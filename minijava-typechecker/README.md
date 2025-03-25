@@ -66,12 +66,20 @@ Tokens:
 - `[Identifier: y]`
 
 ### Symbol Table
+Data structure used by compilers to track identifiers (variables, functions, classes, etc.) and their associated properties in a program.  
+- Name Resolution: Ensures identifiers are declared before use and resolves references to the correct scope.  
+- Type Checking: Validates operations (int + string is invalid)  
+- Error Detection: Catches duplicate declarations or undeclared variables  
+- Code Generation: Provides memory addresses for variables/parameters  
+- Optimization: Helps track variable lifetimes for efficiency  
 
+1. Build Symbol Table: Initial AST traversal will collect all declarations and scopes  
+2. Check Types: Validate type rules using the symbol table in another pass
 
 # Solution
 
 ## Functionality Needed
-The Tokens, and Abstract Syntax Tree is handled, now we need to write code that can walk through the tree and generate a Parse Table.
+The Tokens, and Abstract Syntax Tree is handled, now we need to write code that can walk through the tree and generate a Parse Table. Then using the Parse table we will walk through the tree again to make sure the types and scopes are valid.
 
 ## Files to work on
 - `Typecheck.java`
