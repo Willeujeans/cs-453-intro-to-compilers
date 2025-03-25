@@ -129,3 +129,6 @@ Create a bottom-up visitor (`TypeCheckSimp`) to validate types.
 ``` bash
 java Typecheck < P.java
 ```
+
+## MyType.java
+This should store all of the types that can be used in MiniJava.

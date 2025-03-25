@@ -1,7 +1,29 @@
 package picojava;
 
+import java.util.*;
+import syntaxtree.*;
+
 public class MyType {
-    public static void main(String[] args) {
-        System.out.println("my Type");
+    public Vector<String> type_array;
+
+    MyType(String s){
+        type_array = new Vector<String>();
     }
+
+    MyType(){
+        type_array = new Vector<String>();
+    }
+    
+    Boolean checkIdentical(MyType other_type_object) {
+        return this.type_array.equals(other_type_object.type_array);
+    }
+
+    String getArrayBaseType() {
+        if(type_array.size() > 1){
+            return type_array.firstElement();
+        }else{
+            return null;
+        }
+    }
+
 }
