@@ -2,6 +2,7 @@ package picojava;
 
 import java.util.*;
 import syntaxtree.*;
+import visitor.*;
 
 public class MyType {
     public Vector<String> type_array;
@@ -19,7 +20,7 @@ public class MyType {
     }
 
     String getArrayBaseType() {
-        if(type_array.size() > 1){
+        if(type_array.size() > 0){
             return type_array.firstElement();
         }else{
             return null;
