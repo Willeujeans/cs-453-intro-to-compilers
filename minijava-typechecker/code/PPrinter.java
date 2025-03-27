@@ -2,7 +2,11 @@ import syntaxtree.*;
 import visitor.*;
 
 public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
-    public static void main(String[] args) {
-        System.out.println("PPrinter");
+    private final StringBuilder output = new StringBuilder();
+
+    public void printResult() {
+        System.out.println("\n{ PPrinter } -> printResult()");
+        System.out.println(output.toString());
+        System.out.println("{ PPrinter } ---\n");
     }
 }
