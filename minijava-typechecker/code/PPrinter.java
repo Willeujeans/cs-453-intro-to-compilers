@@ -12,6 +12,17 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
 
 
     /**
+    * NodeToken Variables:
+    * Image -> name as String
+    */
+    @Override
+    public Void visit(NodeToken n, String indent) {
+        output.append(n.toString());
+        return null;
+    }
+
+
+    /**
     * Goal variables:
     * f0 -> MainClass()
     * f1 -> ( TypeDeclaration() )*
