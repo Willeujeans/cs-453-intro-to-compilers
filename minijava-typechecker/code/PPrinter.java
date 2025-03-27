@@ -222,4 +222,18 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
 
         return null;
     }
+
+
+    /**
+    * f0 -> ArrayType()
+    *       | BooleanType()
+    *       | IntegerType()
+    *       | Identifier()
+    */
+    public Void visit(Type n, String indent){
+        output.append("Type( ");
+        n.f0.accept(this, indent);
+        output.append(" )");
+        return null;
+    }
 }
