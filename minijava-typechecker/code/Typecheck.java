@@ -17,7 +17,7 @@ public class Typecheck {
 		
 	    PPrinter<Void,String> pp = new PPrinter<Void,String>();
 	    root.accept(pp, "");
-
+		pp.printResult();
 	    // Build the symbol table. Top-down visitor, inherits from
 	    // GJDepthFirst<R,A>. R=Void, A=Integer.
 
