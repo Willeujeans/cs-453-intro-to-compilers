@@ -10,6 +10,7 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         System.out.println("{ PPrinter } ---\n");
     }
 
+
     /**
     * Goal variables:
     * f0 -> MainClass()
@@ -34,6 +35,7 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
 
         return null;
     }
+
 
     /**
     * This is the case of a Class that has a main method.
