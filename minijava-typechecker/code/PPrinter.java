@@ -127,4 +127,15 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
 
         return null;
     }
+
+    
+    /**
+    * f0 -> <IDENTIFIER>
+    */
+    public Void visit(Identifier n, String indent){
+        output.append("id( ");
+        n.f0.accept(this, indent);
+        output.append(" )");
+        return null;
+    }
 }
