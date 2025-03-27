@@ -138,4 +138,88 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         output.append(" )");
         return null;
     }
+
+
+    /**
+    * f0 -> "public"
+    * f1 -> Type()
+    * f2 -> Identifier()
+    * f3 -> "("
+    * f4 -> ( FormalParameterList() )?
+    * f5 -> ")"
+    * f6 -> "{"
+    * f7 -> ( VarDeclaration() )*
+    * f8 -> ( Statement() )*
+    * f9 -> "return"
+    * f10 -> Expression()
+    * f11 -> ";"
+    * f12 -> "}"
+    */
+    public Void visit(MethodDeclaration n, String indent){
+        indent += ">";
+        output.append("\n");
+        output.append(indent);
+        output.append("[ MethodDeclaration ]: ");
+        output.append("\n");
+
+        // f0 -> "public"
+        output.append(indent);
+        n.f0.accept(this, indent);
+        output.append(" ");
+
+        // f1 -> Type()
+        n.f1.accept(this, indent);
+        output.append(" ");
+
+        // f2 -> Identifier()
+        n.f2.accept(this, indent);
+        output.append(" ");
+
+        // f3 -> "("
+        n.f3.accept(this, indent);
+        output.append(" ");
+
+        // f4 -> ( FormalParameterList() )?
+        n.f4.accept(this, indent);
+        output.append(" ");
+
+        // f5 -> ")"
+        n.f5.accept(this, indent);
+        output.append(" ");
+
+        // f6 -> "{"
+        n.f6.accept(this, indent);
+        output.append("\n");
+        indent += ">";
+
+        // f7 -> ( VarDeclaration() )*
+        output.append(indent);
+        n.f7.accept(this, indent);
+        output.append("\n");
+
+        // f8 -> ( Statement() )*
+        output.append(indent);
+        n.f8.accept(this, indent);
+        output.append("\n");
+
+        // f9 -> "return"
+        output.append(indent);
+        n.f9.accept(this, indent);
+        output.append(" ");
+
+        // f10 -> Expression()
+        n.f10.accept(this, indent);
+
+        // f11 -> ";"
+        n.f11.accept(this, indent);
+        output.append("\n");
+        indent = ">";
+
+        // f12 -> "}"
+        output.append(indent);
+        n.f12.accept(this, indent);
+        output.append("\n");
+
+        return null;
+    }
 }
