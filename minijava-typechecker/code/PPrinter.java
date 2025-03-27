@@ -19,14 +19,17 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(Goal n, String indent) {
         output.append(indent);
-        output.append(indent).append("[ Goal ] (Root)\n");
+        output.append(indent).append("[ Goal ] (Root)");
+        output.append("\n");
     
         // f0 -> MainClass()
-        output.append(indent).append("[ MainClass ]:\n");
+        output.append(indent).append("[ MainClass ]:");
+        output.append("\n");
         n.f0.accept(this, indent + ">");
     
         // f1 -> ( TypeDeclaration() )*
-        output.append(indent).append("[ TypeDeclarations ]:\n");
+        output.append(indent).append("[ TypeDeclarations ]:");
+        output.append("\n");
         n.f1.accept(this, indent + ">");
 
         return null;
