@@ -294,6 +294,9 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     *       | PrintStatement()
     */
     public Void visit(Statement n, String indent){
+        output.append("[Statement : ");
+        indent += ">";
+        n.f0.accept(this, indent);
         return null;
     }
 
@@ -304,6 +307,12 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     * f3 -> ";"
     */
     public Void visit(AssignmentStatement n, String indent){
+        output.append("AssignmentStatement]: \n");
+        output.append(indent);
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f3.accept(this, indent);
         return null;
     }
 
@@ -317,6 +326,14 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     * f6 -> ";"
     */
     public Void visit(ArrayAssignmentStatement n, String indent){
+        output.append("ArrayAssignmentStatement]: \n");
+        output.append(indent);
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f4.accept(this, indent);
+        n.f5.accept(this, indent);
+        n.f6.accept(this, indent);
         return null;
     }
 
@@ -330,6 +347,15 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     * f6 -> Statement()
     */
     public Void visit(IfStatement n, String indent){
+        output.append("IfStatement]: \n");
+        output.append(indent);
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f3.accept(this, indent);
+        n.f4.accept(this, indent);
+        n.f5.accept(this, indent);
+        n.f6.accept(this, indent);
         return null;
     }
 
@@ -341,6 +367,13 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     * f4 -> Statement()
     */
     public Void visit(WhileStatement n, String indent){
+        output.append("WhileStatement]: \n");
+        output.append(indent);
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f3.accept(this, indent);
+        n.f4.accept(this, indent);
         return null;
     }
 
@@ -352,6 +385,13 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     * f4 -> ";"
     */
     public Void visit(PrintStatement n, String indent){
+        output.append("PrintStatement]: \n");
+        output.append(indent);
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f3.accept(this, indent);
+        n.f4.accept(this, indent);
         return null;
     }
 }
