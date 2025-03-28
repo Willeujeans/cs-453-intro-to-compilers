@@ -236,4 +236,38 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         output.append(" )");
         return null;
     }
+
+
+    /**
+    * f0 -> FormalParameter()
+    * f1 -> ( FormalParameterRest() )*
+    */
+    public Void visit(FormalParameterList n, String indent){
+        output.append("[ FormalParameterList ]: ");
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        return null;
+    }
+
+
+    /**
+    * f0 -> Type()
+    * f1 -> Identifier()
+    */
+    public Void visit(FormalParameter n, String indent){
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        return null;
+    }
+
+    /**
+    * f0 -> ","
+    * f1 -> FormalParameter()
+    */
+    public Void visit(FormalParameterRest n, String indent){
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        return null;
+    }
+
 }
