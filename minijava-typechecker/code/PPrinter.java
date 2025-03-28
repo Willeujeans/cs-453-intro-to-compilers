@@ -463,4 +463,36 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f0.accept(this, indent);
         return null;
     }
+
+    /**
+    * f0 -> PrimaryExpression()
+    * f1 -> "&&"
+    * f2 -> PrimaryExpression()
+    */
+    @Override
+    public Void visit(AndExpression n, String indent){
+        output.append("AndExpression]: ");
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        return null;
+    }
+
+        /**
+    * f0 -> IntegerLiteral()
+    *       | TrueLiteral()
+    *       | FalseLiteral()
+    *       | Identifier()
+    *       | ThisExpression()
+    *       | ArrayAllocationExpression()
+    *       | AllocationExpression()
+    *       | NotExpression()
+    *       | BracketExpression()
+    */
+    @Override
+    public Void visit(PrimaryExpression n, String indent){
+        output.append("PrimaryExpression]: ");
+        n.f0.accept(this, indent);
+        return null;
+    }
 }
