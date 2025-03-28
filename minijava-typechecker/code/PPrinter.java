@@ -445,4 +445,22 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f7.accept(this, indent);
         return null;
     }
+
+    /**
+    * f0 -> AndExpression()
+    *       | CompareExpression()
+    *       | PlusExpression()
+    *       | MinusExpression()
+    *       | TimesExpression()
+    *       | ArrayLookup()
+    *       | ArrayLength()
+    *       | MessageSend()
+    *       | PrimaryExpression()
+    */
+    @Override
+    public Void visit(Expression n, String indent) {
+        output.append("[Expression : ");
+        n.f0.accept(this, indent);
+        return null;
+    }
 }
