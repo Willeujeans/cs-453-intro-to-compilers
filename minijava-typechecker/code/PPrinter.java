@@ -1,16 +1,13 @@
-import java.beans.Expression;
-
 import syntaxtree.*;
 import visitor.*;
 
 public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     private final StringBuilder output = new StringBuilder();
 
-    public Void printResult() {
+    public void printResult() {
         System.out.println("\n{ PPrinter } -> printResult()");
         System.out.println(output.toString());
         System.out.println("{ PPrinter } ---\n");
-        return null;
     }
 
 
@@ -481,7 +478,7 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         return null;
     }
 
-    /**
+        /**
     * f0 -> IntegerLiteral()
     *       | TrueLiteral()
     *       | FalseLiteral()
@@ -584,7 +581,7 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f2.accept(this, indent);
         return null;
     }
-
+    
     /**
     * f0 -> PrimaryExpression()
     * f1 -> "."
