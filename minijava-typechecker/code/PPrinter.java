@@ -285,4 +285,113 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         return null;
     }
 
+    /**
+    * f0 -> Block()
+    *       | AssignmentStatement()
+    *       | ArrayAssignmentStatement()
+    *       | IfStatement()
+    *       | WhileStatement()
+    *       | PrintStatement()
+    */
+    public Void visit(Statement n, String indent){
+        output.append("[Statement : ");
+        indent += ">";
+        n.f0.accept(this, indent);
+        return null;
+    }
+
+    /**
+    * f0 -> Identifier()
+    * f1 -> "="
+    * f2 -> Expression()
+    * f3 -> ";"
+    */
+    public Void visit(AssignmentStatement n, String indent){
+        output.append("AssignmentStatement]: \n");
+        output.append(indent);
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f3.accept(this, indent);
+        return null;
+    }
+
+    /**
+    * f0 -> Identifier()
+    * f1 -> "["
+    * f2 -> Expression()
+    * f3 -> "]"
+    * f4 -> "="
+    * f5 -> Expression()
+    * f6 -> ";"
+    */
+    public Void visit(ArrayAssignmentStatement n, String indent){
+        output.append("ArrayAssignmentStatement]: \n");
+        output.append(indent);
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f4.accept(this, indent);
+        n.f5.accept(this, indent);
+        n.f6.accept(this, indent);
+        return null;
+    }
+
+    /**
+    * f0 -> "if"
+    * f1 -> "("
+    * f2 -> Expression()
+    * f3 -> ")"
+    * f4 -> Statement()
+    * f5 -> "else"
+    * f6 -> Statement()
+    */
+    public Void visit(IfStatement n, String indent){
+        output.append("IfStatement]: \n");
+        output.append(indent);
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f3.accept(this, indent);
+        n.f4.accept(this, indent);
+        n.f5.accept(this, indent);
+        n.f6.accept(this, indent);
+        return null;
+    }
+
+    /**
+    * f0 -> "while"
+    * f1 -> "("
+    * f2 -> Expression()
+    * f3 -> ")"
+    * f4 -> Statement()
+    */
+    public Void visit(WhileStatement n, String indent){
+        output.append("WhileStatement]: \n");
+        output.append(indent);
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f3.accept(this, indent);
+        n.f4.accept(this, indent);
+        return null;
+    }
+
+    /**
+    * f0 -> "System.out.println"
+    * f1 -> "("
+    * f2 -> Expression()
+    * f3 -> ")"
+    * f4 -> ";"
+    */
+    public Void visit(PrintStatement n, String indent){
+        output.append("PrintStatement]: \n");
+        output.append(indent);
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f3.accept(this, indent);
+        n.f4.accept(this, indent);
+        return null;
+    }
 }
