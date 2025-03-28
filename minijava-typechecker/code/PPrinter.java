@@ -581,4 +581,24 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f2.accept(this, indent);
         return null;
     }
+    
+    /**
+    * f0 -> PrimaryExpression()
+    * f1 -> "."
+    * f2 -> Identifier()
+    * f3 -> "("
+    * f4 -> ( ExpressionList() )?
+    * f5 -> ")"
+    */
+    @Override
+    public Void visit(MessageSend n, String indent){
+        output.append("MessageSend]: ");
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f3.accept(this, indent);
+        n.f4.accept(this, indent);
+        n.f5.accept(this, indent);
+        return null;
+    }
 }
