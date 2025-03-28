@@ -40,7 +40,6 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f0.accept(this, indent + ">");
     
         // f1 -> ( TypeDeclaration() )*
-        output.append(indent).append("[ TypeDeclarations ]:");
         output.append("\n");
         n.f1.accept(this, indent + ">");
 
@@ -392,6 +391,58 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f2.accept(this, indent);
         n.f3.accept(this, indent);
         n.f4.accept(this, indent);
+        return null;
+    }
+
+    /**
+    * f0 -> ClassDeclaration()
+    *       | ClassExtendsDeclaration()
+    */
+    public Void visit(TypeDeclaration n, String indent){
+        output.append("[TypeDeclaration : ");
+        n.f0.accept(this, indent);
+        return null;
+    }
+
+    /**
+    * f0 -> "class"
+    * f1 -> Identifier()
+    * f2 -> "{"
+    * f3 -> ( VarDeclaration() )*
+    * f4 -> ( MethodDeclaration() )*
+    * f5 -> "}"
+    */
+    public Void visit(ClassDeclaration n, String indent){
+        output.append("ClassDeclaration] : \n");
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f3.accept(this, indent);
+        n.f4.accept(this, indent);
+        n.f5.accept(this, indent);
+        return null;
+    }
+
+    /**
+    * f0 -> "class"
+    * f1 -> Identifier()
+    * f2 -> "extends"
+    * f3 -> Identifier()
+    * f4 -> "{"
+    * f5 -> ( VarDeclaration() )*
+    * f6 -> ( MethodDeclaration() )*
+    * f7 -> "}"
+    */
+    public Void visit(ClassExtendsDeclaration n, String indent){
+        output.append("ClassDeclaration] : \n");
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f3.accept(this, indent);
+        n.f4.accept(this, indent);
+        n.f5.accept(this, indent);
+        n.f6.accept(this, indent);
+        n.f7.accept(this, indent);
         return null;
     }
 }
