@@ -1,13 +1,16 @@
+import java.beans.Expression;
+
 import syntaxtree.*;
 import visitor.*;
 
 public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     private final StringBuilder output = new StringBuilder();
 
-    public void printResult() {
+    public Void printResult() {
         System.out.println("\n{ PPrinter } -> printResult()");
         System.out.println(output.toString());
         System.out.println("{ PPrinter } ---\n");
+        return null;
     }
 
 
@@ -443,6 +446,151 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f5.accept(this, indent);
         n.f6.accept(this, indent);
         n.f7.accept(this, indent);
+        return null;
+    }
+
+    /**
+    * f0 -> AndExpression()
+    *       | CompareExpression()
+    *       | PlusExpression()
+    *       | MinusExpression()
+    *       | TimesExpression()
+    *       | ArrayLookup()
+    *       | ArrayLength()
+    *       | MessageSend()
+    *       | PrimaryExpression()
+    */
+    public Void visit(Expression n, String indent){
+        output.append("[Expression : ");
+        n.f0.accept(this, indent);
+        return null;
+    }
+   
+    /**
+    * f0 -> PrimaryExpression()
+    * f1 -> "&&"
+    * f2 -> PrimaryExpression()
+    */
+    public Void visit(AndExpression n, String indent){
+        output.append("AndExpression]: ");
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        return null;
+    }
+   
+    /**
+    * f0 -> IntegerLiteral()
+    *       | TrueLiteral()
+    *       | FalseLiteral()
+    *       | Identifier()
+    *       | ThisExpression()
+    *       | ArrayAllocationExpression()
+    *       | AllocationExpression()
+    *       | NotExpression()
+    *       | BracketExpression()
+    */
+    public Void visit(PrimaryExpression n, String indent){
+        output.append("PrimaryExpression]: ");
+        n.f0.accept(this, indent);
+        return null;
+    }
+   
+   /**
+    * f0 -> PrimaryExpression()
+    * f1 -> "<"
+    * f2 -> PrimaryExpression()
+    */
+    public Void visit(CompareExpression n, String indent){
+        output.append("CompareExpression]: ");
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        return null;
+    }
+   
+   /**
+    * f0 -> PrimaryExpression()
+    * f1 -> "+"
+    * f2 -> PrimaryExpression()
+    */
+    public Void visit(PlusExpression n, String indent){
+        output.append("PlusExpression]: ");
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        return null;
+    }
+   
+   /**
+    * f0 -> PrimaryExpression()
+    * f1 -> "-"
+    * f2 -> PrimaryExpression()
+    */
+    public Void visit(MinusExpression n, String indent){
+        output.append("MinusExpression]: ");
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        return null;
+    }
+   
+   /**
+    * f0 -> PrimaryExpression()
+    * f1 -> "*"
+    * f2 -> PrimaryExpression()
+    */
+    public Void visit(TimesExpression n, String indent){
+        output.append("TimesExpression]: ");
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        return null;
+    }
+   
+   /**
+    * f0 -> PrimaryExpression()
+    * f1 -> "["
+    * f2 -> PrimaryExpression()
+    * f3 -> "]"
+    */
+    public Void visit(ArrayLookup n, String indent){
+        output.append("ArrayLookup]: ");
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f3.accept(this, indent);
+        return null;
+    }
+   
+   /**
+    * f0 -> PrimaryExpression()
+    * f1 -> "."
+    * f2 -> "length"
+    */
+    public Void visit(ArrayLength n, String indent){
+        output.append("ArrayLength]: ");
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        return null;
+    }
+   
+   /**
+    * f0 -> PrimaryExpression()
+    * f1 -> "."
+    * f2 -> Identifier()
+    * f3 -> "("
+    * f4 -> ( ExpressionList() )?
+    * f5 -> ")"
+    */
+    public Void visit(MessageSend n, String indent){
+        output.append("MessageSend]: ");
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f3.accept(this, indent);
+        n.f4.accept(this, indent);
+        n.f5.accept(this, indent);
         return null;
     }
 }
