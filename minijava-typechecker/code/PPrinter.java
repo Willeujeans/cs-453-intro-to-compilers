@@ -460,24 +460,27 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     *       | MessageSend()
     *       | PrimaryExpression()
     */
-    public Void visit(Expression n, String indent){
+    @Override
+    public Void visit(Expression n, String indent) {
         output.append("[Expression : ");
         n.f0.accept(this, indent);
         return null;
     }
-   
+
     /**
     * f0 -> PrimaryExpression()
     * f1 -> "&&"
     * f2 -> PrimaryExpression()
     */
+    @Override
     public Void visit(AndExpression n, String indent){
         output.append("AndExpression]: ");
         n.f0.accept(this, indent);
         n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
         return null;
     }
-   
+
     /**
     * f0 -> IntegerLiteral()
     *       | TrueLiteral()
@@ -489,17 +492,19 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     *       | NotExpression()
     *       | BracketExpression()
     */
+    @Override
     public Void visit(PrimaryExpression n, String indent){
         output.append("PrimaryExpression]: ");
         n.f0.accept(this, indent);
         return null;
     }
-   
-   /**
+
+    /**
     * f0 -> PrimaryExpression()
     * f1 -> "<"
     * f2 -> PrimaryExpression()
     */
+    @Override
     public Void visit(CompareExpression n, String indent){
         output.append("CompareExpression]: ");
         n.f0.accept(this, indent);
@@ -507,12 +512,13 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f2.accept(this, indent);
         return null;
     }
-   
-   /**
+
+    /**
     * f0 -> PrimaryExpression()
     * f1 -> "+"
     * f2 -> PrimaryExpression()
     */
+    @Override
     public Void visit(PlusExpression n, String indent){
         output.append("PlusExpression]: ");
         n.f0.accept(this, indent);
@@ -520,12 +526,13 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f2.accept(this, indent);
         return null;
     }
-   
-   /**
+
+    /**
     * f0 -> PrimaryExpression()
     * f1 -> "-"
     * f2 -> PrimaryExpression()
     */
+    @Override
     public Void visit(MinusExpression n, String indent){
         output.append("MinusExpression]: ");
         n.f0.accept(this, indent);
@@ -533,12 +540,13 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f2.accept(this, indent);
         return null;
     }
-   
-   /**
+
+    /**
     * f0 -> PrimaryExpression()
     * f1 -> "*"
     * f2 -> PrimaryExpression()
     */
+    @Override
     public Void visit(TimesExpression n, String indent){
         output.append("TimesExpression]: ");
         n.f0.accept(this, indent);
@@ -546,13 +554,14 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f2.accept(this, indent);
         return null;
     }
-   
-   /**
+
+    /**
     * f0 -> PrimaryExpression()
     * f1 -> "["
     * f2 -> PrimaryExpression()
     * f3 -> "]"
     */
+    @Override
     public Void visit(ArrayLookup n, String indent){
         output.append("ArrayLookup]: ");
         n.f0.accept(this, indent);
@@ -561,12 +570,13 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f3.accept(this, indent);
         return null;
     }
-   
-   /**
+
+    /**
     * f0 -> PrimaryExpression()
     * f1 -> "."
     * f2 -> "length"
     */
+    @Override
     public Void visit(ArrayLength n, String indent){
         output.append("ArrayLength]: ");
         n.f0.accept(this, indent);
@@ -574,8 +584,8 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f2.accept(this, indent);
         return null;
     }
-   
-   /**
+
+    /**
     * f0 -> PrimaryExpression()
     * f1 -> "."
     * f2 -> Identifier()
@@ -583,6 +593,7 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     * f4 -> ( ExpressionList() )?
     * f5 -> ")"
     */
+    @Override
     public Void visit(MessageSend n, String indent){
         output.append("MessageSend]: ");
         n.f0.accept(this, indent);
