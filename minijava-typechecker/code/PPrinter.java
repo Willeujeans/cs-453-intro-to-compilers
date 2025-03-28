@@ -537,7 +537,7 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f2.accept(this, indent);
         return null;
     }
-    
+
     /**
     * f0 -> PrimaryExpression()
     * f1 -> "*"
@@ -549,6 +549,22 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f0.accept(this, indent);
         n.f1.accept(this, indent);
         n.f2.accept(this, indent);
+        return null;
+    }
+
+    /**
+    * f0 -> PrimaryExpression()
+    * f1 -> "["
+    * f2 -> PrimaryExpression()
+    * f3 -> "]"
+    */
+    @Override
+    public Void visit(ArrayLookup n, String indent){
+        output.append("ArrayLookup]: ");
+        n.f0.accept(this, indent);
+        n.f1.accept(this, indent);
+        n.f2.accept(this, indent);
+        n.f3.accept(this, indent);
         return null;
     }
 }
