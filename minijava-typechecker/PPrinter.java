@@ -30,18 +30,17 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     */
     @Override
     public Void visit(Goal n, String indent) {
-        output.append(indent);
-        output.append(indent).append("[ Goal ] (Root)");
+        output.append("[ Goal ] (Root)");
         output.append("\n");
     
         // f0 -> MainClass()
         output.append(indent).append("[ MainClass ]:");
         output.append("\n");
-        n.f0.accept(this, indent + ">");
+        n.f0.accept(this, indent);
     
         // f1 -> ( TypeDeclaration() )*
         output.append("\n");
-        n.f1.accept(this, indent + ">");
+        n.f1.accept(this, indent);
 
         return null;
     }
@@ -73,7 +72,6 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     */
     @Override
     public Void visit(MainClass n, String indent) {
-        output.append(indent);
         output.append(" [ ");
         n.f0.accept(this, indent);
         output.append(" ] ");
@@ -83,8 +81,6 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         output.append("\n");
         
         // public static void main(String[] a){
-        String methodIndent = indent + ">";
-        output.append(methodIndent);
         n.f3.accept(this, indent);
         output.append(" ");
         n.f4.accept(this, indent);
@@ -107,20 +103,16 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
 
         n.f13.accept(this, indent);
         output.append(" \n");
-        output.append(indent + ">>");
         
-        String bodyIndent = methodIndent + ">>";
-        n.f14.accept(this, bodyIndent);
+        n.f14.accept(this, indent);
         output.append(" ");
 
-        n.f15.accept(this, bodyIndent);
+        n.f15.accept(this, indent);
         output.append(" \n");
         
-        output.append(indent + ">");
         n.f16.accept(this, indent);
         output.append(" \n");
 
-        output.append(indent);
         n.f17.accept(this, indent);
         output.append(" \n");
 
@@ -157,12 +149,10 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     public Void visit(MethodDeclaration n, String indent){
         indent += ">";
         output.append("\n");
-        output.append(indent);
         output.append("[ MethodDeclaration ]: ");
         output.append("\n");
 
         // f0 -> "public"
-        output.append(indent);
         n.f0.accept(this, indent);
         output.append(" ");
 
@@ -192,17 +182,14 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         indent += ">";
 
         // f7 -> ( VarDeclaration() )*
-        output.append(indent);
         n.f7.accept(this, indent);
         output.append("\n");
 
         // f8 -> ( Statement() )*
-        output.append(indent);
         n.f8.accept(this, indent);
         output.append("\n");
 
         // f9 -> "return"
-        output.append(indent);
         n.f9.accept(this, indent);
         output.append(" ");
 
@@ -215,7 +202,6 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         indent = ">";
 
         // f12 -> "}"
-        output.append(indent);
         n.f12.accept(this, indent);
         output.append("\n");
 
@@ -307,7 +293,6 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     */
     public Void visit(AssignmentStatement n, String indent){
         output.append("AssignmentStatement]: \n");
-        output.append(indent);
         n.f0.accept(this, indent);
         n.f1.accept(this, indent);
         n.f2.accept(this, indent);
@@ -326,7 +311,6 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     */
     public Void visit(ArrayAssignmentStatement n, String indent){
         output.append("ArrayAssignmentStatement]: \n");
-        output.append(indent);
         n.f0.accept(this, indent);
         n.f1.accept(this, indent);
         n.f2.accept(this, indent);
@@ -347,7 +331,6 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     */
     public Void visit(IfStatement n, String indent){
         output.append("IfStatement]: \n");
-        output.append(indent);
         n.f0.accept(this, indent);
         n.f1.accept(this, indent);
         n.f2.accept(this, indent);
@@ -367,7 +350,6 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     */
     public Void visit(WhileStatement n, String indent){
         output.append("WhileStatement]: \n");
-        output.append(indent);
         n.f0.accept(this, indent);
         n.f1.accept(this, indent);
         n.f2.accept(this, indent);
@@ -385,7 +367,6 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     */
     public Void visit(PrintStatement n, String indent){
         output.append("PrintStatement]: \n");
-        output.append(indent);
         n.f0.accept(this, indent);
         n.f1.accept(this, indent);
         n.f2.accept(this, indent);
