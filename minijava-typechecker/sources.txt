@@ -1,0 +1,5 @@
+src/main/java/PPrinter.java
+src/main/java/picojava/TypeCheckSimp.java
+src/main/java/picojava/SymTableVis.java
+src/main/java/picojava/MyType.java
+src/main/java/Typecheck.java
