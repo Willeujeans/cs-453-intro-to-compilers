@@ -84,7 +84,7 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         output.append(" ");
         n.f13.accept(this, indent + indentChar);
         
-        output.append("\n");
+        output.append("\n").append(indent).append(indent);
         n.f14.accept(this, indent + indentChar);
         n.f15.accept(this, indent + indentChar);
         
@@ -108,9 +108,14 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
         n.f0.accept(this, indent + indentChar);
         output.append(" ");
         n.f1.accept(this, indent + indentChar);
+        output.append(" ");
         n.f2.accept(this, indent + indentChar);
+        
+        output.append("\n").append(indent);
         n.f3.accept(this, indent + indentChar);
         n.f4.accept(this, indent + indentChar);
+        
+        output.append("\n").append(indent);
         n.f5.accept(this, indent + indentChar);
         return null;
     }
@@ -131,10 +136,6 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     * f12 -> "}"
     */
     public Void visit(MethodDeclaration n, String indent){
-        output.append(indent);
-        output.append("[MethodDeclaration]");
-        output.append("\n").append(indent + indentChar);
-
         // f0 -> "public"
         n.f0.accept(this, indent + indentChar);
         output.append(" ");
@@ -240,9 +241,7 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     */
     public Void visit(VarDeclaration n, String indent){
         n.f0.accept(this, indent + indentChar);
-        output.append(" : ");
         n.f1.accept(this, indent + indentChar);
-        output.append(" ");
         n.f2.accept(this, indent + indentChar);
         return null;
     }
@@ -256,7 +255,6 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     *       | PrintStatement()
     */
     public Void visit(Statement n, String indent){
-        output.append(indent);
         n.f0.accept(this, indent + indentChar);
         return null;
     }
