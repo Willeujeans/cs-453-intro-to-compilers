@@ -9,6 +9,7 @@ public class TestMyType {
         this.TestGetTypeSingle();
         this.TestGetTypeMultiple();
         this.TestCheckIdenticalSameType();
+        this.TestCheckIdenticalSame();
     }
 
     private void TestConstructorEmptyString(){
@@ -61,9 +62,30 @@ public class TestMyType {
 
         MyType otherType = new MyType(typeName);
 
-        System.out.println(myType.toString() + " != " + otherType.toString());
+        output += " " + myType.toString() + " != " + otherType.toString() + " ";
 
         if(myType.checkIdentical(otherType) == false){
+            output += " ✅";
+        }else{
+            output += " ❌";
+        }
+        System.out.println(output);
+    }
+
+    private void TestCheckIdenticalSame(){
+        String output = "[TestMyType] TEST 'TestCheckIdenticalSame' ";
+        String typeName = "int";
+        MyType myType = new MyType(typeName);
+        myType.addType("[]");
+        myType.addType("[]");
+
+        MyType myTypeOther = new MyType(typeName);
+        myTypeOther.addType("[]");
+        myTypeOther.addType("[]");
+
+        output += " " + myType.toString() + " == " + myTypeOther.toString() + " ";
+
+        if(myType.checkIdentical(myTypeOther) == true){
             output += " ✅";
         }else{
             output += " ❌";
