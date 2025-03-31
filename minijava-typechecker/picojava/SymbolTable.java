@@ -6,7 +6,6 @@ public class SymbolTable {
     private LinkedList<HashMap<String, Symbol>> scopes;
 
     public SymbolTable() {
-        System.out.println("[SymbolTable]: Constructed");
         scopes = new LinkedList<>();
         enterScope();
     }
