@@ -1,5 +1,4 @@
 package picojava;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -14,5 +13,5 @@ public class SymbolTable {
         public final int lineUsed = 0;
         public final int address = 0;
     }
-    
+
 }
