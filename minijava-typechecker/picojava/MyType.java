@@ -53,4 +53,17 @@ public class MyType {
             return true;
         }
     }
+
+    public String toString(){
+        String output = "[";
+        for(int i = 0; i < this.type_array.size(); ++i){
+            output += this.type_array.get(i);
+            if(i < this.type_array.size() - 1){
+                System.out.println(this.type_array.size());
+                output += ",";
+            }
+        }
+        output += "]";
+        return output;
+    }
 }

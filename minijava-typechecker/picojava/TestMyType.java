@@ -8,6 +8,7 @@ public class TestMyType {
         this.TestConstructorEmptyString();
         this.TestGetTypeSingle();
         this.TestGetTypeMultiple();
+        this.TestCheckIdenticalSameType();
     }
 
     private void TestConstructorEmptyString(){
@@ -41,8 +42,7 @@ public class TestMyType {
         MyType myType = new MyType(typeName);
         myType.addType("[]");
         myType.addType("[]");
-        // int[][] would be stored as -> ["int", "[]", "[]"]
-        // Which means the type would be int
+
         String result_type = myType.getType();
         if(result_type.equals(typeName)){
             output += " ✅";
@@ -52,10 +52,22 @@ public class TestMyType {
         System.out.println(output);
     }
 
-    private void TestCheckIdentical(MyType other){
+    private void TestCheckIdenticalSameType(){
+        String output = "[TestMyType] TEST 'TestCheckIdenticalSameType' ";
+        String typeName = "int";
+        MyType myType = new MyType(typeName);
+        myType.addType("[]");
+        myType.addType("[]");
 
+        MyType otherType = new MyType(typeName);
+
+        System.out.println(myType.toString() + " != " + otherType.toString());
+
+        if(myType.checkIdentical(otherType) == false){
+            output += " ✅";
+        }else{
+            output += " ❌";
+        }
+        System.out.println(output);
     }
-
-
-
 }
