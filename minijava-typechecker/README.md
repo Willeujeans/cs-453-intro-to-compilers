@@ -11,7 +11,7 @@ java Typecheck < P.java
 
 Run both
 ``` Bash
-javac Typecheck.java && java Typecheck < P.java
+javac -cp . *.java picojava/*.java && java Typecheck < P.java
 ```
 
 Run Test
