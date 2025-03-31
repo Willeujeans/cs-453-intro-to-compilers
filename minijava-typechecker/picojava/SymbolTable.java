@@ -6,6 +6,7 @@ public class SymbolTable {
     private LinkedList<HashMap<String, SymbolData>> scopes;
 
     public SymbolTable() {
+        System.out.println("[SymbolTable]: Constructed");
         scopes = new LinkedList<>();
         enterScope();
     }
@@ -21,8 +22,12 @@ public class SymbolTable {
     
     public void insert(String identifier, SymbolData entry){
         if(identifier == null){
-
+            throw new IllegalArgumentException("Insert failed due to empty identifier");
         }
+        if(entry == null){
+            throw new IllegalArgumentException("Insert failed due to empty entry");
+        }
+
         // Adds symbols to the symbol table
         if (scopes.peek().containsKey(identifier)) {
             throw new RuntimeException("Trying to insert an existing symbol to the same scope: " + identifier);
@@ -43,6 +48,7 @@ public class SymbolTable {
 
     public void enterScope() {
         // Enter a new scope
+        scopes.push(new HashMap<>());
     }
 
     public void exitScope() {
