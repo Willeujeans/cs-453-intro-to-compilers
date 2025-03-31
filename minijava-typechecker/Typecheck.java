@@ -21,9 +21,9 @@ public class Typecheck {
 	    // Build the symbol table. Top-down visitor, inherits from
 	    // GJDepthFirst<R,A>. R=Void, A=Integer.
 
-	    SymTableVis<Void, Integer> pv = new SymTableVis<Void,Integer>();
-	    root.accept(pv, 0);
-	    HashMap<String, String> symt = pv.symt;
+	    // SymTableVis<Void, Integer> pv = new SymTableVis<Void,Integer>();
+	    // root.accept(pv, 0);
+	    // HashMap<String, String> symt = pv.symt;
 
 	    // Do type checking. Bottom-up visitor, also inherits from
 	    // GJDepthFirst. Visit functions return MyTpe (=R), and
