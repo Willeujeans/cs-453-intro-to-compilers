@@ -12,3 +12,8 @@ Run both
 ``` Bash
 javac Typecheck.java && java Typecheck < P.java
 ```
+
+Run Test
+``` Bash
+javac TestTypecheck.java && java TestTypecheck
+```

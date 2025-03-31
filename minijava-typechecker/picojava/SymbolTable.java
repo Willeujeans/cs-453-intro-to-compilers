@@ -3,23 +3,14 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class SymbolTable {
-    private LinkedList<HashMap<String, SymbolEntry>> scopes;
-    
-    public static class SymbolEntry {
-        public final MyType type = new MyType("");
-        public final int size = 0;
-        public final int dimension = 0;
-        public final int lineDeclared = 0;
-        public final int lineUsed = 0;
-        public final int address = 0;
-    }
+    private LinkedList<HashMap<String, SymbolData>> scopes;
 
     public SymbolTable() {
         scopes = new LinkedList<>();
         enterScope();
     }
 
-    public LinkedList<HashMap<String, SymbolEntry>> getScopes(){
+    public LinkedList<HashMap<String, SymbolData>> getScopes(){
         if(this.scopes != null && !this.scopes.isEmpty()){
             return this.scopes;
         }else{
@@ -28,11 +19,19 @@ public class SymbolTable {
         }
     }
     
-    public void insert(String identifier, SymbolEntry entry){
+    public void insert(String identifier, SymbolData entry){
+        if(identifier == null){
+
+        }
         // Adds symbols to the symbol table
+        if (scopes.peek().containsKey(identifier)) {
+            throw new RuntimeException("Trying to insert an existing symbol to the same scope: " + identifier);
+        }else{
+            scopes.peek().put(identifier, entry);
+        }
     }
 
-    public SymbolEntry lookup(String identifier){
+    public SymbolData lookup(String identifier){
         // Lookup will find the symbolEntry inside the inner most scope using the identifier and symbol table
         return null;
     }
