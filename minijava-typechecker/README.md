@@ -1,5 +1,6 @@
 Compile:
 ``` Bash
+javac -cp . *.java picojava/*.java
 javac Typecheck.java
 ```
 
@@ -15,5 +16,5 @@ javac Typecheck.java && java Typecheck < P.java
 
 Run Test
 ``` Bash
-javac TestTypecheck.java && java TestTypecheck
+javac -cp . *.java picojava/*.java && java TestTypecheck
 ```

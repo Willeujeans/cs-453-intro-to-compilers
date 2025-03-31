@@ -7,7 +7,9 @@ import picojava.*;
 
 public class TestTypecheck {
     public static void main(String[] args) {
-        System.out.println("[TestTypecheck]: Main");
+        System.out.println("[TestTypecheck]: Start");
+        TestMyType myTypeTester = new TestMyType();
         TestSymbolTable symbolTableTester = new TestSymbolTable();
+        System.out.println("[TestTypecheck]: End");
     }
 }
