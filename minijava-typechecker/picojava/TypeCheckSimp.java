@@ -1,5 +1,4 @@
 package picojava;
-
 import syntaxtree.*;
 import visitor.*;
 import java.util.HashMap;

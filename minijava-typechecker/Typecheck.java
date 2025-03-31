@@ -10,7 +10,8 @@ public class Typecheck {
     public static void main(String[] args) {
 	Node root = null;
 	try {
-	    root = new MiniJavaParser(System.in).Goal();
+	    new MiniJavaParser(System.in);
+		root = MiniJavaParser.Goal();
 
 	    // Pretty-print the tree. PPrinter inherits from
 	    // GJDepthFirst<R,A>. R=Void, A=String.
@@ -21,10 +22,8 @@ public class Typecheck {
 	    // Build the symbol table. Top-down visitor, inherits from
 	    // GJDepthFirst<R,A>. R=Void, A=Integer.
 
-	    // SymTableVis<Void, Integer> pv =
-	    // 	new SymTableVis<Void,Integer>();
-	    // root.accept(pv, 0);
-	    // HashMap<String, String> symt = pv.symt;
+	    SymTableVis<Void, Integer> symbolTableVisitor = new SymTableVis<Void,Integer>();
+	    root.accept(symbolTableVisitor, 0);
 
 	    // Do type checking. Bottom-up visitor, also inherits from
 	    // GJDepthFirst. Visit functions return MyTpe (=R), and

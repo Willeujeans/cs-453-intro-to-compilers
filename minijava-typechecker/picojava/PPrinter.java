@@ -1,3 +1,4 @@
+package picojava;
 import syntaxtree.*;
 import visitor.*;
 

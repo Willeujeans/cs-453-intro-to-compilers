@@ -1,10 +1,10 @@
 package picojava;
-
 import java.util.*;
 import syntaxtree.*;
 import visitor.*;
 
 public class MyType {
+    // int[][] would be stored as -> ["int", "[]", "[]"]
     public Vector<String> type_array;
 
     MyType(String s){
