@@ -13,9 +13,9 @@ public class TestSymbolTable {
     public static void testInsertInvalidIdentifier() {
         String output = "[TestSymbolTable] TEST: Insert Invalid Identifier";
         SymbolTable testingSymbolTable = new SymbolTable();
-        SymbolData symbolData = new SymbolData(new MyType("String"), 0, 0, 0, 0, 0);
+        Symbol symbol = new Symbol(new MyType("String"), 0, 0, 0, 0, 0);
         try {
-            testingSymbolTable.insert(null, symbolData);
+            testingSymbolTable.insert(null, symbol);
         }catch(IllegalArgumentException exception){
             output += " ✅";
             System.out.println(output);
@@ -26,7 +26,7 @@ public class TestSymbolTable {
         System.out.println("[TestSymbolTable] running: testInsert");
 
         SymbolTable testingSymbolTable = new SymbolTable();
-        SymbolData symbolData = new SymbolData(new MyType("String"), 0, 0, 0, 0, 0);
-        testingSymbolTable.insert("a", symbolData);
+        Symbol symbol = new Symbol(new MyType("String"), 0, 0, 0, 0, 0);
+        testingSymbolTable.insert("a", symbol);
     }
 }

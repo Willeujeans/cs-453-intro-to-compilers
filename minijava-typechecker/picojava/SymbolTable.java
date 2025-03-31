@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class SymbolTable {
-    private LinkedList<HashMap<String, SymbolData>> scopes;
+    private LinkedList<HashMap<String, Symbol>> scopes;
 
     public SymbolTable() {
         System.out.println("[SymbolTable]: Constructed");
@@ -11,7 +11,7 @@ public class SymbolTable {
         enterScope();
     }
 
-    public LinkedList<HashMap<String, SymbolData>> getScopes(){
+    public LinkedList<HashMap<String, Symbol>> getScopes(){
         if(this.scopes != null && !this.scopes.isEmpty()){
             return this.scopes;
         }else{
@@ -20,7 +20,7 @@ public class SymbolTable {
         }
     }
     
-    public void insert(String identifier, SymbolData entry){
+    public void insert(String identifier, Symbol entry){
         if(identifier == null){
             throw new IllegalArgumentException("Insert failed due to empty identifier");
         }
@@ -36,7 +36,7 @@ public class SymbolTable {
         }
     }
 
-    public SymbolData lookup(String identifier){
+    public Symbol lookup(String identifier){
         // Lookup will find the symbolEntry inside the inner most scope using the identifier and symbol table
         return null;
     }
