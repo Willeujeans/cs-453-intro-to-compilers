@@ -58,4 +58,36 @@ public class SymbolTable {
         // Reset all non-global scopes
     }
 
+    public String prettyPrint(){
+        StringBuilder output = new StringBuilder();
+        output.append("---Symbol-Table---\n");
+        for(int i = 0; i < scopes.size(); ++i){
+            System.out.println("\n");
+            HashMap<String, Symbol> current_scope = scopes.get(i);
+            output.append("Scope int: " + i + "\n");
+            output.append(" ________________________________________\n");
+            output.append("( id, type, dimension, LoD, LoU, Address )\n");
+            output.append(" ----------------------------------------\n");
+
+            for(String key : current_scope.keySet()){
+                output.append("( ");
+                output.append(key);
+                output.append(", ");
+                Symbol symbol = current_scope.get(key);
+                output.append(symbol.type.getType());
+                output.append(", ");
+                output.append(symbol.size);
+                output.append(", ");
+                output.append(symbol.dimension);
+                output.append(", ");
+                output.append(symbol.lineDeclared);
+                output.append(", ");
+                output.append(symbol.lineUsed);
+                output.append(", ");
+                output.append(symbol.address);
+                output.append(" )");
+            }
+        }
+        return output.toString();
+    }
 }
