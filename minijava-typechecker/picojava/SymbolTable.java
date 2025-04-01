@@ -1,70 +1,59 @@
 package picojava;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
+
+import syntaxtree.*;
 
 public class SymbolTable {
-    private LinkedList<HashMap<String, Symbol>> scopes;
+
+    // A scope is defined as: HashMap<String, Symbol>
+    //   Where String is the identifier
+    //   symbol is the information reguarding the symbol
+    private final Deque<HashMap<String, Symbol>> stackOfScopes = new ArrayDeque<>();
+    private final Map<Node, HashMap<String, Symbol>> ASTNodeScopeDictionary = new HashMap<>();
 
     public SymbolTable() {
-        scopes = new LinkedList<>();
-        enterScope();
+        stackOfScopes.push(new HashMap<>());
     }
 
-    public LinkedList<HashMap<String, Symbol>> getScopes(){
-        if(this.scopes != null && !this.scopes.isEmpty()){
-            return this.scopes;
-        }else{
-            System.err.println("SymbolTable: Trying to get an empty LinkedList");
-            return null;
+    public void enterScope() {
+        stackOfScopes.push(new HashMap<>());
+    }
+
+    public void exitScope() {
+        if (stackOfScopes.size() > 1) {
+            stackOfScopes.pop();
         }
     }
     
     public void insert(String identifier, Symbol entry){
-        if(identifier == null){
-            throw new IllegalArgumentException("Insert failed due to empty identifier");
-        }
-        if(entry == null){
-            throw new IllegalArgumentException("Insert failed due to empty entry");
-        }
-
-        // Adds symbols to the symbol table
-        if (scopes.peek().containsKey(identifier)) {
+        if(identifier == null || entry == null)
+            throw new IllegalArgumentException("Insert failed due to null argument(s)");
+        
+        if (stackOfScopes.peek().containsKey(identifier))
             throw new RuntimeException("Trying to insert an existing symbol to the same scope: " + identifier);
-        }else{
-            scopes.peek().put(identifier, entry);
+        
+        stackOfScopes.peek().put(identifier, entry);
+    }
+
+    // Grab the most inner scope indentifier that matches
+    public Symbol resolveSymbol(String identifier) {
+        for (HashMap<String, Symbol> scope : stackOfScopes) {
+            if (scope.containsKey(identifier))
+                return scope.get(identifier);
         }
-    }
-
-    public Symbol lookup(String identifier){
-        // Lookup will find the symbolEntry inside the inner most scope using the identifier and symbol table
         return null;
-    }
-
-    public boolean set(String identifier, int lineUsed){
-        // Updates a symbol table entry, sucess will return true, failure will return false
-        return false;
-    }
-
-    public void enterScope() {
-        // Enter a new scope
-        scopes.push(new HashMap<>());
-    }
-
-    public void exitScope() {
-        // Exit current scope
-    }
-
-    public void reset(){
-        // Reset all non-global scopes
     }
 
     public String prettyPrint(){
         StringBuilder output = new StringBuilder();
         output.append("---Symbol-Table---\n");
-        for(int i = 0; i < scopes.size(); ++i){
+        for(Node item : ASTNodeScopeDictionary.keySet()){
             System.out.println("\n");
-            HashMap<String, Symbol> current_scope = scopes.get(i);
-            output.append("Scope int: " + i + "\n");
+            HashMap<String, Symbol> current_scope = ASTNodeScopeDictionary.get(item);
             output.append(" ________________________________________\n");
             output.append("( id, type, dimension, LoD, LoU, Address )\n");
             output.append(" ----------------------------------------\n");

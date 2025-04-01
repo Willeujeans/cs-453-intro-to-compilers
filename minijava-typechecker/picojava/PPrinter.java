@@ -496,6 +496,7 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     */
     @Override
     public Void visit(MessageSend n, String indent){
+        output.append("   MESSAGE   \n");
         n.f0.accept(this, indent + indentChar);
         n.f1.accept(this, indent + indentChar);
         n.f2.accept(this, indent + indentChar);

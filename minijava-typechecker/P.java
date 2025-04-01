@@ -1,5 +1,5 @@
-class P{
-    public static void main(String[] a){
+class P {
+    public static void main(String[] a) {
         System.out.println(new Fac().ComputeFac(10));
     }
 }
