@@ -58,8 +58,9 @@ public class SymbolTable {
         // Reset all non-global scopes
     }
 
-    public void prettyPrint(){
-        String output = "---Symbol-Table---\n";
+    public String prettyPrint(){
+        StringBuilder output = new StringBuilder();
+        output.append("---Symbol-Table---\n");
         for(int i = 0; i < scopes.size(); ++i){
             System.out.println("\n");
             HashMap<String, Symbol> current_scope = scopes.get(i);
@@ -69,7 +70,7 @@ public class SymbolTable {
             for(String key : current_scope.keySet()){
                 output.append(key + ": ");
                 Symbol symbol = current_scope.get(key);
-                output.append(symbol.type);
+                output.append(symbol.type.getType());
                 output.append(" | ");
                 output.append(symbol.size);
                 output.append(" | ");
@@ -82,5 +83,6 @@ public class SymbolTable {
                 output.append(symbol.address);
             }
         }
+        return output.toString();
     }
 }

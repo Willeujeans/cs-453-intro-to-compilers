@@ -7,6 +7,7 @@ public class TestSymbolTable {
     public TestSymbolTable(){
         testInsertInvalidIdentifier();
         testInsert();
+        testPrint();
     }
 
     // Testing insert methods
@@ -28,5 +29,14 @@ public class TestSymbolTable {
         SymbolTable testingSymbolTable = new SymbolTable();
         Symbol symbol = new Symbol(new MyType("String"), 0, 0, 0, 0, 0);
         testingSymbolTable.insert("a", symbol);
+    }
+
+    public static void testPrint(){
+        System.out.println("[TestSymbolTable] running: testPrint");
+        SymbolTable testingSymbolTable = new SymbolTable();
+        Symbol symbol = new Symbol(new MyType("String"), 0, 0, 0, 0, 0);
+        testingSymbolTable.insert("a", symbol);
+
+        System.out.println(testingSymbolTable.prettyPrint());
     }
 }
