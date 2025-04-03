@@ -12,12 +12,26 @@ import visitor.*;
 public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
     private HashMap<String, Symbol> data;
     private ArrayList<String> scope = new ArrayList<String>();
-    private ArrayList<String> scopeTypes = new ArrayList<String>();
+    private ArrayList<ScopeTypes> scopeTracker = new ArrayList<ScopeTypes>();
     private String bufferCharacter = ":";
+
+    private enum ScopeTypes {
+        GLOBAL,
+        CLASS,
+        METHOD
+    }
 
     public SymbolTable() {
         enterGlobalScope();
         data = new HashMap<String, Symbol>();
+    }
+
+    public HashMap<String, Symbol> getData(){
+        return data;
+    }
+
+    public ArrayList getScope(){
+        return scope;
     }
 
     public String scopeString(){
@@ -30,25 +44,38 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
     }
 
     public void enterGlobalScope(){
-        scopeTypes.add("global");
-        scope.add("global");
+        if(scope.isEmpty()){
+            scopeTracker.add(ScopeTypes.GLOBAL);
+            scope.add("global");
+        }else{
+            throw new RuntimeException("Tried to enter a global scope while in incorrect scope");
+        }
     }
 
     public void enterClassScope(String classIdentifier){
-        scopeTypes.add("class");
-        scope.add(classIdentifier);
+        ScopeTypes lastItem = scopeTracker.get(scopeTracker.size() - 1);
+        if(lastItem == ScopeTypes.GLOBAL){
+            scopeTracker.add(ScopeTypes.CLASS);
+            scope.add(classIdentifier);
+        }else{
+            throw new RuntimeException("Tried to enter a class scope while in incorrect scope");
+        }
     }
 
     public void enterMethodScope(String methodIdentifier){
-        scopeTypes.add("method");
-        scope.add(methodIdentifier);
+        ScopeTypes lastItem = scopeTracker.get(scopeTracker.size() - 1);
+        if(lastItem == ScopeTypes.CLASS){
+            scopeTracker.add(ScopeTypes.METHOD);
+            scope.add(methodIdentifier);
+        }else{
+            throw new RuntimeException("Tried to enter a class scope while in incorrect scope");
+        }
     }
 
     public void exitScope(){
-        int removeElm = scope.size() - 1;
-        if(scopeTypes.get(removeElm) != "global"){
-            scope.remove(removeElm);
-            scopeTypes.remove(removeElm);
+        if(scope.size() > 1){
+            scope.remove(scope.size() - 1);
+            scopeTracker.remove(scope.size() - 1);
         }
     }
     
@@ -81,7 +108,9 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
         while(finderKey.size() > 1){
             if (data.containsKey(finderKey.toString()))
                 return data.get(key);
-            finderKey.remove(finderKey.size() - 1);
+            
+                if(!finderKey.isEmpty())
+                finderKey.remove(finderKey.size() - 1);
         }
         throw new RuntimeException("[SymbolTable] This symbol was never defined!");
     }
