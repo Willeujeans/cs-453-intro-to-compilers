@@ -35,13 +35,21 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
     }
 
     public void enterClassScope(String classIdentifier){
-        scopeTypes.add("class");
-        scope.add(classIdentifier);
+        if(scopeTypes.get(scopeTypes.size() - 1) == "global"){
+            scopeTypes.add("class");
+            scope.add(classIdentifier);
+        }else{
+            System.err.println("Tried to enter a class scope while in correct scope");
+        }
     }
 
     public void enterMethodScope(String methodIdentifier){
-        scopeTypes.add("method");
-        scope.add(methodIdentifier);
+        if(scopeTypes.get(scopeTypes.size() - 1) == "class"){
+            scopeTypes.add("method");
+            scope.add(methodIdentifier);
+        }else{
+            System.err.println("Tried to enter a method scope while in correct scope");
+        }
     }
 
     public void exitScope(){

@@ -17,7 +17,6 @@ public class TestSymbolTable {
         SymbolTable<Void, Integer> symbolTable = new SymbolTable<Void,Integer>();
         String identifier = "x";
         MyType type = new MyType("int");
-        
         Symbol symbol = new Symbol(type, 0, 0, 0, 0, 0);
     
         try {
