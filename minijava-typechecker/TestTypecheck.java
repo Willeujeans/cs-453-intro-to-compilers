@@ -11,8 +11,7 @@ public class TestTypecheck {
 
         new TestMyType();
         new TestSymbolTable();
-        new TestSymTableVis();
-        new TestTypeCheckSimp();
+        new TestTypeValidator();
 
         System.out.println("^--- [TestTypecheck] ---^");
     }

@@ -2,7 +2,7 @@ package picojava;
 import syntaxtree.*;
 import visitor.*;
 
-public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
+public class ASTPrinter<R, A> extends GJDepthFirst<Void, String> {
     private final StringBuilder output = new StringBuilder();
     private final String indentChar = ">";
 
