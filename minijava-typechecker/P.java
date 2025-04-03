@@ -4,19 +4,18 @@ class P {
         int y;
 
         x = 29;
-        System.out.println(new Fac().ComputeFac(10, "hello"));
+        System.out.println(new Fac().ComputeFac(10));
     }
 }
 
 class Fac {
     int x;
-    public int ComputeFac(int num, String phrase){
-        String myPhrase = phrase;
+    public int ComputeFac(int num){
         int num_aux ;
         if (num < 1)
             num_aux = 1 ;
         else
-            num_aux = num * (this.ComputeFac(num - 1, myPhrase)) ;
+            num_aux = num * (this.ComputeFac(num - 1)) ;
         return num_aux ;
     }
 }

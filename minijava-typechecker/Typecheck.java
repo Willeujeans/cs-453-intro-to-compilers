@@ -17,14 +17,14 @@ public class Typecheck {
 	    // GJDepthFirst<R,A>. R=Void, A=String.
 		
 	    ASTPrinter<Void,String> prettyPrinter = new ASTPrinter<Void,String>();
-	    root.accept(prettyPrinter, "");
+	    // root.accept(prettyPrinter, "");
 		prettyPrinter.printResult();
 
 	    // Build the symbol table. Top-down visitor, inherits from
 	    // GJDepthFirst<R,A>. R=Void, A=Integer.
 
 	    SymbolTable<Void, Integer> symbolTable = new SymbolTable<Void,Integer>();
-	    root.accept(symbolTable, 0);
+	    // root.accept(symbolTable, 0);
 
 	    // Do type checking. Bottom-up visitor, also inherits from
 	    // GJDepthFirst. Visit functions return MyTpe (=R), and
