@@ -73,10 +73,10 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
     }
 
     public void exitScope(){
-        int removeElm = scope.size() - 1;
-        if(scopeTracker.get(removeElm) != ScopeTypes.GLOBAL)
-            scope.remove(removeElm);
-            scopeTracker.remove(removeElm);
+        if(scope.size() > 1){
+            scope.remove(scope.size() - 1);
+            scopeTracker.remove(scope.size() - 1);
+        }
     }
     
     public boolean insert(String identifier, Symbol entry){
