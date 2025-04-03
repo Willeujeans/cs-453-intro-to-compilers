@@ -3,79 +3,63 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import syntaxtree.*;
 
 public class SymbolTable {
-
-    // A scope is defined as: HashMap<String, Symbol>
-    //   Where String is the identifier
-    //   symbol is the information reguarding the symbol
-    private final Deque<HashMap<String, Symbol>> stackOfScopes = new ArrayDeque<>();
-    private final Map<Node, HashMap<String, Symbol>> ASTNodeScopeDictionary = new HashMap<>();
+    private final HashMap<String, Symbol> data;
+    private List<String> scopeKey;
 
     public SymbolTable() {
-        stackOfScopes.push(new HashMap<>());
+        scopeKey = new List<String>();
+        scopeKey.add("global");
+        data = new HashMap<String, Symbol>();
     }
 
-    public void enterScope() {
-        stackOfScopes.push(new HashMap<>());
+    public String scopeKeyString(){
+        String buffer = "|";
+        String output = "";
+        for(int i = 0; i < scopeKey.size(); ++i){
+            output += scopeKey.get(i);
+            if(i < scopeKey.size() - 1){
+                output += buffer;
+            }
+        }
+        return output;
     }
 
-    public void exitScope() {
-        if (stackOfScopes.size() > 1) {
-            stackOfScopes.pop();
+    public void enterScope(String scopeName){
+        scopeKey.add(scopeName);
+    }
+
+    public void exitScope(){
+        if (!scopeKey.isEmpty()) {
+            scopeKey.remove(scopeKey.size() - 1);
         }
     }
     
     public void insert(String identifier, Symbol entry){
-        if(identifier == null || entry == null)
+        if(
+               identifier == null
+            || identifier.trim().isEmpty()
+            || entry == null
+            || entry.type == null
+        )
             throw new IllegalArgumentException("Insert failed due to null argument(s)");
         
-        if (stackOfScopes.peek().containsKey(identifier))
-            throw new RuntimeException("Trying to insert an existing symbol to the same scope: " + identifier);
+        String currentKey = scopeKeyString() + identifier;
+        if (data.containsKey(currentKey))
+            throw new RuntimeException("Trying to insert an existing symbol to the same scope: " + currentKey);
         
-        stackOfScopes.peek().put(identifier, entry);
-    }
-
-    // Grab the most inner scope indentifier that matches
-    public Symbol resolveSymbol(String identifier) {
-        for (HashMap<String, Symbol> scope : stackOfScopes) {
-            if (scope.containsKey(identifier))
-                return scope.get(identifier);
-        }
-        return null;
+        data.put(currentKey, entry);
     }
 
     public String prettyPrint(){
         StringBuilder output = new StringBuilder();
         output.append("---Symbol-Table---\n");
-        for(Node item : ASTNodeScopeDictionary.keySet()){
-            System.out.println("\n");
-            HashMap<String, Symbol> current_scope = ASTNodeScopeDictionary.get(item);
-            output.append(" ________________________________________\n");
-            output.append("( id, type, dimension, LoD, LoU, Address )\n");
-            output.append(" ----------------------------------------\n");
-
-            for(String key : current_scope.keySet()){
-                output.append("( ");
-                output.append(key);
-                output.append(", ");
-                Symbol symbol = current_scope.get(key);
-                output.append(symbol.type.getType());
-                output.append(", ");
-                output.append(symbol.size);
-                output.append(", ");
-                output.append(symbol.dimension);
-                output.append(", ");
-                output.append(symbol.lineDeclared);
-                output.append(", ");
-                output.append(symbol.lineUsed);
-                output.append(", ");
-                output.append(symbol.address);
-                output.append(" )");
-            }
+        for(Node item : data.keySet()){
         }
         return output.toString();
     }

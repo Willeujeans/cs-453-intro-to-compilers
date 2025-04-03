@@ -527,7 +527,9 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     * f0 -> <IDENTIFIER>
     */
     public Void visit(Identifier n, String indent){
+        output.append(" id(");
         n.f0.accept(this, indent + indentChar);
+        output.append(")");
         return null;
     }
 
