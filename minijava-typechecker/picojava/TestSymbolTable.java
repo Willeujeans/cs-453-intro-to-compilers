@@ -9,6 +9,7 @@ public class TestSymbolTable {
         testInsertInvalid();
         testInsertDuplicate();
         testExitScopeTooManyTimes();
+        testEnterScopeIncorrectly();
         testPrettyPrinting();
     }
 
@@ -68,14 +69,32 @@ public class TestSymbolTable {
         MyType type = new MyType("int");
         Symbol symbol = new Symbol(type, 0, 0, 0, 0, 0);
         symbolTable.insert("a", symbol);
-        symbolTable.enterMethodScope("myClass");
+        symbolTable.enterClassScope("myClass");
         symbolTable.exitScope();
         symbolTable.exitScope();
         symbolTable.exitScope();
-
+        if(symbolTable.getScope().contains("global")){
+            output.insert(0, " ✅");
+        }else{
+            output.insert(0, " ❌");
+        }
         System.out.println(output);
     }
 
+    private void testEnterScopeIncorrectly(){
+        StringBuilder output = new StringBuilder("[TestSymbolTable] TEST 'testEnterScopeIncorrectly'");
+        SymbolTable<Void, Integer> symbolTable = new SymbolTable<Void,Integer>();
+        MyType type = new MyType("int");
+        Symbol symbol = new Symbol(type, 0, 0, 0, 0, 0);
+        symbolTable.insert("a", symbol);
+        try {
+            symbolTable.enterMethodScope("myMethod");
+            output.insert(0, " ❌");
+        } catch (Exception e) {
+            output.insert(0, " ✅");
+        }
+        System.out.println(output);
+    }
 
     private void testPrettyPrinting(){
         SymbolTable<Void, Integer> symbolTable = new SymbolTable<Void,Integer>();
