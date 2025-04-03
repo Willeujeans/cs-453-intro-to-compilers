@@ -13,32 +13,32 @@ public class TestMyType {
     }
 
     private void TestConstructorEmptyString(){
-        String output = "[TestMyType] TEST 'TestConstructorEmptyString' ";
+        StringBuilder output = new StringBuilder("[TestMyType] TEST 'TestConstructorEmptyString' ");
         try {
-            MyType myTypeStringConstruct = new MyType("");
+            new MyType("");
+            output.insert(0, " ❌");
         } catch (Exception e) {
-            output += " ✅";
+            output.insert(0, " ✅");
             System.out.println(output);
         }
-        
     }
 
     private void TestGetTypeSingle(){
-        String output = "[TestMyType] TEST 'TestGetTypeSingle' ";
+        StringBuilder output = new StringBuilder("[TestMyType] TEST 'TestGetTypeSingle' ");
         String typeName = "int";
         MyType myType = new MyType(typeName);
 
         String result_type = myType.getType();
         if(result_type.equals(typeName)){
-            output += " ✅";
+            output.insert(0, " ✅");
         }else{
-            output += " ❌";
+            output.insert(0, " ❌");
         }
         System.out.println(output);
     }
 
     private void TestGetTypeMultiple(){
-        String output = "[TestMyType] TEST 'TestGetTypeMultiple' ";
+        StringBuilder output = new StringBuilder("[TestMyType] TEST 'TestGetTypeMultiple' ");
         String typeName = "int";
         MyType myType = new MyType(typeName);
         myType.addType("[]");
@@ -46,15 +46,15 @@ public class TestMyType {
 
         String result_type = myType.getType();
         if(result_type.equals(typeName)){
-            output += " ✅";
+            output.insert(0, " ✅");
         }else{
-            output += " ❌";
+            output.insert(0, " ❌");
         }
         System.out.println(output);
     }
 
     private void TestCheckIdenticalSameType(){
-        String output = "[TestMyType] TEST 'TestCheckIdenticalSameType' ";
+        StringBuilder output = new StringBuilder("[TestMyType] TEST 'TestCheckIdenticalSameType' ");
         String typeName = "int";
         MyType myType = new MyType(typeName);
         myType.addType("[]");
@@ -62,18 +62,16 @@ public class TestMyType {
 
         MyType otherType = new MyType(typeName);
 
-        output += " " + myType.toString() + " != " + otherType.toString() + " ";
-
         if(myType.checkIdentical(otherType) == false){
-            output += " ✅";
+            output.insert(0, " ✅");
         }else{
-            output += " ❌";
+            output.insert(0, " ❌");
         }
         System.out.println(output);
     }
 
     private void TestCheckIdenticalSame(){
-        String output = "[TestMyType] TEST 'TestCheckIdenticalSame' ";
+        StringBuilder output = new StringBuilder("[TestMyType] TEST 'TestCheckIdenticalSame' ");
         String typeName = "int";
         MyType myType = new MyType(typeName);
         myType.addType("[]");
@@ -83,12 +81,10 @@ public class TestMyType {
         myTypeOther.addType("[]");
         myTypeOther.addType("[]");
 
-        output += " " + myType.toString() + " == " + myTypeOther.toString() + " ";
-
         if(myType.checkIdentical(myTypeOther) == true){
-            output += " ✅";
+            output.insert(0, " ✅");
         }else{
-            output += " ❌";
+            output.insert(0, " ❌");
         }
         System.out.println(output);
     }

@@ -16,4 +16,18 @@ public class Symbol {
         this.lineUsed = lineUsed;
         this.address = address;
     }
+
+    public String toString(){
+        StringBuilder output = new StringBuilder();
+        output.append("ₘₜ{");
+        output.append(type.toString()).append(", ");
+        output.append(size).append(", ");
+        output.append(dimension).append(", ");
+        output.append(lineDeclared).append(", ");
+        output.append(lineUsed).append(", ");
+        output.append(address);
+        output.append("}");
+        
+        return output.toString();
+    }
 }
