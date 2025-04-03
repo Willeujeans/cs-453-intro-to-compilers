@@ -2,7 +2,7 @@ package picojava;
 import syntaxtree.*;
 import visitor.*;
 
-public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
+public class ASTPrinter<R, A> extends GJDepthFirst<Void, String> {
     private final StringBuilder output = new StringBuilder();
     private final String indentChar = ">";
 
@@ -496,6 +496,7 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     */
     @Override
     public Void visit(MessageSend n, String indent){
+        output.append("   MESSAGE   \n");
         n.f0.accept(this, indent + indentChar);
         n.f1.accept(this, indent + indentChar);
         n.f2.accept(this, indent + indentChar);
@@ -526,7 +527,9 @@ public class PPrinter<R, A> extends GJDepthFirst<Void, String> {
     * f0 -> <IDENTIFIER>
     */
     public Void visit(Identifier n, String indent){
+        output.append(" id(");
         n.f0.accept(this, indent + indentChar);
+        output.append(")");
         return null;
     }
 

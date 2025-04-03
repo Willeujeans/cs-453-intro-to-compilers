@@ -16,14 +16,15 @@ public class Typecheck {
 	    // Pretty-print the tree. PPrinter inherits from
 	    // GJDepthFirst<R,A>. R=Void, A=String.
 		
-	    PPrinter<Void,String> pp = new PPrinter<Void,String>();
-	    root.accept(pp, "");
-		pp.printResult();
+	    ASTPrinter<Void,String> prettyPrinter = new ASTPrinter<Void,String>();
+	    // root.accept(prettyPrinter, "");
+		prettyPrinter.printResult();
+
 	    // Build the symbol table. Top-down visitor, inherits from
 	    // GJDepthFirst<R,A>. R=Void, A=Integer.
 
-	    SymTableVis<Void, Integer> symbolTableVisitor = new SymTableVis<Void,Integer>();
-	    root.accept(symbolTableVisitor, 0);
+	    SymbolTable<Void, Integer> symbolTable = new SymbolTable<Void,Integer>();
+	    // root.accept(symbolTable, 0);
 
 	    // Do type checking. Bottom-up visitor, also inherits from
 	    // GJDepthFirst. Visit functions return MyTpe (=R), and

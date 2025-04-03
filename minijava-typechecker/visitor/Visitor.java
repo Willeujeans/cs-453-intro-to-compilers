@@ -13,7 +13,7 @@ import java.util.*;
 public interface Visitor {
 
    //
-   // void Auto class visitors
+   // void Auto ors
    //
 
    public void visit(NodeList n);

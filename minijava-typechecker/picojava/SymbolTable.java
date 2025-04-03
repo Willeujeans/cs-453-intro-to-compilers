@@ -1,93 +1,87 @@
 package picojava;
-import java.util.HashMap;
-import java.util.LinkedList;
 
-public class SymbolTable {
-    private LinkedList<HashMap<String, Symbol>> scopes;
+import java.beans.Expression;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import syntaxtree.*;
+import visitor.*;
+
+// Symbol Table Visitor: Traverses AST to create symbol table.
+public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
+    private HashMap<String, Symbol> data;
+    private ArrayList<String> scopeKey = new ArrayList<String>(4);
 
     public SymbolTable() {
-        scopes = new LinkedList<>();
-        enterScope();
+        scopeKey.add("global");
+        data = new HashMap<String, Symbol>();
     }
 
-    public LinkedList<HashMap<String, Symbol>> getScopes(){
-        if(this.scopes != null && !this.scopes.isEmpty()){
-            return this.scopes;
-        }else{
-            System.err.println("SymbolTable: Trying to get an empty LinkedList");
-            return null;
+    public String scopeKeyString(){
+        String buffer = "|";
+        String output = "";
+        for(int i = 0; i < scopeKey.size(); ++i){
+            output += scopeKey.get(i);
+            if(i < scopeKey.size() - 1){
+                output += buffer;
+            }
+        }
+        return output;
+    }
+
+    public void enterScope(String scopeName){
+        scopeKey.add(scopeName);
+    }
+
+    public void exitScope(){
+        if (!scopeKey.isEmpty()) {
+            scopeKey.remove(scopeKey.size() - 1);
         }
     }
     
     public void insert(String identifier, Symbol entry){
-        if(identifier == null){
-            throw new IllegalArgumentException("Insert failed due to empty identifier");
-        }
-        if(entry == null){
-            throw new IllegalArgumentException("Insert failed due to empty entry");
-        }
-
-        // Adds symbols to the symbol table
-        if (scopes.peek().containsKey(identifier)) {
-            throw new RuntimeException("Trying to insert an existing symbol to the same scope: " + identifier);
-        }else{
-            scopes.peek().put(identifier, entry);
-        }
-    }
-
-    public Symbol lookup(String identifier){
-        // Lookup will find the symbolEntry inside the inner most scope using the identifier and symbol table
-        return null;
-    }
-
-    public boolean set(String identifier, int lineUsed){
-        // Updates a symbol table entry, sucess will return true, failure will return false
-        return false;
-    }
-
-    public void enterScope() {
-        // Enter a new scope
-        scopes.push(new HashMap<>());
-    }
-
-    public void exitScope() {
-        // Exit current scope
-    }
-
-    public void reset(){
-        // Reset all non-global scopes
+        if(
+               identifier == null
+            || identifier.trim().isEmpty()
+            || entry == null
+            || entry.type == null
+        )
+            throw new IllegalArgumentException("Insert failed due to null argument(s)");
+        
+        String currentKey = scopeKeyString() + identifier;
+        if (data.containsKey(currentKey))
+            throw new RuntimeException("Trying to insert an existing symbol to the same scope: " + currentKey);
+        
+        data.put(currentKey, entry);
     }
 
     public String prettyPrint(){
         StringBuilder output = new StringBuilder();
         output.append("---Symbol-Table---\n");
-        for(int i = 0; i < scopes.size(); ++i){
-            System.out.println("\n");
-            HashMap<String, Symbol> current_scope = scopes.get(i);
-            output.append("Scope int: " + i + "\n");
-            output.append(" ________________________________________\n");
-            output.append("( id, type, dimension, LoD, LoU, Address )\n");
-            output.append(" ----------------------------------------\n");
-
-            for(String key : current_scope.keySet()){
-                output.append("( ");
-                output.append(key);
-                output.append(", ");
-                Symbol symbol = current_scope.get(key);
-                output.append(symbol.type.getType());
-                output.append(", ");
-                output.append(symbol.size);
-                output.append(", ");
-                output.append(symbol.dimension);
-                output.append(", ");
-                output.append(symbol.lineDeclared);
-                output.append(", ");
-                output.append(symbol.lineUsed);
-                output.append(", ");
-                output.append(symbol.address);
-                output.append(" )");
-            }
+        for(String key : data.keySet()){
+            output.append(data.get(key));
         }
         return output.toString();
     }
+
+    // we can use our SymbolTable's .enterScope(); method when entering a method
+    // Override every visitor method
+    // Each method will be based around adding symbols to the symbol table
+    // visit(this, Integer) Integer will be used to track scope
+
+    /**
+     * f0 -> MainClass()
+     * f1 -> ( TypeDeclaration() )*
+     * f2 -> <EOF>
+     */
+    @Override
+    public Void visit(Goal n, Integer depth) {
+
+        n.f0.accept(this, depth);
+        n.f1.accept(this, depth);
+        n.f2.accept(this, depth);
+        return null;
+    }
+
 }
