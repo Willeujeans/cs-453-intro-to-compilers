@@ -14,124 +14,33 @@ import visitor.*;
 // Symbol Table Visitor: Traverses AST to create symbol table.
 public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     private HashMap<String, Symbol> data;
-    private ArrayList<String> scope = new ArrayList<String>();
-    private ArrayList<ScopeTypes> scopeTracker = new ArrayList<ScopeTypes>();
     private String bufferCharacter = ":";
 
-    private enum ScopeTypes {
-        GLOBAL,
-        CLASS,
-        METHOD,
-        VARIABLE
-    }
-
     public SymbolTable() {
-        enterGlobalScope();
         data = new HashMap<String, Symbol>();
     }
 
     public HashMap<String, Symbol> getData(){
         return data;
     }
-
-    public ArrayList getScope(){
-        return scope;
-    }
-
-    public String scopeString(){
-        String output = "";
-        for(int i = 0; i < scope.size(); ++i){
-            output += scope.get(i);
-            output += bufferCharacter;
-        }
-        return output;
-    }
-
-    public void enterGlobalScope(){
-        if(scope.isEmpty()){
-            scopeTracker.add(ScopeTypes.GLOBAL);
-            scope.add("global");
-        }else{
-            throw new RuntimeException("Tried to enter a global scope while in incorrect scope");
-        }
-    }
-
-    public void enterClassScope(String classIdentifier){
-        ScopeTypes lastItem = scopeTracker.get(scopeTracker.size() - 1);
-        if(lastItem == ScopeTypes.GLOBAL){
-            scopeTracker.add(ScopeTypes.CLASS);
-            scope.add(classIdentifier);
-        }else{
-            System.err.println((scopeTracker.get(scope.size() - 1)).toString());
-            throw new RuntimeException("Tried to enter a class scope while in scope: ");
-            
-        }
-    }
-
-    public void enterMethodScope(String methodIdentifier){
-        ScopeTypes lastItem = scopeTracker.get(scopeTracker.size() - 1);
-        if(lastItem == ScopeTypes.CLASS){
-            scopeTracker.add(ScopeTypes.METHOD);
-            scope.add(methodIdentifier);
-        }else{
-            System.err.println((scopeTracker.get(scope.size() - 1)).toString());
-            throw new RuntimeException("Tried to enter a class scope while in scope: ");
-        }
-    }
-
-    public void enterVariableScope(String varIdentifier){
-        ScopeTypes lastItem = scopeTracker.get(scopeTracker.size() - 1);
-
-        if(lastItem == ScopeTypes.CLASS || lastItem == ScopeTypes.METHOD){
-            scopeTracker.add(ScopeTypes.VARIABLE);
-            scope.add(varIdentifier);
-        }else{
-            System.err.println((scopeTracker.get(scope.size() - 1)).toString());
-            prettyPrint();
-            throw new RuntimeException("Tried to enter a variable scope while in scope: ");
-        }
-    }
-
-    public void exitScope() {
-        System.out.println(scopeTracker);
-        if (scope.size() > 1) {
-            int lastIndex = scope.size() - 1;
-            scope.remove(lastIndex);
-            scopeTracker.remove(lastIndex);
-        }
-        System.out.println(scopeTracker);
-    }
     
-    public boolean insert(Symbol entry){
-        if(
-            entry == null
+    public boolean insert(String key, Symbol entry){
+        if(key == null
+            || key.trim().isEmpty()
+            || entry == null
             || entry.type == null
         )
             return false;
         
-        if (data.containsKey(scopeString()))
+        if (data.containsKey(key))
             return false;
 
-        data.put(scopeString(), entry);
+        data.put(key, entry);
         return true;
     }
 
     public Symbol find(String key){
-        String[] finderKeySplit = (key + scope).split(bufferCharacter);
-        ArrayList<String> finderKey = new ArrayList<String>();
-        for (int i = 0; i < finderKeySplit.length; i++) {
-            finderKey.add(finderKeySplit[i]);
-        }
-
-        // If we cannot find it in this scope, we will move up
-        while(finderKey.size() > 1){
-            if (data.containsKey(finderKey.toString()))
-                return data.get(key);
-            
-                if(!finderKey.isEmpty())
-                finderKey.remove(finderKey.size() - 1);
-        }
-        throw new RuntimeException("[SymbolTable] This symbol was never defined!");
+        return data.get(key);
     }
 
     public void prettyPrint(){
