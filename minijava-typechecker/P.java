@@ -1,7 +1,7 @@
 class P {
     public static void main(String[] a) {
-        int x;
-        int y;
+        int x ;
+        int y ;
 
         x = 29;
         System.out.println(new Fac().ComputeFac(10));

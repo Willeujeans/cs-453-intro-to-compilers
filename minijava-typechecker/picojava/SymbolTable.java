@@ -77,4 +77,92 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         n.f2.accept(this, key);
         return null;
     }
+
+    /**
+     * f0 -> "class"
+     * f1 -> Identifier()
+     * f2 -> "{"
+     * f3 -> "public"
+     * f4 -> "static"
+     * f5 -> "void"
+     * f6 -> "main"
+     * f7 -> "("
+     * f8 -> "String"
+     * f9 -> "["
+     * f10 -> "]"
+     * f11 -> Identifier()
+     * f12 -> ")"
+     * f13 -> "{"
+     * f14 -> ( VarDeclaration() )*
+     * f15 -> ( Statement() )*
+     * f16 -> "}"
+     * f17 -> "}"
+     */
+    @Override
+    public Void visit(MainClass n, String key) {
+        System.out.println("visit(MainClass)");
+        insert(key + ":" + n.f1.f0.toString(), new Symbol(new MyType("mainClass"), 0));
+        
+        String currentScope = key + ":" + n.f1.f0.toString() + ":" + "main";
+        insert(currentScope + ":" + n.f11.f0.toString(), new Symbol(new MyType("String", "[", "]"), 0));
+
+        n.f14.accept(this, currentScope);
+        n.f15.accept(this, currentScope);
+        return null;
+    }
+
+    /**
+     * f0 -> Type()
+     * f1 -> Identifier()
+     * f2 -> ";"
+     */
+    @Override
+    public Void visit(VarDeclaration n, String key) {
+        n.f0.accept(this, key + ":" + n.f1.f0.toString());
+        return null;
+    }
+
+    /**
+     * f0 -> ArrayType()
+     * | BooleanType()
+     * | IntegerType()
+     * | Identifier()
+     */
+    @Override
+    public Void visit(Type n, String key) {
+        n.f0.accept(this, key);
+        return null;
+    }
+
+    /**
+     * f0 -> "int"
+     * f1 -> "["
+     * f2 -> "]"
+     */
+    @Override
+    public Void visit(ArrayType n, String key) {
+        insert(key, new Symbol(new MyType("int", "[", "]"), 0));
+        return null;
+    }
+
+    /**
+     * f0 -> "boolean"
+     */
+    @Override
+    public Void visit(BooleanType n, String key) {
+        insert(key, new Symbol(new MyType("boolean"), 0));
+        return null;
+    }
+
+    /**
+     * f0 -> "int"
+     */
+    @Override
+    public Void visit(IntegerType n, String key) {
+        System.out.println("Just added an int type!");
+        System.out.println(key);
+        insert(key, new Symbol(new MyType("int"), 0));
+        return null;
+    }
+
 }
