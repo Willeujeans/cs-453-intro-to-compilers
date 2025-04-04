@@ -155,7 +155,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         return null;
     }
 
-        /**
+    /**
      * f0 -> "public"
      * f1 -> Type()
      * f2 -> Identifier()
@@ -183,6 +183,36 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         return null;
     }
 
+    /**
+     * f0 -> FormalParameter()
+     * f1 -> ( FormalParameterRest() )*
+     */
+    @Override
+    public Void visit(FormalParameterList n, String key) {
+        n.f0.accept(this, key);
+        n.f1.accept(this, key);
+        return null;
+    }
+
+    /**
+     * f0 -> Type()
+     * f1 -> Identifier()
+     */
+    @Override
+    public Void visit(FormalParameter n, String key) {
+        n.f0.accept(this, key + bufferChar + n.f1.f0.toString());
+        return null;
+    }
+
+    /**
+     * f0 -> ","
+     * f1 -> FormalParameter()
+     */
+    @Override
+    public Void visit(FormalParameterRest n, String key) {
+        n.f1.accept(this, key);
+        return null;
+    }
 
     /**
      * f0 -> Type()
