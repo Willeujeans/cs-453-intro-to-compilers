@@ -134,6 +134,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(ClassDeclaration n, String key) {
         String currentScope = key + bufferChar + n.f1.f0.toString();
+        insert(currentScope, new Symbol(new MyType("class"), n.f0.beginLine));
         n.f3.accept(this, currentScope);
         n.f4.accept(this, currentScope);
         return null;
