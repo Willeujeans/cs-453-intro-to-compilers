@@ -112,6 +112,48 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     }
 
     /**
+     * f0 -> ClassDeclaration()
+     * | ClassExtendsDeclaration()
+     */
+    @Override
+    public Void visit(TypeDeclaration n, String key) {
+        n.f0.accept(this, key);
+        return null;
+    }
+
+    /**
+     * f0 -> "class"
+     * f1 -> Identifier()
+     * f2 -> "{"
+     * f3 -> ( VarDeclaration() )*
+     * f4 -> ( MethodDeclaration() )*
+     * f5 -> "}"
+     */
+    @Override
+    public Void visit(ClassDeclaration n, String key) {
+        n.f3.accept(this, key + n.f1.f0.toString());
+        n.f4.accept(this, key + n.f1.f0.toString());
+        return null;
+    }
+
+    /**
+     * f0 -> "class"
+     * f1 -> Identifier()
+     * f2 -> "extends"
+     * f3 -> Identifier()
+     * f4 -> "{"
+     * f5 -> ( VarDeclaration() )*
+     * f6 -> ( MethodDeclaration() )*
+     * f7 -> "}"
+     */
+    @Override
+    public Void visit(ClassExtendsDeclaration n, String key) {
+        // Not sure how to handle this yet
+        return null;
+    }
+
+
+    /**
      * f0 -> Type()
      * f1 -> Identifier()
      * f2 -> ";"
