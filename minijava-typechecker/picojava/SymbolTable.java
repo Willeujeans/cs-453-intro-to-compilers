@@ -2,14 +2,17 @@ package picojava;
 
 import java.beans.Expression;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 
 import syntaxtree.*;
 import visitor.*;
 
 // Symbol Table Visitor: Traverses AST to create symbol table.
-public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
+public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     private HashMap<String, Symbol> data;
     private ArrayList<String> scope = new ArrayList<String>();
     private ArrayList<ScopeTypes> scopeTracker = new ArrayList<ScopeTypes>();
@@ -18,7 +21,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
     private enum ScopeTypes {
         GLOBAL,
         CLASS,
-        METHOD
+        METHOD,
+        VARIABLE
     }
 
     public SymbolTable() {
@@ -58,7 +62,9 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
             scopeTracker.add(ScopeTypes.CLASS);
             scope.add(classIdentifier);
         }else{
-            throw new RuntimeException("Tried to enter a class scope while in incorrect scope");
+            System.err.println((scopeTracker.get(scope.size() - 1)).toString());
+            throw new RuntimeException("Tried to enter a class scope while in scope: ");
+            
         }
     }
 
@@ -68,32 +74,45 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
             scopeTracker.add(ScopeTypes.METHOD);
             scope.add(methodIdentifier);
         }else{
-            throw new RuntimeException("Tried to enter a class scope while in incorrect scope");
+            System.err.println((scopeTracker.get(scope.size() - 1)).toString());
+            throw new RuntimeException("Tried to enter a class scope while in scope: ");
         }
     }
 
-    public void exitScope(){
-        if(scope.size() > 1){
-            scope.remove(scope.size() - 1);
-            scopeTracker.remove(scope.size() - 1);
+    public void enterVariableScope(String varIdentifier){
+        ScopeTypes lastItem = scopeTracker.get(scopeTracker.size() - 1);
+
+        if(lastItem == ScopeTypes.CLASS || lastItem == ScopeTypes.METHOD){
+            scopeTracker.add(ScopeTypes.VARIABLE);
+            scope.add(varIdentifier);
+        }else{
+            System.err.println((scopeTracker.get(scope.size() - 1)).toString());
+            prettyPrint();
+            throw new RuntimeException("Tried to enter a variable scope while in scope: ");
         }
     }
+
+    public void exitScope() {
+        System.out.println(scopeTracker);
+        if (scope.size() > 1) {
+            int lastIndex = scope.size() - 1;
+            scope.remove(lastIndex);
+            scopeTracker.remove(lastIndex);
+        }
+        System.out.println(scopeTracker);
+    }
     
-    public boolean insert(String identifier, Symbol entry){
+    public boolean insert(Symbol entry){
         if(
-            identifier == null
-            || identifier.trim().isEmpty()
-            || entry == null
+            entry == null
             || entry.type == null
         )
             return false;
         
-        String currentKey = scopeString() + identifier;
-        
-        if (data.containsKey(currentKey))
+        if (data.containsKey(scopeString()))
             return false;
 
-        data.put(currentKey, entry);
+        data.put(scopeString(), entry);
         return true;
     }
 
@@ -115,7 +134,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
         throw new RuntimeException("[SymbolTable] This symbol was never defined!");
     }
 
-    public String prettyPrint(){
+    public void prettyPrint(){
         StringBuilder output = new StringBuilder();
         output.append("\n---Symbol-Table---\n");
         for(String key : data.keySet()){
@@ -126,14 +145,16 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
             output.append(data.get(key));
             output.append("]\n");
         }
-        output.append("---------\n");
-        return output.toString();
+        output.append("------------------\n");
+        System.out.println(output.toString());
     }
 
-    // we can use our SymbolTable's .enterScope(); method when entering a method
-    // Override every visitor method
-    // Each method will be based around adding symbols to the symbol table
-    // visit(this, Integer) Integer will be used to track scope
+    // All symbol types
+    // variable declaration
+    // variable assignment
+    // class
+    // method
+    // statments
 
     /**
      * f0 -> MainClass()
@@ -141,12 +162,10 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
      * f2 -> <EOF>
      */
     @Override
-    public Void visit(Goal n, Integer depth) {
-
-        n.f0.accept(this, depth);
-        n.f1.accept(this, depth);
-        n.f2.accept(this, depth);
+    public Void visit(Goal n, String key) {
+        n.f0.accept(this, key);
+        n.f1.accept(this, key);
+        n.f2.accept(this, key);
         return null;
     }
-
 }
