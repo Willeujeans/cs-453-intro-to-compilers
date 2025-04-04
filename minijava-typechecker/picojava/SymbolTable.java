@@ -268,4 +268,130 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         return null;
     }
 
+    /**
+     * f0 -> Block()
+     * | AssignmentStatement()
+     * | ArrayAssignmentStatement()
+     * | IfStatement()
+     * | WhileStatement()
+     * | PrintStatement()
+     */
+    @Override
+    public Void visit(Statement n, String key) {
+        
+        n.f0.accept(this,key);
+        return null;
+    }
+
+    /**
+     * f0 -> "{"
+     * f1 -> ( Statement() )*
+     * f2 -> "}"
+     */
+    @Override
+    public Void visit(Block n, String key) {
+        
+        n.f0.accept(this,key);
+        n.f1.accept(this,key);
+        n.f2.accept(this,key);
+        return null;
+    }
+
+    /**
+     * f0 -> Identifier()
+     * f1 -> "="
+     * f2 -> Expression()
+     * f3 -> ";"
+     */
+    @Override
+    public Void visit(AssignmentStatement n, String key) {
+        
+        n.f0.accept(this,key);
+        n.f1.accept(this,key);
+        n.f2.accept(this,key);
+        n.f3.accept(this,key);
+        return null;
+    }
+
+    /**
+     * f0 -> Identifier()
+     * f1 -> "["
+     * f2 -> Expression()
+     * f3 -> "]"
+     * f4 -> "="
+     * f5 -> Expression()
+     * f6 -> ";"
+     */
+    @Override
+    public Void visit(ArrayAssignmentStatement n, String key) {
+        
+        n.f0.accept(this,key);
+        n.f1.accept(this,key);
+        n.f2.accept(this,key);
+        n.f3.accept(this,key);
+        n.f4.accept(this,key);
+        n.f5.accept(this,key);
+        n.f6.accept(this,key);
+        return null;
+    }
+
+    /**
+     * f0 -> "if"
+     * f1 -> "("
+     * f2 -> Expression()
+     * f3 -> ")"
+     * f4 -> Statement()
+     * f5 -> "else"
+     * f6 -> Statement()
+     */
+    @Override
+    public Void visit(IfStatement n, String key) {
+        
+        n.f0.accept(this,key);
+        n.f1.accept(this,key);
+        n.f2.accept(this,key);
+        n.f3.accept(this,key);
+        n.f4.accept(this,key);
+        n.f5.accept(this,key);
+        n.f6.accept(this,key);
+        return null;
+    }
+
+    /**
+     * f0 -> "while"
+     * f1 -> "("
+     * f2 -> Expression()
+     * f3 -> ")"
+     * f4 -> Statement()
+     */
+    @Override
+    public Void visit(WhileStatement n, String key) {
+        
+        n.f0.accept(this,key);
+        n.f1.accept(this,key);
+        n.f2.accept(this,key);
+        n.f3.accept(this,key);
+        n.f4.accept(this,key);
+        return null;
+    }
+
+    /**
+     * f0 -> "System.out.println"
+     * f1 -> "("
+     * f2 -> Expression()
+     * f3 -> ")"
+     * f4 -> ";"
+     */
+    @Override
+    public Void visit(PrintStatement n, String key) {
+        
+        n.f0.accept(this,key);
+        n.f1.accept(this,key);
+        n.f2.accept(this,key);
+        n.f3.accept(this,key);
+        n.f4.accept(this,key);
+        return null;
+    }
+
+
 }
