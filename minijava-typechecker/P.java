@@ -4,18 +4,18 @@ class P {
         int y ;
 
         x = 29;
-        System.out.println(new Fac().ComputeFac(10));
+        System.out.println(new Factorial().ComputeFactorial(10));
     }
 }
 
-class Fac {
+class Factorial {
     int x;
-    public int ComputeFac(int num){
+    public int ComputeFactorial(int num){
         int num_aux ;
         if (num < 1)
             num_aux = 1 ;
         else
-            num_aux = num * (this.ComputeFac(num - 1)) ;
+            num_aux = num * (this.ComputeFactorial(num - 1)) ;
         return num_aux ;
     }
 }
