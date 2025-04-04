@@ -7,25 +7,8 @@ public class MyType {
     // int[][] would be stored as -> ["int", "[]", "[]"]
     public Vector<String> type_array;
 
-    public MyType(String inputString){
-        if(inputString == "" || inputString == null){
-            throw new IllegalArgumentException("Failed to construct MyType: empty String argument");
-        }else{
-            this.type_array = new Vector<String>();
-            addType(inputString);
-        }
-    }
-
-    public MyType(){
-        type_array = new Vector<String>();
-    }
-
-    public void addType(String inputString){
-        if(inputString == "" || inputString == null){
-            throw new IllegalArgumentException("Failed to addType: empty String argument");
-        }else{
-            this.type_array.add(inputString);
-        }
+    public MyType(String... components) {
+        this.type_array = new Vector<>(Arrays.asList(components));
     }
 
     public String getType() {

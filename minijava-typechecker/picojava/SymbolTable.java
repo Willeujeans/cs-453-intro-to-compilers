@@ -2,120 +2,48 @@ package picojava;
 
 import java.beans.Expression;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 
 import syntaxtree.*;
 import visitor.*;
 
 // Symbol Table Visitor: Traverses AST to create symbol table.
-public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
+public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     private HashMap<String, Symbol> data;
-    private ArrayList<String> scope = new ArrayList<String>();
-    private ArrayList<ScopeTypes> scopeTracker = new ArrayList<ScopeTypes>();
     private String bufferCharacter = ":";
 
-    private enum ScopeTypes {
-        GLOBAL,
-        CLASS,
-        METHOD
-    }
-
     public SymbolTable() {
-        enterGlobalScope();
         data = new HashMap<String, Symbol>();
     }
 
     public HashMap<String, Symbol> getData(){
         return data;
     }
-
-    public ArrayList getScope(){
-        return scope;
-    }
-
-    public String scopeString(){
-        String output = "";
-        for(int i = 0; i < scope.size(); ++i){
-            output += scope.get(i);
-            output += bufferCharacter;
-        }
-        return output;
-    }
-
-    public void enterGlobalScope(){
-        if(scope.isEmpty()){
-            scopeTracker.add(ScopeTypes.GLOBAL);
-            scope.add("global");
-        }else{
-            throw new RuntimeException("Tried to enter a global scope while in incorrect scope");
-        }
-    }
-
-    public void enterClassScope(String classIdentifier){
-        ScopeTypes lastItem = scopeTracker.get(scopeTracker.size() - 1);
-        if(lastItem == ScopeTypes.GLOBAL){
-            scopeTracker.add(ScopeTypes.CLASS);
-            scope.add(classIdentifier);
-        }else{
-            throw new RuntimeException("Tried to enter a class scope while in incorrect scope");
-        }
-    }
-
-    public void enterMethodScope(String methodIdentifier){
-        ScopeTypes lastItem = scopeTracker.get(scopeTracker.size() - 1);
-        if(lastItem == ScopeTypes.CLASS){
-            scopeTracker.add(ScopeTypes.METHOD);
-            scope.add(methodIdentifier);
-        }else{
-            throw new RuntimeException("Tried to enter a class scope while in incorrect scope");
-        }
-    }
-
-    public void exitScope(){
-        if(scope.size() > 1){
-            scope.remove(scope.size() - 1);
-            scopeTracker.remove(scope.size() - 1);
-        }
-    }
     
-    public boolean insert(String identifier, Symbol entry){
-        if(
-            identifier == null
-            || identifier.trim().isEmpty()
+    public boolean insert(String key, Symbol entry){
+        if(key == null
+            || key.trim().isEmpty()
             || entry == null
             || entry.type == null
         )
             return false;
         
-        String currentKey = scopeString() + identifier;
-        
-        if (data.containsKey(currentKey))
+        if (data.containsKey(key))
             return false;
 
-        data.put(currentKey, entry);
+        data.put(key, entry);
         return true;
     }
 
     public Symbol find(String key){
-        String[] finderKeySplit = (key + scope).split(bufferCharacter);
-        ArrayList<String> finderKey = new ArrayList<String>();
-        for (int i = 0; i < finderKeySplit.length; i++) {
-            finderKey.add(finderKeySplit[i]);
-        }
-
-        // If we cannot find it in this scope, we will move up
-        while(finderKey.size() > 1){
-            if (data.containsKey(finderKey.toString()))
-                return data.get(key);
-            
-                if(!finderKey.isEmpty())
-                finderKey.remove(finderKey.size() - 1);
-        }
-        throw new RuntimeException("[SymbolTable] This symbol was never defined!");
+        return data.get(key);
     }
 
-    public String prettyPrint(){
+    public void prettyPrint(){
         StringBuilder output = new StringBuilder();
         output.append("\n---Symbol-Table---\n");
         for(String key : data.keySet()){
@@ -126,14 +54,16 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
             output.append(data.get(key));
             output.append("]\n");
         }
-        output.append("---------\n");
-        return output.toString();
+        output.append("------------------\n");
+        System.out.println(output.toString());
     }
 
-    // we can use our SymbolTable's .enterScope(); method when entering a method
-    // Override every visitor method
-    // Each method will be based around adding symbols to the symbol table
-    // visit(this, Integer) Integer will be used to track scope
+    // All symbol types
+    // variable declaration
+    // variable assignment
+    // class
+    // method
+    // statments
 
     /**
      * f0 -> MainClass()
@@ -141,11 +71,97 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, Integer> {
      * f2 -> <EOF>
      */
     @Override
-    public Void visit(Goal n, Integer depth) {
+    public Void visit(Goal n, String key) {
+        n.f0.accept(this, key);
+        n.f1.accept(this, key);
+        n.f2.accept(this, key);
+        return null;
+    }
 
-        n.f0.accept(this, depth);
-        n.f1.accept(this, depth);
-        n.f2.accept(this, depth);
+    /**
+     * f0 -> "class"
+     * f1 -> Identifier()
+     * f2 -> "{"
+     * f3 -> "public"
+     * f4 -> "static"
+     * f5 -> "void"
+     * f6 -> "main"
+     * f7 -> "("
+     * f8 -> "String"
+     * f9 -> "["
+     * f10 -> "]"
+     * f11 -> Identifier()
+     * f12 -> ")"
+     * f13 -> "{"
+     * f14 -> ( VarDeclaration() )*
+     * f15 -> ( Statement() )*
+     * f16 -> "}"
+     * f17 -> "}"
+     */
+    @Override
+    public Void visit(MainClass n, String key) {
+        System.out.println("visit(MainClass)");
+        insert(key + ":" + n.f1.f0.toString(), new Symbol(new MyType("mainClass"), 0));
+        
+        String currentScope = key + ":" + n.f1.f0.toString() + ":" + "main";
+        insert(currentScope + ":" + n.f11.f0.toString(), new Symbol(new MyType("String", "[", "]"), 0));
+
+        n.f14.accept(this, currentScope);
+        n.f15.accept(this, currentScope);
+        return null;
+    }
+
+    /**
+     * f0 -> Type()
+     * f1 -> Identifier()
+     * f2 -> ";"
+     */
+    @Override
+    public Void visit(VarDeclaration n, String key) {
+        n.f0.accept(this, key + ":" + n.f1.f0.toString());
+        return null;
+    }
+
+    /**
+     * f0 -> ArrayType()
+     * | BooleanType()
+     * | IntegerType()
+     * | Identifier()
+     */
+    @Override
+    public Void visit(Type n, String key) {
+        n.f0.accept(this, key);
+        return null;
+    }
+
+    /**
+     * f0 -> "int"
+     * f1 -> "["
+     * f2 -> "]"
+     */
+    @Override
+    public Void visit(ArrayType n, String key) {
+        insert(key, new Symbol(new MyType("int", "[", "]"), 0));
+        return null;
+    }
+
+    /**
+     * f0 -> "boolean"
+     */
+    @Override
+    public Void visit(BooleanType n, String key) {
+        insert(key, new Symbol(new MyType("boolean"), 0));
+        return null;
+    }
+
+    /**
+     * f0 -> "int"
+     */
+    @Override
+    public Void visit(IntegerType n, String key) {
+        System.out.println("Just added an int type!");
+        System.out.println(key);
+        insert(key, new Symbol(new MyType("int"), 0));
         return null;
     }
 

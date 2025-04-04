@@ -40,9 +40,7 @@ public class TestMyType {
     private void TestGetTypeMultiple(){
         StringBuilder output = new StringBuilder("[TestMyType] TEST 'TestGetTypeMultiple' ");
         String typeName = "int";
-        MyType myType = new MyType(typeName);
-        myType.addType("[]");
-        myType.addType("[]");
+        MyType myType = new MyType(typeName, "[]", "[]");
 
         String result_type = myType.getType();
         if(result_type.equals(typeName)){
@@ -56,9 +54,7 @@ public class TestMyType {
     private void TestCheckIdenticalSameType(){
         StringBuilder output = new StringBuilder("[TestMyType] TEST 'TestCheckIdenticalSameType' ");
         String typeName = "int";
-        MyType myType = new MyType(typeName);
-        myType.addType("[]");
-        myType.addType("[]");
+        MyType myType = new MyType(typeName, "[]", "[]");
 
         MyType otherType = new MyType(typeName);
 
@@ -73,15 +69,11 @@ public class TestMyType {
     private void TestCheckIdenticalSame(){
         StringBuilder output = new StringBuilder("[TestMyType] TEST 'TestCheckIdenticalSame' ");
         String typeName = "int";
-        MyType myType = new MyType(typeName);
-        myType.addType("[]");
-        myType.addType("[]");
+        MyType myType = new MyType(typeName, "[]", "[]");
 
-        MyType myTypeOther = new MyType(typeName);
-        myTypeOther.addType("[]");
-        myTypeOther.addType("[]");
+        MyType otherType = new MyType(typeName, "[]", "[]");
 
-        if(myType.checkIdentical(myTypeOther) == true){
+        if(myType.checkIdentical(otherType) == true){
             output.insert(0, " ✅");
         }else{
             output.insert(0, " ❌");
