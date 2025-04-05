@@ -39,7 +39,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
         
         if (data.containsKey(key)) {
-            System.out.println("Type Error");
+            System.out.println("❌ [SymbolTable] Type Error: duplicate (" + key + ")");
             System.exit(1);
         }
 
