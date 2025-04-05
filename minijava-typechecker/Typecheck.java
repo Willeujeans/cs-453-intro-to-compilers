@@ -19,7 +19,7 @@ public class Typecheck {
 			root.accept(symbolTable, "global");
 			symbolTable.prettyPrint();
 
-			TypeValidator<> typeValidator = new TypeValidator<>(symbolTable.getData());
+			TypeValidator<MyType, String> typeValidator = new TypeValidator<MyType, String>(symbolTable.getData());
 		} catch (Exception e) {
 			System.err.println(e);
 		}

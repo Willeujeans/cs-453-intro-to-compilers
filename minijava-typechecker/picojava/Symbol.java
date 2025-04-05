@@ -20,10 +20,10 @@ public class Symbol {
 
     public String toString(){
         StringBuilder output = new StringBuilder();
-        output.append("ₘₜ{");
+        output.append("{");
         output.append(type.toString()).append(", ");
         output.append(lineDeclared).append(", ");
-        output.append(lineUsed).append(", ");
+        output.append(lineUsed);
         output.append("}");
         
         return output.toString();
