@@ -18,6 +18,8 @@ public class Typecheck {
 			SymbolTable<Void, String> symbolTable = new SymbolTable<Void,String>();
 			root.accept(symbolTable, "global");
 			symbolTable.prettyPrint();
+
+			TypeValidator<> typeValidator = new TypeValidator<>(symbolTable.getData());
 		} catch (Exception e) {
 			System.err.println(e);
 		}
