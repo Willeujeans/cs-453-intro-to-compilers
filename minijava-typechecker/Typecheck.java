@@ -20,7 +20,8 @@ public class Typecheck {
 			symbolTable.prettyPrint();
 
 			TypeValidator<MyType, String> typeValidator = new TypeValidator<MyType, String>(symbolTable.getData());
-
+			root.accept(typeValidator, "global");
+			
 			System.out.println("✅ Program type checked successfully");
 		} catch (Exception e) {
 			System.err.println(e);
