@@ -13,9 +13,12 @@ if [ ! -d "testSourceCode" ]; then
     exit 1
 fi
 
+echo ""
+echo "Running Type check Tests"
+echo ""
 # Process all .java files in testSourceCode
 for file in testSourceCode/*.java; do
-    echo "Type checking: $file"
+    echo "Typecheck < $file"
     java Typecheck < "$file"
-    echo "--------------------------------"
+    echo ""
 done
