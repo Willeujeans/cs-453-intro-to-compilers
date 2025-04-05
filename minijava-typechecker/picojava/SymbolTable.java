@@ -33,11 +33,15 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             || key.trim().isEmpty()
             || entry == null
             || entry.type == null
-        )
+        ){
             return false;
+        }
+
         
-        if (data.containsKey(key))
-            return false;
+        if (data.containsKey(key)) {
+            System.out.println("Type Error");
+            System.exit(1);
+        }
 
         data.put(key, entry);
         return true;
@@ -52,7 +56,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         StringBuilder output = new StringBuilder();
         ArrayList<String> keys = new ArrayList<String>(data.keySet());
         Collections.sort(keys, Comparator.comparingInt(String::length));
-        
+
         for(String key : keys){
             System.out.print(key);
             System.out.print(" -> " + data.get(key) + "\n");
