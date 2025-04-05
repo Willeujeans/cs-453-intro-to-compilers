@@ -2,10 +2,9 @@ package picojava;
 import syntaxtree.*;
 import visitor.*;
 
-import java.beans.Expression;
 import java.util.HashMap;
 
-public class TypeValidator<R, A> extends GJDepthFirst<MyType, String> {
+public class TypeValidator extends GJDepthFirst<MyType, String> {
     HashMap<String, Symbol> symbolTableData;
     private String bufferChar = ":";
 
@@ -104,7 +103,7 @@ public class TypeValidator<R, A> extends GJDepthFirst<MyType, String> {
     *       | PrimaryExpression()
     */
     @Override
-    public MyType visit(Expression n, String key){
+    public MyType visit(Expression n, String key) {
         n.f0.accept(this, key);
         return new MyType("int");
     }
