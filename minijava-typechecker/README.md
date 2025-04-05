@@ -1,20 +1,4 @@
-Compile:
+This will compile all required files then run each source code test
 ``` Bash
-javac -cp . *.java picojava/*.java
-javac Typecheck.java
-```
-
-Run File
-``` Bash
-java Typecheck < P.java
-```
-
-Run both
-``` Bash
-javac -cp . *.java picojava/*.java && java Typecheck < P.java
-```
-
-Run Test
-``` Bash
-javac -cp . *.java picojava/*.java && java TestTypecheck
+./typecheck_all.sh
 ```

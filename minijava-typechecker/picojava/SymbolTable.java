@@ -3,9 +3,13 @@ package picojava;
 import java.beans.Expression;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.Vector;
 
 import syntaxtree.*;
@@ -29,11 +33,15 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             || key.trim().isEmpty()
             || entry == null
             || entry.type == null
-        )
+        ){
             return false;
+        }
+
         
-        if (data.containsKey(key))
-            return false;
+        if (data.containsKey(key)) {
+            System.out.println("Type Error");
+            System.exit(1);
+        }
 
         data.put(key, entry);
         return true;
@@ -44,18 +52,16 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     }
 
     public void prettyPrint(){
+        System.out.println("---Symbol-Table---");
         StringBuilder output = new StringBuilder();
-        output.append("\n---Symbol-Table---\n");
-        for(String key : data.keySet()){
-            output.append("(");
-            output.append(key);
-            output.append(") : ");
-            output.append("[");
-            output.append(data.get(key));
-            output.append("]\n");
+        ArrayList<String> keys = new ArrayList<String>(data.keySet());
+        Collections.sort(keys, Comparator.comparingInt(String::length));
+
+        for(String key : keys){
+            System.out.print(key);
+            System.out.print(" -> " + data.get(key) + "\n");
         }
-        output.append("------------------\n");
-        System.out.println(output.toString());
+        System.out.println("------------------");
     }
 
     // All symbol types
@@ -100,7 +106,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
      */
     @Override
     public Void visit(MainClass n, String key) {
-        System.out.println("visit(MainClass)");
         // MainClass addition
         insert(key + bufferChar + n.f1.f0.toString(), new Symbol(new MyType("mainClass"), n.f0.beginLine));
         
@@ -263,8 +268,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
      */
     @Override
     public Void visit(IntegerType n, String key) {
-        System.out.println("Just added an int type!");
-        System.out.println(key);
         insert(key, new Symbol(new MyType("int"), n.f0.beginLine));
         return null;
     }
