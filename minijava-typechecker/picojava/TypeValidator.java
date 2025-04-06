@@ -198,11 +198,21 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(ArrayLookup n, String key) {
-        n.f0.accept(this, key);
-        n.f1.accept(this, key);
-        n.f2.accept(this, key);
-        n.f3.accept(this, key);
-        return null;
+        // f0 needs to return an array type
+        // f2 needs to return a int type
+        MyType primaryExpressionZero = n.f0.accept(this, key);
+        MyType primaryExpressionTwo = n.f2.accept(this, key);
+
+        if(primaryExpressionZero.checkIdentical(new MyType("int", "[", "]"))){
+            System.out.println("❌ Type Error");
+            System.exit(1);
+        }
+
+        if(primaryExpressionTwo.checkIdentical(new MyType("int"))){
+            System.out.println("❌ Type Error");
+            System.exit(1);
+        }
+        return new MyType(primaryExpressionZero.getType());
     }
 
     /**
@@ -218,7 +228,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
             System.out.println("❌ Type Error");
             System.exit(1);
         }
-        return null;
+        return new MyType("int");
     }
 
     /**
@@ -249,6 +259,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(ExpressionList n, String key) {
+        // Unsure of what to do here, combine the expressions?
         n.f0.accept(this, key);
         n.f1.accept(this, key);
         return null;
@@ -336,6 +347,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(ArrayAllocationExpression n, String key) {
+        // Check if Expression() is type int?
         return new MyType("int", "[", "]");
     }
 
@@ -348,8 +360,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     @Override
     public MyType visit(AllocationExpression n, String key) {
         // Unsure how to handle yet
-        n.f1.accept(this, key);
-        return null;
+        MyType identifierType = n.f1.accept(this, key);
+        return identifierType;
     }
 
     /**

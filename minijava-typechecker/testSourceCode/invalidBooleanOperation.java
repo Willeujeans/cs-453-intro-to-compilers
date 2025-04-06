@@ -1,7 +1,7 @@
-class invalidVarAssignment {
+class invalidBooleanOperation {
     public static void main(String[] a) {
         int x ;
-        x = false;
+        x = !x ;
     }
 }
 
