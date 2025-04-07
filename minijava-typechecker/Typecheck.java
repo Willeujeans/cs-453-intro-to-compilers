@@ -19,7 +19,7 @@ public class Typecheck {
 			root.accept(symbolTable, "global");
 			symbolTable.prettyPrint();
 
-			TypeValidator typeValidator = new TypeValidator(symbolTable.getData());
+			TypeValidator typeValidator = new TypeValidator(symbolTable);
 			root.accept(typeValidator, "global");
 			
 			System.out.println("✅ Program type checked successfully");

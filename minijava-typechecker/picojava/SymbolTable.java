@@ -47,8 +47,18 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         return true;
     }
 
-    public Symbol find(String key){
-        return data.get(key);
+    public Symbol find(String key) {
+        String[] parts = key.split(bufferChar);
+        String endKey = parts[parts.length - 1];
+        for (int i = parts.length - 1; i >= 1; i--) {
+            String currentKey = String.join(bufferChar, Arrays.copyOf(parts, i));
+            System.out.println("Finding: " + currentKey + bufferChar + endKey);
+            if (data.containsKey(currentKey + bufferChar + endKey)) {
+                System.out.println("FOUND!!!!!: " + currentKey + bufferChar + endKey);
+                return data.get(currentKey + bufferChar + endKey);
+            }
+        }
+        return null;
     }
 
     public void prettyPrint(){

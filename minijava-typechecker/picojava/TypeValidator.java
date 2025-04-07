@@ -5,11 +5,11 @@ import visitor.*;
 import java.util.HashMap;
 
 public class TypeValidator extends GJDepthFirst<MyType, String> {
-    HashMap<String, Symbol> symbolTableData;
+    SymbolTable symbolTableData;
     private String bufferChar = ":";
 
-    public TypeValidator(HashMap<String, Symbol> symbolTableData){
-        this.symbolTableData = new HashMap<String, Symbol>(symbolTableData);
+    public TypeValidator(SymbolTable symbolTableData){
+        this.symbolTableData = symbolTableData;
     }
 
     // return the type to check it
@@ -241,6 +241,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(MessageSend n, String key) {
+        System.out.println("Validating MessageSend...");
         // Validate that PrimaryExpression is a class
         // Validate that ID exists in the class
         // Validate that the method with that ID uses the ExpressionList types in arguments
@@ -323,7 +324,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     public MyType visit(Identifier n, String key) {
         String searchKey = key + bufferChar + n.f0.toString();
         System.out.println("Getting type for id: " + searchKey);
-        MyType identifierType = symbolTableData.get(searchKey).type;
+        MyType identifierType = symbolTableData.find(searchKey).type;
         return identifierType;
     }
 
