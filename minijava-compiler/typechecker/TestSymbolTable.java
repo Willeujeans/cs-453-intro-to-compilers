@@ -1,4 +1,5 @@
-package picojava;
+package typechecker;
+
 import java.util.*;
 import syntaxtree.*;
 import visitor.*;

@@ -6,7 +6,7 @@ import visitor.*;
 import syntaxtree.*;
 import java.util.*;
 // Files are stored in the picojava directory/package.
-import picojava.*;
+import typechecker.*;
 
 public class Typecheck {
     public static void main(String[] args) {
