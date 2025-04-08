@@ -5,11 +5,11 @@ import visitor.*;
 import java.util.HashMap;
 
 public class TypeValidator extends GJDepthFirst<MyType, String> {
-    SymbolTable symbolTableData;
+    HashMap<String, Symbol> symbolTableData;
     private String bufferChar = ":";
 
-    public TypeValidator(SymbolTable symbolTableData){
-        this.symbolTableData = symbolTableData;
+    public TypeValidator(HashMap<String, Symbol> symbolTableData){
+        this.symbolTableData = new HashMap<String, Symbol>(symbolTableData);
     }
 
     // return the type to check it
@@ -27,6 +27,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(Goal n, String key) {
+        System.out.println("Validating Goal...");
         n.f0.accept(this, key);
         n.f1.accept(this, key);
         n.f2.accept(this, key);
@@ -55,6 +56,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(MainClass n, String key) {
+        System.out.println("Validating MainClass...");
         String currentScope = key + bufferChar + n.f1.f0.toString() + bufferChar + "main";
         
         // f15 -> ( Statement() )*
@@ -73,6 +75,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(Statement n, String key) {
+        System.out.println("Validating Statement...");
         n.f0.accept(this, key);
         return null;
     }
@@ -85,10 +88,12 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(AssignmentStatement n, String key) {
+        System.out.println("Validating AssignmentStatement...");
         MyType identifierType = n.f0.accept(this, key);
         MyType expressionType = n.f2.accept(this, key);
+        System.out.println("AssignmentStatement: " + "idType: " + identifierType + " ExpressionType: " + expressionType);
         if(!identifierType.checkIdentical(expressionType)){
-            System.out.println("Type Error");
+            System.out.println("❌ Type Error");
             System.exit(1);
         }
         return null;
@@ -107,6 +112,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     */
     @Override
     public MyType visit(Expression n, String key) {
+        System.out.println("Validating Expression...");
         return n.f0.accept(this, key);
     }
 
@@ -117,6 +123,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(AndExpression n, String key) {
+        System.out.println("Validating AndExpression...");
         // Can only accept booleans
         n.f0.accept(this, key);
         n.f1.accept(this, key);
@@ -131,6 +138,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(CompareExpression n, String key) {
+        System.out.println("Validating CompareExpression...");
         // Can only accept ints
         n.f0.accept(this, key);
         n.f1.accept(this, key);
@@ -146,6 +154,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(PlusExpression n, String key) {
+        System.out.println("Validating PlusExpression...");
         // Can only accept ints
         n.f0.accept(this, key);
         n.f1.accept(this, key);
@@ -195,12 +204,12 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         MyType primaryExpressionTwo = n.f2.accept(this, key);
 
         if(primaryExpressionZero.checkIdentical(new MyType("int", "[", "]"))){
-            System.out.println("Type Error");
+            System.out.println("❌ Type Error");
             System.exit(1);
         }
 
         if(primaryExpressionTwo.checkIdentical(new MyType("int"))){
-            System.out.println("Type Error");
+            System.out.println("❌ Type Error");
             System.exit(1);
         }
         return new MyType(primaryExpressionZero.getType());
@@ -213,9 +222,10 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(ArrayLength n, String key) {
+        // Validate that PrimaryExpression is of type int[][]
         MyType primaryExpressionType = n.f0.accept(this, key);
         if(!primaryExpressionType.checkIdentical(new MyType("int", "[", "]"))){
-            System.out.println("Type Error");
+            System.out.println("❌ Type Error");
             System.exit(1);
         }
         return new MyType("int");
@@ -234,10 +244,13 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         // Validate that PrimaryExpression is a class
         // Validate that ID exists in the class
         // Validate that the method with that ID uses the ExpressionList types in arguments
-        MyType className = n.f0.accept(this, key);
-        String classKey = "global" + bufferChar + className.getType();
-        MyType returnType = n.f2.accept(this, classKey);
-        return returnType;
+        n.f0.accept(this, key);
+        n.f1.accept(this, key);
+        n.f2.accept(this, key);
+        n.f3.accept(this, key);
+        n.f4.accept(this, key);
+        n.f5.accept(this, key);
+        return null;
     }
 
     /**
@@ -275,6 +288,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     @Override
     public MyType visit(PrimaryExpression n, String key) {
         MyType primaryExpressionType = n.f0.accept(this, key);
+        System.out.println("PrimaryExpression returns: " + primaryExpressionType);
         return primaryExpressionType;
     }
 
@@ -308,7 +322,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     @Override
     public MyType visit(Identifier n, String key) {
         String searchKey = key + bufferChar + n.f0.toString();
-        MyType identifierType = symbolTableData.find(searchKey).type;
+        System.out.println("Getting type for id: " + searchKey);
+        MyType identifierType = symbolTableData.get(searchKey).type;
         return identifierType;
     }
 
@@ -317,7 +332,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(ThisExpression n, String key) {
-        // return the class we are inside of
+        // look up vars the class has to see if we are accessing one that exists
+        // look up type of var in class
         n.f0.accept(this, key);
         return null;
     }
@@ -331,10 +347,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(ArrayAllocationExpression n, String key) {
-        if(new MyType("int").checkIdentical(n.f3.accept(this, key)) == false){
-            System.out.println("Type Error");
-            System.exit(1);
-        }
+        // Check if Expression() is type int?
         return new MyType("int", "[", "]");
     }
 
@@ -346,8 +359,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(AllocationExpression n, String key) {
-        // if the identifier is a class type we globally search
-        MyType identifierType = n.f1.accept(this, "global");
+        // Unsure how to handle yet
+        MyType identifierType = n.f1.accept(this, key);
         return identifierType;
     }
 
@@ -359,7 +372,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     public MyType visit(NotExpression n, String key) {
         MyType expressionType = n.f1.accept(this, key);
         if(!expressionType.checkIdentical(new MyType("boolean"))){
-            System.out.println("Type Error");
+            System.out.println("❌ Type Error");
             System.exit(1);
         }
         return expressionType;

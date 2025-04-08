@@ -39,7 +39,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
         
         if (data.containsKey(key)) {
-            System.out.println("Type Error");
+            System.out.println("❌ [SymbolTable] Type Error: duplicate (" + key + ")");
             System.exit(1);
         }
 
@@ -47,16 +47,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         return true;
     }
 
-    public Symbol find(String key) {
-        String[] parts = key.split(bufferChar);
-        String endKey = parts[parts.length - 1];
-        for (int i = parts.length - 1; i >= 1; i--) {
-            String currentKey = String.join(bufferChar, Arrays.copyOf(parts, i));
-            if (data.containsKey(currentKey + bufferChar + endKey)) {
-                return data.get(currentKey + bufferChar + endKey);
-            }
-        }
-        return null;
+    public Symbol find(String key){
+        return data.get(key);
     }
 
     public void prettyPrint(){
@@ -115,7 +107,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(MainClass n, String key) {
         // MainClass addition
-        insert(key + bufferChar + n.f1.f0.toString(), new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
+        insert(key + bufferChar + n.f1.f0.toString(), new Symbol(new MyType("mainClass"), n.f0.beginLine));
         
         // Argument in mainClass addition
         String currentScope = key + bufferChar + n.f1.f0.toString() + bufferChar + "main";
@@ -147,7 +139,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(ClassDeclaration n, String key) {
         String currentScope = key + bufferChar + n.f1.f0.toString();
-        insert(currentScope, new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
+        insert(currentScope, new Symbol(new MyType("class"), n.f0.beginLine));
         n.f3.accept(this, currentScope);
         n.f4.accept(this, currentScope);
         return null;
