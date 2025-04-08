@@ -1,7 +1,7 @@
-package picojava;
+package typechecker;
+
 import syntaxtree.*;
 import visitor.*;
-
 import java.util.HashMap;
 
 public class TypeValidator extends GJDepthFirst<MyType, String> {
