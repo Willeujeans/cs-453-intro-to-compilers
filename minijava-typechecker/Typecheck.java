@@ -17,12 +17,11 @@ public class Typecheck {
 
 			SymbolTable<Void, String> symbolTable = new SymbolTable<Void,String>();
 			root.accept(symbolTable, "global");
-			symbolTable.prettyPrint();
 
-			TypeValidator typeValidator = new TypeValidator(symbolTable.getData());
+			TypeValidator typeValidator = new TypeValidator(symbolTable);
 			root.accept(typeValidator, "global");
 			
-			System.out.println("✅ Program type checked successfully");
+			System.out.println("Program type checked successfully");
 		} catch (Exception e) {
 			System.err.println(e);
 		}
