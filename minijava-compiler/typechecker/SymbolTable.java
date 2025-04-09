@@ -284,4 +284,95 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         insert(key, new Symbol(new MyType("int"), n.f0.beginLine));
         return null;
     }
+
+    /**
+    * f0 -> <IDENTIFIER>
+    */
+    @Override
+    public Void visit(Identifier n, String key){
+        System.out.println("Adding new guy: " + key + "[" + n.f0.toString());
+        insert(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
+        return null;
+    }
+
+    @Override
+    public Void visit(Block n, String key) { return null; }
+
+    @Override
+    public Void visit(AssignmentStatement n, String key) { return null; }
+
+    @Override
+    public Void visit(ArrayAssignmentStatement n, String key) { return null; }
+
+    @Override
+    public Void visit(IfStatement n, String key) { return null; }
+
+    @Override
+    public Void visit(WhileStatement n, String key) { return null; }
+
+    @Override
+    public Void visit(PrintStatement n, String key) { return null; }
+
+    @Override
+    public Void visit(Expression n, String key) { return null; }
+
+    @Override
+    public Void visit(AndExpression n, String key) { return null; }
+
+    @Override
+    public Void visit(CompareExpression n, String key) { return null; }
+
+    @Override
+    public Void visit(PlusExpression n, String key) { return null; }
+
+    @Override
+    public Void visit(MinusExpression n, String key) { return null; }
+
+    @Override
+    public Void visit(TimesExpression n, String key) { return null; }
+
+    @Override
+    public Void visit(ArrayLookup n, String key) { return null; }
+
+    @Override
+    public Void visit(ArrayLength n, String key) { return null; }
+
+    @Override
+    public Void visit(MessageSend n, String key) { return null; }
+
+    @Override
+    public Void visit(ExpressionList n, String key) { return null; }
+
+    @Override
+    public Void visit(ExpressionRest n, String key) { return null; }
+
+    @Override
+    public Void visit(PrimaryExpression n, String key) { return null; }
+
+    @Override
+    public Void visit(IntegerLiteral n, String key) { return null; }
+
+    @Override
+    public Void visit(TrueLiteral n, String key) { return null; }
+
+    @Override
+    public Void visit(FalseLiteral n, String key) { return null; }
+
+    @Override
+    public Void visit(ThisExpression n, String key) { return null; }
+
+    @Override
+    public Void visit(ArrayAllocationExpression n, String key) { return null; }
+
+    @Override
+    public Void visit(AllocationExpression n, String key) { return null; }
+
+    @Override
+    public Void visit(NotExpression n, String key) { return null; }
+
+    @Override
+    public Void visit(BracketExpression n, String key) { return null; }
+
+    @Override
+    public Void visit(Statement n, String key) { return null; }
 }

@@ -1,13 +1,35 @@
-2025-04-09 11:50:36
-=== Typecheck < tests/minijava-symboltable-tests/advanced-tests/BinaryTree-error.java ===
+2025-04-09 12:22:53
+=== Typecheck < tests/minijava-symboltable-tests/advanced-tests/AABinaryTree.java ===
+  Adding new guy: global:BT:Start:root[Tree
+  Adding new guy: global:Tree:left[Tree
+  Adding new guy: global:Tree:right[Tree
+  Adding new guy: global:Tree:my_null[Tree
+  Adding new guy: global:Tree:SetRight:rn[Tree
+  Adding new guy: global:Tree:SetLeft:ln[Tree
+  Adding new guy: global:Tree:GetRight[Tree
+  Adding new guy: global:Tree:GetLeft[Tree
+  Adding new guy: global:Tree:Insert:new_node[Tree
+  Adding new guy: global:Tree:Insert:current_node[Tree
+  Adding new guy: global:Tree:Delete:current_node[Tree
+  Adding new guy: global:Tree:Delete:parent_node[Tree
+  Adding new guy: global:Tree:Remove:p_node[Tree
+  Adding new guy: global:Tree:Remove:c_node[Tree
+  Adding new guy: global:Tree:RemoveRight:p_node[Tree
+  Adding new guy: global:Tree:RemoveRight:c_node[Tree
+  Adding new guy: global:Tree:RemoveLeft:p_node[Tree
+  Adding new guy: global:Tree:RemoveLeft:c_node[Tree
+  Adding new guy: global:Tree:Search:current_node[Tree
+  Adding new guy: global:Tree:Print:current_node[Tree
+  Adding new guy: global:Tree:RecPrint:node[Tree
   ---Symbol-Table---
   global:BT -> {[BT], 10, []}
   global:Tree -> {[Tree], 44, []}
   global:Tree:key -> {[int], 47, []}
   global:BT:Start -> {[int], 12, []}
   global:Tree:Init -> {[boolean], 53, []}
+  global:Tree:left -> {[Tree], 45, []}
+  global:Tree:right -> {[Tree], 46, []}
   global:Tree:Print -> {[boolean], 306, []}
-  global:BinaryTree -> {[BinaryTree], 1, []}
   global:Tree:Insert -> {[boolean], 124, []}
   global:Tree:Delete -> {[boolean], 161, []}
   global:Tree:Remove -> {[boolean], 209, []}
@@ -15,11 +37,16 @@
   global:Tree:SetKey -> {[boolean], 84, []}
   global:Tree:GetKey -> {[int], 80, []}
   global:BT:Start:ntb -> {[boolean], 14, []}
+  global:AABinaryTree -> {[AABinaryTree], 1, []}
   global:BT:Start:nti -> {[int], 15, []}
   global:Tree:SetLeft -> {[boolean], 67, []}
+  global:Tree:GetLeft -> {[Tree], 76, []}
   global:Tree:Compare -> {[boolean], 110, []}
+  global:Tree:my_null -> {[Tree], 50, []}
+  global:Tree:GetRight -> {[Tree], 72, []}
   global:Tree:SetRight -> {[boolean], 61, []}
   global:Tree:has_left -> {[boolean], 48, []}
+  global:BT:Start:root -> {[Tree], 13, []}
   global:Tree:RecPrint -> {[boolean], 316, []}
   global:Tree:has_right -> {[boolean], 49, []}
   global:Tree:Print:ntb -> {[boolean], 308, []}
@@ -27,18 +54,19 @@
   global:Tree:Delete:ntb -> {[boolean], 168, []}
   global:Tree:Remove:ntb -> {[boolean], 210, []}
   global:Tree:Insert:ntb -> {[boolean], 126, []}
+  global:Tree:SetLeft:ln -> {[Tree], 67, []}
   global:Tree:RemoveLeft -> {[boolean], 260, []}
   global:Tree:Delete:cont -> {[boolean], 164, []}
   global:Tree:Insert:cont -> {[boolean], 127, []}
   global:Tree:Search:cont -> {[boolean], 278, []}
   global:Tree:SetHas_Left -> {[boolean], 97, []}
+  global:Tree:SetRight:rn -> {[Tree], 61, []}
   global:Tree:Compare:nti -> {[int], 112, []}
   global:Tree:Compare:ntb -> {[boolean], 111, []}
   global:Tree:GetHas_Left -> {[boolean], 93, []}
   global:Tree:RemoveRight -> {[boolean], 240, []}
   global:Tree:SetKey:v_key -> {[int], 84, []}
   global:Tree:Compare:num2 -> {[int], 110, []}
-  global:BinaryTree:main:a -> {[String,[,]], 2, []}
   global:Tree:Compare:num1 -> {[int], 110, []}
   global:Tree:Search:v_key -> {[int], 277, []}
   global:Tree:Insert:v_key -> {[int], 124, []}
@@ -48,49 +76,63 @@
   global:Tree:Delete:found -> {[boolean], 165, []}
   global:Tree:Delete:v_key -> {[int], 161, []}
   global:Tree:Search:ifound -> {[int], 279, []}
+  global:Tree:RecPrint:node -> {[Tree], 316, []}
+  global:Tree:Remove:c_node -> {[Tree], 209, []}
+  global:Tree:Remove:p_node -> {[Tree], 209, []}
   global:Tree:RemoveLeft:ntb -> {[boolean], 261, []}
   global:Tree:Remove:auxkey2 -> {[int], 212, []}
   global:Tree:Remove:auxkey1 -> {[int], 211, []}
   global:Tree:Insert:key_aux -> {[int], 128, []}
   global:Tree:Delete:is_root -> {[boolean], 166, []}
+  global:AABinaryTree:main:a -> {[String,[,]], 2, []}
   global:Tree:Delete:key_aux -> {[int], 167, []}
   global:Tree:Search:key_aux -> {[int], 281, []}
+  global:Tree:Insert:new_node -> {[Tree], 125, []}
   global:Tree:RemoveRight:ntb -> {[boolean], 241, []}
   global:Tree:SetHas_Left:val -> {[boolean], 97, []}
   global:Tree:SetHas_Right:val -> {[boolean], 102, []}
+  global:Tree:RemoveLeft:p_node -> {[Tree], 260, []}
+  global:Tree:RemoveLeft:c_node -> {[Tree], 260, []}
+  global:Tree:Print:current_node -> {[Tree], 307, []}
+  global:Tree:RemoveRight:c_node -> {[Tree], 240, []}
+  global:Tree:Delete:parent_node -> {[Tree], 163, []}
+  global:Tree:RemoveRight:p_node -> {[Tree], 240, []}
+  global:Tree:Search:current_node -> {[Tree], 280, []}
+  global:Tree:Delete:current_node -> {[Tree], 162, []}
+  global:Tree:Insert:current_node -> {[Tree], 129, []}
   ------------------
-  877░ Goal
-  620░ MainClass
-  933░ Statement
-  601░ Expression
-  601▓ Expression
-  988░ MessageSend
-  226░ PrimaryExpression
-  338░ AllocationExpression
-  672░ Identifier
+  143░ Goal
+  503░ MainClass
+  967░ Statement
+  366░ Expression
+  366▓ Expression
+  664░ MessageSend
+  917░ PrimaryExpression
+  482░ AllocationExpression
+  139░ Identifier
     >Searchkey: [global:BT]
-  672▓ Identifier
-  338▓ AllocationExpression
-  226▓ PrimaryExpression
-  585░ Identifier
+  139▓ Identifier
+  482▓ AllocationExpression
+  917▓ PrimaryExpression
+  736░ Identifier
     >Searchkey: [global:BT:Start]
-  585▓ Identifier
-  988▓ MessageSend
-  933▓ Statement
-  620▓ MainClass
-  424░ TypeDeclaration
+  736▓ Identifier
+  664▓ MessageSend
+  967▓ Statement
+  503▓ MainClass
+  172░ TypeDeclaration
   Typedecco KEY!global
-  557░ ClassDeclaration
-  497░ Identifier
+  993░ ClassDeclaration
+  942░ Identifier
     >Searchkey: [global:BT]
-  497▓ Identifier
+  942▓ Identifier
   class scope: global:BT
-  678░ Identifier
+  429░ Identifier
     >Searchkey: [global:BT:Start]
-  678▓ Identifier
-  379░ Identifier
+  429▓ Identifier
+  564░ Identifier
     >Searchkey: [global:BT:Tree]
-  379▓ Identifier
-  832░ Identifier
+  564▓ Identifier
+  540░ Identifier
     >Searchkey: [global:BT:root]
   java.lang.NullPointerException
