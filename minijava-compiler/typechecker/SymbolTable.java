@@ -167,10 +167,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         String currentScope = key + bufferChar + n.f3.f0.toString() + bufferChar + n.f1.f0.toString();
         String parentClass = n.f3.f0.toString();
         String childClass = n.f1.f0.toString();
-
-        System.out.println("===========");
-        System.out.println(currentScope);
-        System.out.println("===========");
         insert(currentScope, new Symbol(new MyType(childClass, parentClass), n.f0.beginLine));
 
         n.f5.accept(this, currentScope);
