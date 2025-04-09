@@ -2,24 +2,49 @@
 
 # Compile Java files first
 echo "Compiling Java sources..."
-javac -cp . typechecker/*.java Typecheck.java || {
-    echo "Compilation failed! Fix errors and try again."
-    exit 1
-}
 
-# Check if directory exists
-if [ ! -d "tests/minijava-symboltable-tests" ]; then
-    echo "Error: Directory 'minijava-symboltable-tests' not found!"
-    exit 1
-fi
+current_date_time="`date "+%Y-%m-%d %H:%M:%S"`";
+
+javac Typecheck.java || echo "Compilation failed! Fix errors and try again."
 
 echo ""
-echo "Running Type check Tests"
+echo "Running SymbolTable tests"
 echo ""
-# Process all .java files in testSourceCode
-for file in tests/minijava-symboltable-tests/*.java; do
-    echo "Typecheck < $file"
-    java Typecheck < "$file"
-    echo ""
-    echo "======================================================================================="
+
+echo $current_date_time > tests/minijava-symboltable-tests/advanced-tests/test.txt
+java_files=(tests/minijava-symboltable-tests/advanced-tests/*.java)
+num_files=${#java_files[@]}
+more_java_files=(tests/minijava-symboltable-tests/advanced-tests/*.java)
+more_num_files=${#more_java_files[@]}
+num_files+=#$more_num_files
+
+bar=""
+for ((i=0; i<num_files; i++)); do
+    bar+="."
 done
+
+loading_string=""
+for file in tests/minijava-symboltable-tests/advanced-tests/*.java; do
+    clear
+    echo $bar
+    echo $loading_string
+    loading_string+="|"
+
+    echo "Typecheck < $file" >> tests/minijava-symboltable-tests/advanced-tests/test.txt
+    java Typecheck < "$file" >> tests/minijava-symboltable-tests/advanced-tests/test.txt
+    echo "" >> tests/minijava-symboltable-tests/advanced-tests/test.txt
+done
+
+echo $current_date_time > tests/minijava-symboltable-tests/simple-tests/test.txt
+for file in tests/minijava-symboltable-tests/simple-tests/*.java; do
+    clear
+    echo $bar
+    echo $loading_string
+    loading_string+="|"
+
+    echo "Typecheck < $file" >> tests/minijava-symboltable-tests/simple-tests/test.txt
+    java Typecheck < "$file" >> tests/minijava-symboltable-tests/simple-tests/test.txt
+    echo "" >> tests/minijava-symboltable-tests/simple-tests/test.txt
+done
+
+echo $bar
