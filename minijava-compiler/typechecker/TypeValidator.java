@@ -106,6 +106,15 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     * f5 -> "}"
     */
     public MyType visit(ClassDeclaration n, String key){
+        int uuid = randomNumber();
+        System.out.println(uuid + "░ " + n.getClass().getSimpleName());
+        MyType classType = n.f1.accept(this, key);
+        String currentScope = key + bufferChar + classType.getType();
+        System.out.println("class scope: " + currentScope);
+        n.f3.accept(this, currentScope);
+        n.f4.accept(this, currentScope);
+        
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName());
         return null;
     }
 
@@ -120,6 +129,14 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     * f7 -> "}"
     */
     public MyType visit(ClassExtendsDeclaration n, String key){
+        int uuid = randomNumber();
+        System.out.println(uuid + "░ " + n.getClass().getSimpleName());
+        MyType classType = n.f1.accept(this, key);
+        String currentScope = key + bufferChar + classType.getType();
+
+        n.f5.accept(this, currentScope);
+        n.f6.accept(this, currentScope);
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName());
         return null;
     }
 

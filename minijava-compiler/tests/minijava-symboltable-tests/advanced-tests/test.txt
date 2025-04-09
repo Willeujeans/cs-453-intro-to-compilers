@@ -1,4 +1,4 @@
-2025-04-09 11:41:24
+2025-04-09 11:50:36
 === Typecheck < tests/minijava-symboltable-tests/advanced-tests/BinaryTree-error.java ===
   ---Symbol-Table---
   global:BT -> {[BT], 10, []}
@@ -59,30 +59,38 @@
   global:Tree:SetHas_Left:val -> {[boolean], 97, []}
   global:Tree:SetHas_Right:val -> {[boolean], 102, []}
   ------------------
-  797░ Goal
-  467░ MainClass
-  233░ Statement
-  309░ Expression
-  309▓ Expression
-  708░ MessageSend
-  471░ PrimaryExpression
-  660░ AllocationExpression
-  237░ Identifier
+  877░ Goal
+  620░ MainClass
+  933░ Statement
+  601░ Expression
+  601▓ Expression
+  988░ MessageSend
+  226░ PrimaryExpression
+  338░ AllocationExpression
+  672░ Identifier
     >Searchkey: [global:BT]
-  237▓ Identifier
-  660▓ AllocationExpression
-  471▓ PrimaryExpression
-  987░ Identifier
+  672▓ Identifier
+  338▓ AllocationExpression
+  226▓ PrimaryExpression
+  585░ Identifier
     >Searchkey: [global:BT:Start]
-  987▓ Identifier
-  708▓ MessageSend
-  233▓ Statement
-  467▓ MainClass
-  988░ TypeDeclaration
+  585▓ Identifier
+  988▓ MessageSend
+  933▓ Statement
+  620▓ MainClass
+  424░ TypeDeclaration
   Typedecco KEY!global
-  890░ Identifier
+  557░ ClassDeclaration
+  497░ Identifier
     >Searchkey: [global:BT]
-  890▓ Identifier
-  952░ Identifier
-    >Searchkey: [global:Start]
+  497▓ Identifier
+  class scope: global:BT
+  678░ Identifier
+    >Searchkey: [global:BT:Start]
+  678▓ Identifier
+  379░ Identifier
+    >Searchkey: [global:BT:Tree]
+  379▓ Identifier
+  832░ Identifier
+    >Searchkey: [global:BT:root]
   java.lang.NullPointerException
