@@ -1,4 +1,4 @@
-2025-04-09 12:22:53
+2025-04-09 12:36:11
 === Typecheck < tests/minijava-symboltable-tests/advanced-tests/AABinaryTree.java ===
   Adding new guy: global:BT:Start:root[Tree
   Adding new guy: global:Tree:left[Tree
@@ -101,38 +101,38 @@
   global:Tree:Delete:current_node -> {[Tree], 162, []}
   global:Tree:Insert:current_node -> {[Tree], 129, []}
   ------------------
-  143░ Goal
-  503░ MainClass
-  967░ Statement
-  366░ Expression
-  366▓ Expression
-  664░ MessageSend
-  917░ PrimaryExpression
-  482░ AllocationExpression
-  139░ Identifier
+  783░ Goal
+  685░ MainClass
+  626░ Statement
+  671░ Expression
+  671▓ Expression
+  678░ MessageSend
+  344░ PrimaryExpression
+  624░ AllocationExpression
+  394░ Identifier
     >Searchkey: [global:BT]
-  139▓ Identifier
-  482▓ AllocationExpression
-  917▓ PrimaryExpression
-  736░ Identifier
+  394▓ Identifier
+  624▓ AllocationExpression
+  344▓ PrimaryExpression
+  212░ Identifier
     >Searchkey: [global:BT:Start]
-  736▓ Identifier
-  664▓ MessageSend
-  967▓ Statement
-  503▓ MainClass
-  172░ TypeDeclaration
+  212▓ Identifier
+  678▓ MessageSend
+  626▓ Statement
+  685▓ MainClass
+  178░ TypeDeclaration
   Typedecco KEY!global
-  993░ ClassDeclaration
-  942░ Identifier
+  638░ ClassDeclaration
+  993░ Identifier
     >Searchkey: [global:BT]
-  942▓ Identifier
+  993▓ Identifier
   class scope: global:BT
-  429░ Identifier
+  422░ Identifier
     >Searchkey: [global:BT:Start]
-  429▓ Identifier
-  564░ Identifier
-    >Searchkey: [global:BT:Tree]
-  564▓ Identifier
-  540░ Identifier
+  422▓ Identifier
+  726░ Statement
+  325░ AssignmentStatement
+  AS name: global:BT
+  762░ Identifier
     >Searchkey: [global:BT:root]
   java.lang.NullPointerException

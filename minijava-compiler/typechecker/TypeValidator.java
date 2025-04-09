@@ -97,7 +97,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         return classType;
     }
 
-       /**
+    /**
     * f0 -> "class"
     * f1 -> Identifier()
     * f2 -> "{"
@@ -108,10 +108,12 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     public MyType visit(ClassDeclaration n, String key){
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
+        
         MyType classType = n.f1.accept(this, key);
         String currentScope = key + bufferChar + classType.getType();
         System.out.println("class scope: " + currentScope);
-        n.f3.accept(this, currentScope);
+        
+        // n.f3.accept(this, currentScope);
         n.f4.accept(this, currentScope);
         
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName());
@@ -134,11 +136,13 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         MyType classType = n.f1.accept(this, key);
         String currentScope = key + bufferChar + classType.getType();
 
-        n.f5.accept(this, currentScope);
+        // n.f5.accept(this, currentScope);
         n.f6.accept(this, currentScope);
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName());
         return null;
     }
+
+    
 
     /**
      * f0 -> Block()
@@ -169,6 +173,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         //debug
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
+        System.out.println("AS name: " + key);
         MyType identifierType = n.f0.accept(this, key);
         MyType expressionType = n.f2.accept(this, key);
         if(!identifierType.checkIdentical(expressionType)){
@@ -545,5 +550,10 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName());
         return n.f1.accept(this, key);
+    }
+
+    @Override
+    public MyType visit(VarDeclaration n, String key) {
+        return null;
     }
 }
