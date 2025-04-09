@@ -87,13 +87,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         System.out.println("------------------");
     }
 
-    // All symbol types
-    // variable declaration
-    // variable assignment
-    // class
-    // method
-    // statments
-
     /**
      * f0 -> MainClass()
      * f1 -> ( TypeDeclaration() )*

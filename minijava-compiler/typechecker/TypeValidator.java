@@ -573,8 +573,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
 
-        // return the class we are inside of
-        // so zoom out of the scope until you find a class?
+        // return the closest class we are inside of
         Symbol mySymbol = symbolTableData.getNearestClass(key);
         MyType returnType = mySymbol.type;
 
