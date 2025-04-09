@@ -21,4 +21,5 @@ for file in tests/minijava-symboltable-tests/*.java; do
     echo "Typecheck < $file"
     java Typecheck < "$file"
     echo ""
+    echo "======================================================================================="
 done
