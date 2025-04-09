@@ -306,7 +306,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     */
     @Override
     public Void visit(Identifier n, String key){
-        System.out.println("Adding new guy: " + key + "[" + n.f0.toString());
         insert(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
         return null;
     }
