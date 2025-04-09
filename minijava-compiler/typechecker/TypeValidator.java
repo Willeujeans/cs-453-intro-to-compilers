@@ -142,7 +142,37 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         return null;
     }
 
-    
+    /**
+     * f0 -> "public"
+     * f1 -> Type()
+     * f2 -> Identifier()
+     * f3 -> "("
+     * f4 -> ( FormalParameterList() )?
+     * f5 -> ")"
+     * f6 -> "{"
+     * f7 -> ( VarDeclaration() )*
+     * f8 -> ( Statement() )*
+     * f9 -> "return"
+     * f10 -> Expression()
+     * f11 -> ";"
+     * f12 -> "}"
+     */
+    @Override
+    public MyType visit(MethodDeclaration n, String key) {
+
+        // verify that actual return type matches method's return type
+        String currentScope = key + bufferChar + n.f2.f0.toString();
+
+        // unsure yet
+        // n.f4.accept(this, currentScope);
+
+        n.f8.accept(this, currentScope);
+
+        // compare with type of method in symbol table
+        n.f10.accept(this, currentScope);
+
+        return null;
+    }
 
     /**
      * f0 -> Block()
