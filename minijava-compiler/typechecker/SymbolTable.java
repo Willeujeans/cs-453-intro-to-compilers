@@ -58,6 +58,22 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         return null;
     }
 
+    public Symbol getNearestClass(String key) {
+        String[] parts = key.split(bufferChar);
+        for (int i = parts.length; i >= 1; i--) {
+            String[] currentParts = Arrays.copyOf(parts, i);
+            String currentKey = String.join(bufferChar, currentParts);
+            if (data.containsKey(currentKey)) {
+                Symbol symbol = data.get(currentKey);
+                String lastPart = currentParts[currentParts.length - 1];
+                if (symbol.type.getType().equals(lastPart)) {
+                    return symbol;
+                }
+            }
+        }
+        return null;
+    }
+
     public void prettyPrint(){
         System.out.println("---Symbol-Table---");
         StringBuilder output = new StringBuilder();

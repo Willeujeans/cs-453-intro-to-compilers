@@ -1,1 +1,57 @@
-2025-04-09 16:34:18
+2025-04-09 16:59:38
+=== Typecheck < tests/minijava-symboltable-tests/simple-tests/class_inheritance.java ===
+  ---Symbol-Table---
+  global:myParentClass -> {[myParentClass], 1, []}
+  global:myParentClass:main:a -> {[String,[,]], 2, []}
+  global:myParentClass:main:x -> {[int], 3, []}
+  global:myParentClass:myChildClass -> {[myChildClass,myParentClass], 7, []}
+  global:myParentClass:myChildClass:x -> {[int], 8, []}
+  ------------------
+  359░ Goal
+  256░ MainClass
+  256▓ MainClass ----------------- ------------>  [myParentClass]
+  670░ TypeDeclaration
+  863░ ClassExtendsDeclaration
+  967░ Identifier
+    >Searchkey: [global:myChildClass]
+  java.lang.NullPointerException
+=== Typecheck < tests/minijava-symboltable-tests/simple-tests/duplicateClasses.java ===
+  Type Error
+
+ERROR: Type checking failed for tests/minijava-symboltable-tests/simple-tests/duplicateClasses.java (exit code: 1)
+=== Typecheck < tests/minijava-symboltable-tests/simple-tests/duplicateMethodsInClass.java ===
+  Type Error
+
+ERROR: Type checking failed for tests/minijava-symboltable-tests/simple-tests/duplicateMethodsInClass.java (exit code: 1)
+=== Typecheck < tests/minijava-symboltable-tests/simple-tests/duplicateVariablesInClass.java ===
+  Type Error
+
+ERROR: Type checking failed for tests/minijava-symboltable-tests/simple-tests/duplicateVariablesInClass.java (exit code: 1)
+=== Typecheck < tests/minijava-symboltable-tests/simple-tests/duplicateVariablesInMethod.java ===
+  Type Error
+
+ERROR: Type checking failed for tests/minijava-symboltable-tests/simple-tests/duplicateVariablesInMethod.java (exit code: 1)
+=== Typecheck < tests/minijava-symboltable-tests/simple-tests/factorial.java ===
+  Type Error
+
+ERROR: Type checking failed for tests/minijava-symboltable-tests/simple-tests/factorial.java (exit code: 1)
+=== Typecheck < tests/minijava-symboltable-tests/simple-tests/multiple_classes.java ===
+  ---Symbol-Table---
+  global:myClass -> {[myClass], 1, []}
+  global:myOtherClass -> {[myOtherClass], 7, []}
+  global:myClass:main:x -> {[int], 3, []}
+  global:myOtherClass:x -> {[int], 8, []}
+  global:myClass:main:a -> {[String,[,]], 2, []}
+  ------------------
+  734░ Goal
+  479░ MainClass
+  479▓ MainClass ----------------- ------------>  [myClass]
+  113░ TypeDeclaration
+  504░ ClassDeclaration
+  112░ Identifier
+    >Searchkey: [global:myOtherClass]
+  112▓ Identifier  ------------>  [myOtherClass]
+  504▓ ClassDeclaration ----------------- ------------>  [myOtherClass]
+  113▓ TypeDeclaration ----------------- ------------>  [myOtherClass]
+  734▓ Goal
+  ✅ Program type checked successfully

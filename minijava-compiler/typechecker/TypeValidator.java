@@ -274,7 +274,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         MyType typeA = n.f0.accept(this, key);
         MyType typeB = n.f2.accept(this, key);
 
-        MyType returnType = typeA;
+        MyType returnType = new MyType("boolean");
+
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
         
         return returnType;
@@ -296,9 +297,9 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         MyType typeA = n.f0.accept(this, key);
         MyType typeB = n.f2.accept(this, key);
 
-        MyType returnType = typeA;
+        MyType returnType = new MyType("boolean");
+
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
-        
         return returnType;
     }
 
@@ -574,10 +575,11 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
 
         // return the class we are inside of
         // so zoom out of the scope until you find a class?
-        n.f0.accept(this, key);
+        Symbol mySymbol = symbolTableData.getNearestClass(key);
+        MyType returnType = mySymbol.type;
 
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName());
-        return null;
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
+        return returnType;
     }
 
     /**
