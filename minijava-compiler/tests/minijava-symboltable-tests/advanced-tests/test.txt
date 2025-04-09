@@ -1,4 +1,4 @@
-2025-04-09 12:43:35
+2025-04-09 16:34:18
 === Typecheck < tests/minijava-symboltable-tests/advanced-tests/AABinaryTree.java ===
   Adding new guy: global:BT:Start:root[Tree
   Adding new guy: global:Tree:left[Tree
@@ -101,758 +101,840 @@
   global:Tree:Delete:current_node -> {[Tree], 162, []}
   global:Tree:Insert:current_node -> {[Tree], 129, []}
   ------------------
-  765░ Goal
-  930░ MainClass
-  311░ Statement
-  681░ Expression
-  681▓ Expression
-  366░ MessageSend
-  386░ PrimaryExpression
-  339░ AllocationExpression
-  447░ Identifier
+  914░ Goal
+  838░ MainClass
+  537░ Statement
+  439░ Expression
+  753░ MessageSend
+  180░ PrimaryExpression
+  650░ AllocationExpression
+  367░ Identifier
     >Searchkey: [global:BT]
-  447▓ Identifier
-  339▓ AllocationExpression
-  386▓ PrimaryExpression
-  576░ Identifier
+  367▓ Identifier  ------------>  [BT]
+  650▓ AllocationExpression  ------------>  [BT]
+  180▓ PrimaryExpression  ------------>  [BT]
+  895░ Identifier
     >Searchkey: [global:BT:Start]
-  576▓ Identifier
-  366▓ MessageSend
-  311▓ Statement
-  930▓ MainClass
-  504░ TypeDeclaration
-  Typedecco KEY!global
-  117░ ClassDeclaration
-  194░ Identifier
+  895▓ Identifier  ------------>  [int]
+  753▓ MessageSend  ------------>  [int]
+  439▓ Expression  ------------>  [int]
+  537▓ Statement
+  838▓ MainClass ----------------- ------------>  [AABinaryTree]
+  976░ TypeDeclaration
+  592░ ClassDeclaration
+  512░ Identifier
     >Searchkey: [global:BT]
-  194▓ Identifier
-  class scope: global:BT
-  990░ Statement
-  460░ AssignmentStatement
+  512▓ Identifier  ------------>  [BT]
+  127░ Statement
+  337░ AssignmentStatement
   AS name: global:BT:Start
+  897░ Identifier
+    >Searchkey: [global:BT:Start:root]
+  897▓ Identifier  ------------>  [Tree]
+  808░ Expression
+  323░ PrimaryExpression
+  882░ AllocationExpression
+  927░ Identifier
+    >Searchkey: [global:Tree]
+  927▓ Identifier  ------------>  [Tree]
+  882▓ AllocationExpression  ------------>  [Tree]
+  323▓ PrimaryExpression  ------------>  [Tree]
+  808▓ Expression  ------------>  [Tree]
+  [Tree] == [Tree]
+  337▓ AssignmentStatement
+  127▓ Statement
+  460░ Statement
+  306░ AssignmentStatement
+  AS name: global:BT:Start
+  277░ Identifier
+    >Searchkey: [global:BT:Start:ntb]
+  277▓ Identifier  ------------>  [boolean]
+  832░ Expression
+  866░ MessageSend
+  396░ PrimaryExpression
+  681░ Identifier
+    >Searchkey: [global:BT:Start:root]
+  681▓ Identifier  ------------>  [Tree]
+  396▓ PrimaryExpression  ------------>  [Tree]
+  316░ Identifier
+    >Searchkey: [global:Tree:Init]
+  316▓ Identifier  ------------>  [boolean]
+  994░ ExpressionList
+  320░ Expression
+  810░ PrimaryExpression
+  800░ IntegerLiteral
+  800▓ IntegerLiteral  ------------>  [int]
+  810▓ PrimaryExpression  ------------>  [int]
+  320▓ Expression  ------------>  [int]
+  994▓ ExpressionList
+  866▓ MessageSend  ------------>  [boolean]
+  832▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  306▓ AssignmentStatement
+  460▓ Statement
+  336░ Statement
+  711░ AssignmentStatement
+  AS name: global:BT:Start
+  180░ Identifier
+    >Searchkey: [global:BT:Start:ntb]
+  180▓ Identifier  ------------>  [boolean]
+  323░ Expression
+  438░ MessageSend
+  203░ PrimaryExpression
+  513░ Identifier
+    >Searchkey: [global:BT:Start:root]
+  513▓ Identifier  ------------>  [Tree]
+  203▓ PrimaryExpression  ------------>  [Tree]
+  229░ Identifier
+    >Searchkey: [global:Tree:Print]
+  229▓ Identifier  ------------>  [boolean]
+  438▓ MessageSend  ------------>  [boolean]
+  323▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  711▓ AssignmentStatement
+  336▓ Statement
+  932░ Statement
+  655░ Expression
+  650░ PrimaryExpression
+  347░ IntegerLiteral
+  347▓ IntegerLiteral  ------------>  [int]
+  650▓ PrimaryExpression  ------------>  [int]
+  655▓ Expression  ------------>  [int]
+  932▓ Statement
+  121░ Statement
+  173░ AssignmentStatement
+  AS name: global:BT:Start
+  454░ Identifier
+    >Searchkey: [global:BT:Start:ntb]
+  454▓ Identifier  ------------>  [boolean]
+  471░ Expression
+  598░ MessageSend
+  490░ PrimaryExpression
   874░ Identifier
     >Searchkey: [global:BT:Start:root]
-  874▓ Identifier
-  726░ Expression
-  726▓ Expression
-  591░ PrimaryExpression
-  150░ AllocationExpression
-  489░ Identifier
-    >Searchkey: [global:Tree]
-  489▓ Identifier
-  150▓ AllocationExpression
-  591▓ PrimaryExpression
-  460▓ AssignmentStatement
-  990▓ Statement
-  889░ Statement
-  917░ AssignmentStatement
+  874▓ Identifier  ------------>  [Tree]
+  490▓ PrimaryExpression  ------------>  [Tree]
+  601░ Identifier
+    >Searchkey: [global:Tree:Insert]
+  601▓ Identifier  ------------>  [boolean]
+  413░ ExpressionList
+  843░ Expression
+  377░ PrimaryExpression
+  140░ IntegerLiteral
+  140▓ IntegerLiteral  ------------>  [int]
+  377▓ PrimaryExpression  ------------>  [int]
+  843▓ Expression  ------------>  [int]
+  413▓ ExpressionList
+  598▓ MessageSend  ------------>  [boolean]
+  471▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  173▓ AssignmentStatement
+  121▓ Statement
+  336░ Statement
+  256░ AssignmentStatement
   AS name: global:BT:Start
-  903░ Identifier
+  859░ Identifier
     >Searchkey: [global:BT:Start:ntb]
-  903▓ Identifier
-  754░ Expression
-  754▓ Expression
-  244░ MessageSend
-  164░ PrimaryExpression
-  684░ Identifier
+  859▓ Identifier  ------------>  [boolean]
+  954░ Expression
+  498░ MessageSend
+  784░ PrimaryExpression
+  492░ Identifier
     >Searchkey: [global:BT:Start:root]
-  684▓ Identifier
-  164▓ PrimaryExpression
+  492▓ Identifier  ------------>  [Tree]
+  784▓ PrimaryExpression  ------------>  [Tree]
+  276░ Identifier
+    >Searchkey: [global:Tree:Print]
+  276▓ Identifier  ------------>  [boolean]
+  498▓ MessageSend  ------------>  [boolean]
+  954▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  256▓ AssignmentStatement
+  336▓ Statement
+  129░ Statement
+  577░ AssignmentStatement
+  AS name: global:BT:Start
+  586░ Identifier
+    >Searchkey: [global:BT:Start:ntb]
+  586▓ Identifier  ------------>  [boolean]
+  743░ Expression
+  867░ MessageSend
+  907░ PrimaryExpression
+  128░ Identifier
+    >Searchkey: [global:BT:Start:root]
+  128▓ Identifier  ------------>  [Tree]
+  907▓ PrimaryExpression  ------------>  [Tree]
+  352░ Identifier
+    >Searchkey: [global:Tree:Insert]
+  352▓ Identifier  ------------>  [boolean]
+  866░ ExpressionList
+  204░ Expression
+  207░ PrimaryExpression
+  464░ IntegerLiteral
+  464▓ IntegerLiteral  ------------>  [int]
+  207▓ PrimaryExpression  ------------>  [int]
+  204▓ Expression  ------------>  [int]
+  866▓ ExpressionList
+  867▓ MessageSend  ------------>  [boolean]
+  743▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  577▓ AssignmentStatement
+  129▓ Statement
+  306░ Statement
+  808░ AssignmentStatement
+  AS name: global:BT:Start
+  193░ Identifier
+    >Searchkey: [global:BT:Start:ntb]
+  193▓ Identifier  ------------>  [boolean]
+  837░ Expression
+  638░ MessageSend
+  891░ PrimaryExpression
   651░ Identifier
-    >Searchkey: [global:Tree:Init]
-  651▓ Identifier
-  332░ ExpressionList
-  579░ Expression
-  579▓ Expression
-  403░ PrimaryExpression
-  326░ IntegerLiteral
-  326▓ IntegerLiteral
-  403▓ PrimaryExpression
-  332▓ ExpressionList
-  244▓ MessageSend
-  917▓ AssignmentStatement
-  889▓ Statement
-  183░ Statement
-  267░ AssignmentStatement
-  AS name: global:BT:Start
-  957░ Identifier
-    >Searchkey: [global:BT:Start:ntb]
-  957▓ Identifier
-  721░ Expression
-  721▓ Expression
-  347░ MessageSend
-  255░ PrimaryExpression
-  420░ Identifier
     >Searchkey: [global:BT:Start:root]
-  420▓ Identifier
-  255▓ PrimaryExpression
-  772░ Identifier
+  651▓ Identifier  ------------>  [Tree]
+  891▓ PrimaryExpression  ------------>  [Tree]
+  526░ Identifier
+    >Searchkey: [global:Tree:Insert]
+  526▓ Identifier  ------------>  [boolean]
+  776░ ExpressionList
+  659░ Expression
+  926░ PrimaryExpression
+  934░ IntegerLiteral
+  934▓ IntegerLiteral  ------------>  [int]
+  926▓ PrimaryExpression  ------------>  [int]
+  659▓ Expression  ------------>  [int]
+  776▓ ExpressionList
+  638▓ MessageSend  ------------>  [boolean]
+  837▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  808▓ AssignmentStatement
+  306▓ Statement
+  400░ Statement
+  339░ AssignmentStatement
+  AS name: global:BT:Start
+  402░ Identifier
+    >Searchkey: [global:BT:Start:ntb]
+  402▓ Identifier  ------------>  [boolean]
+  101░ Expression
+  816░ MessageSend
+  454░ PrimaryExpression
+  443░ Identifier
+    >Searchkey: [global:BT:Start:root]
+  443▓ Identifier  ------------>  [Tree]
+  454▓ PrimaryExpression  ------------>  [Tree]
+  697░ Identifier
+    >Searchkey: [global:Tree:Insert]
+  697▓ Identifier  ------------>  [boolean]
+  461░ ExpressionList
+  196░ Expression
+  949░ PrimaryExpression
+  885░ IntegerLiteral
+  885▓ IntegerLiteral  ------------>  [int]
+  949▓ PrimaryExpression  ------------>  [int]
+  196▓ Expression  ------------>  [int]
+  461▓ ExpressionList
+  816▓ MessageSend  ------------>  [boolean]
+  101▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  339▓ AssignmentStatement
+  400▓ Statement
+  835░ Statement
+  140░ AssignmentStatement
+  AS name: global:BT:Start
+  182░ Identifier
+    >Searchkey: [global:BT:Start:ntb]
+  182▓ Identifier  ------------>  [boolean]
+  746░ Expression
+  389░ MessageSend
+  924░ PrimaryExpression
+  282░ Identifier
+    >Searchkey: [global:BT:Start:root]
+  282▓ Identifier  ------------>  [Tree]
+  924▓ PrimaryExpression  ------------>  [Tree]
+  304░ Identifier
+    >Searchkey: [global:Tree:Insert]
+  304▓ Identifier  ------------>  [boolean]
+  338░ ExpressionList
+  179░ Expression
+  313░ PrimaryExpression
+  182░ IntegerLiteral
+  182▓ IntegerLiteral  ------------>  [int]
+  313▓ PrimaryExpression  ------------>  [int]
+  179▓ Expression  ------------>  [int]
+  338▓ ExpressionList
+  389▓ MessageSend  ------------>  [boolean]
+  746▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  140▓ AssignmentStatement
+  835▓ Statement
+  312░ Statement
+  574░ AssignmentStatement
+  AS name: global:BT:Start
+  184░ Identifier
+    >Searchkey: [global:BT:Start:ntb]
+  184▓ Identifier  ------------>  [boolean]
+  108░ Expression
+  306░ MessageSend
+  341░ PrimaryExpression
+  674░ Identifier
+    >Searchkey: [global:BT:Start:root]
+  674▓ Identifier  ------------>  [Tree]
+  341▓ PrimaryExpression  ------------>  [Tree]
+  390░ Identifier
+    >Searchkey: [global:Tree:Insert]
+  390▓ Identifier  ------------>  [boolean]
+  111░ ExpressionList
+  166░ Expression
+  431░ PrimaryExpression
+  895░ IntegerLiteral
+  895▓ IntegerLiteral  ------------>  [int]
+  431▓ PrimaryExpression  ------------>  [int]
+  166▓ Expression  ------------>  [int]
+  111▓ ExpressionList
+  306▓ MessageSend  ------------>  [boolean]
+  108▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  574▓ AssignmentStatement
+  312▓ Statement
+  496░ Statement
+  392░ AssignmentStatement
+  AS name: global:BT:Start
+  973░ Identifier
+    >Searchkey: [global:BT:Start:ntb]
+  973▓ Identifier  ------------>  [boolean]
+  375░ Expression
+  685░ MessageSend
+  524░ PrimaryExpression
+  562░ Identifier
+    >Searchkey: [global:BT:Start:root]
+  562▓ Identifier  ------------>  [Tree]
+  524▓ PrimaryExpression  ------------>  [Tree]
+  708░ Identifier
+    >Searchkey: [global:Tree:Insert]
+  708▓ Identifier  ------------>  [boolean]
+  545░ ExpressionList
+  337░ Expression
+  178░ PrimaryExpression
+  884░ IntegerLiteral
+  884▓ IntegerLiteral  ------------>  [int]
+  178▓ PrimaryExpression  ------------>  [int]
+  337▓ Expression  ------------>  [int]
+  545▓ ExpressionList
+  685▓ MessageSend  ------------>  [boolean]
+  375▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  392▓ AssignmentStatement
+  496▓ Statement
+  395░ Statement
+  837░ AssignmentStatement
+  AS name: global:BT:Start
+  374░ Identifier
+    >Searchkey: [global:BT:Start:ntb]
+  374▓ Identifier  ------------>  [boolean]
+  263░ Expression
+  736░ MessageSend
+  646░ PrimaryExpression
+  447░ Identifier
+    >Searchkey: [global:BT:Start:root]
+  447▓ Identifier  ------------>  [Tree]
+  646▓ PrimaryExpression  ------------>  [Tree]
+  326░ Identifier
     >Searchkey: [global:Tree:Print]
-  772▓ Identifier
-  347▓ MessageSend
-  267▓ AssignmentStatement
-  183▓ Statement
-  471░ Statement
-  871░ Expression
-  871▓ Expression
-  637░ PrimaryExpression
-  666░ IntegerLiteral
-  666▓ IntegerLiteral
-  637▓ PrimaryExpression
-  471▓ Statement
-  862░ Statement
-  955░ AssignmentStatement
-  AS name: global:BT:Start
-  207░ Identifier
-    >Searchkey: [global:BT:Start:ntb]
-  207▓ Identifier
-  480░ Expression
-  480▓ Expression
-  272░ MessageSend
-  875░ PrimaryExpression
-  571░ Identifier
+  326▓ Identifier  ------------>  [boolean]
+  736▓ MessageSend  ------------>  [boolean]
+  263▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  837▓ AssignmentStatement
+  395▓ Statement
+  569░ Statement
+  583░ Expression
+  251░ MessageSend
+  763░ PrimaryExpression
+  823░ Identifier
     >Searchkey: [global:BT:Start:root]
-  571▓ Identifier
-  875▓ PrimaryExpression
-  736░ Identifier
-    >Searchkey: [global:Tree:Insert]
-  736▓ Identifier
-  611░ ExpressionList
-  172░ Expression
-  172▓ Expression
-  260░ PrimaryExpression
-  461░ IntegerLiteral
-  461▓ IntegerLiteral
-  260▓ PrimaryExpression
-  611▓ ExpressionList
-  272▓ MessageSend
-  955▓ AssignmentStatement
-  862▓ Statement
-  544░ Statement
-  658░ AssignmentStatement
-  AS name: global:BT:Start
-  188░ Identifier
-    >Searchkey: [global:BT:Start:ntb]
-  188▓ Identifier
-  182░ Expression
-  182▓ Expression
-  221░ MessageSend
-  505░ PrimaryExpression
-  123░ Identifier
+  823▓ Identifier  ------------>  [Tree]
+  763▓ PrimaryExpression  ------------>  [Tree]
+  936░ Identifier
+    >Searchkey: [global:Tree:Search]
+  936▓ Identifier  ------------>  [int]
+  305░ ExpressionList
+  877░ Expression
+  402░ PrimaryExpression
+  433░ IntegerLiteral
+  433▓ IntegerLiteral  ------------>  [int]
+  402▓ PrimaryExpression  ------------>  [int]
+  877▓ Expression  ------------>  [int]
+  305▓ ExpressionList
+  251▓ MessageSend  ------------>  [int]
+  583▓ Expression  ------------>  [int]
+  569▓ Statement
+  371░ Statement
+  939░ Expression
+  284░ MessageSend
+  338░ PrimaryExpression
+  341░ Identifier
     >Searchkey: [global:BT:Start:root]
-  123▓ Identifier
-  505▓ PrimaryExpression
-  572░ Identifier
-    >Searchkey: [global:Tree:Print]
-  572▓ Identifier
-  221▓ MessageSend
-  658▓ AssignmentStatement
-  544▓ Statement
-  333░ Statement
-  709░ AssignmentStatement
-  AS name: global:BT:Start
-  861░ Identifier
-    >Searchkey: [global:BT:Start:ntb]
-  861▓ Identifier
-  158░ Expression
-  158▓ Expression
-  334░ MessageSend
-  979░ PrimaryExpression
-  847░ Identifier
+  341▓ Identifier  ------------>  [Tree]
+  338▓ PrimaryExpression  ------------>  [Tree]
+  997░ Identifier
+    >Searchkey: [global:Tree:Search]
+  997▓ Identifier  ------------>  [int]
+  226░ ExpressionList
+  429░ Expression
+  879░ PrimaryExpression
+  715░ IntegerLiteral
+  715▓ IntegerLiteral  ------------>  [int]
+  879▓ PrimaryExpression  ------------>  [int]
+  429▓ Expression  ------------>  [int]
+  226▓ ExpressionList
+  284▓ MessageSend  ------------>  [int]
+  939▓ Expression  ------------>  [int]
+  371▓ Statement
+  955░ Statement
+  498░ Expression
+  466░ MessageSend
+  237░ PrimaryExpression
+  471░ Identifier
     >Searchkey: [global:BT:Start:root]
-  847▓ Identifier
-  979▓ PrimaryExpression
-  648░ Identifier
-    >Searchkey: [global:Tree:Insert]
-  648▓ Identifier
-  396░ ExpressionList
-  458░ Expression
-  458▓ Expression
-  873░ PrimaryExpression
-  102░ IntegerLiteral
-  102▓ IntegerLiteral
-  873▓ PrimaryExpression
-  396▓ ExpressionList
-  334▓ MessageSend
-  709▓ AssignmentStatement
-  333▓ Statement
-  415░ Statement
-  475░ AssignmentStatement
-  AS name: global:BT:Start
-  415░ Identifier
-    >Searchkey: [global:BT:Start:ntb]
-  415▓ Identifier
-  833░ Expression
-  833▓ Expression
-  490░ MessageSend
-  357░ PrimaryExpression
-  317░ Identifier
+  471▓ Identifier  ------------>  [Tree]
+  237▓ PrimaryExpression  ------------>  [Tree]
+  175░ Identifier
+    >Searchkey: [global:Tree:Search]
+  175▓ Identifier  ------------>  [int]
+  848░ ExpressionList
+  226░ Expression
+  170░ PrimaryExpression
+  354░ IntegerLiteral
+  354▓ IntegerLiteral  ------------>  [int]
+  170▓ PrimaryExpression  ------------>  [int]
+  226▓ Expression  ------------>  [int]
+  848▓ ExpressionList
+  466▓ MessageSend  ------------>  [int]
+  498▓ Expression  ------------>  [int]
+  955▓ Statement
+  160░ Statement
+  138░ Expression
+  353░ MessageSend
+  994░ PrimaryExpression
+  296░ Identifier
     >Searchkey: [global:BT:Start:root]
-  317▓ Identifier
-  357▓ PrimaryExpression
-  339░ Identifier
-    >Searchkey: [global:Tree:Insert]
-  339▓ Identifier
-  639░ ExpressionList
-  350░ Expression
-  350▓ Expression
-  660░ PrimaryExpression
-  745░ IntegerLiteral
-  745▓ IntegerLiteral
-  660▓ PrimaryExpression
-  639▓ ExpressionList
-  490▓ MessageSend
-  475▓ AssignmentStatement
-  415▓ Statement
-  507░ Statement
-  573░ AssignmentStatement
-  AS name: global:BT:Start
-  344░ Identifier
-    >Searchkey: [global:BT:Start:ntb]
-  344▓ Identifier
-  249░ Expression
-  249▓ Expression
-  993░ MessageSend
-  630░ PrimaryExpression
-  645░ Identifier
+  296▓ Identifier  ------------>  [Tree]
+  994▓ PrimaryExpression  ------------>  [Tree]
+  955░ Identifier
+    >Searchkey: [global:Tree:Search]
+  955▓ Identifier  ------------>  [int]
+  174░ ExpressionList
+  802░ Expression
+  225░ PrimaryExpression
+  425░ IntegerLiteral
+  425▓ IntegerLiteral  ------------>  [int]
+  225▓ PrimaryExpression  ------------>  [int]
+  802▓ Expression  ------------>  [int]
+  174▓ ExpressionList
+  353▓ MessageSend  ------------>  [int]
+  138▓ Expression  ------------>  [int]
+  160▓ Statement
+  806░ Statement
+  193░ Expression
+  996░ MessageSend
+  252░ PrimaryExpression
+  525░ Identifier
     >Searchkey: [global:BT:Start:root]
-  645▓ Identifier
-  630▓ PrimaryExpression
-  157░ Identifier
-    >Searchkey: [global:Tree:Insert]
-  157▓ Identifier
-  895░ ExpressionList
-  285░ Expression
-  285▓ Expression
-  249░ PrimaryExpression
-  710░ IntegerLiteral
-  710▓ IntegerLiteral
-  249▓ PrimaryExpression
-  895▓ ExpressionList
-  993▓ MessageSend
-  573▓ AssignmentStatement
-  507▓ Statement
-  941░ Statement
-  417░ AssignmentStatement
-  AS name: global:BT:Start
-  799░ Identifier
-    >Searchkey: [global:BT:Start:ntb]
-  799▓ Identifier
-  970░ Expression
-  970▓ Expression
-  474░ MessageSend
-  157░ PrimaryExpression
-  960░ Identifier
-    >Searchkey: [global:BT:Start:root]
-  960▓ Identifier
-  157▓ PrimaryExpression
-  762░ Identifier
-    >Searchkey: [global:Tree:Insert]
-  762▓ Identifier
-  811░ ExpressionList
-  525░ Expression
-  525▓ Expression
-  713░ PrimaryExpression
-  682░ IntegerLiteral
-  682▓ IntegerLiteral
-  713▓ PrimaryExpression
-  811▓ ExpressionList
-  474▓ MessageSend
-  417▓ AssignmentStatement
-  941▓ Statement
-  828░ Statement
-  102░ AssignmentStatement
-  AS name: global:BT:Start
-  500░ Identifier
-    >Searchkey: [global:BT:Start:ntb]
-  500▓ Identifier
-  847░ Expression
-  847▓ Expression
-  765░ MessageSend
-  394░ PrimaryExpression
-  299░ Identifier
-    >Searchkey: [global:BT:Start:root]
-  299▓ Identifier
-  394▓ PrimaryExpression
-  278░ Identifier
-    >Searchkey: [global:Tree:Insert]
-  278▓ Identifier
-  113░ ExpressionList
-  424░ Expression
-  424▓ Expression
-  391░ PrimaryExpression
-  211░ IntegerLiteral
-  211▓ IntegerLiteral
-  391▓ PrimaryExpression
-  113▓ ExpressionList
-  765▓ MessageSend
-  102▓ AssignmentStatement
-  828▓ Statement
-  843░ Statement
+  525▓ Identifier  ------------>  [Tree]
+  252▓ PrimaryExpression  ------------>  [Tree]
+  981░ Identifier
+    >Searchkey: [global:Tree:Search]
+  981▓ Identifier  ------------>  [int]
+  794░ ExpressionList
+  742░ Expression
+  464░ PrimaryExpression
+  971░ IntegerLiteral
+  971▓ IntegerLiteral  ------------>  [int]
+  464▓ PrimaryExpression  ------------>  [int]
+  742▓ Expression  ------------>  [int]
+  794▓ ExpressionList
+  996▓ MessageSend  ------------>  [int]
+  193▓ Expression  ------------>  [int]
+  806▓ Statement
+  612░ Statement
   774░ AssignmentStatement
   AS name: global:BT:Start
-  574░ Identifier
+  550░ Identifier
     >Searchkey: [global:BT:Start:ntb]
-  574▓ Identifier
-  957░ Expression
-  957▓ Expression
-  413░ MessageSend
-  260░ PrimaryExpression
-  885░ Identifier
-    >Searchkey: [global:BT:Start:root]
-  885▓ Identifier
-  260▓ PrimaryExpression
-  359░ Identifier
-    >Searchkey: [global:Tree:Insert]
-  359▓ Identifier
-  875░ ExpressionList
-  678░ Expression
-  678▓ Expression
-  317░ PrimaryExpression
-  254░ IntegerLiteral
-  254▓ IntegerLiteral
-  317▓ PrimaryExpression
-  875▓ ExpressionList
-  413▓ MessageSend
-  774▓ AssignmentStatement
-  843▓ Statement
-  481░ Statement
-  169░ AssignmentStatement
-  AS name: global:BT:Start
-  979░ Identifier
-    >Searchkey: [global:BT:Start:ntb]
-  979▓ Identifier
-  515░ Expression
-  515▓ Expression
-  206░ MessageSend
-  753░ PrimaryExpression
-  633░ Identifier
-    >Searchkey: [global:BT:Start:root]
-  633▓ Identifier
-  753▓ PrimaryExpression
-  862░ Identifier
-    >Searchkey: [global:Tree:Print]
-  862▓ Identifier
-  206▓ MessageSend
-  169▓ AssignmentStatement
-  481▓ Statement
-  465░ Statement
-  683░ Expression
-  683▓ Expression
-  479░ MessageSend
-  792░ PrimaryExpression
-  495░ Identifier
-    >Searchkey: [global:BT:Start:root]
-  495▓ Identifier
-  792▓ PrimaryExpression
-  492░ Identifier
-    >Searchkey: [global:Tree:Search]
-  492▓ Identifier
-  699░ ExpressionList
-  807░ Expression
-  807▓ Expression
-  297░ PrimaryExpression
-  420░ IntegerLiteral
-  420▓ IntegerLiteral
-  297▓ PrimaryExpression
-  699▓ ExpressionList
-  479▓ MessageSend
-  465▓ Statement
-  874░ Statement
-  483░ Expression
-  483▓ Expression
-  769░ MessageSend
-  527░ PrimaryExpression
-  372░ Identifier
-    >Searchkey: [global:BT:Start:root]
-  372▓ Identifier
-  527▓ PrimaryExpression
-  845░ Identifier
-    >Searchkey: [global:Tree:Search]
-  845▓ Identifier
-  702░ ExpressionList
-  961░ Expression
-  961▓ Expression
-  883░ PrimaryExpression
-  606░ IntegerLiteral
-  606▓ IntegerLiteral
-  883▓ PrimaryExpression
-  702▓ ExpressionList
-  769▓ MessageSend
-  874▓ Statement
-  204░ Statement
-  729░ Expression
-  729▓ Expression
-  240░ MessageSend
-  276░ PrimaryExpression
-  731░ Identifier
-    >Searchkey: [global:BT:Start:root]
-  731▓ Identifier
-  276▓ PrimaryExpression
-  285░ Identifier
-    >Searchkey: [global:Tree:Search]
-  285▓ Identifier
-  361░ ExpressionList
-  631░ Expression
-  631▓ Expression
-  494░ PrimaryExpression
-  940░ IntegerLiteral
-  940▓ IntegerLiteral
-  494▓ PrimaryExpression
-  361▓ ExpressionList
-  240▓ MessageSend
-  204▓ Statement
-  840░ Statement
-  908░ Expression
-  908▓ Expression
-  545░ MessageSend
-  749░ PrimaryExpression
-  425░ Identifier
-    >Searchkey: [global:BT:Start:root]
-  425▓ Identifier
-  749▓ PrimaryExpression
-  278░ Identifier
-    >Searchkey: [global:Tree:Search]
-  278▓ Identifier
-  917░ ExpressionList
-  801░ Expression
-  801▓ Expression
-  910░ PrimaryExpression
-  485░ IntegerLiteral
-  485▓ IntegerLiteral
-  910▓ PrimaryExpression
-  917▓ ExpressionList
-  545▓ MessageSend
-  840▓ Statement
-  363░ Statement
-  664░ Expression
-  664▓ Expression
-  897░ MessageSend
-  912░ PrimaryExpression
-  416░ Identifier
-    >Searchkey: [global:BT:Start:root]
-  416▓ Identifier
-  912▓ PrimaryExpression
-  978░ Identifier
-    >Searchkey: [global:Tree:Search]
-  978▓ Identifier
-  372░ ExpressionList
-  649░ Expression
-  649▓ Expression
-  622░ PrimaryExpression
-  633░ IntegerLiteral
-  633▓ IntegerLiteral
-  622▓ PrimaryExpression
-  372▓ ExpressionList
-  897▓ MessageSend
-  363▓ Statement
-  486░ Statement
-  182░ AssignmentStatement
-  AS name: global:BT:Start
-  206░ Identifier
-    >Searchkey: [global:BT:Start:ntb]
-  206▓ Identifier
-  726░ Expression
-  726▓ Expression
-  552░ MessageSend
-  559░ PrimaryExpression
-  433░ Identifier
-    >Searchkey: [global:BT:Start:root]
-  433▓ Identifier
-  559▓ PrimaryExpression
-  930░ Identifier
-    >Searchkey: [global:Tree:Delete]
-  930▓ Identifier
-  117░ ExpressionList
-  571░ Expression
-  571▓ Expression
-  558░ PrimaryExpression
-  960░ IntegerLiteral
-  960▓ IntegerLiteral
-  558▓ PrimaryExpression
-  117▓ ExpressionList
-  552▓ MessageSend
-  182▓ AssignmentStatement
-  486▓ Statement
-  612░ Statement
-  557░ AssignmentStatement
-  AS name: global:BT:Start
-  853░ Identifier
-    >Searchkey: [global:BT:Start:ntb]
-  853▓ Identifier
-  637░ Expression
-  637▓ Expression
-  819░ MessageSend
-  809░ PrimaryExpression
-  343░ Identifier
-    >Searchkey: [global:BT:Start:root]
-  343▓ Identifier
-  809▓ PrimaryExpression
-  542░ Identifier
-    >Searchkey: [global:Tree:Print]
-  542▓ Identifier
-  819▓ MessageSend
-  557▓ AssignmentStatement
-  612▓ Statement
-  693░ Statement
-  222░ Expression
-  222▓ Expression
-  912░ MessageSend
-  674░ PrimaryExpression
-  503░ Identifier
-    >Searchkey: [global:BT:Start:root]
-  503▓ Identifier
-  674▓ PrimaryExpression
-  789░ Identifier
-    >Searchkey: [global:Tree:Search]
-  789▓ Identifier
-  469░ ExpressionList
-  512░ Expression
-  512▓ Expression
-  349░ PrimaryExpression
-  639░ IntegerLiteral
-  639▓ IntegerLiteral
-  349▓ PrimaryExpression
-  469▓ ExpressionList
-  912▓ MessageSend
-  693▓ Statement
-  364░ Expression
-  364▓ Expression
-  756░ PrimaryExpression
-  315░ IntegerLiteral
-  315▓ IntegerLiteral
-  756▓ PrimaryExpression
-  117▓ ClassDeclaration
-  504▓ TypeDeclaration
-  159░ TypeDeclaration
-  Typedecco KEY!global
-  731░ ClassDeclaration
-  875░ Identifier
-    >Searchkey: [global:Tree]
-  875▓ Identifier
-  class scope: global:Tree
-  988░ Statement
-  811░ AssignmentStatement
-  AS name: global:Tree:Init
-  888░ Identifier
-    >Searchkey: [global:Tree:Init:key]
-  888▓ Identifier
-  482░ Expression
-  482▓ Expression
-  851░ PrimaryExpression
-  231░ Identifier
-    >Searchkey: [global:Tree:Init:v_key]
-  231▓ Identifier
-  851▓ PrimaryExpression
-  811▓ AssignmentStatement
-  988▓ Statement
-  285░ Statement
-  180░ AssignmentStatement
-  AS name: global:Tree:Init
-  334░ Identifier
-    >Searchkey: [global:Tree:Init:has_left]
-  334▓ Identifier
-  337░ Expression
-  337▓ Expression
-  399░ PrimaryExpression
-  478░ FalseLiteral
-  478▓ FalseLiteral
-  399▓ PrimaryExpression
-  180▓ AssignmentStatement
-  285▓ Statement
-  434░ Statement
-  452░ AssignmentStatement
-  AS name: global:Tree:Init
-  232░ Identifier
-    >Searchkey: [global:Tree:Init:has_right]
-  232▓ Identifier
-  520░ Expression
-  520▓ Expression
-  378░ PrimaryExpression
-  216░ FalseLiteral
-  216▓ FalseLiteral
-  378▓ PrimaryExpression
-  452▓ AssignmentStatement
-  434▓ Statement
-  659░ Expression
-  659▓ Expression
-  785░ PrimaryExpression
-  492░ TrueLiteral
-  492▓ TrueLiteral
-  785▓ PrimaryExpression
-  127░ Statement
-  534░ AssignmentStatement
-  AS name: global:Tree:SetRight
-  270░ Identifier
-    >Searchkey: [global:Tree:SetRight:right]
-  270▓ Identifier
-  691░ Expression
-  691▓ Expression
-  779░ PrimaryExpression
-  338░ Identifier
-    >Searchkey: [global:Tree:SetRight:rn]
-  338▓ Identifier
-  779▓ PrimaryExpression
-  534▓ AssignmentStatement
-  127▓ Statement
-  442░ Expression
-  442▓ Expression
-  924░ PrimaryExpression
-  888░ TrueLiteral
-  888▓ TrueLiteral
-  924▓ PrimaryExpression
-  223░ Statement
-  921░ AssignmentStatement
-  AS name: global:Tree:SetLeft
-  601░ Identifier
-    >Searchkey: [global:Tree:SetLeft:left]
-  601▓ Identifier
-  838░ Expression
-  838▓ Expression
-  570░ PrimaryExpression
-  536░ Identifier
-    >Searchkey: [global:Tree:SetLeft:ln]
-  536▓ Identifier
-  570▓ PrimaryExpression
-  921▓ AssignmentStatement
-  223▓ Statement
-  369░ Expression
-  369▓ Expression
-  799░ PrimaryExpression
-  463░ TrueLiteral
-  463▓ TrueLiteral
-  799▓ PrimaryExpression
-  327░ Expression
-  327▓ Expression
-  643░ PrimaryExpression
-  743░ Identifier
-    >Searchkey: [global:Tree:GetRight:right]
-  743▓ Identifier
-  643▓ PrimaryExpression
-  684░ Expression
-  684▓ Expression
-  849░ PrimaryExpression
-  528░ Identifier
-    >Searchkey: [global:Tree:GetLeft:left]
-  528▓ Identifier
-  849▓ PrimaryExpression
-  199░ Expression
-  199▓ Expression
-  428░ PrimaryExpression
-  688░ Identifier
-    >Searchkey: [global:Tree:GetKey:key]
-  688▓ Identifier
-  428▓ PrimaryExpression
-  674░ Statement
-  739░ AssignmentStatement
-  AS name: global:Tree:SetKey
-  626░ Identifier
-    >Searchkey: [global:Tree:SetKey:key]
-  626▓ Identifier
-  837░ Expression
-  837▓ Expression
-  306░ PrimaryExpression
-  760░ Identifier
-    >Searchkey: [global:Tree:SetKey:v_key]
-  760▓ Identifier
-  306▓ PrimaryExpression
-  739▓ AssignmentStatement
-  674▓ Statement
-  190░ Expression
-  190▓ Expression
-  133░ PrimaryExpression
-  605░ TrueLiteral
-  605▓ TrueLiteral
-  133▓ PrimaryExpression
-  635░ Expression
-  635▓ Expression
-  533░ PrimaryExpression
-  945░ Identifier
-    >Searchkey: [global:Tree:GetHas_Right:has_right]
-  945▓ Identifier
-  533▓ PrimaryExpression
-  142░ Expression
-  142▓ Expression
-  928░ PrimaryExpression
-  944░ Identifier
-    >Searchkey: [global:Tree:GetHas_Left:has_left]
-  944▓ Identifier
-  928▓ PrimaryExpression
-  725░ Statement
-  790░ AssignmentStatement
-  AS name: global:Tree:SetHas_Left
-  854░ Identifier
-    >Searchkey: [global:Tree:SetHas_Left:has_left]
-  854▓ Identifier
-  470░ Expression
-  470▓ Expression
-  430░ PrimaryExpression
-  827░ Identifier
-    >Searchkey: [global:Tree:SetHas_Left:val]
-  827▓ Identifier
-  430▓ PrimaryExpression
-  790▓ AssignmentStatement
-  725▓ Statement
-  550░ Expression
-  550▓ Expression
-  628░ PrimaryExpression
-  244░ TrueLiteral
-  244▓ TrueLiteral
-  628▓ PrimaryExpression
-  329░ Statement
-  965░ AssignmentStatement
-  AS name: global:Tree:SetHas_Right
-  951░ Identifier
-    >Searchkey: [global:Tree:SetHas_Right:has_right]
-  951▓ Identifier
-  119░ Expression
-  119▓ Expression
-  858░ PrimaryExpression
-  776░ Identifier
-    >Searchkey: [global:Tree:SetHas_Right:val]
-  776▓ Identifier
-  858▓ PrimaryExpression
-  965▓ AssignmentStatement
-  329▓ Statement
-  142░ Expression
-  142▓ Expression
-  766░ PrimaryExpression
-  178░ TrueLiteral
-  178▓ TrueLiteral
-  766▓ PrimaryExpression
-  109░ Statement
-  732░ AssignmentStatement
-  AS name: global:Tree:Compare
-  986░ Identifier
-    >Searchkey: [global:Tree:Compare:ntb]
-  986▓ Identifier
-  736░ Expression
-  736▓ Expression
-  479░ PrimaryExpression
-  235░ FalseLiteral
-  235▓ FalseLiteral
-  479▓ PrimaryExpression
-  732▓ AssignmentStatement
-  109▓ Statement
-  255░ Statement
-  395░ AssignmentStatement
-  AS name: global:Tree:Compare
-  188░ Identifier
-    >Searchkey: [global:Tree:Compare:nti]
-  188▓ Identifier
-  686░ Expression
-  686▓ Expression
-  471░ PlusExpression
+  550▓ Identifier  ------------>  [boolean]
+  308░ Expression
+  123░ MessageSend
   544░ PrimaryExpression
-  199░ Identifier
+  376░ Identifier
+    >Searchkey: [global:BT:Start:root]
+  376▓ Identifier  ------------>  [Tree]
+  544▓ PrimaryExpression  ------------>  [Tree]
+  295░ Identifier
+    >Searchkey: [global:Tree:Delete]
+  295▓ Identifier  ------------>  [boolean]
+  445░ ExpressionList
+  452░ Expression
+  629░ PrimaryExpression
+  808░ IntegerLiteral
+  808▓ IntegerLiteral  ------------>  [int]
+  629▓ PrimaryExpression  ------------>  [int]
+  452▓ Expression  ------------>  [int]
+  445▓ ExpressionList
+  123▓ MessageSend  ------------>  [boolean]
+  308▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  774▓ AssignmentStatement
+  612▓ Statement
+  543░ Statement
+  965░ AssignmentStatement
+  AS name: global:BT:Start
+  803░ Identifier
+    >Searchkey: [global:BT:Start:ntb]
+  803▓ Identifier  ------------>  [boolean]
+  507░ Expression
+  414░ MessageSend
+  996░ PrimaryExpression
+  754░ Identifier
+    >Searchkey: [global:BT:Start:root]
+  754▓ Identifier  ------------>  [Tree]
+  996▓ PrimaryExpression  ------------>  [Tree]
+  757░ Identifier
+    >Searchkey: [global:Tree:Print]
+  757▓ Identifier  ------------>  [boolean]
+  414▓ MessageSend  ------------>  [boolean]
+  507▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  965▓ AssignmentStatement
+  543▓ Statement
+  490░ Statement
+  170░ Expression
+  800░ MessageSend
+  125░ PrimaryExpression
+  258░ Identifier
+    >Searchkey: [global:BT:Start:root]
+  258▓ Identifier  ------------>  [Tree]
+  125▓ PrimaryExpression  ------------>  [Tree]
+  484░ Identifier
+    >Searchkey: [global:Tree:Search]
+  484▓ Identifier  ------------>  [int]
+  794░ ExpressionList
+  113░ Expression
+  315░ PrimaryExpression
+  670░ IntegerLiteral
+  670▓ IntegerLiteral  ------------>  [int]
+  315▓ PrimaryExpression  ------------>  [int]
+  113▓ Expression  ------------>  [int]
+  794▓ ExpressionList
+  800▓ MessageSend  ------------>  [int]
+  170▓ Expression  ------------>  [int]
+  490▓ Statement
+  638░ Expression
+  563░ PrimaryExpression
+  735░ IntegerLiteral
+  735▓ IntegerLiteral  ------------>  [int]
+  563▓ PrimaryExpression  ------------>  [int]
+  638▓ Expression  ------------>  [int]
+  592▓ ClassDeclaration ----------------- ------------>  [BT]
+  976▓ TypeDeclaration ----------------- ------------>  [BT]
+  889░ TypeDeclaration
+  236░ ClassDeclaration
+  550░ Identifier
+    >Searchkey: [global:Tree]
+  550▓ Identifier  ------------>  [Tree]
+  739░ Statement
+  919░ AssignmentStatement
+  AS name: global:Tree:Init
+  330░ Identifier
+    >Searchkey: [global:Tree:Init:key]
+  330▓ Identifier  ------------>  [int]
+  150░ Expression
+  370░ PrimaryExpression
+  672░ Identifier
+    >Searchkey: [global:Tree:Init:v_key]
+  672▓ Identifier  ------------>  [int]
+  370▓ PrimaryExpression  ------------>  [int]
+  150▓ Expression  ------------>  [int]
+  [int] == [int]
+  919▓ AssignmentStatement
+  739▓ Statement
+  557░ Statement
+  135░ AssignmentStatement
+  AS name: global:Tree:Init
+  795░ Identifier
+    >Searchkey: [global:Tree:Init:has_left]
+  795▓ Identifier  ------------>  [boolean]
+  842░ Expression
+  153░ PrimaryExpression
+  217░ FalseLiteral
+  217▓ FalseLiteral  ------------>  [boolean]
+  153▓ PrimaryExpression  ------------>  [boolean]
+  842▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  135▓ AssignmentStatement
+  557▓ Statement
+  742░ Statement
+  138░ AssignmentStatement
+  AS name: global:Tree:Init
+  283░ Identifier
+    >Searchkey: [global:Tree:Init:has_right]
+  283▓ Identifier  ------------>  [boolean]
+  966░ Expression
+  131░ PrimaryExpression
+  663░ FalseLiteral
+  663▓ FalseLiteral  ------------>  [boolean]
+  131▓ PrimaryExpression  ------------>  [boolean]
+  966▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  138▓ AssignmentStatement
+  742▓ Statement
+  277░ Expression
+  734░ PrimaryExpression
+  240░ TrueLiteral
+  240▓ TrueLiteral  ------------>  [boolean]
+  734▓ PrimaryExpression  ------------>  [boolean]
+  277▓ Expression  ------------>  [boolean]
+  431░ Statement
+  220░ AssignmentStatement
+  AS name: global:Tree:SetRight
+  331░ Identifier
+    >Searchkey: [global:Tree:SetRight:right]
+  331▓ Identifier  ------------>  [Tree]
+  789░ Expression
+  287░ PrimaryExpression
+  593░ Identifier
+    >Searchkey: [global:Tree:SetRight:rn]
+  593▓ Identifier  ------------>  [Tree]
+  287▓ PrimaryExpression  ------------>  [Tree]
+  789▓ Expression  ------------>  [Tree]
+  [Tree] == [Tree]
+  220▓ AssignmentStatement
+  431▓ Statement
+  317░ Expression
+  412░ PrimaryExpression
+  692░ TrueLiteral
+  692▓ TrueLiteral  ------------>  [boolean]
+  412▓ PrimaryExpression  ------------>  [boolean]
+  317▓ Expression  ------------>  [boolean]
+  405░ Statement
+  807░ AssignmentStatement
+  AS name: global:Tree:SetLeft
+  479░ Identifier
+    >Searchkey: [global:Tree:SetLeft:left]
+  479▓ Identifier  ------------>  [Tree]
+  802░ Expression
+  760░ PrimaryExpression
+  292░ Identifier
+    >Searchkey: [global:Tree:SetLeft:ln]
+  292▓ Identifier  ------------>  [Tree]
+  760▓ PrimaryExpression  ------------>  [Tree]
+  802▓ Expression  ------------>  [Tree]
+  [Tree] == [Tree]
+  807▓ AssignmentStatement
+  405▓ Statement
+  432░ Expression
+  352░ PrimaryExpression
+  243░ TrueLiteral
+  243▓ TrueLiteral  ------------>  [boolean]
+  352▓ PrimaryExpression  ------------>  [boolean]
+  432▓ Expression  ------------>  [boolean]
+  998░ Expression
+  802░ PrimaryExpression
+  623░ Identifier
+    >Searchkey: [global:Tree:GetRight:right]
+  623▓ Identifier  ------------>  [Tree]
+  802▓ PrimaryExpression  ------------>  [Tree]
+  998▓ Expression  ------------>  [Tree]
+  874░ Identifier
+    >Searchkey: [global:Tree:Tree]
+  874▓ Identifier  ------------>  [Tree]
+  429░ Expression
+  389░ PrimaryExpression
+  316░ Identifier
+    >Searchkey: [global:Tree:GetLeft:left]
+  316▓ Identifier  ------------>  [Tree]
+  389▓ PrimaryExpression  ------------>  [Tree]
+  429▓ Expression  ------------>  [Tree]
+  906░ Identifier
+    >Searchkey: [global:Tree:Tree]
+  906▓ Identifier  ------------>  [Tree]
+  790░ Expression
+  521░ PrimaryExpression
+  739░ Identifier
+    >Searchkey: [global:Tree:GetKey:key]
+  739▓ Identifier  ------------>  [int]
+  521▓ PrimaryExpression  ------------>  [int]
+  790▓ Expression  ------------>  [int]
+  641░ Statement
+  620░ AssignmentStatement
+  AS name: global:Tree:SetKey
+  226░ Identifier
+    >Searchkey: [global:Tree:SetKey:key]
+  226▓ Identifier  ------------>  [int]
+  861░ Expression
+  120░ PrimaryExpression
+  747░ Identifier
+    >Searchkey: [global:Tree:SetKey:v_key]
+  747▓ Identifier  ------------>  [int]
+  120▓ PrimaryExpression  ------------>  [int]
+  861▓ Expression  ------------>  [int]
+  [int] == [int]
+  620▓ AssignmentStatement
+  641▓ Statement
+  598░ Expression
+  615░ PrimaryExpression
+  732░ TrueLiteral
+  732▓ TrueLiteral  ------------>  [boolean]
+  615▓ PrimaryExpression  ------------>  [boolean]
+  598▓ Expression  ------------>  [boolean]
+  643░ Expression
+  189░ PrimaryExpression
+  967░ Identifier
+    >Searchkey: [global:Tree:GetHas_Right:has_right]
+  967▓ Identifier  ------------>  [boolean]
+  189▓ PrimaryExpression  ------------>  [boolean]
+  643▓ Expression  ------------>  [boolean]
+  296░ Expression
+  143░ PrimaryExpression
+  811░ Identifier
+    >Searchkey: [global:Tree:GetHas_Left:has_left]
+  811▓ Identifier  ------------>  [boolean]
+  143▓ PrimaryExpression  ------------>  [boolean]
+  296▓ Expression  ------------>  [boolean]
+  910░ Statement
+  476░ AssignmentStatement
+  AS name: global:Tree:SetHas_Left
+  348░ Identifier
+    >Searchkey: [global:Tree:SetHas_Left:has_left]
+  348▓ Identifier  ------------>  [boolean]
+  938░ Expression
+  596░ PrimaryExpression
+  894░ Identifier
+    >Searchkey: [global:Tree:SetHas_Left:val]
+  894▓ Identifier  ------------>  [boolean]
+  596▓ PrimaryExpression  ------------>  [boolean]
+  938▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  476▓ AssignmentStatement
+  910▓ Statement
+  116░ Expression
+  564░ PrimaryExpression
+  122░ TrueLiteral
+  122▓ TrueLiteral  ------------>  [boolean]
+  564▓ PrimaryExpression  ------------>  [boolean]
+  116▓ Expression  ------------>  [boolean]
+  737░ Statement
+  108░ AssignmentStatement
+  AS name: global:Tree:SetHas_Right
+  934░ Identifier
+    >Searchkey: [global:Tree:SetHas_Right:has_right]
+  934▓ Identifier  ------------>  [boolean]
+  974░ Expression
+  158░ PrimaryExpression
+  874░ Identifier
+    >Searchkey: [global:Tree:SetHas_Right:val]
+  874▓ Identifier  ------------>  [boolean]
+  158▓ PrimaryExpression  ------------>  [boolean]
+  974▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  108▓ AssignmentStatement
+  737▓ Statement
+  110░ Expression
+  217░ PrimaryExpression
+  635░ TrueLiteral
+  635▓ TrueLiteral  ------------>  [boolean]
+  217▓ PrimaryExpression  ------------>  [boolean]
+  110▓ Expression  ------------>  [boolean]
+  939░ Statement
+  441░ AssignmentStatement
+  AS name: global:Tree:Compare
+  200░ Identifier
+    >Searchkey: [global:Tree:Compare:ntb]
+  200▓ Identifier  ------------>  [boolean]
+  988░ Expression
+  173░ PrimaryExpression
+  757░ FalseLiteral
+  757▓ FalseLiteral  ------------>  [boolean]
+  173▓ PrimaryExpression  ------------>  [boolean]
+  988▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  441▓ AssignmentStatement
+  939▓ Statement
+  632░ Statement
+  871░ AssignmentStatement
+  AS name: global:Tree:Compare
+  853░ Identifier
+    >Searchkey: [global:Tree:Compare:nti]
+  853▓ Identifier  ------------>  [int]
+  148░ Expression
+  965░ PlusExpression
+  764░ PrimaryExpression
+  428░ Identifier
     >Searchkey: [global:Tree:Compare:num2]
-  199▓ Identifier
-  544▓ PrimaryExpression
-  633░ PrimaryExpression
-  223░ IntegerLiteral
-  223▓ IntegerLiteral
-  633▓ PrimaryExpression
-  471▓ PlusExpression
-  Type Error
+  428▓ Identifier  ------------>  [int]
+  764▓ PrimaryExpression  ------------>  [int]
+  828░ PrimaryExpression
+  621░ IntegerLiteral
+  621▓ IntegerLiteral  ------------>  [int]
+  828▓ PrimaryExpression  ------------>  [int]
+  965▓ PlusExpression  ------------>  [int]
+  148▓ Expression  ------------>  [int]
+  [int] == [int]
+  871▓ AssignmentStatement
+  632▓ Statement
+  239░ Statement
+  725░ Expression
+  221░ CompareExpression
+  924░ PrimaryExpression
+  943░ Identifier
+    >Searchkey: [global:Tree:Compare:num1]
+  943▓ Identifier  ------------>  [int]
+  924▓ PrimaryExpression  ------------>  [int]
+  370░ PrimaryExpression
+  134░ Identifier
+    >Searchkey: [global:Tree:Compare:num2]
+  134▓ Identifier  ------------>  [int]
+  370▓ PrimaryExpression  ------------>  [int]
+  221▓ CompareExpression  ------------>  [int]
+  725▓ Expression  ------------>  [int]
+  748░ Statement
+  301░ AssignmentStatement
+  AS name: global:Tree:Compare
+  434░ Identifier
+    >Searchkey: [global:Tree:Compare:ntb]
+  434▓ Identifier  ------------>  [boolean]
+  221░ Expression
+  139░ PrimaryExpression
+  860░ FalseLiteral
+  860▓ FalseLiteral  ------------>  [boolean]
+  139▓ PrimaryExpression  ------------>  [boolean]
+  221▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  301▓ AssignmentStatement
+  748▓ Statement
+  390░ Statement
+  994░ Expression
+  685░ PrimaryExpression
+  349░ NotExpression
+  890░ Expression
+  115░ PrimaryExpression
+  665░ BracketExpression
+  769░ Expression
+  934░ CompareExpression
+  888░ PrimaryExpression
+  795░ Identifier
+    >Searchkey: [global:Tree:Compare:num1]
+  795▓ Identifier  ------------>  [int]
+  888▓ PrimaryExpression  ------------>  [int]
+  301░ PrimaryExpression
+  311░ Identifier
+    >Searchkey: [global:Tree:Compare:nti]
+  311▓ Identifier  ------------>  [int]
+  301▓ PrimaryExpression  ------------>  [int]
+  934▓ CompareExpression  ------------>  [int]
+  769▓ Expression  ------------>  [int]
+  665▓ BracketExpression  ------------>  [int]
+  115▓ PrimaryExpression  ------------>  [int]
+  890▓ Expression  ------------>  [int]
+  NotExpression: Type Error
 
 ERROR: Type checking failed for tests/minijava-symboltable-tests/advanced-tests/AABinaryTree.java (exit code: 1)
