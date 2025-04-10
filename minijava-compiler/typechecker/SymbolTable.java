@@ -48,6 +48,19 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         return true;
     }
 
+    public boolean put(String key, Symbol entry){
+        if(key == null
+            || key.trim().isEmpty()
+            || entry == null
+            || entry.type == null
+        ){
+            return false;
+        }
+        Symbol oldData = data.get(key);
+        Symbol newData = oldData
+        data.replace();
+    }
+
     public Symbol find(String key) {
         String[] keyFragments = key.split(bufferChar);
         String idToFind = keyFragments[keyFragments.length - 1];

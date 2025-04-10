@@ -1,4 +1,4 @@
-2025-04-09 22:20:43
+2025-04-09 22:24:08
 === Typecheck < tests/minijava-symboltable-tests/advanced-tests/AAAAclass_inheritance.java ===
   ---Symbol-Table---
   global:myParentClass -> {[myParentClass], 1, []}
@@ -9,41 +9,37 @@
   global:myParentClass:myChildClass:x -> {[int], 11, []}
   global:myParentClass:main:childInstance -> {[myChildClass], 4, []}
   ------------------
-  766░ Goal
-  382░ MainClass
-  454░ Statement
-  930░ AssignmentStatement
-  427░ Identifier
+  726░ Goal
+  784░ MainClass
+  621░ Statement
+  983░ AssignmentStatement
+  823░ Identifier
     >Searchkey: [global:myParentClass:main:x]
-  427▓ Identifier  ------------>  [int]
-  938░ Expression
-  854░ PrimaryExpression
-  204░ IntegerLiteral
-  204▓ IntegerLiteral  ------------>  [int]
-  854▓ PrimaryExpression  ------------>  [int]
-  938▓ Expression  ------------>  [int]
+  823▓ Identifier  ------------>  [int]
+  241░ Expression
+  754░ PrimaryExpression
+  205░ IntegerLiteral
+  205▓ IntegerLiteral  ------------>  [int]
+  754▓ PrimaryExpression  ------------>  [int]
+  241▓ Expression  ------------>  [int]
   [int] == [int]
-  x
-  930▓ AssignmentStatement
-  454▓ Statement
+  983▓ AssignmentStatement
+  621▓ Statement
   174░ Statement
-  949░ AssignmentStatement
-  671░ Identifier
+  591░ AssignmentStatement
+  289░ Identifier
     >Searchkey: [global:myParentClass:main:childInstance]
-  671▓ Identifier  ------------>  [myChildClass]
-  384░ Expression
-  302░ PrimaryExpression
-  245░ AllocationExpression
-  270░ Identifier
+  289▓ Identifier  ------------>  [myChildClass]
+  686░ Expression
+  206░ PrimaryExpression
+  257░ AllocationExpression
+  441░ Identifier
     >Searchkey: [global:myParentClass]
-  270▓ Identifier  ------------>  [myParentClass]
-  245▓ AllocationExpression  ------------>  [myParentClass]
-  302▓ PrimaryExpression  ------------>  [myParentClass]
-  384▓ Expression  ------------>  [myParentClass]
+  441▓ Identifier  ------------>  [myParentClass]
+  257▓ AllocationExpression  ------------>  [myParentClass]
+  206▓ PrimaryExpression  ------------>  [myParentClass]
+  686▓ Expression  ------------>  [myParentClass]
   [myChildClass] == [myParentClass]
-  childInstance
-  [myChildClass]
-  [myParentClass]
-  AssignmentStatement: Type Error similar
+  AssignmentStatement: Type Error
 
 ERROR: Type checking failed for tests/minijava-symboltable-tests/advanced-tests/AAAAclass_inheritance.java (exit code: 1)

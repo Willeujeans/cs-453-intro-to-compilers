@@ -224,26 +224,10 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         MyType expressionType = n.f2.accept(this, key);
 
         System.out.println(idType + " == " + expressionType);
-
-        // if the variable is a class type:
-        // check child type then parent type, if it matches one its good
-        boolean isClass = symbolTableData.isClass(key + bufferChar + n.f0.f0.toString());
-
-        if(isClass){
-            if(!expressionType.checkSimilar(idType)){
-                System.out.println(idType);
-                System.out.println(expressionType);
-                System.out.println(n.getClass().getSimpleName() + ": Type Error similar");
-                System.exit(1);
-            }
-        }else{
-            if(!idType.checkIdentical(expressionType)){
-                System.out.println(n.getClass().getSimpleName() + ": Type Error");
-                System.exit(1);
-            }
+        if(!idType.checkIdentical(expressionType)){
+            System.out.println(n.getClass().getSimpleName() + ": Type Error");
+            System.exit(1);
         }
-
-
 
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName());
         return expressionType;
