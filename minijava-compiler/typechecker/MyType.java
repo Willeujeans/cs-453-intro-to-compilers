@@ -38,6 +38,21 @@ public class MyType {
         }
     }
 
+    public Boolean checkSimilar(MyType other){
+        if(other == null || other.type_array.isEmpty()){
+            return false;
+        }else{
+            for(String type : type_array){
+                for(String otherType : other.type_array){
+                    if(type.equals(otherType)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public String toString(){
         String output = "[";
         for(int i = 0; i < this.type_array.size(); ++i){

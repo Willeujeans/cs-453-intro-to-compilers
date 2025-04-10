@@ -219,19 +219,34 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         //debug
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-        System.out.println("AS name: " + key);
-        MyType identifierType = n.f0.accept(this, key);
+
+        MyType idType = n.f0.accept(this, key);
         MyType expressionType = n.f2.accept(this, key);
 
-        System.out.println(identifierType + " == " + expressionType);
+        System.out.println(idType + " == " + expressionType);
 
-        if(!identifierType.checkIdentical(expressionType)){
-            System.out.println(n.getClass().getSimpleName() + ": Type Error");
-            System.exit(1);
+        // if the variable is a class type:
+        // check child type then parent type, if it matches one its good
+        boolean isClass = symbolTableData.isClass(key + bufferChar + n.f0.f0.toString());
+
+        if(isClass){
+            if(!expressionType.checkSimilar(idType)){
+                System.out.println(idType);
+                System.out.println(expressionType);
+                System.out.println(n.getClass().getSimpleName() + ": Type Error similar");
+                System.exit(1);
+            }
+        }else{
+            if(!idType.checkIdentical(expressionType)){
+                System.out.println(n.getClass().getSimpleName() + ": Type Error");
+                System.exit(1);
+            }
         }
+
+
+
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName());
-        
-        return null;
+        return expressionType;
     }
 
    /**
@@ -555,6 +570,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         //debug
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
+
         String searchKey = key + bufferChar + n.f0.toString();
         System.out.println("  >Searchkey: [" + searchKey + "]");
 

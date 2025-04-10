@@ -19,6 +19,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     private HashMap<String, Symbol> data;
     private String bufferChar = ":";
 
+    // maybe a method that runs through the symbol table and updates all instances of classes with the class types?
+
     public SymbolTable() {
         data = new HashMap<String, Symbol>();
     }
@@ -54,13 +56,12 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         String currentKey = "";
         for (int i = keyFragments.length - 1; i >= 1; i--) {
             currentKey = String.join(bufferChar, Arrays.copyOf(keyFragments, i)) + bufferChar + idToFind;
-            System.out.println("THis is what are key looks like now baby lets go this is a key!!!!" + currentKey);
             if (data.containsKey(currentKey)) {
                 return data.get(currentKey);
             }
         }
 
-        System.out.println("THis is what are key looks like now baby lets go this is a key!!!!" + currentKey);
+        System.out.println("================================================>" + currentKey);
 
         return null;
     }
@@ -68,12 +69,14 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public boolean isClass(String key){
         String[] keyFragments = key.split(bufferChar);
         String idToFind = keyFragments[keyFragments.length - 1];
+        System.out.println(idToFind);
         if(data.containsKey(key)){
-            if(data.get(key).type.getType().equals(idToFind)){
-                return true;
+            String baseType = data.get(key).type.getType();
+            if(baseType == "int" || baseType == "boolean" || baseType == "String" || baseType == "void"){
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     public Symbol getNearestClass(String key) {
@@ -176,8 +179,10 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public Void visit(ClassDeclaration n, String key) {
         String currentScope = key + bufferChar + n.f1.f0.toString();
         insert(currentScope, new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
+
         n.f3.accept(this, currentScope);
         n.f4.accept(this, currentScope);
+
         return null;
     }
 
