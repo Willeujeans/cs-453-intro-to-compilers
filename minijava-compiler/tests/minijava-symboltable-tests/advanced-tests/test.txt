@@ -1,45 +1,45 @@
-2025-04-09 19:27:47
+2025-04-09 22:20:43
 === Typecheck < tests/minijava-symboltable-tests/advanced-tests/AAAAclass_inheritance.java ===
   ---Symbol-Table---
-  global:myChildClass -> {[myChildClass,myParentClass], 10, []}
   global:myParentClass -> {[myParentClass], 1, []}
-  global:myChildClass:x -> {[int], 11, []}
   global:myParentClass:main -> {[void], 2, []}
   global:myParentClass:main:a -> {[String,[,]], 2, []}
   global:myParentClass:main:x -> {[int], 3, []}
+  global:myParentClass:myChildClass -> {[myChildClass,myParentClass], 10, []}
+  global:myParentClass:myChildClass:x -> {[int], 11, []}
   global:myParentClass:main:childInstance -> {[myChildClass], 4, []}
   ------------------
-  406░ Goal
-  368░ MainClass
-  909░ Statement
-  174░ AssignmentStatement
-  451░ Identifier
+  766░ Goal
+  382░ MainClass
+  454░ Statement
+  930░ AssignmentStatement
+  427░ Identifier
     >Searchkey: [global:myParentClass:main:x]
-  451▓ Identifier  ------------>  [int]
-  824░ Expression
-  564░ PrimaryExpression
-  179░ IntegerLiteral
-  179▓ IntegerLiteral  ------------>  [int]
-  564▓ PrimaryExpression  ------------>  [int]
-  824▓ Expression  ------------>  [int]
+  427▓ Identifier  ------------>  [int]
+  938░ Expression
+  854░ PrimaryExpression
+  204░ IntegerLiteral
+  204▓ IntegerLiteral  ------------>  [int]
+  854▓ PrimaryExpression  ------------>  [int]
+  938▓ Expression  ------------>  [int]
   [int] == [int]
   x
-  174▓ AssignmentStatement
-  909▓ Statement
-  151░ Statement
-  260░ AssignmentStatement
-  916░ Identifier
+  930▓ AssignmentStatement
+  454▓ Statement
+  174░ Statement
+  949░ AssignmentStatement
+  671░ Identifier
     >Searchkey: [global:myParentClass:main:childInstance]
-  916▓ Identifier  ------------>  [myChildClass]
-  155░ Expression
-  749░ PrimaryExpression
-  813░ AllocationExpression
-  953░ Identifier
+  671▓ Identifier  ------------>  [myChildClass]
+  384░ Expression
+  302░ PrimaryExpression
+  245░ AllocationExpression
+  270░ Identifier
     >Searchkey: [global:myParentClass]
-  953▓ Identifier  ------------>  [myParentClass]
-  813▓ AllocationExpression  ------------>  [myParentClass]
-  749▓ PrimaryExpression  ------------>  [myParentClass]
-  155▓ Expression  ------------>  [myParentClass]
+  270▓ Identifier  ------------>  [myParentClass]
+  245▓ AllocationExpression  ------------>  [myParentClass]
+  302▓ PrimaryExpression  ------------>  [myParentClass]
+  384▓ Expression  ------------>  [myParentClass]
   [myChildClass] == [myParentClass]
   childInstance
   [myChildClass]
