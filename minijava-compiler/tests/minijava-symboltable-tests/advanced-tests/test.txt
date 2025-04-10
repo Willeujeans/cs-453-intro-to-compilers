@@ -1,4 +1,4 @@
-2025-04-09 17:18:38
+2025-04-09 18:26:42
 === Typecheck < tests/minijava-symboltable-tests/advanced-tests/AAATreeVisitor.java ===
   ---Symbol-Table---
   global:TV -> {[TV], 11, []}
@@ -76,6 +76,7 @@
   global:Tree:Remove:auxkey1 -> {[int], 221, []}
   global:Tree:Insert:key_aux -> {[int], 144, []}
   global:Tree:Delete:is_root -> {[boolean], 180, []}
+  global:AAATreeVisitor:main -> {[void], 6, []}
   global:MyVisitor:visit:nti -> {[int], 357, []}
   global:Tree:Delete:key_aux -> {[int], 181, []}
   global:Tree:Search:key_aux -> {[int], 273, []}
@@ -94,353 +95,393 @@
   global:Tree:Delete:current_node -> {[Tree], 175, []}
   global:Tree:Insert:current_node -> {[Tree], 142, []}
   ------------------
-  294░ Goal
-  355░ MainClass
-  311░ Statement
-  236░ Expression
-  689░ MessageSend
-  867░ PrimaryExpression
-  407░ AllocationExpression
-  781░ Identifier
+  934░ Goal
+  213░ MainClass
+  584░ Statement
+  315░ Expression
+  403░ MessageSend
+  990░ PrimaryExpression
+  470░ AllocationExpression
+  THis is what are key looks like now baby lets go this is a key!!!!global:AAATreeVisitor:main
+  128░ Identifier
     >Searchkey: [global:TV]
-  781▓ Identifier  ------------>  [TV]
-  407▓ AllocationExpression  ------------>  [TV]
-  867▓ PrimaryExpression  ------------>  [TV]
-  941░ Identifier
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV
+  128▓ Identifier  ------------>  [TV]
+  470▓ AllocationExpression  ------------>  [TV]
+  990▓ PrimaryExpression  ------------>  [TV]
+  767░ Identifier
     >Searchkey: [global:TV:Start]
-  941▓ Identifier  ------------>  [int]
-  689▓ MessageSend  ------------>  [int]
-  236▓ Expression  ------------>  [int]
-  311▓ Statement
-  355▓ MainClass ----------------- ------------>  [AAATreeVisitor]
-  259░ TypeDeclaration
-  772░ ClassDeclaration
-  208░ Identifier
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start
+  767▓ Identifier  ------------>  [int]
+  403▓ MessageSend  ------------>  [int]
+  315▓ Expression  ------------>  [int]
+  584▓ Statement
+  213▓ MainClass ----------------- ------------>  [AAATreeVisitor]
+  570░ TypeDeclaration
+  629░ ClassDeclaration
+  221░ Identifier
     >Searchkey: [global:TV]
-  208▓ Identifier  ------------>  [TV]
-  296░ Statement
-  358░ AssignmentStatement
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV
+  221▓ Identifier  ------------>  [TV]
+  305░ Statement
+  236░ AssignmentStatement
   AS name: global:TV:Start
-  997░ Identifier
+  177░ Identifier
     >Searchkey: [global:TV:Start:root]
-  997▓ Identifier  ------------>  [Tree]
-  767░ Expression
-  275░ PrimaryExpression
-  415░ AllocationExpression
-  411░ Identifier
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:root
+  177▓ Identifier  ------------>  [Tree]
+  869░ Expression
+  435░ PrimaryExpression
+  604░ AllocationExpression
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start
+  265░ Identifier
     >Searchkey: [global:Tree]
-  411▓ Identifier  ------------>  [Tree]
-  415▓ AllocationExpression  ------------>  [Tree]
-  275▓ PrimaryExpression  ------------>  [Tree]
-  767▓ Expression  ------------>  [Tree]
+  THis is what are key looks like now baby lets go this is a key!!!!global:Tree
+  265▓ Identifier  ------------>  [Tree]
+  604▓ AllocationExpression  ------------>  [Tree]
+  435▓ PrimaryExpression  ------------>  [Tree]
+  869▓ Expression  ------------>  [Tree]
   [Tree] == [Tree]
-  358▓ AssignmentStatement
-  296▓ Statement
-  858░ Statement
-  367░ AssignmentStatement
+  236▓ AssignmentStatement
+  305▓ Statement
+  797░ Statement
+  424░ AssignmentStatement
   AS name: global:TV:Start
-  665░ Identifier
+  941░ Identifier
     >Searchkey: [global:TV:Start:ntb]
-  665▓ Identifier  ------------>  [boolean]
-  751░ Expression
-  173░ MessageSend
-  894░ PrimaryExpression
-  654░ Identifier
-    >Searchkey: [global:TV:Start:root]
-  654▓ Identifier  ------------>  [Tree]
-  894▓ PrimaryExpression  ------------>  [Tree]
-  141░ Identifier
-    >Searchkey: [global:Tree:Init]
-  141▓ Identifier  ------------>  [boolean]
-  928░ ExpressionList
-  679░ Expression
-  830░ PrimaryExpression
-  633░ IntegerLiteral
-  633▓ IntegerLiteral  ------------>  [int]
-  830▓ PrimaryExpression  ------------>  [int]
-  679▓ Expression  ------------>  [int]
-  928▓ ExpressionList
-  173▓ MessageSend  ------------>  [boolean]
-  751▓ Expression  ------------>  [boolean]
-  [boolean] == [boolean]
-  367▓ AssignmentStatement
-  858▓ Statement
-  549░ Statement
-  855░ AssignmentStatement
-  AS name: global:TV:Start
-  858░ Identifier
-    >Searchkey: [global:TV:Start:ntb]
-  858▓ Identifier  ------------>  [boolean]
-  525░ Expression
-  637░ MessageSend
-  102░ PrimaryExpression
-  677░ Identifier
-    >Searchkey: [global:TV:Start:root]
-  677▓ Identifier  ------------>  [Tree]
-  102▓ PrimaryExpression  ------------>  [Tree]
-  395░ Identifier
-    >Searchkey: [global:Tree:Print]
-  395▓ Identifier  ------------>  [boolean]
-  637▓ MessageSend  ------------>  [boolean]
-  525▓ Expression  ------------>  [boolean]
-  [boolean] == [boolean]
-  855▓ AssignmentStatement
-  549▓ Statement
-  150░ Statement
-  558░ Expression
-  764░ PrimaryExpression
-  156░ IntegerLiteral
-  156▓ IntegerLiteral  ------------>  [int]
-  764▓ PrimaryExpression  ------------>  [int]
-  558▓ Expression  ------------>  [int]
-  150▓ Statement
-  353░ Statement
-  658░ AssignmentStatement
-  AS name: global:TV:Start
-  427░ Identifier
-    >Searchkey: [global:TV:Start:ntb]
-  427▓ Identifier  ------------>  [boolean]
-  235░ Expression
-  287░ MessageSend
-  582░ PrimaryExpression
-  219░ Identifier
-    >Searchkey: [global:TV:Start:root]
-  219▓ Identifier  ------------>  [Tree]
-  582▓ PrimaryExpression  ------------>  [Tree]
-  430░ Identifier
-    >Searchkey: [global:Tree:Insert]
-  430▓ Identifier  ------------>  [boolean]
-  731░ ExpressionList
-  521░ Expression
-  277░ PrimaryExpression
-  324░ IntegerLiteral
-  324▓ IntegerLiteral  ------------>  [int]
-  277▓ PrimaryExpression  ------------>  [int]
-  521▓ Expression  ------------>  [int]
-  731▓ ExpressionList
-  287▓ MessageSend  ------------>  [boolean]
-  235▓ Expression  ------------>  [boolean]
-  [boolean] == [boolean]
-  658▓ AssignmentStatement
-  353▓ Statement
-  925░ Statement
-  592░ AssignmentStatement
-  AS name: global:TV:Start
-  328░ Identifier
-    >Searchkey: [global:TV:Start:ntb]
-  328▓ Identifier  ------------>  [boolean]
-  566░ Expression
-  457░ MessageSend
-  649░ PrimaryExpression
-  761░ Identifier
-    >Searchkey: [global:TV:Start:root]
-  761▓ Identifier  ------------>  [Tree]
-  649▓ PrimaryExpression  ------------>  [Tree]
-  335░ Identifier
-    >Searchkey: [global:Tree:Insert]
-  335▓ Identifier  ------------>  [boolean]
-  833░ ExpressionList
-  323░ Expression
-  214░ PrimaryExpression
-  669░ IntegerLiteral
-  669▓ IntegerLiteral  ------------>  [int]
-  214▓ PrimaryExpression  ------------>  [int]
-  323▓ Expression  ------------>  [int]
-  833▓ ExpressionList
-  457▓ MessageSend  ------------>  [boolean]
-  566▓ Expression  ------------>  [boolean]
-  [boolean] == [boolean]
-  592▓ AssignmentStatement
-  925▓ Statement
-  278░ Statement
-  119░ AssignmentStatement
-  AS name: global:TV:Start
-  891░ Identifier
-    >Searchkey: [global:TV:Start:ntb]
-  891▓ Identifier  ------------>  [boolean]
-  346░ Expression
-  719░ MessageSend
-  711░ PrimaryExpression
-  117░ Identifier
-    >Searchkey: [global:TV:Start:root]
-  117▓ Identifier  ------------>  [Tree]
-  711▓ PrimaryExpression  ------------>  [Tree]
-  574░ Identifier
-    >Searchkey: [global:Tree:Insert]
-  574▓ Identifier  ------------>  [boolean]
-  541░ ExpressionList
-  809░ Expression
-  604░ PrimaryExpression
-  234░ IntegerLiteral
-  234▓ IntegerLiteral  ------------>  [int]
-  604▓ PrimaryExpression  ------------>  [int]
-  809▓ Expression  ------------>  [int]
-  541▓ ExpressionList
-  719▓ MessageSend  ------------>  [boolean]
-  346▓ Expression  ------------>  [boolean]
-  [boolean] == [boolean]
-  119▓ AssignmentStatement
-  278▓ Statement
-  348░ Statement
-  712░ AssignmentStatement
-  AS name: global:TV:Start
-  108░ Identifier
-    >Searchkey: [global:TV:Start:ntb]
-  108▓ Identifier  ------------>  [boolean]
-  870░ Expression
-  526░ MessageSend
-  119░ PrimaryExpression
-  461░ Identifier
-    >Searchkey: [global:TV:Start:root]
-  461▓ Identifier  ------------>  [Tree]
-  119▓ PrimaryExpression  ------------>  [Tree]
-  885░ Identifier
-    >Searchkey: [global:Tree:Insert]
-  885▓ Identifier  ------------>  [boolean]
-  270░ ExpressionList
-  483░ Expression
-  287░ PrimaryExpression
-  215░ IntegerLiteral
-  215▓ IntegerLiteral  ------------>  [int]
-  287▓ PrimaryExpression  ------------>  [int]
-  483▓ Expression  ------------>  [int]
-  270▓ ExpressionList
-  526▓ MessageSend  ------------>  [boolean]
-  870▓ Expression  ------------>  [boolean]
-  [boolean] == [boolean]
-  712▓ AssignmentStatement
-  348▓ Statement
-  409░ Statement
-  148░ AssignmentStatement
-  AS name: global:TV:Start
-  370░ Identifier
-    >Searchkey: [global:TV:Start:ntb]
-  370▓ Identifier  ------------>  [boolean]
-  743░ Expression
-  800░ MessageSend
-  587░ PrimaryExpression
-  752░ Identifier
-    >Searchkey: [global:TV:Start:root]
-  752▓ Identifier  ------------>  [Tree]
-  587▓ PrimaryExpression  ------------>  [Tree]
-  698░ Identifier
-    >Searchkey: [global:Tree:Insert]
-  698▓ Identifier  ------------>  [boolean]
-  405░ ExpressionList
-  682░ Expression
-  117░ PrimaryExpression
-  921░ IntegerLiteral
-  921▓ IntegerLiteral  ------------>  [int]
-  117▓ PrimaryExpression  ------------>  [int]
-  682▓ Expression  ------------>  [int]
-  405▓ ExpressionList
-  800▓ MessageSend  ------------>  [boolean]
-  743▓ Expression  ------------>  [boolean]
-  [boolean] == [boolean]
-  148▓ AssignmentStatement
-  409▓ Statement
-  663░ Statement
-  422░ AssignmentStatement
-  AS name: global:TV:Start
-  308░ Identifier
-    >Searchkey: [global:TV:Start:ntb]
-  308▓ Identifier  ------------>  [boolean]
-  425░ Expression
-  255░ MessageSend
-  519░ PrimaryExpression
-  137░ Identifier
-    >Searchkey: [global:TV:Start:root]
-  137▓ Identifier  ------------>  [Tree]
-  519▓ PrimaryExpression  ------------>  [Tree]
-  702░ Identifier
-    >Searchkey: [global:Tree:Insert]
-  702▓ Identifier  ------------>  [boolean]
-  636░ ExpressionList
-  872░ Expression
-  467░ PrimaryExpression
-  524░ IntegerLiteral
-  524▓ IntegerLiteral  ------------>  [int]
-  467▓ PrimaryExpression  ------------>  [int]
-  872▓ Expression  ------------>  [int]
-  636▓ ExpressionList
-  255▓ MessageSend  ------------>  [boolean]
-  425▓ Expression  ------------>  [boolean]
-  [boolean] == [boolean]
-  422▓ AssignmentStatement
-  663▓ Statement
-  787░ Statement
-  154░ AssignmentStatement
-  AS name: global:TV:Start
-  309░ Identifier
-    >Searchkey: [global:TV:Start:ntb]
-  309▓ Identifier  ------------>  [boolean]
-  131░ Expression
-  931░ MessageSend
-  426░ PrimaryExpression
-  968░ Identifier
-    >Searchkey: [global:TV:Start:root]
-  968▓ Identifier  ------------>  [Tree]
-  426▓ PrimaryExpression  ------------>  [Tree]
-  404░ Identifier
-    >Searchkey: [global:Tree:Insert]
-  404▓ Identifier  ------------>  [boolean]
-  562░ ExpressionList
-  483░ Expression
-  722░ PrimaryExpression
-  983░ IntegerLiteral
-  983▓ IntegerLiteral  ------------>  [int]
-  722▓ PrimaryExpression  ------------>  [int]
-  483▓ Expression  ------------>  [int]
-  562▓ ExpressionList
-  931▓ MessageSend  ------------>  [boolean]
-  131▓ Expression  ------------>  [boolean]
-  [boolean] == [boolean]
-  154▓ AssignmentStatement
-  787▓ Statement
-  903░ Statement
-  740░ AssignmentStatement
-  AS name: global:TV:Start
-  777░ Identifier
-    >Searchkey: [global:TV:Start:ntb]
-  777▓ Identifier  ------------>  [boolean]
-  813░ Expression
-  477░ MessageSend
-  858░ PrimaryExpression
-  860░ Identifier
-    >Searchkey: [global:TV:Start:root]
-  860▓ Identifier  ------------>  [Tree]
-  858▓ PrimaryExpression  ------------>  [Tree]
-  275░ Identifier
-    >Searchkey: [global:Tree:Print]
-  275▓ Identifier  ------------>  [boolean]
-  477▓ MessageSend  ------------>  [boolean]
-  813▓ Expression  ------------>  [boolean]
-  [boolean] == [boolean]
-  740▓ AssignmentStatement
-  903▓ Statement
-  995░ Statement
-  609░ Expression
-  144░ PrimaryExpression
-  224░ IntegerLiteral
-  224▓ IntegerLiteral  ------------>  [int]
-  144▓ PrimaryExpression  ------------>  [int]
-  609▓ Expression  ------------>  [int]
-  995▓ Statement
-  730░ Statement
-  108░ AssignmentStatement
-  AS name: global:TV:Start
-  279░ Identifier
-    >Searchkey: [global:TV:Start:v]
-  279▓ Identifier  ------------>  [MyVisitor]
-  160░ Expression
-  856░ PrimaryExpression
-  900░ AllocationExpression
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:ntb
+  941▓ Identifier  ------------>  [boolean]
+  560░ Expression
+  276░ MessageSend
+  470░ PrimaryExpression
   562░ Identifier
+    >Searchkey: [global:TV:Start:root]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:root
+  562▓ Identifier  ------------>  [Tree]
+  470▓ PrimaryExpression  ------------>  [Tree]
+  793░ Identifier
+    >Searchkey: [global:Tree:Init]
+  THis is what are key looks like now baby lets go this is a key!!!!global:Tree:Init
+  793▓ Identifier  ------------>  [boolean]
+  691░ ExpressionList
+  892░ Expression
+  797░ PrimaryExpression
+  892░ IntegerLiteral
+  892▓ IntegerLiteral  ------------>  [int]
+  797▓ PrimaryExpression  ------------>  [int]
+  892▓ Expression  ------------>  [int]
+  691▓ ExpressionList
+  276▓ MessageSend  ------------>  [boolean]
+  560▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  424▓ AssignmentStatement
+  797▓ Statement
+  623░ Statement
+  770░ AssignmentStatement
+  AS name: global:TV:Start
+  983░ Identifier
+    >Searchkey: [global:TV:Start:ntb]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:ntb
+  983▓ Identifier  ------------>  [boolean]
+  541░ Expression
+  666░ MessageSend
+  512░ PrimaryExpression
+  260░ Identifier
+    >Searchkey: [global:TV:Start:root]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:root
+  260▓ Identifier  ------------>  [Tree]
+  512▓ PrimaryExpression  ------------>  [Tree]
+  172░ Identifier
+    >Searchkey: [global:Tree:Print]
+  THis is what are key looks like now baby lets go this is a key!!!!global:Tree:Print
+  172▓ Identifier  ------------>  [boolean]
+  666▓ MessageSend  ------------>  [boolean]
+  541▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  770▓ AssignmentStatement
+  623▓ Statement
+  164░ Statement
+  100░ Expression
+  846░ PrimaryExpression
+  196░ IntegerLiteral
+  196▓ IntegerLiteral  ------------>  [int]
+  846▓ PrimaryExpression  ------------>  [int]
+  100▓ Expression  ------------>  [int]
+  164▓ Statement
+  273░ Statement
+  646░ AssignmentStatement
+  AS name: global:TV:Start
+  329░ Identifier
+    >Searchkey: [global:TV:Start:ntb]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:ntb
+  329▓ Identifier  ------------>  [boolean]
+  511░ Expression
+  803░ MessageSend
+  614░ PrimaryExpression
+  663░ Identifier
+    >Searchkey: [global:TV:Start:root]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:root
+  663▓ Identifier  ------------>  [Tree]
+  614▓ PrimaryExpression  ------------>  [Tree]
+  858░ Identifier
+    >Searchkey: [global:Tree:Insert]
+  THis is what are key looks like now baby lets go this is a key!!!!global:Tree:Insert
+  858▓ Identifier  ------------>  [boolean]
+  470░ ExpressionList
+  487░ Expression
+  633░ PrimaryExpression
+  970░ IntegerLiteral
+  970▓ IntegerLiteral  ------------>  [int]
+  633▓ PrimaryExpression  ------------>  [int]
+  487▓ Expression  ------------>  [int]
+  470▓ ExpressionList
+  803▓ MessageSend  ------------>  [boolean]
+  511▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  646▓ AssignmentStatement
+  273▓ Statement
+  403░ Statement
+  315░ AssignmentStatement
+  AS name: global:TV:Start
+  853░ Identifier
+    >Searchkey: [global:TV:Start:ntb]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:ntb
+  853▓ Identifier  ------------>  [boolean]
+  110░ Expression
+  428░ MessageSend
+  188░ PrimaryExpression
+  148░ Identifier
+    >Searchkey: [global:TV:Start:root]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:root
+  148▓ Identifier  ------------>  [Tree]
+  188▓ PrimaryExpression  ------------>  [Tree]
+  175░ Identifier
+    >Searchkey: [global:Tree:Insert]
+  THis is what are key looks like now baby lets go this is a key!!!!global:Tree:Insert
+  175▓ Identifier  ------------>  [boolean]
+  289░ ExpressionList
+  272░ Expression
+  830░ PrimaryExpression
+  514░ IntegerLiteral
+  514▓ IntegerLiteral  ------------>  [int]
+  830▓ PrimaryExpression  ------------>  [int]
+  272▓ Expression  ------------>  [int]
+  289▓ ExpressionList
+  428▓ MessageSend  ------------>  [boolean]
+  110▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  315▓ AssignmentStatement
+  403▓ Statement
+  809░ Statement
+  186░ AssignmentStatement
+  AS name: global:TV:Start
+  652░ Identifier
+    >Searchkey: [global:TV:Start:ntb]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:ntb
+  652▓ Identifier  ------------>  [boolean]
+  798░ Expression
+  933░ MessageSend
+  343░ PrimaryExpression
+  135░ Identifier
+    >Searchkey: [global:TV:Start:root]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:root
+  135▓ Identifier  ------------>  [Tree]
+  343▓ PrimaryExpression  ------------>  [Tree]
+  778░ Identifier
+    >Searchkey: [global:Tree:Insert]
+  THis is what are key looks like now baby lets go this is a key!!!!global:Tree:Insert
+  778▓ Identifier  ------------>  [boolean]
+  686░ ExpressionList
+  346░ Expression
+  239░ PrimaryExpression
+  990░ IntegerLiteral
+  990▓ IntegerLiteral  ------------>  [int]
+  239▓ PrimaryExpression  ------------>  [int]
+  346▓ Expression  ------------>  [int]
+  686▓ ExpressionList
+  933▓ MessageSend  ------------>  [boolean]
+  798▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  186▓ AssignmentStatement
+  809▓ Statement
+  258░ Statement
+  829░ AssignmentStatement
+  AS name: global:TV:Start
+  236░ Identifier
+    >Searchkey: [global:TV:Start:ntb]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:ntb
+  236▓ Identifier  ------------>  [boolean]
+  490░ Expression
+  672░ MessageSend
+  826░ PrimaryExpression
+  316░ Identifier
+    >Searchkey: [global:TV:Start:root]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:root
+  316▓ Identifier  ------------>  [Tree]
+  826▓ PrimaryExpression  ------------>  [Tree]
+  918░ Identifier
+    >Searchkey: [global:Tree:Insert]
+  THis is what are key looks like now baby lets go this is a key!!!!global:Tree:Insert
+  918▓ Identifier  ------------>  [boolean]
+  889░ ExpressionList
+  596░ Expression
+  958░ PrimaryExpression
+  153░ IntegerLiteral
+  153▓ IntegerLiteral  ------------>  [int]
+  958▓ PrimaryExpression  ------------>  [int]
+  596▓ Expression  ------------>  [int]
+  889▓ ExpressionList
+  672▓ MessageSend  ------------>  [boolean]
+  490▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  829▓ AssignmentStatement
+  258▓ Statement
+  778░ Statement
+  206░ AssignmentStatement
+  AS name: global:TV:Start
+  614░ Identifier
+    >Searchkey: [global:TV:Start:ntb]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:ntb
+  614▓ Identifier  ------------>  [boolean]
+  199░ Expression
+  141░ MessageSend
+  166░ PrimaryExpression
+  446░ Identifier
+    >Searchkey: [global:TV:Start:root]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:root
+  446▓ Identifier  ------------>  [Tree]
+  166▓ PrimaryExpression  ------------>  [Tree]
+  724░ Identifier
+    >Searchkey: [global:Tree:Insert]
+  THis is what are key looks like now baby lets go this is a key!!!!global:Tree:Insert
+  724▓ Identifier  ------------>  [boolean]
+  715░ ExpressionList
+  920░ Expression
+  807░ PrimaryExpression
+  132░ IntegerLiteral
+  132▓ IntegerLiteral  ------------>  [int]
+  807▓ PrimaryExpression  ------------>  [int]
+  920▓ Expression  ------------>  [int]
+  715▓ ExpressionList
+  141▓ MessageSend  ------------>  [boolean]
+  199▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  206▓ AssignmentStatement
+  778▓ Statement
+  638░ Statement
+  984░ AssignmentStatement
+  AS name: global:TV:Start
+  658░ Identifier
+    >Searchkey: [global:TV:Start:ntb]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:ntb
+  658▓ Identifier  ------------>  [boolean]
+  834░ Expression
+  902░ MessageSend
+  198░ PrimaryExpression
+  933░ Identifier
+    >Searchkey: [global:TV:Start:root]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:root
+  933▓ Identifier  ------------>  [Tree]
+  198▓ PrimaryExpression  ------------>  [Tree]
+  967░ Identifier
+    >Searchkey: [global:Tree:Insert]
+  THis is what are key looks like now baby lets go this is a key!!!!global:Tree:Insert
+  967▓ Identifier  ------------>  [boolean]
+  502░ ExpressionList
+  467░ Expression
+  855░ PrimaryExpression
+  510░ IntegerLiteral
+  510▓ IntegerLiteral  ------------>  [int]
+  855▓ PrimaryExpression  ------------>  [int]
+  467▓ Expression  ------------>  [int]
+  502▓ ExpressionList
+  902▓ MessageSend  ------------>  [boolean]
+  834▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  984▓ AssignmentStatement
+  638▓ Statement
+  234░ Statement
+  371░ AssignmentStatement
+  AS name: global:TV:Start
+  903░ Identifier
+    >Searchkey: [global:TV:Start:ntb]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:ntb
+  903▓ Identifier  ------------>  [boolean]
+  577░ Expression
+  741░ MessageSend
+  988░ PrimaryExpression
+  189░ Identifier
+    >Searchkey: [global:TV:Start:root]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:root
+  189▓ Identifier  ------------>  [Tree]
+  988▓ PrimaryExpression  ------------>  [Tree]
+  758░ Identifier
+    >Searchkey: [global:Tree:Insert]
+  THis is what are key looks like now baby lets go this is a key!!!!global:Tree:Insert
+  758▓ Identifier  ------------>  [boolean]
+  494░ ExpressionList
+  629░ Expression
+  988░ PrimaryExpression
+  558░ IntegerLiteral
+  558▓ IntegerLiteral  ------------>  [int]
+  988▓ PrimaryExpression  ------------>  [int]
+  629▓ Expression  ------------>  [int]
+  494▓ ExpressionList
+  741▓ MessageSend  ------------>  [boolean]
+  577▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  371▓ AssignmentStatement
+  234▓ Statement
+  685░ Statement
+  953░ AssignmentStatement
+  AS name: global:TV:Start
+  595░ Identifier
+    >Searchkey: [global:TV:Start:ntb]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:ntb
+  595▓ Identifier  ------------>  [boolean]
+  565░ Expression
+  909░ MessageSend
+  992░ PrimaryExpression
+  835░ Identifier
+    >Searchkey: [global:TV:Start:root]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:root
+  835▓ Identifier  ------------>  [Tree]
+  992▓ PrimaryExpression  ------------>  [Tree]
+  935░ Identifier
+    >Searchkey: [global:Tree:Print]
+  THis is what are key looks like now baby lets go this is a key!!!!global:Tree:Print
+  935▓ Identifier  ------------>  [boolean]
+  909▓ MessageSend  ------------>  [boolean]
+  565▓ Expression  ------------>  [boolean]
+  [boolean] == [boolean]
+  953▓ AssignmentStatement
+  685▓ Statement
+  409░ Statement
+  444░ Expression
+  280░ PrimaryExpression
+  686░ IntegerLiteral
+  686▓ IntegerLiteral  ------------>  [int]
+  280▓ PrimaryExpression  ------------>  [int]
+  444▓ Expression  ------------>  [int]
+  409▓ Statement
+  491░ Statement
+  654░ AssignmentStatement
+  AS name: global:TV:Start
+  678░ Identifier
+    >Searchkey: [global:TV:Start:v]
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start:v
+  678▓ Identifier  ------------>  [MyVisitor]
+  468░ Expression
+  374░ PrimaryExpression
+  710░ AllocationExpression
+  THis is what are key looks like now baby lets go this is a key!!!!global:TV:Start
+  675░ Identifier
     >Searchkey: [global:MyVisitor]
-  562▓ Identifier  ------------>  [MyVisitor,Visitor]
-  900▓ AllocationExpression  ------------>  [MyVisitor,Visitor]
-  856▓ PrimaryExpression  ------------>  [MyVisitor,Visitor]
-  160▓ Expression  ------------>  [MyVisitor,Visitor]
+  THis is what are key looks like now baby lets go this is a key!!!!global:MyVisitor
+  675▓ Identifier  ------------>  [MyVisitor,Visitor]
+  710▓ AllocationExpression  ------------>  [MyVisitor,Visitor]
+  374▓ PrimaryExpression  ------------>  [MyVisitor,Visitor]
+  468▓ Expression  ------------>  [MyVisitor,Visitor]
   [MyVisitor] == [MyVisitor,Visitor]
   AssignmentStatement: Type Error
 
