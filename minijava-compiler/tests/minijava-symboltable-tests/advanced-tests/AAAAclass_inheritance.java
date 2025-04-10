@@ -3,7 +3,7 @@ class myParentClass {
         int x;
         myChildClass childInstance;
         x = 1;
-        childInstance = new myParentClass();
+        childInstance = new myChildClass();
     }
 }
 

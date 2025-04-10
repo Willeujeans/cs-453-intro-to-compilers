@@ -110,7 +110,11 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
         
-        MyType returnType = n.f1.accept(this, key);
+        HashMap<String, Symbol> classHashmap = symbolTableData.classes;
+        String classKey = n.f1.f0.toString();
+        Symbol classSymbol = classHashmap.get(classKey);
+        MyType returnType = classSymbol.type;
+
         String currentScope = key + bufferChar + returnType.getType();
         
         // n.f3.accept(this, currentScope);
@@ -134,7 +138,12 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     public MyType visit(ClassExtendsDeclaration n, String key){
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-        MyType returnType = n.f1.accept(this, key);
+        
+        HashMap<String, Symbol> classHashmap = symbolTableData.classes;
+        String classKey = n.f1.f0.toString();
+        Symbol classSymbol = classHashmap.get(classKey);
+        MyType returnType = classSymbol.type;
+
         String currentScope = key + bufferChar + returnType.getType();
 
         // n.f5.accept(this, currentScope);
@@ -438,9 +447,10 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         // Validate that PrimaryExpression is a class
         // Validate that ID exists in the class
         // Validate that the method with that ID uses the ExpressionList types in arguments
-        MyType className = n.f0.accept(this, key);
-        String classKey = "global" + bufferChar + className.getType();
-        MyType returnType = n.f2.accept(this, classKey);
+        HashMap<String, Symbol> classHashmap = symbolTableData.classes;
+        String classKey = n.f2.f0.toString();
+        Symbol classSymbol = classHashmap.get(classKey);
+        MyType returnType = classSymbol.type;
 
         n.f4.accept(this, key);
         
@@ -620,8 +630,10 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         // if the identifier is a class type we globally search
         // Problem: when searching for `global:MyVisitor` we actually want to search for `global:Visitor:MyVisitor`
         Symbol mySymbol = symbolTableData.find(key);
-        MyType returnType = n.f1.accept(this, "global");
-
+        HashMap<String, Symbol> classHashmap = symbolTableData.classes;
+        String classKey = n.f1.f0.toString();
+        Symbol classSymbol = classHashmap.get(classKey);
+        MyType returnType = classSymbol.type;
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
         return returnType;
     }
