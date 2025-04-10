@@ -616,7 +616,10 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         //debug
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
+
         // if the identifier is a class type we globally search
+        // Problem: when searching for `global:MyVisitor` we actually want to search for `global:Visitor:MyVisitor`
+        Symbol mySymbol = symbolTableData.find(key);
         MyType returnType = n.f1.accept(this, "global");
 
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);

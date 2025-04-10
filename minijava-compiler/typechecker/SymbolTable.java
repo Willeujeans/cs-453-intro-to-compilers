@@ -47,25 +47,60 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     }
 
     public Symbol find(String key) {
-        String[] parts = key.split(bufferChar);
-        String endKey = parts[parts.length - 1];
+        // data = {
+        // "global:myClass"           : Symbol{MyType["int","[","]"], int lineDeclared, int[] linesUsed},
+        // "global:myClass:myVariable": Symbol{MyType["className"], int lineDeclared, int[] linesUsed},
+        // "global:myClass:main:a"    : Symbol{MyType["childClassName", "parentClassName"], int lineDeclared, int[] linesUsed},
+        // }
+
+
+        // Case Normal
+        // key = "global:className:method:var"
+        // loop1: key = "global:className:method:var" -> could not find, key = "global:className:var"
+        // loop2: key = "global:className:var" -> FOUND! return item
+
+        // Case variable is stored in parent class
+        // key = "global:childClassName:method:var"
+        // loop1: key = "global:childClassName:method:var" -> could not find, key = "global:childClassName:var"
+        // loop2: key = "global:childClassName:var" -> could not find, key = "global:var"
+        // Use childClassName.type to find the parent class of this class : ["childClassName", "parentClassName"]
+        // now searching using that key
+        // key = "global:parentClassName:method:var"
+
+        String[] keyFragments = key.split(bufferChar);
+        String idToFind = keyFragments[parts.length - 1];
+
+        data.get(currentKey + bufferChar + idToFind);
+
         for (int i = parts.length - 1; i >= 1; i--) {
             String currentKey = String.join(bufferChar, Arrays.copyOf(parts, i));
-            if (data.containsKey(currentKey + bufferChar + endKey)) {
-                return data.get(currentKey + bufferChar + endKey);
+            if (data.containsKey(currentKey + bufferChar + idToFind)) {
+                return data.get(currentKey + bufferChar + idToFind);
             }
         }
         return null;
     }
 
+    public boolean isClass(String key){
+        String[] keyFragments = key.split(bufferChar);
+        String idToFind = keyFragments[parts.length - 1];
+        if(data.containsKey(key)){
+            if(data.get(key).type.getType().equals(idToFind)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Symbol getNearestClass(String key) {
-        String[] parts = key.split(bufferChar);
-        for (int i = parts.length; i >= 1; i--) {
-            String[] currentParts = Arrays.copyOf(parts, i);
-            String currentKey = String.join(bufferChar, currentParts);
+        String[] keyFragments = key.split(bufferChar);
+
+        for (int i = keyFragments.length; i >= 1; i--) {
+            String[] currentFragments = Arrays.copyOf(keyFragments, i);
+            String currentKey = String.join(bufferChar, currentFragments);
             if (data.containsKey(currentKey)) {
                 Symbol symbol = data.get(currentKey);
-                String lastPart = currentParts[currentParts.length - 1];
+                String lastPart = currentFragments[currentFragments.length - 1];
                 if (symbol.type.getType().equals(lastPart)) {
                     return symbol;
                 }
@@ -173,7 +208,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
      */
     @Override
     public Void visit(ClassExtendsDeclaration n, String key) {
-        String currentScope = key + bufferChar + n.f3.f0.toString() + bufferChar + n.f1.f0.toString();
+        String currentScope = key + bufferChar + n.f1.f0.toString();
         String parentClass = n.f3.f0.toString();
         String childClass = n.f1.f0.toString();
         insert(currentScope, new Symbol(new MyType(childClass, parentClass), n.f0.beginLine));
