@@ -1,126 +1,85 @@
-2025-04-11 11:45:57
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/BinaryTree.java ===
+2025-04-11 12:40:03
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/AllTypesAndStatements.java ===
+  Nothing to update here;
   -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
-  global:BT -> {[BT], 10, []}
-  global:Tree -> {[Tree], 44, []}
-  global:Tree:key -> {[int], 47, []}
-  global:BT:Start -> {[int], 12, []}
-  global:Tree:Init -> {[boolean], 53, []}
-  global:Tree:left -> {[Tree], 45, []}
-  global:Tree:right -> {[Tree], 46, []}
-  global:Tree:Print -> {[boolean], 306, []}
   global:BinaryTree -> {[BinaryTree], 1, []}
-  global:Tree:Insert -> {[boolean], 124, []}
-  global:Tree:Delete -> {[boolean], 161, []}
-  global:Tree:Remove -> {[boolean], 209, []}
-  global:Tree:Search -> {[int], 277, []}
-  global:Tree:SetKey -> {[boolean], 84, []}
-  global:Tree:GetKey -> {[int], 80, []}
-  global:BT:Start:ntb -> {[boolean], 14, []}
-  global:BT:Start:nti -> {[int], 15, []}
-  global:Tree:SetLeft -> {[boolean], 67, []}
-  global:Tree:GetLeft -> {[Tree], 76, []}
-  global:Tree:Compare -> {[boolean], 110, []}
-  global:Tree:my_null -> {[Tree], 50, []}
-  global:Tree:GetRight -> {[Tree], 72, []}
-  global:Tree:SetRight -> {[boolean], 61, []}
-  global:Tree:has_left -> {[boolean], 48, []}
-  global:BT:Start:root -> {[Tree], 13, []}
-  global:Tree:RecPrint -> {[boolean], 316, []}
-  global:Tree:has_right -> {[boolean], 49, []}
-  global:Tree:Print:ntb -> {[boolean], 308, []}
-  global:Tree:Init:v_key -> {[int], 53, []}
-  global:Tree:Delete:ntb -> {[boolean], 168, []}
   global:BinaryTree:main -> {[void], 2, []}
-  global:Tree:Remove:ntb -> {[boolean], 210, []}
-  global:Tree:Insert:ntb -> {[boolean], 126, []}
-  global:Tree:SetLeft:ln -> {[Tree], 67, []}
-  global:Tree:RemoveLeft -> {[boolean], 260, []}
-  global:Tree:Delete:cont -> {[boolean], 164, []}
-  global:Tree:Insert:cont -> {[boolean], 127, []}
-  global:Tree:Search:cont -> {[boolean], 278, []}
-  global:Tree:SetHas_Left -> {[boolean], 97, []}
-  global:Tree:SetRight:rn -> {[Tree], 61, []}
-  global:Tree:Compare:nti -> {[int], 112, []}
-  global:Tree:Compare:ntb -> {[boolean], 111, []}
-  global:Tree:GetHas_Left -> {[boolean], 93, []}
-  global:Tree:RemoveRight -> {[boolean], 240, []}
-  global:Tree:SetKey:v_key -> {[int], 84, []}
-  global:Tree:Compare:num2 -> {[int], 110, []}
+  global:BinaryTree:main:k -> {[int,[,]], 6, []}
+  global:BinaryTree:main:y -> {[boolean], 4, []}
+  global:BinaryTree:main:x -> {[int], 3, []}
+  global:BinaryTree:main:w -> {[boolean], 5, []}
   global:BinaryTree:main:a -> {[String,[,]], 2, []}
-  global:Tree:Compare:num1 -> {[int], 110, []}
-  global:Tree:Search:v_key -> {[int], 277, []}
-  global:Tree:Insert:v_key -> {[int], 124, []}
-  global:Tree:SetHas_Right -> {[boolean], 102, []}
-  global:Tree:RecPrint:ntb -> {[boolean], 317, []}
-  global:Tree:GetHas_Right -> {[boolean], 89, []}
-  global:Tree:Delete:found -> {[boolean], 165, []}
-  global:Tree:Delete:v_key -> {[int], 161, []}
-  global:Tree:Search:ifound -> {[int], 279, []}
-  global:Tree:RecPrint:node -> {[Tree], 316, []}
-  global:Tree:Remove:c_node -> {[Tree], 209, []}
-  global:Tree:Remove:p_node -> {[Tree], 209, []}
-  global:Tree:RemoveLeft:ntb -> {[boolean], 261, []}
-  global:Tree:Remove:auxkey2 -> {[int], 212, []}
-  global:Tree:Remove:auxkey1 -> {[int], 211, []}
-  global:Tree:Insert:key_aux -> {[int], 128, []}
-  global:Tree:Delete:is_root -> {[boolean], 166, []}
-  global:Tree:Delete:key_aux -> {[int], 167, []}
-  global:Tree:Search:key_aux -> {[int], 281, []}
-  global:Tree:Insert:new_node -> {[Tree], 125, []}
-  global:Tree:RemoveRight:ntb -> {[boolean], 241, []}
-  global:Tree:SetHas_Left:val -> {[boolean], 97, []}
-  global:Tree:SetHas_Right:val -> {[boolean], 102, []}
-  global:Tree:RemoveLeft:p_node -> {[Tree], 260, []}
-  global:Tree:RemoveLeft:c_node -> {[Tree], 260, []}
-  global:Tree:Print:current_node -> {[Tree], 307, []}
-  global:Tree:RemoveRight:c_node -> {[Tree], 240, []}
-  global:Tree:Delete:parent_node -> {[Tree], 163, []}
-  global:Tree:RemoveRight:p_node -> {[Tree], 240, []}
-  global:Tree:Search:current_node -> {[Tree], 280, []}
-  global:Tree:Delete:current_node -> {[Tree], 162, []}
-  global:Tree:Insert:current_node -> {[Tree], 129, []}
   -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
-  BT -> {[BT], 10, []}
   BinaryTree -> {[BinaryTree], 1, []}
-  Tree -> {[Tree], 44, []}
   -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
-  357░ Goal
-  246░ MainClass
-  771░ Statement
-  411░ MessageSend
-  596░ AllocationExpression
-  BT
-  596▓ AllocationExpression  ------------>  [BT]
-  411▓ MessageSend  ------------>  [void]
-  771▓ Statement
-  246▓ MainClass ----------------- ------------>  [BinaryTree]
-  678░ TypeDeclaration
-  683░ ClassDeclaration
-  578░ Statement
-  173░ AssignmentStatement
-  251░ Identifier
-  Finding: global:BT:Start:root
-  251▓ Identifier  ------------>  [Tree]
-  239░ AllocationExpression
-  Tree
-  239▓ AllocationExpression  ------------>  [Tree]
-  173▓ AssignmentStatement
-  578▓ Statement
-  171░ Statement
-  291░ AssignmentStatement
-  307░ Identifier
-  Finding: global:BT:Start:ntb
-  307▓ Identifier  ------------>  [boolean]
-  991░ MessageSend
-  157░ Identifier
-  Finding: global:BT:Start:root
-  157▓ Identifier  ------------>  [Tree]
-  192░ ExpressionList
-  192▓ ExpressionList
-  991▓ MessageSend  ------------>  [int]
-  global:BT:Start
-  [boolean] == [int]
+  453░ Goal
+  942░ MainClass
+  158░ AssignmentStatement
+  205░ Identifier
+  Search::::: global:BinaryTree:main:y -----------------> {[boolean], 4, []}
+  205▓ Identifier  ------------>  [boolean]
+  158▓ AssignmentStatement
+  458░ AssignmentStatement
+  714░ Identifier
+  Search::::: global:BinaryTree:main:w -----------------> {[boolean], 5, []}
+  714▓ Identifier  ------------>  [boolean]
+  458▓ AssignmentStatement
+  976░ Identifier
+  Search::::: global:BinaryTree:main:y -----------------> {[boolean], 4, []}
+  976▓ Identifier  ------------>  [boolean]
+  510░ Identifier
+  Search::::: global:BinaryTree:main:w -----------------> {[boolean], 5, []}
+  510▓ Identifier  ------------>  [boolean]
+  726░ AssignmentStatement
+  192░ Identifier
+  Search::::: global:BinaryTree:main:x -----------------> {[int], 3, []}
+  192▓ Identifier  ------------>  [int]
+  726▓ AssignmentStatement
+  297░ AssignmentStatement
+  758░ Identifier
+  Search::::: global:BinaryTree:main:x -----------------> {[int], 3, []}
+  758▓ Identifier  ------------>  [int]
+  297▓ AssignmentStatement
+  942▓ MainClass ----------------- ------------>  [BinaryTree]
+  453▓ Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/ATwoClassesInstance.java ===
+  Instance key looks like: global:BinaryTree:main:instance
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
+  global:childClass -> {[childClass], 10, []}
+  global:BinaryTree -> {[BinaryTree], 1, []}
+  global:BinaryTree:main -> {[void], 2, []}
+  global:childClass:method -> {[int], 11, []}
+  global:BinaryTree:main:x -> {[int], 3, []}
+  global:BinaryTree:main:a -> {[String,[,]], 2, []}
+  global:BinaryTree:main:instance -> {[childClass], 4, []}
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  BinaryTree -> {[BinaryTree], 1, []}
+  childClass -> {[childClass], 10, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  815░ Goal
+  755░ MainClass
+  380░ AssignmentStatement
+  951░ Identifier
+  Search::::: global:BinaryTree:main:instance -----------------> {[childClass], 4, []}
+  951▓ Identifier  ------------>  [childClass]
+  977░ AllocationExpression
+  childClass
+  977▓ AllocationExpression  ------------>  [childClass]
+  380▓ AssignmentStatement
+  697░ AssignmentStatement
+  441░ Identifier
+  Search::::: global:BinaryTree:main:x -----------------> {[int], 3, []}
+  441▓ Identifier  ------------>  [int]
+  415░ MessageSend
+  271░ Identifier
+  Search::::: global:BinaryTree:main:instance -----------------> {[childClass], 4, []}
+  271▓ Identifier  ------------>  [childClass]
+  Finding with shadowing: global:BinaryTree:main:childClass
+  FOUND!: global:BinaryTree:main:childClass
+  415▓ MessageSend  ------------>  [childClass]
+  global:BinaryTree:main
+  [int] == [childClass]
   AssignmentStatement: Type Error
 
-ERROR: Type checking failed for tests/minijava-symboltable-tests/correct-tests/BinaryTree.java (exit code: 1)
+ERROR: Type checking failed for tests/minijava-symboltable-tests/correct-tests/ATwoClassesInstance.java (exit code: 1)

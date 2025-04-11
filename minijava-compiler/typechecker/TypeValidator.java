@@ -187,33 +187,23 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     }
 
     /**
-    * f0 -> ArrayType()
-    *       | BooleanType()
-    *       | IntegerType()
-    *       | Identifier()
-    */
-    public MyType visit(Type n, String key){
-        MyType returnType = n.f0.accept(this, key);
-        return returnType;
-    }
-
-    /**
-     * f0 -> Block()
-     * | AssignmentStatement()
-     * | ArrayAssignmentStatement()
-     * | IfStatement()
-     * | WhileStatement()
-     * | PrintStatement()
+     * f0 -> "new"
+     * f1 -> Identifier()
+     * f2 -> "("
+     * f3 -> ")"
      */
     @Override
-    public MyType visit(Statement n, String key) {
+    public MyType visit(AllocationExpression n, String key) {
         //debug
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-        n.f0.accept(this, key);
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName());
-        
-        return null;
+
+        Symbol mySymbol = symbolTable.findWithShadowing(key);
+        String classKey = n.f1.f0.toString();
+        System.out.println(classKey);
+        MyType returnType = symbolTable.findClass(classKey).type;
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
+        return returnType;
     }
 
     /**
@@ -242,19 +232,161 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         return expressionType;
     }
 
-   /**
-    * f0 -> AndExpression()
-    *       | CompareExpression()
-    *       | PlusExpression()
-    *       | MinusExpression()
-    *       | TimesExpression()
-    *       | ArrayLookup()
-    *       | ArrayLength()
-    *       | MessageSend()
-    *       | PrimaryExpression()
-    */
+        /**
+     * f0 -> PrimaryExpression()
+     * f1 -> "["
+     * f2 -> PrimaryExpression()
+     * f3 -> "]"
+     */
     @Override
-    public MyType visit(Expression n, String key) {
+    public MyType visit(ArrayLookup n, String key) {
+        //debug
+        int uuid = randomNumber();
+        System.out.println(uuid + "░ " + n.getClass().getSimpleName());
+        // f0 needs to return an array type
+        // f2 needs to return a int type
+        MyType primaryExpressionZero = n.f0.accept(this, key);
+        MyType primaryExpressionTwo = n.f2.accept(this, key);
+
+        if(primaryExpressionZero.checkIdentical(new MyType("int", "[", "]"))){
+            System.out.println(n.getClass().getSimpleName() + ": Type Error");
+            System.exit(1);
+        }
+
+        if(primaryExpressionTwo.checkIdentical(new MyType("int"))){
+            System.out.println(n.getClass().getSimpleName() + ": Type Error");
+            System.exit(1);
+        }
+        MyType returnType = new MyType(primaryExpressionZero.getType());
+
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
+        return returnType;
+    }
+
+    /**
+     * f0 -> PrimaryExpression()
+     * f1 -> "."
+     * f2 -> "length"
+     */
+    @Override
+    public MyType visit(ArrayLength n, String key) {
+        //debug
+        int uuid = randomNumber();
+        System.out.println(uuid + "░ " + n.getClass().getSimpleName());
+        
+        MyType returnType = n.f0.accept(this, key);
+        
+        if(!returnType.checkIdentical(new MyType("int", "[", "]"))){
+            System.out.println(n.getClass().getSimpleName() + ": Type Error");
+            System.exit(1);
+        }
+
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
+        return returnType;
+    }
+
+    /**
+     * f0 -> PrimaryExpression()
+     * f1 -> "."
+     * f2 -> Identifier()
+     * f3 -> "("
+     * f4 -> ( ExpressionList() )?
+     * f5 -> ")"
+     */
+    @Override
+    public MyType visit(MessageSend n, String key) {
+        //debug
+        int uuid = randomNumber();
+        System.out.println(uuid + "░ " + n.getClass().getSimpleName());
+
+        MyType classType = n.f0.accept(this, key);
+        String methodKey = key + bufferChar + classType.getType();
+        System.out.println("Finding with shadowing: " + methodKey);
+        Symbol methodSymbol = symbolTable.findWithShadowing(methodKey);
+        System.out.println("FOUND!: " + methodKey);
+        MyType methodType = methodSymbol.type;
+        n.f4.accept(this, key);
+        
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + methodType);
+        return methodType;
+    }
+
+    /**
+     * f0 -> <IDENTIFIER>
+     */
+    @Override
+    public MyType visit(Identifier n, String key) {
+        int uuid = randomNumber();
+        System.out.println(uuid + "░ " + n.getClass().getSimpleName());
+
+        String searchKey = key + bufferChar + n.f0.toString();
+        Symbol foundSymbol = symbolTable.findWithShadowing(searchKey);
+        System.out.println("Search::::: " + searchKey + " -----------------> " + foundSymbol);
+        MyType returnType = foundSymbol.type;
+
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
+        return returnType;
+    }
+
+    /**
+     * f0 -> "this"
+     */
+    @Override
+    public MyType visit(ThisExpression n, String key) {
+        //debug
+        int uuid = randomNumber();
+        System.out.println(uuid + "░ " + n.getClass().getSimpleName());
+
+        // return the closest class we are inside of
+        Symbol mySymbol = symbolTable.getNearestClass(key);
+        MyType returnType = mySymbol.type;
+
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
+        return returnType;
+    }
+
+    /**
+     * f0 -> Expression()
+     * f1 -> ( ExpressionRest() )*
+     */
+    @Override
+    public MyType visit(ExpressionList n, String key) {
+        MyType returnType = n.f0.accept(this, key);
+        n.f1.accept(this, key);
+        return returnType;
+    }
+
+    /**
+     * f0 -> ","
+     * f1 -> Expression()
+     */
+    @Override
+    public MyType visit(ExpressionRest n, String key) {
+        MyType returnType = n.f1.accept(this, key);
+        return returnType;
+    }
+
+    /**
+    * f0 -> ArrayType()
+    *       | BooleanType()
+    *       | IntegerType()
+    *       | Identifier()
+    */
+    public MyType visit(Type n, String key){
+        MyType returnType = n.f0.accept(this, key);
+        return returnType;
+    }
+
+    /**
+     * f0 -> Block()
+     * | AssignmentStatement()
+     * | ArrayAssignmentStatement()
+     * | IfStatement()
+     * | WhileStatement()
+     * | PrintStatement()
+     */
+    @Override
+    public MyType visit(Statement n, String key) {
         MyType returnType = n.f0.accept(this, key);
         return returnType;
     }
@@ -338,7 +470,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         return returnType;
     }
 
-    /**
+    /** 
      * f0 -> PrimaryExpression()
      * f1 -> "-"
      * f2 -> PrimaryExpression()
@@ -387,112 +519,6 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     }
 
     /**
-     * f0 -> PrimaryExpression()
-     * f1 -> "["
-     * f2 -> PrimaryExpression()
-     * f3 -> "]"
-     */
-    @Override
-    public MyType visit(ArrayLookup n, String key) {
-        //debug
-        int uuid = randomNumber();
-        System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-        // f0 needs to return an array type
-        // f2 needs to return a int type
-        MyType primaryExpressionZero = n.f0.accept(this, key);
-        MyType primaryExpressionTwo = n.f2.accept(this, key);
-
-        if(primaryExpressionZero.checkIdentical(new MyType("int", "[", "]"))){
-            System.out.println(n.getClass().getSimpleName() + ": Type Error");
-            System.exit(1);
-        }
-
-        if(primaryExpressionTwo.checkIdentical(new MyType("int"))){
-            System.out.println(n.getClass().getSimpleName() + ": Type Error");
-            System.exit(1);
-        }
-        MyType returnType = new MyType(primaryExpressionZero.getType());
-
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
-        return returnType;
-    }
-
-    /**
-     * f0 -> PrimaryExpression()
-     * f1 -> "."
-     * f2 -> "length"
-     */
-    @Override
-    public MyType visit(ArrayLength n, String key) {
-        //debug
-        int uuid = randomNumber();
-        System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-        
-        MyType returnType = n.f0.accept(this, key);
-        
-        if(!returnType.checkIdentical(new MyType("int", "[", "]"))){
-            System.out.println(n.getClass().getSimpleName() + ": Type Error");
-            System.exit(1);
-        }
-
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
-        return returnType;
-    }
-
-    /**
-     * f0 -> PrimaryExpression()
-     * f1 -> "."
-     * f2 -> Identifier()
-     * f3 -> "("
-     * f4 -> ( ExpressionList() )?
-     * f5 -> ")"
-     */
-    @Override
-    public MyType visit(MessageSend n, String key) {
-        //debug
-        int uuid = randomNumber();
-        System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-        // Validate that PrimaryExpression is a class
-        // Validate that ID exists in the class
-        // Validate that the method with that ID uses the ExpressionList types in arguments
-        MyType classType = n.f0.accept(this, key);
-
-        MyType returnType = symbolTable.findWithShadowing(key).type;
-
-        n.f4.accept(this, key);
-        
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
-        return returnType;
-    }
-
-    /**
-     * f0 -> Expression()
-     * f1 -> ( ExpressionRest() )*
-     */
-    @Override
-    public MyType visit(ExpressionList n, String key) {
-        //debug
-        int uuid = randomNumber();
-        System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-        // Unsure of what to do here, combine the expressions?
-        n.f0.accept(this, key);
-        n.f1.accept(this, key);
-        
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName());
-        return null;
-    }
-
-    /**
-     * f0 -> ","
-     * f1 -> Expression()
-     */
-    @Override
-    public MyType visit(ExpressionRest n, String key) {
-        MyType returnType = n.f1.accept(this, key);
-        return returnType;
-    }
-
-    /**
      * f0 -> IntegerLiteral()
      * | TrueLiteral()
      * | FalseLiteral()
@@ -537,40 +563,6 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     }
 
     /**
-     * f0 -> <IDENTIFIER>
-     */
-    @Override
-    public MyType visit(Identifier n, String key) {
-        //debug
-        int uuid = randomNumber();
-        System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-
-        String searchKey = key + bufferChar + n.f0.toString();
-        System.out.println("Finding: " + searchKey);
-        MyType returnType = symbolTable.findWithShadowing(searchKey).type;
-
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
-        return returnType;
-    }
-
-    /**
-     * f0 -> "this"
-     */
-    @Override
-    public MyType visit(ThisExpression n, String key) {
-        //debug
-        int uuid = randomNumber();
-        System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-
-        // return the closest class we are inside of
-        Symbol mySymbol = symbolTable.getNearestClass(key);
-        MyType returnType = mySymbol.type;
-
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
-        return returnType;
-    }
-
-    /**
      * f0 -> "new"
      * f1 -> "int"
      * f2 -> "["
@@ -585,26 +577,6 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
             System.exit(1);
         }
         MyType returnType = new MyType("int", "[", "]");
-        return returnType;
-    }
-
-    /**
-     * f0 -> "new"
-     * f1 -> Identifier()
-     * f2 -> "("
-     * f3 -> ")"
-     */
-    @Override
-    public MyType visit(AllocationExpression n, String key) {
-        //debug
-        int uuid = randomNumber();
-        System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-
-        Symbol mySymbol = symbolTable.findWithShadowing(key);
-        String classKey = n.f1.f0.toString();
-        System.out.println(classKey);
-        MyType returnType = symbolTable.findClass(classKey).type;
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
         return returnType;
     }
 
@@ -632,6 +604,23 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     @Override
     public MyType visit(BracketExpression n, String key) {
         MyType returnType = n.f1.accept(this, key);
+        return returnType;
+    }
+
+    /**
+    * f0 -> AndExpression()
+    *       | CompareExpression()
+    *       | PlusExpression()
+    *       | MinusExpression()
+    *       | TimesExpression()
+    *       | ArrayLookup()
+    *       | ArrayLength()
+    *       | MessageSend()
+    *       | PrimaryExpression()
+    */
+    @Override
+    public MyType visit(Expression n, String key) {
+        MyType returnType = n.f0.accept(this, key);
         return returnType;
     }
 

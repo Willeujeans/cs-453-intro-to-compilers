@@ -39,6 +39,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             MyType instanceType = classInstances.get(instanceKey).type;
             MyType classType = classes.get(instanceType.getType()).type;
             declarations.get(instanceKey).type = classType;
+            System.out.println("Instance key looks like: " + instanceKey);
         }
     }
     
