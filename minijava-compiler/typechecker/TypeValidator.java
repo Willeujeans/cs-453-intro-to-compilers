@@ -79,7 +79,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         n.f15.accept(this, currentScope);
         
         MyType returnType = new MyType(n.f1.f0.toString());
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------- ------------>  " + returnType);
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------------------->  " + returnType);
 
         return returnType;
     }
@@ -93,7 +93,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
         MyType returnType = n.f0.accept(this, key);
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------- ------------>  " + returnType);
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------------------->  " + returnType);
         
         return returnType;
     }
@@ -119,7 +119,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         // n.f3.accept(this, currentScope);
         n.f4.accept(this, currentScope);
 
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------- ------------>  " + returnType);
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------------------->  " + returnType);
 
         return returnType;
     }
@@ -147,7 +147,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
 
         // n.f5.accept(this, currentScope);
         n.f6.accept(this, currentScope);
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------- ------------>  " + returnType);
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------------------->  " + returnType);
         
         return returnType;
     }
@@ -214,11 +214,12 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(AssignmentStatement n, String key) {
-        //debug
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
 
         MyType idType = n.f0.accept(this, key);
+        System.out.println(symbolTable.findClass(idType.getType()));
+        
         MyType expressionType = n.f2.accept(this, key);
 
         if(!idType.checkIdentical(expressionType)){
