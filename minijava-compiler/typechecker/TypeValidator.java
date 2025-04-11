@@ -7,11 +7,11 @@ import java.util.Random;
 import java.util.HashMap;
 
 public class TypeValidator extends GJDepthFirst<MyType, String> {
-    SymbolTable symbolTableData;
+    SymbolTable symbolTable;
     private String bufferChar = ":";
 
-    public TypeValidator(SymbolTable symbolTableData){
-        this.symbolTableData = symbolTableData;
+    public TypeValidator(SymbolTable symbolTable){
+        this.symbolTable = symbolTable;
     }
 
     public static int randomNumber(){
@@ -110,7 +110,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
         
-        HashMap<String, Symbol> classHashmap = symbolTableData.classes;
+        HashMap<String, Symbol> classHashmap = symbolTable.classes;
         String classKey = n.f1.f0.toString();
         Symbol classSymbol = classHashmap.get(classKey);
         MyType returnType = classSymbol.type;
@@ -139,7 +139,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
         
-        HashMap<String, Symbol> classHashmap = symbolTableData.classes;
+        HashMap<String, Symbol> classHashmap = symbolTable.classes;
         String classKey = n.f1.f0.toString();
         Symbol classSymbol = classHashmap.get(classKey);
         MyType returnType = classSymbol.type;
@@ -447,7 +447,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         // Validate that PrimaryExpression is a class
         // Validate that ID exists in the class
         // Validate that the method with that ID uses the ExpressionList types in arguments
-        HashMap<String, Symbol> classHashmap = symbolTableData.classes;
+        HashMap<String, Symbol> classHashmap = symbolTable.classes;
         String classKey = n.f2.f0.toString();
         Symbol classSymbol = classHashmap.get(classKey);
         MyType returnType = classSymbol.type;
@@ -568,7 +568,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         String searchKey = key + bufferChar + n.f0.toString();
         System.out.println("  >Searchkey: [" + searchKey + "]");
 
-        MyType returnType = symbolTableData.find(searchKey).type;
+        MyType returnType = symbolTable.find(searchKey).type;
 
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
         return returnType;
@@ -584,7 +584,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
 
         // return the closest class we are inside of
-        Symbol mySymbol = symbolTableData.getNearestClass(key);
+        Symbol mySymbol = symbolTable.getNearestClass(key);
         MyType returnType = mySymbol.type;
 
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
@@ -629,9 +629,10 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
 
         // if the identifier is a class type we globally search
         // Problem: when searching for `global:MyVisitor` we actually want to search for `global:Visitor:MyVisitor`
-        Symbol mySymbol = symbolTableData.find(key);
-        HashMap<String, Symbol> classHashmap = symbolTableData.classes;
+        Symbol mySymbol = symbolTable.find(key);
+        HashMap<String, Symbol> classHashmap = symbolTable.classes;
         String classKey = n.f1.f0.toString();
+        
         Symbol classSymbol = classHashmap.get(classKey);
         MyType returnType = classSymbol.type;
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);

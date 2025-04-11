@@ -16,21 +16,17 @@ import visitor.*;
 
 // Symbol Table Visitor: Traverses AST to create symbol table.
 public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
-    public HashMap<String, Symbol> data;
+    public HashMap<String, Symbol> declarations;
     public HashMap<String, Symbol> classes;
     public HashMap<String, Symbol> classInstances;
-    private String bufferChar = ":";
+    public String bufferChar = ":";
 
-    // maybe a method that runs through the symbol table and updates all instances of classes with the class types?
+
 
     public SymbolTable() {
-        data = new HashMap<String, Symbol>();
+        declarations = new HashMap<String, Symbol>();
         classes = new HashMap<String, Symbol>();
         classInstances = new HashMap<String, Symbol>();
-    }
-
-    public HashMap<String, Symbol> getData(){
-        return data;
     }
 
     public void updateClassInstances(){
@@ -38,33 +34,62 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             System.out.println("Nothing to update here;");
             return;
         }
+
         for(String instanceKey : classInstances.keySet()){
-            System.out.println("------------" + data.get(instanceKey).type);
+            System.out.println("------------" + declarations.get(instanceKey).type);
             System.out.println("Updating: [][][][][]" + instanceKey);
             MyType instanceType = classInstances.get(instanceKey).type;
             MyType classType = classes.get(instanceType.getType()).type;
             System.out.println("Updated: [!][!][!][!][!]" + instanceType.getType() + " GOT " + classType);
-            data.get(instanceKey).type = classType;
-            System.out.println("++++++++++++" + data.get(instanceKey).type);
+            declarations.get(instanceKey).type = classType;
+            System.out.println("++++++++++++" + declarations.get(instanceKey).type);
         }
     }
     
-    public boolean insert(String key, Symbol entry){
-        if(key == null || key.trim().isEmpty() || entry == null){
-            return false;
+    public boolean insertDeclaration(String key, Symbol entry){
+        if(key == null || key.isEmpty() || entry == null){
+            throw new IllegalArgumentException("Attempt to call method with null arguments");
         }
         
-        if (data.containsKey(key)) {
+        if (declarations.containsKey(key)) {
             System.out.println("Type Error");
             System.exit(1);
         }
 
-        data.put(key, entry);
+        declarations.put(key, entry);
         return true;
     }
 
-    public Symbol find(String key) {
-        System.out.println("<<FINDING>>");
+    public boolean insertClass(String key, Symbol entry){
+        if(key == null || key.isEmpty() || entry == null){
+            throw new IllegalArgumentException("Attempt to call method with null arguments");
+        }
+        
+        if (classes.containsKey(key)) {
+            System.out.println("Type Error");
+            System.exit(1);
+        }
+
+        classes.put(key, entry);
+        return true;
+    }
+
+    public boolean insertClassInstance(String classInstanceKey, Symbol entry){
+        if(classInstanceKey == null || classInstanceKey.isEmpty() || entry == null){
+            throw new IllegalArgumentException("Attempt to call method with null arguments");
+        }
+        if (classInstances.containsKey(classInstanceKey)) {
+            System.out.println("Type Error");
+            System.exit(1);
+        }
+        classInstances.put(classInstanceKey, entry);
+        return true;
+    }
+
+    public Symbol findWithShadowing(String key) {
+        if(key == null || key.isEmpty()){
+            throw new IllegalArgumentException("Attempt to call method with null arguments");
+        }
         String[] keyFragments = key.split(bufferChar);
         String idToFind = keyFragments[keyFragments.length - 1];
 
@@ -72,12 +97,31 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         String currentKey = "";
         for (int i = keyFragments.length - 1; i >= 1; i--) {
             currentKey = String.join(bufferChar, Arrays.copyOf(keyFragments, i)) + bufferChar + idToFind;
-            System.out.println("<<currentKey>>>>>>>>>    " + currentKey);
-            if (data.containsKey(currentKey)) {
-                return data.get(currentKey);
+            if (declarations.containsKey(currentKey)) {
+                return declarations.get(currentKey);
             }
         }
         return null;
+    }
+
+    public Symbol findClass(String classId){
+        if(classId == null || classId.isEmpty()){
+            throw new IllegalArgumentException("Attempt to call method with null arguments");
+        }
+        if (!classInstances.containsKey(classId)) {
+            throw new RuntimeException("Attempted to find a Class that does not exist");
+        }
+        return classInstances.get(classId);
+    }
+
+    public Symbol findClassInstance(String classInstanceId){
+        if(classInstanceId == null || classInstanceId.isEmpty()){
+            throw new IllegalArgumentException("Attempt to call method with null arguments");
+        }
+        if (!classInstances.containsKey(classInstanceId)) {
+            throw new RuntimeException("Attempted to find a Class that does not exist");
+        }
+        return classInstances.get(classInstanceId);
     }
 
     public Symbol getNearestClass(String key) {
@@ -86,8 +130,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         for (int i = keyFragments.length; i >= 1; i--) {
             String[] currentFragments = Arrays.copyOf(keyFragments, i);
             String currentKey = String.join(bufferChar, currentFragments);
-            if (data.containsKey(currentKey)) {
-                Symbol symbol = data.get(currentKey);
+            if (declarations.containsKey(currentKey)) {
+                Symbol symbol = declarations.get(currentKey);
                 String lastPart = currentFragments[currentFragments.length - 1];
                 if (symbol.type.getType().equals(lastPart)) {
                     return symbol;
@@ -100,12 +144,12 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public void prettyPrint(){
         System.out.println("---Symbol-Table---");
         StringBuilder output = new StringBuilder();
-        ArrayList<String> keys = new ArrayList<String>(data.keySet());
+        ArrayList<String> keys = new ArrayList<String>(declarations.keySet());
         Collections.sort(keys, Comparator.comparingInt(String::length));
 
         for(String key : keys){
             System.out.print(key);
-            System.out.print(" -> " + data.get(key) + "\n");
+            System.out.print(" -> " + declarations.get(key) + "\n");
         }
         System.out.println("------------------");
     }
@@ -147,12 +191,12 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(MainClass n, String key) {
         // MainClass addition
-        insert(key + bufferChar + n.f1.f0.toString(), new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
-        classes.put(n.f1.f0.toString(), new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
+        insertDeclaration(key + bufferChar + n.f1.f0.toString(), new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
+        insertClass(n.f1.f0.toString(), new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
         // Argument in mainClass addition
         String currentScope = key + bufferChar + n.f1.f0.toString() + bufferChar + "main";
-        insert(currentScope, new Symbol(new MyType("void"), n.f5.beginLine));
-        insert(currentScope + bufferChar + n.f11.f0.toString(), new Symbol(new MyType("String", "[", "]"), n.f8.beginLine));
+        insertDeclaration(currentScope, new Symbol(new MyType("void"), n.f5.beginLine));
+        insertDeclaration(currentScope + bufferChar + n.f11.f0.toString(), new Symbol(new MyType("String", "[", "]"), n.f8.beginLine));
 
         n.f14.accept(this, currentScope);
         n.f15.accept(this, currentScope);
@@ -180,8 +224,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(ClassDeclaration n, String key) {
         String currentScope = key + bufferChar + n.f1.f0.toString();
-        classes.put(n.f1.f0.toString(), new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
-        insert(currentScope, new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
+        insertClass(n.f1.f0.toString(), new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
+        insertDeclaration(currentScope, new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
 
         n.f3.accept(this, currentScope);
         n.f4.accept(this, currentScope);
@@ -206,8 +250,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
         String currentScope = key + bufferChar + parentClassId + bufferChar + childClassId;
 
-        classes.put(childClassId, new Symbol(new MyType(childClassId, parentClassId), n.f0.beginLine));
-        insert(currentScope, new Symbol(new MyType(childClassId, parentClassId), n.f0.beginLine));
+        insertClass(childClassId, new Symbol(new MyType(childClassId, parentClassId), n.f0.beginLine));
+        insertDeclaration(currentScope, new Symbol(new MyType(childClassId, parentClassId), n.f0.beginLine));
 
         n.f5.accept(this, currentScope);
         n.f6.accept(this, currentScope);
@@ -303,7 +347,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
      */
     @Override
     public Void visit(ArrayType n, String key) {
-        insert(key, new Symbol(new MyType("int", "[", "]"), n.f0.beginLine));
+        insertDeclaration(key, new Symbol(new MyType("int", "[", "]"), n.f0.beginLine));
         return null;
     }
 
@@ -312,7 +356,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
      */
     @Override
     public Void visit(BooleanType n, String key) {
-        insert(key, new Symbol(new MyType("boolean"), n.f0.beginLine));
+        insertDeclaration(key, new Symbol(new MyType("boolean"), n.f0.beginLine));
         return null;
     }
 
@@ -321,7 +365,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
      */
     @Override
     public Void visit(IntegerType n, String key) {
-        insert(key, new Symbol(new MyType("int"), n.f0.beginLine));
+        insertDeclaration(key, new Symbol(new MyType("int"), n.f0.beginLine));
         return null;
     }
 
@@ -331,9 +375,9 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(Identifier n, String key){
 
-        classInstances.put(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
+        insertClassInstance(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
         
-        insert(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
+        insertDeclaration(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
         return null;
     }
 

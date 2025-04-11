@@ -1,4 +1,4 @@
-2025-04-10 00:12:40
+2025-04-10 21:35:27
 === Typecheck < tests/minijava-symboltable-tests/advanced-tests/AAAAclass_inheritance.java ===
   ------------[myChildClass]
   Updating: [][][][][]global:myParentClass:main:childInstance
@@ -13,46 +13,251 @@
   global:myParentClass:myChildClass:x -> {[int], 11, []}
   global:myParentClass:main:childInstance -> {[myChildClass,myParentClass], 4, []}
   ------------------
-  710░ Goal
-  451░ MainClass
-  282░ Statement
-  395░ AssignmentStatement
-  281░ Identifier
+  356░ Goal
+  494░ MainClass
+  757░ Statement
+  484░ AssignmentStatement
+  965░ Identifier
     >Searchkey: [global:myParentClass:main:x]
-  <<FINDING>>
-  <<currentKey>>>>>>>>>    global:myParentClass:main:x
-  281▓ Identifier  ------------>  [int]
-  735░ Expression
-  230░ PrimaryExpression
-  908░ IntegerLiteral
-  908▓ IntegerLiteral  ------------>  [int]
-  230▓ PrimaryExpression  ------------>  [int]
-  735▓ Expression  ------------>  [int]
+  965▓ Identifier  ------------>  [int]
+  190░ Expression
+  217░ PrimaryExpression
+  672░ IntegerLiteral
+  672▓ IntegerLiteral  ------------>  [int]
+  217▓ PrimaryExpression  ------------>  [int]
+  190▓ Expression  ------------>  [int]
   [int] == [int]
-  395▓ AssignmentStatement
-  282▓ Statement
-  153░ Statement
-  855░ AssignmentStatement
-  584░ Identifier
+  484▓ AssignmentStatement
+  757▓ Statement
+  616░ Statement
+  549░ AssignmentStatement
+  663░ Identifier
     >Searchkey: [global:myParentClass:main:childInstance]
-  <<FINDING>>
-  <<currentKey>>>>>>>>>    global:myParentClass:main:childInstance
-  584▓ Identifier  ------------>  [myChildClass,myParentClass]
-  666░ Expression
-  222░ PrimaryExpression
-  718░ AllocationExpression
-  <<FINDING>>
-  <<currentKey>>>>>>>>>    global:myParentClass:main
-  718▓ AllocationExpression  ------------>  [myChildClass,myParentClass]
-  222▓ PrimaryExpression  ------------>  [myChildClass,myParentClass]
-  666▓ Expression  ------------>  [myChildClass,myParentClass]
+  663▓ Identifier  ------------>  [myChildClass,myParentClass]
+  316░ Expression
+  991░ PrimaryExpression
+  584░ AllocationExpression
+  584▓ AllocationExpression  ------------>  [myChildClass,myParentClass]
+  991▓ PrimaryExpression  ------------>  [myChildClass,myParentClass]
+  316▓ Expression  ------------>  [myChildClass,myParentClass]
   [myChildClass,myParentClass] == [myChildClass,myParentClass]
-  855▓ AssignmentStatement
-  153▓ Statement
-  451▓ MainClass ----------------- ------------>  [myParentClass]
-  860░ TypeDeclaration
-  981░ ClassExtendsDeclaration
-  981▓ ClassExtendsDeclaration ----------------- ------------>  [myChildClass,myParentClass]
-  860▓ TypeDeclaration ----------------- ------------>  [myChildClass,myParentClass]
-  710▓ Goal
+  549▓ AssignmentStatement
+  616▓ Statement
+  494▓ MainClass ----------------- ------------>  [myParentClass]
+  511░ TypeDeclaration
+  521░ ClassExtendsDeclaration
+  521▓ ClassExtendsDeclaration ----------------- ------------>  [myChildClass,myParentClass]
+  511▓ TypeDeclaration ----------------- ------------>  [myChildClass,myParentClass]
+  356▓ Goal
   ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/advanced-tests/AAATreeVisitor.java ===
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:Remove:c_node
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:GetLeft
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Visitor]
+  Updating: [][][][][]global:Tree:accept:v
+  Updated: [!][!][!][!][!]Visitor GOT [Visitor]
+  ++++++++++++[Visitor]
+  ------------[Tree]
+  Updating: [][][][][]global:Visitor:MyVisitor:visit:n
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:right
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:SetRight:rn
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:Search:current_node
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Visitor:visit:n
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:Delete:current_node
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:Remove:p_node
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:RemoveLeft:p_node
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:RemoveLeft:c_node
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:TV:Start:root
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Visitor:l
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:left
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Visitor:r
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:Print:current_node
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:SetLeft:ln
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:Insert:new_node
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[MyVisitor]
+  Updating: [][][][][]global:TV:Start:v
+  Updated: [!][!][!][!][!]MyVisitor GOT [MyVisitor,Visitor]
+  ++++++++++++[MyVisitor,Visitor]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:GetRight
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:Insert:current_node
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:Delete:parent_node
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:RemoveRight:c_node
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:RecPrint:node
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:RemoveRight:p_node
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ------------[Tree]
+  Updating: [][][][][]global:Tree:my_null
+  Updated: [!][!][!][!][!]Tree GOT [Tree]
+  ++++++++++++[Tree]
+  ---Symbol-Table---
+  global:TV -> {[TV], 11, []}
+  global:Tree -> {[Tree], 51, []}
+  global:Visitor -> {[Visitor], 331, []}
+  global:TV:Start -> {[int], 13, []}
+  global:Tree:key -> {[int], 54, []}
+  global:Tree:Init -> {[boolean], 75, []}
+  global:Visitor:l -> {[Tree], 332, []}
+  global:Visitor:r -> {[Tree], 333, []}
+  global:Tree:left -> {[Tree], 52, []}
+  global:Tree:right -> {[Tree], 53, []}
+  global:Tree:Print -> {[boolean], 297, []}
+  global:TV:Start:v -> {[MyVisitor,Visitor], 17, []}
+  global:Tree:Insert -> {[boolean], 139, []}
+  global:Tree:Delete -> {[boolean], 174, []}
+  global:Tree:Remove -> {[boolean], 219, []}
+  global:Tree:accept -> {[int], 319, []}
+  global:Tree:Search -> {[int], 269, []}
+  global:Tree:SetKey -> {[boolean], 104, []}
+  global:Tree:GetKey -> {[int], 100, []}
+  global:TV:Start:nti -> {[int], 16, []}
+  global:TV:Start:ntb -> {[boolean], 15, []}
+  global:Tree:SetLeft -> {[boolean], 87, []}
+  global:Tree:GetLeft -> {[Tree], 96, []}
+  global:Tree:Compare -> {[boolean], 127, []}
+  global:Tree:my_null -> {[Tree], 57, []}
+  global:Tree:accept:v -> {[Visitor], 319, []}
+  global:TV:Start:root -> {[Tree], 14, []}
+  global:Tree:GetRight -> {[Tree], 92, []}
+  global:Tree:SetRight -> {[boolean], 82, []}
+  global:Tree:has_left -> {[boolean], 55, []}
+  global:Visitor:visit -> {[int], 335, []}
+  global:Tree:RecPrint -> {[boolean], 306, []}
+  global:AAATreeVisitor -> {[AAATreeVisitor], 5, []}
+  global:Tree:has_right -> {[boolean], 56, []}
+  global:Tree:Print:ntb -> {[boolean], 298, []}
+  global:Tree:Init:v_key -> {[int], 75, []}
+  global:Tree:Delete:ntb -> {[boolean], 179, []}
+  global:Visitor:visit:n -> {[Tree], 335, []}
+  global:Tree:accept:nti -> {[int], 320, []}
+  global:Tree:Remove:ntb -> {[boolean], 220, []}
+  global:Tree:Insert:ntb -> {[boolean], 141, []}
+  global:Tree:SetLeft:ln -> {[Tree], 87, []}
+  global:Tree:RemoveLeft -> {[boolean], 256, []}
+  global:Tree:Delete:cont -> {[boolean], 177, []}
+  global:Tree:Insert:cont -> {[boolean], 143, []}
+  global:Tree:Search:cont -> {[boolean], 272, []}
+  global:Tree:SetHas_Left -> {[boolean], 117, []}
+  global:Tree:SetRight:rn -> {[Tree], 82, []}
+  global:Tree:Compare:nti -> {[int], 129, []}
+  global:Tree:Compare:ntb -> {[boolean], 128, []}
+  global:Tree:GetHas_Left -> {[boolean], 113, []}
+  global:Tree:RemoveRight -> {[boolean], 244, []}
+  global:Tree:SetKey:v_key -> {[int], 104, []}
+  global:Visitor:MyVisitor -> {[MyVisitor,Visitor], 354, []}
+  global:Tree:Compare:num2 -> {[int], 127, []}
+  global:Tree:Compare:num1 -> {[int], 127, []}
+  global:Tree:Search:v_key -> {[int], 269, []}
+  global:Tree:Insert:v_key -> {[int], 139, []}
+  global:Tree:SetHas_Right -> {[boolean], 122, []}
+  global:Tree:RecPrint:ntb -> {[boolean], 307, []}
+  global:Tree:GetHas_Right -> {[boolean], 109, []}
+  global:Visitor:visit:nti -> {[int], 336, []}
+  global:Tree:Delete:found -> {[boolean], 178, []}
+  global:Tree:Delete:v_key -> {[int], 174, []}
+  global:Tree:Search:ifound -> {[int], 271, []}
+  global:Tree:RecPrint:node -> {[Tree], 306, []}
+  global:Tree:Remove:c_node -> {[Tree], 219, []}
+  global:Tree:Remove:p_node -> {[Tree], 219, []}
+  global:Tree:RemoveLeft:ntb -> {[boolean], 257, []}
+  global:Tree:Remove:auxkey2 -> {[int], 222, []}
+  global:Tree:Remove:auxkey1 -> {[int], 221, []}
+  global:Tree:Insert:key_aux -> {[int], 144, []}
+  global:Tree:Delete:is_root -> {[boolean], 180, []}
+  global:AAATreeVisitor:main -> {[void], 6, []}
+  global:Tree:Delete:key_aux -> {[int], 181, []}
+  global:Tree:Search:key_aux -> {[int], 273, []}
+  global:Tree:Insert:new_node -> {[Tree], 140, []}
+  global:Tree:RemoveRight:ntb -> {[boolean], 245, []}
+  global:Tree:SetHas_Left:val -> {[boolean], 117, []}
+  global:AAATreeVisitor:main:a -> {[String,[,]], 6, []}
+  global:Tree:SetHas_Right:val -> {[boolean], 122, []}
+  global:Tree:RemoveLeft:p_node -> {[Tree], 256, []}
+  global:Tree:RemoveLeft:c_node -> {[Tree], 256, []}
+  global:Tree:Print:current_node -> {[Tree], 299, []}
+  global:Tree:RemoveRight:c_node -> {[Tree], 244, []}
+  global:Visitor:MyVisitor:visit -> {[int], 356, []}
+  global:Tree:Delete:parent_node -> {[Tree], 176, []}
+  global:Tree:RemoveRight:p_node -> {[Tree], 244, []}
+  global:Tree:Search:current_node -> {[Tree], 270, []}
+  global:Tree:Delete:current_node -> {[Tree], 175, []}
+  global:Tree:Insert:current_node -> {[Tree], 142, []}
+  global:Visitor:MyVisitor:visit:n -> {[Tree], 356, []}
+  global:Visitor:MyVisitor:visit:nti -> {[int], 357, []}
+  ------------------
+  924░ Goal
+  294░ MainClass
+  523░ Statement
+  302░ Expression
+  795░ MessageSend
+  ClassKey Start
+  java.lang.NullPointerException
