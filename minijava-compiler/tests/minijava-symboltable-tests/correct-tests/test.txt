@@ -1,4 +1,4 @@
-2025-04-11 12:40:03
+2025-04-11 13:37:23
 === Typecheck < tests/minijava-symboltable-tests/correct-tests/AllTypesAndStatements.java ===
   Nothing to update here;
   -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
@@ -12,36 +12,36 @@
   -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
   BinaryTree -> {[BinaryTree], 1, []}
   -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
-  453░ Goal
-  942░ MainClass
-  158░ AssignmentStatement
-  205░ Identifier
+  240░ Goal
+  572░ MainClass
+  647░ AssignmentStatement
+  748░ Identifier
   Search::::: global:BinaryTree:main:y -----------------> {[boolean], 4, []}
-  205▓ Identifier  ------------>  [boolean]
-  158▓ AssignmentStatement
-  458░ AssignmentStatement
-  714░ Identifier
+  748▓ Identifier  ------------>  [boolean]
+  647▓ AssignmentStatement
+  607░ AssignmentStatement
+  651░ Identifier
   Search::::: global:BinaryTree:main:w -----------------> {[boolean], 5, []}
-  714▓ Identifier  ------------>  [boolean]
-  458▓ AssignmentStatement
-  976░ Identifier
+  651▓ Identifier  ------------>  [boolean]
+  607▓ AssignmentStatement
+  739░ Identifier
   Search::::: global:BinaryTree:main:y -----------------> {[boolean], 4, []}
-  976▓ Identifier  ------------>  [boolean]
-  510░ Identifier
+  739▓ Identifier  ------------>  [boolean]
+  545░ Identifier
   Search::::: global:BinaryTree:main:w -----------------> {[boolean], 5, []}
-  510▓ Identifier  ------------>  [boolean]
-  726░ AssignmentStatement
-  192░ Identifier
+  545▓ Identifier  ------------>  [boolean]
+  464░ AssignmentStatement
+  711░ Identifier
   Search::::: global:BinaryTree:main:x -----------------> {[int], 3, []}
-  192▓ Identifier  ------------>  [int]
-  726▓ AssignmentStatement
-  297░ AssignmentStatement
-  758░ Identifier
+  711▓ Identifier  ------------>  [int]
+  464▓ AssignmentStatement
+  985░ AssignmentStatement
+  894░ Identifier
   Search::::: global:BinaryTree:main:x -----------------> {[int], 3, []}
-  758▓ Identifier  ------------>  [int]
-  297▓ AssignmentStatement
-  942▓ MainClass ----------------- ------------>  [BinaryTree]
-  453▓ Goal
+  894▓ Identifier  ------------>  [int]
+  985▓ AssignmentStatement
+  572▓ MainClass ----------------- ------------>  [BinaryTree]
+  240▓ Goal
   ✅ Program type checked successfully
 === Typecheck < tests/minijava-symboltable-tests/correct-tests/ATwoClassesInstance.java ===
   Instance key looks like: global:BinaryTree:main:instance
@@ -57,29 +57,32 @@
   BinaryTree -> {[BinaryTree], 1, []}
   childClass -> {[childClass], 10, []}
   -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
-  815░ Goal
-  755░ MainClass
-  380░ AssignmentStatement
-  951░ Identifier
+  462░ Goal
+  518░ MainClass
+  792░ AssignmentStatement
+  495░ Identifier
   Search::::: global:BinaryTree:main:instance -----------------> {[childClass], 4, []}
-  951▓ Identifier  ------------>  [childClass]
-  977░ AllocationExpression
+  495▓ Identifier  ------------>  [childClass]
+  882░ AllocationExpression
   childClass
-  977▓ AllocationExpression  ------------>  [childClass]
-  380▓ AssignmentStatement
-  697░ AssignmentStatement
-  441░ Identifier
+  882▓ AllocationExpression  ------------>  [childClass]
+  792▓ AssignmentStatement
+  568░ AssignmentStatement
+  840░ Identifier
   Search::::: global:BinaryTree:main:x -----------------> {[int], 3, []}
-  441▓ Identifier  ------------>  [int]
-  415░ MessageSend
-  271░ Identifier
+  840▓ Identifier  ------------>  [int]
+  869░ MessageSend
+  610░ Identifier
   Search::::: global:BinaryTree:main:instance -----------------> {[childClass], 4, []}
-  271▓ Identifier  ------------>  [childClass]
-  Finding with shadowing: global:BinaryTree:main:childClass
-  FOUND!: global:BinaryTree:main:childClass
-  415▓ MessageSend  ------------>  [childClass]
-  global:BinaryTree:main
-  [int] == [childClass]
-  AssignmentStatement: Type Error
-
-ERROR: Type checking failed for tests/minijava-symboltable-tests/correct-tests/ATwoClassesInstance.java (exit code: 1)
+  610▓ Identifier  ------------>  [childClass]
+  Finding with shadowing: global:childClass:method
+  FOUND!: global:childClass:method
+  869▓ MessageSend  ------------>  [int]
+  568▓ AssignmentStatement
+  518▓ MainClass ----------------- ------------>  [BinaryTree]
+  568░ TypeDeclaration
+  107░ ClassDeclaration
+  107▓ ClassDeclaration ----------------- ------------>  [childClass]
+  568▓ TypeDeclaration ----------------- ------------>  [childClass]
+  462▓ Goal
+  ✅ Program type checked successfully
