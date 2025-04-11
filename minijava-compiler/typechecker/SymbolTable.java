@@ -108,8 +108,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         if(classId == null || classId.isEmpty()){
             throw new IllegalArgumentException("Attempt to call method with null arguments");
         }
-        if (classInstances.containsKey(classId)) {
-            return classInstances.get(classId);
+        if (classes.containsKey(classId)) {
+            return classes.get(classId);
         }
         throw new RuntimeException("Attempted to find a Class that does not exist");
     }
@@ -119,7 +119,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             throw new IllegalArgumentException("Attempt to call method with null arguments");
         }
         if (!classInstances.containsKey(classInstanceId)) {
-            throw new RuntimeException("Attempted to find a Class Instance that does not exist");
+            throw new RuntimeException("Attempted to find a ClassInstance that does not exist");
         }
         return classInstances.get(classInstanceId);
     }
