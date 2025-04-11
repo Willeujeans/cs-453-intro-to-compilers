@@ -1,89 +1,5 @@
-2025-04-11 00:41:40
+2025-04-11 11:10:16
 === Typecheck < tests/minijava-symboltable-tests/correct-tests/BinaryTree.java ===
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:Remove:c_node
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:left
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:Print:current_node
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:SetLeft:ln
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:BT:Start:root
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:GetLeft
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:Insert:new_node
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:GetRight
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:right
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:SetRight:rn
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:Insert:current_node
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:Delete:parent_node
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:RemoveRight:c_node
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:RecPrint:node
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:Search:current_node
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:RemoveRight:p_node
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:Delete:current_node
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:Remove:p_node
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:RemoveLeft:p_node
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:RemoveLeft:c_node
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
-  ------------[Tree]
-  Updating: [][][][][]global:Tree:my_null
-  Updated: [!][!][!][!][!]Tree GOT [Tree]
-  ++++++++++++[Tree]
   -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
   global:BT -> {[BT], 10, []}
   global:Tree -> {[Tree], 44, []}
@@ -169,58 +85,60 @@
   BinaryTree -> {[BinaryTree], 1, []}
   Tree -> {[Tree], 44, []}
   -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
-  435░ Goal
-  867░ MainClass
-  371░ Statement
-  786░ Expression
-  636░ MessageSend
-  499░ PrimaryExpression
-  527░ AllocationExpression
-  BT
-  527▓ AllocationExpression  ------------>  [BT]
-  499▓ PrimaryExpression  ------------>  [BT]
-  [BT]
-  636▓ MessageSend  ------------>  [BT]
-  786▓ Expression  ------------>  [BT]
-  371▓ Statement
-  867▓ MainClass ----------------- ------------>  [BinaryTree]
-  547░ TypeDeclaration
-  356░ ClassDeclaration
-  697░ Statement
-  363░ AssignmentStatement
-  945░ Identifier
-  945▓ Identifier  ------------>  [Tree]
-  158░ Expression
-  871░ PrimaryExpression
-  905░ AllocationExpression
-  Tree
-  905▓ AllocationExpression  ------------>  [Tree]
-  871▓ PrimaryExpression  ------------>  [Tree]
-  158▓ Expression  ------------>  [Tree]
-  [Tree] == [Tree]
-  363▓ AssignmentStatement
-  697▓ Statement
-  638░ Statement
-  664░ AssignmentStatement
-  714░ Identifier
-  714▓ Identifier  ------------>  [boolean]
+  764░ Goal
+  588░ MainClass
+  357░ Statement
   151░ Expression
-  152░ MessageSend
-  850░ PrimaryExpression
-  701░ Identifier
-  701▓ Identifier  ------------>  [Tree]
-  850▓ PrimaryExpression  ------------>  [Tree]
+  549░ MessageSend
+  360░ PrimaryExpression
+  184░ AllocationExpression
+  BT
+  184▓ AllocationExpression  ------------>  [BT]
+  360▓ PrimaryExpression  ------------>  [BT]
+  [BT]
+  549▓ MessageSend  ------------>  [BT]
+  151▓ Expression  ------------>  [BT]
+  357▓ Statement
+  588▓ MainClass ----------------- ------------>  [BinaryTree]
+  635░ TypeDeclaration
+  269░ ClassDeclaration
+  349░ Statement
+  185░ AssignmentStatement
+  459░ Identifier
+  459▓ Identifier  ------------>  [Tree]
+  612░ Expression
+  208░ PrimaryExpression
+  895░ AllocationExpression
+  Tree
+  895▓ AllocationExpression  ------------>  [Tree]
+  208▓ PrimaryExpression  ------------>  [Tree]
+  612▓ Expression  ------------>  [Tree]
+  global:BT:Start
+  [Tree] == [Tree]
+  185▓ AssignmentStatement
+  349▓ Statement
+  287░ Statement
+  530░ AssignmentStatement
+  775░ Identifier
+  775▓ Identifier  ------------>  [boolean]
+  478░ Expression
+  908░ MessageSend
+  336░ PrimaryExpression
+  549░ Identifier
+  549▓ Identifier  ------------>  [Tree]
+  336▓ PrimaryExpression  ------------>  [Tree]
   [Tree]
-  238░ ExpressionList
-  874░ Expression
-  714░ PrimaryExpression
-  185░ IntegerLiteral
-  185▓ IntegerLiteral  ------------>  [int]
-  714▓ PrimaryExpression  ------------>  [int]
-  874▓ Expression  ------------>  [int]
-  238▓ ExpressionList
-  152▓ MessageSend  ------------>  [Tree]
-  151▓ Expression  ------------>  [Tree]
+  603░ ExpressionList
+  956░ Expression
+  454░ PrimaryExpression
+  337░ IntegerLiteral
+  337▓ IntegerLiteral  ------------>  [int]
+  454▓ PrimaryExpression  ------------>  [int]
+  956▓ Expression  ------------>  [int]
+  603▓ ExpressionList
+  908▓ MessageSend  ------------>  [Tree]
+  478▓ Expression  ------------>  [Tree]
+  global:BT:Start
   [boolean] == [Tree]
   AssignmentStatement: Type Error
 

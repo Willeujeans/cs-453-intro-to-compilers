@@ -11,7 +11,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.Vector;
 
-import jdk.nashorn.internal.ir.Block;
+// import jdk.nashorn.internal.ir.Block;
 import syntaxtree.*;
 import visitor.*;
 
@@ -37,13 +37,9 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         }
 
         for(String instanceKey : classInstances.keySet()){
-            System.out.println("------------" + declarations.get(instanceKey).type);
-            System.out.println("Updating: [][][][][]" + instanceKey);
             MyType instanceType = classInstances.get(instanceKey).type;
             MyType classType = classes.get(instanceType.getType()).type;
-            System.out.println("Updated: [!][!][!][!][!]" + instanceType.getType() + " GOT " + classType);
             declarations.get(instanceKey).type = classType;
-            System.out.println("++++++++++++" + declarations.get(instanceKey).type);
         }
     }
     
@@ -61,7 +57,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         return true;
     }
 
-    public boolean insertClass(String key, Symbol entry){
+    public boolean insertClass(String key, ClassSymbol entry){
         if(key == null || key.isEmpty() || entry == null){
             throw new IllegalArgumentException("Attempt to call method with null arguments");
         }
@@ -199,8 +195,12 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(MainClass n, String key) {
         // MainClass addition
-        insertDeclaration(key + bufferChar + n.f1.f0.toString(), new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
-        insertClass(n.f1.f0.toString(), new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
+        String classKey = key + bufferChar + n.f1.f0.toString();
+        String className = n.f1.f0.toString();
+        ClassSymbol classSymbol = new ClassSymbol(classKey, new MyType(n.f1.f0.toString()), n.f0.beginLine);
+        insertClass(className, classSymbol);
+        insertDeclaration(classKey, new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
+
         // Argument in mainClass addition
         String currentScope = key + bufferChar + n.f1.f0.toString() + bufferChar + "main";
         insertDeclaration(currentScope, new Symbol(new MyType("void"), n.f5.beginLine));
@@ -232,7 +232,9 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(ClassDeclaration n, String key) {
         String currentScope = key + bufferChar + n.f1.f0.toString();
-        insertClass(n.f1.f0.toString(), new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
+        String className = n.f1.f0.toString();
+        ClassSymbol classSymbol = new ClassSymbol(currentScope, new MyType(n.f1.f0.toString()), n.f0.beginLine);
+        insertClass(className, classSymbol);
         insertDeclaration(currentScope, new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
 
         n.f3.accept(this, currentScope);
@@ -257,8 +259,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         String childClassId = n.f1.f0.toString();
 
         String currentScope = key + bufferChar + parentClassId + bufferChar + childClassId;
-
-        insertClass(childClassId, new Symbol(new MyType(childClassId, parentClassId), n.f0.beginLine));
+        ClassSymbol classSymbol = new ClassSymbol(currentScope, new MyType(childClassId, parentClassId), n.f0.beginLine);
+        insertClass(childClassId, classSymbol);
         insertDeclaration(currentScope, new Symbol(new MyType(childClassId, parentClassId), n.f0.beginLine));
 
         n.f5.accept(this, currentScope);
@@ -382,9 +384,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     */
     @Override
     public Void visit(Identifier n, String key){
-
-        insertClassInstance(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
         
+        insertClassInstance(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
         insertDeclaration(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
         return null;
     }

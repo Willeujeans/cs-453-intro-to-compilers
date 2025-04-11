@@ -230,7 +230,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
 
         MyType idType = n.f0.accept(this, key);
         MyType expressionType = n.f2.accept(this, key);
-
+        System.out.println(key);
         System.out.println(idType + " == " + expressionType);
         if(!idType.checkIdentical(expressionType)){
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
