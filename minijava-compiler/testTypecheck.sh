@@ -1,50 +1,79 @@
 #!/bin/bash
 
-# Compile Java files first
-echo "Compiling Java sources..."
+# Configure run parameters
+MAX_FILES_PER_DIR=""  # Empty means no limit
+MAX_TOTAL_FILES=""    # Empty means no limit
+CURRENT_FILE_COUNT=0  # Global counter
 
-current_date_time="`date "+%Y-%m-%d %H:%M:%S"`";
+# Function to run tests in a directory
+run_tests() {
+    local test_dir="$1"
+    echo -e "\nRunning tests in ${test_dir}"
 
-javac Typecheck.java || echo "Compilation failed! Fix errors and try again."
+    # Create timestamp and clear previous results
+    local current_date_time="$(date "+%Y-%m-%d %H:%M:%S")"
+    echo "${current_date_time}" > "${test_dir}/test.txt"
 
-echo ""
-echo "Running SymbolTable tests"
-echo ""
+    # Process each Java file
+    local dir_file_count=0
+    for file in "${test_dir}"/*.java; do
+        # Check global total limit
+        if [[ -n "$MAX_TOTAL_FILES" && "$CURRENT_FILE_COUNT" -ge "$MAX_TOTAL_FILES" ]]; then
+            echo "Reached global file limit ($MAX_TOTAL_FILES), stopping..."
+            return
+        fi
 
-echo $current_date_time > tests/minijava-symboltable-tests/advanced-tests/test.txt
-java_files=(tests/minijava-symboltable-tests/advanced-tests/*.java)
-num_files=${#java_files[@]}
-more_java_files=(tests/minijava-symboltable-tests/advanced-tests/*.java)
-more_num_files=${#more_java_files[@]}
-num_files+=#$more_num_files
+        # Check per-directory limit
+        if [[ -n "$MAX_FILES_PER_DIR" && "$dir_file_count" -ge "$MAX_FILES_PER_DIR" ]]; then
+            echo "Reached per-directory limit ($MAX_FILES_PER_DIR) for ${test_dir}, moving to next directory..."
+            return
+        fi
 
-bar=""
-for ((i=0; i<num_files; i++)); do
-    bar+="."
-done
+        ((CURRENT_FILE_COUNT++))
+        ((dir_file_count++))
+        
+        echo -e "\nProcessing ${file} (Global: ${CURRENT_FILE_COUNT}"
+        echo "Directory: ${dir_file_count}/$(ls -1 "${test_dir}"/*.java | wc -l))"
+        
+        # Run type checker and capture output with line numbers for errors
+        {
+            echo "=== Typecheck < ${file} ==="
+            java Typecheck < "${file}" 2>&1 | awk '{print "  " $0}'
+            exit_code=${PIPESTATUS[0]}
+            
+            if [ ${exit_code} -ne 0 ]; then
+                echo -e "\nERROR: Type checking failed for ${file} (exit code: ${exit_code})"
+            fi
+        } | tee -a "${test_dir}/test.txt"
+        
+        echo "------------------------------------"
+    done
+}
 
-loading_string=""
-for file in tests/minijava-symboltable-tests/advanced-tests/*.java; do
-    clear
-    echo $bar
-    echo $loading_string
-    loading_string+="|"
+# Main script execution
+{
+    # Handle command line arguments
+    if [[ "$#" -gt 0 ]]; then
+        if [[ "$1" == "--per-dir" ]]; then
+            MAX_FILES_PER_DIR="$2"
+            echo "Limiting to $MAX_FILES_PER_DIR files per directory"
+        else
+            MAX_TOTAL_FILES="$1"
+            echo "Limiting to total $MAX_TOTAL_FILES files"
+        fi
+    fi
 
-    echo "Typecheck < $file" >> tests/minijava-symboltable-tests/advanced-tests/test.txt
-    java Typecheck < "$file" >> tests/minijava-symboltable-tests/advanced-tests/test.txt
-    echo "" >> tests/minijava-symboltable-tests/advanced-tests/test.txt
-done
+    # Compile Java files first
+    echo "Compiling Java sources..."
+    if ! javac Typecheck.java; then
+        echo "Compilation failed! Fix errors and try again."
+        exit 1
+    fi
 
-echo $current_date_time > tests/minijava-symboltable-tests/simple-tests/test.txt
-for file in tests/minijava-symboltable-tests/simple-tests/*.java; do
-    clear
-    echo $bar
-    echo $loading_string
-    loading_string+="|"
+    # Run tests for both directories
+    run_tests "tests/minijava-symboltable-tests/correct-tests"
+    run_tests "tests/minijava-symboltable-tests/incorrect-tests"
 
-    echo "Typecheck < $file" >> tests/minijava-symboltable-tests/simple-tests/test.txt
-    java Typecheck < "$file" >> tests/minijava-symboltable-tests/simple-tests/test.txt
-    echo "" >> tests/minijava-symboltable-tests/simple-tests/test.txt
-done
+} | tee "test_run.log"  # Save complete output to log file
 
-echo $bar
+echo -e "\nAll tests completed. Full output saved to test_run.log"
