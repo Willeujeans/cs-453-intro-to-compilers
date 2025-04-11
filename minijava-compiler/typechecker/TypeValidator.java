@@ -216,7 +216,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     public MyType visit(AssignmentStatement n, String key) {
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-
+        
         MyType idType = n.f0.accept(this, key);
         System.out.println(symbolTable.findClass(idType.getType()));
         

@@ -1,53 +1,29 @@
-2025-04-11 16:07:13
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/AllTypesAndStatements.java ===
+2025-04-11 17:37:00
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/AAATwoClassesInstanceInheritance.java ===
   Nothing to update here;
   -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
-  global:BinaryTree -> {[BinaryTree], 1, []}
-  global:BinaryTree:main -> {[void], 2, []}
-  global:BinaryTree:main:k -> {[int,[,]], 6, []}
-  global:BinaryTree:main:y -> {[boolean], 4, []}
-  global:BinaryTree:main:x -> {[int], 3, []}
-  global:BinaryTree:main:w -> {[boolean], 5, []}
-  global:BinaryTree:main:a -> {[String,[,]], 2, []}
+  global:superClass -> {[superClass], 1, []}
+  global:superClass:main -> {[void], 2, []}
+  global:superClass:main:a -> {[String,[,]], 2, []}
+  global:ParentClass:ChildClass -> {[ChildClass,ParentClass], 12, []}
+  global:superClass:ParentClass -> {[ParentClass,superClass], 6, []}
+  global:ParentClass:ChildClass:method -> {[int], 13, []}
+  global:superClass:ParentClass:method -> {[int], 7, []}
   -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
-  BinaryTree -> {[BinaryTree], 1, []}
+  ParentClass -> {[ParentClass,superClass], 6, []}
+  superClass -> {[superClass], 1, []}
+  ChildClass -> {[ChildClass,ParentClass], 12, []}
   -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
-  456░ Goal
-  152░ MainClass
-  356░ AssignmentStatement
-  844░ Identifier
-  Search::::: global:BinaryTree:main:y -----------------> {[boolean], 4, []}
-  844▓ Identifier  ------------>  [boolean]
-  java.lang.RuntimeException: Attempted to find a Class that does not exist
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/ATwoClassesInstanceInheritance.java ===
-  Instance key looks like: global:BinaryTree:main:instance
-  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
-  global:BinaryTree -> {[BinaryTree], 1, []}
-  global:ParentClass -> {[ParentClass], 10, []}
-  global:BinaryTree:main -> {[void], 2, []}
-  global:BinaryTree:main:x -> {[int], 3, []}
-  global:BinaryTree:main:a -> {[String,[,]], 2, []}
-  global:ParentClass:ChildClass -> {[ChildClass,ParentClass], 16, []}
-  global:BinaryTree:main:instance -> {[ParentClass], 4, []}
-  global:ParentClass:parentMethod -> {[int], 11, []}
-  global:ParentClass:ChildClass:method -> {[int], 17, []}
-  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
-  ParentClass -> {[ParentClass], 10, []}
-  ChildClass -> {[ChildClass,ParentClass], 16, []}
-  BinaryTree -> {[BinaryTree], 1, []}
-  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
-  547░ Goal
-  849░ MainClass
-  423░ AssignmentStatement
-  867░ Identifier
-  Search::::: global:BinaryTree:main:instance -----------------> {[ParentClass], 4, []}
-  867▓ Identifier  ------------>  [ParentClass]
-  {[ParentClass], 10, []}
-  571░ AllocationExpression
-  ChildClass
-  571▓ AllocationExpression  ------------>  [ChildClass,ParentClass]
-  global:BinaryTree:main
-  [ParentClass] == [ChildClass,ParentClass]
-  AssignmentStatement: Type Error
-
-ERROR: Type checking failed for tests/minijava-symboltable-tests/correct-tests/ATwoClassesInstanceInheritance.java (exit code: 1)
+  837░ Goal
+  907░ MainClass
+  907▓ MainClass ----------------------------->  [superClass]
+  417░ TypeDeclaration
+  781░ ClassExtendsDeclaration
+  781▓ ClassExtendsDeclaration ----------------------------->  [ParentClass,superClass]
+  417▓ TypeDeclaration ----------------------------->  [ParentClass,superClass]
+  730░ TypeDeclaration
+  798░ ClassExtendsDeclaration
+  798▓ ClassExtendsDeclaration ----------------------------->  [ChildClass,ParentClass]
+  730▓ TypeDeclaration ----------------------------->  [ChildClass,ParentClass]
+  837▓ Goal
+  ✅ Program type checked successfully
