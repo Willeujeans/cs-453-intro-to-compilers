@@ -1,10 +1,10 @@
-2025-04-10 21:35:27
+2025-04-10 23:09:03
 === Typecheck < tests/minijava-symboltable-tests/advanced-tests/AAAAclass_inheritance.java ===
   ------------[myChildClass]
   Updating: [][][][][]global:myParentClass:main:childInstance
   Updated: [!][!][!][!][!]myChildClass GOT [myChildClass,myParentClass]
   ++++++++++++[myChildClass,myParentClass]
-  ---Symbol-Table---
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
   global:myParentClass -> {[myParentClass], 1, []}
   global:myParentClass:main -> {[void], 2, []}
   global:myParentClass:main:a -> {[String,[,]], 2, []}
@@ -12,44 +12,34 @@
   global:myParentClass:myChildClass -> {[myChildClass,myParentClass], 10, []}
   global:myParentClass:myChildClass:x -> {[int], 11, []}
   global:myParentClass:main:childInstance -> {[myChildClass,myParentClass], 4, []}
-  ------------------
-  356░ Goal
-  494░ MainClass
-  757░ Statement
-  484░ AssignmentStatement
-  965░ Identifier
-    >Searchkey: [global:myParentClass:main:x]
-  965▓ Identifier  ------------>  [int]
-  190░ Expression
-  217░ PrimaryExpression
-  672░ IntegerLiteral
-  672▓ IntegerLiteral  ------------>  [int]
-  217▓ PrimaryExpression  ------------>  [int]
-  190▓ Expression  ------------>  [int]
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  myParentClass -> {[myParentClass], 1, []}
+  myChildClass -> {[myChildClass,myParentClass], 10, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  454░ Goal
+  878░ MainClass
+  703░ Statement
+  605░ AssignmentStatement
+  545░ Identifier
+  545▓ Identifier  ------------>  [int]
+  667░ Expression
+  256░ PrimaryExpression
+  925░ IntegerLiteral
+  925▓ IntegerLiteral  ------------>  [int]
+  256▓ PrimaryExpression  ------------>  [int]
+  667▓ Expression  ------------>  [int]
   [int] == [int]
-  484▓ AssignmentStatement
-  757▓ Statement
-  616░ Statement
-  549░ AssignmentStatement
-  663░ Identifier
-    >Searchkey: [global:myParentClass:main:childInstance]
-  663▓ Identifier  ------------>  [myChildClass,myParentClass]
-  316░ Expression
-  991░ PrimaryExpression
-  584░ AllocationExpression
-  584▓ AllocationExpression  ------------>  [myChildClass,myParentClass]
-  991▓ PrimaryExpression  ------------>  [myChildClass,myParentClass]
-  316▓ Expression  ------------>  [myChildClass,myParentClass]
-  [myChildClass,myParentClass] == [myChildClass,myParentClass]
-  549▓ AssignmentStatement
-  616▓ Statement
-  494▓ MainClass ----------------- ------------>  [myParentClass]
-  511░ TypeDeclaration
-  521░ ClassExtendsDeclaration
-  521▓ ClassExtendsDeclaration ----------------- ------------>  [myChildClass,myParentClass]
-  511▓ TypeDeclaration ----------------- ------------>  [myChildClass,myParentClass]
-  356▓ Goal
-  ✅ Program type checked successfully
+  605▓ AssignmentStatement
+  703▓ Statement
+  602░ Statement
+  317░ AssignmentStatement
+  129░ Identifier
+  129▓ Identifier  ------------>  [myChildClass,myParentClass]
+  929░ Expression
+  786░ PrimaryExpression
+  921░ AllocationExpression
+  myChildClass
+  java.lang.RuntimeException: Attempted to find a Class that does not exist
 === Typecheck < tests/minijava-symboltable-tests/advanced-tests/AAATreeVisitor.java ===
   ------------[Tree]
   Updating: [][][][][]global:Tree:Remove:c_node
@@ -159,7 +149,7 @@
   Updating: [][][][][]global:Tree:my_null
   Updated: [!][!][!][!][!]Tree GOT [Tree]
   ++++++++++++[Tree]
-  ---Symbol-Table---
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
   global:TV -> {[TV], 11, []}
   global:Tree -> {[Tree], 51, []}
   global:Visitor -> {[Visitor], 331, []}
@@ -253,11 +243,19 @@
   global:Tree:Insert:current_node -> {[Tree], 142, []}
   global:Visitor:MyVisitor:visit:n -> {[Tree], 356, []}
   global:Visitor:MyVisitor:visit:nti -> {[int], 357, []}
-  ------------------
-  924░ Goal
-  294░ MainClass
-  523░ Statement
-  302░ Expression
-  795░ MessageSend
-  ClassKey Start
-  java.lang.NullPointerException
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  TV -> {[TV], 11, []}
+  Visitor -> {[Visitor], 331, []}
+  Tree -> {[Tree], 51, []}
+  MyVisitor -> {[MyVisitor,Visitor], 354, []}
+  AAATreeVisitor -> {[AAATreeVisitor], 5, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  982░ Goal
+  999░ MainClass
+  372░ Statement
+  331░ Expression
+  985░ MessageSend
+  461░ PrimaryExpression
+  839░ AllocationExpression
+  TV
+  java.lang.RuntimeException: Attempted to find a Class that does not exist

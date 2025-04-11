@@ -108,10 +108,10 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         if(classId == null || classId.isEmpty()){
             throw new IllegalArgumentException("Attempt to call method with null arguments");
         }
-        if (!classInstances.containsKey(classId)) {
-            throw new RuntimeException("Attempted to find a Class that does not exist");
+        if (classInstances.containsKey(classId)) {
+            return classInstances.get(classId);
         }
-        return classInstances.get(classId);
+        throw new RuntimeException("Attempted to find a Class that does not exist");
     }
 
     public Symbol findClassInstance(String classInstanceId){
@@ -119,7 +119,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             throw new IllegalArgumentException("Attempt to call method with null arguments");
         }
         if (!classInstances.containsKey(classInstanceId)) {
-            throw new RuntimeException("Attempted to find a Class that does not exist");
+            throw new RuntimeException("Attempted to find a Class Instance that does not exist");
         }
         return classInstances.get(classInstanceId);
     }
@@ -142,8 +142,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     }
 
     public void prettyPrint(){
-        System.out.println("---Symbol-Table---");
-        StringBuilder output = new StringBuilder();
+        System.out.println("-=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-");
         ArrayList<String> keys = new ArrayList<String>(declarations.keySet());
         Collections.sort(keys, Comparator.comparingInt(String::length));
 
@@ -151,7 +150,15 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             System.out.print(key);
             System.out.print(" -> " + declarations.get(key) + "\n");
         }
-        System.out.println("------------------");
+
+        System.out.println("-=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-");
+
+        for(String key : classes.keySet()){
+            System.out.print(key);
+            System.out.print(" -> " + classes.get(key) + "\n");
+        }
+
+        System.out.println("-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-");
     }
 
     /**
