@@ -11,14 +11,13 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.Vector;
 
-// import jdk.nashorn.internal.ir.Block;
 import syntaxtree.*;
 import visitor.*;
 
 // Symbol Table Visitor: Traverses AST to create symbol table.
 public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public HashMap<String, Symbol> declarations;
-    public HashMap<String, Symbol> classes;
+    public HashMap<String, ClassSymbol> classes;
     public HashMap<String, Symbol> classInstances;
     public String bufferChar = ":";
 
@@ -26,7 +25,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
     public SymbolTable() {
         declarations = new HashMap<String, Symbol>();
-        classes = new HashMap<String, Symbol>();
+        classes = new HashMap<String, ClassSymbol>();
         classInstances = new HashMap<String, Symbol>();
     }
 
@@ -101,7 +100,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         return null;
     }
 
-    public Symbol findClass(String classId){
+    public ClassSymbol findClass(String classId){
         if(classId == null || classId.isEmpty()){
             throw new IllegalArgumentException("Attempt to call method with null arguments");
         }

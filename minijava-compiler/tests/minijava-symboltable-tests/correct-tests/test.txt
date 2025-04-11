@@ -1,4 +1,4 @@
-2025-04-11 11:10:16
+2025-04-11 11:45:57
 === Typecheck < tests/minijava-symboltable-tests/correct-tests/BinaryTree.java ===
   -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
   global:BT -> {[BT], 10, []}
@@ -85,61 +85,42 @@
   BinaryTree -> {[BinaryTree], 1, []}
   Tree -> {[Tree], 44, []}
   -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
-  764░ Goal
-  588░ MainClass
-  357░ Statement
-  151░ Expression
-  549░ MessageSend
-  360░ PrimaryExpression
-  184░ AllocationExpression
+  357░ Goal
+  246░ MainClass
+  771░ Statement
+  411░ MessageSend
+  596░ AllocationExpression
   BT
-  184▓ AllocationExpression  ------------>  [BT]
-  360▓ PrimaryExpression  ------------>  [BT]
-  [BT]
-  549▓ MessageSend  ------------>  [BT]
-  151▓ Expression  ------------>  [BT]
-  357▓ Statement
-  588▓ MainClass ----------------- ------------>  [BinaryTree]
-  635░ TypeDeclaration
-  269░ ClassDeclaration
-  349░ Statement
-  185░ AssignmentStatement
-  459░ Identifier
-  459▓ Identifier  ------------>  [Tree]
-  612░ Expression
-  208░ PrimaryExpression
-  895░ AllocationExpression
+  596▓ AllocationExpression  ------------>  [BT]
+  411▓ MessageSend  ------------>  [void]
+  771▓ Statement
+  246▓ MainClass ----------------- ------------>  [BinaryTree]
+  678░ TypeDeclaration
+  683░ ClassDeclaration
+  578░ Statement
+  173░ AssignmentStatement
+  251░ Identifier
+  Finding: global:BT:Start:root
+  251▓ Identifier  ------------>  [Tree]
+  239░ AllocationExpression
   Tree
-  895▓ AllocationExpression  ------------>  [Tree]
-  208▓ PrimaryExpression  ------------>  [Tree]
-  612▓ Expression  ------------>  [Tree]
+  239▓ AllocationExpression  ------------>  [Tree]
+  173▓ AssignmentStatement
+  578▓ Statement
+  171░ Statement
+  291░ AssignmentStatement
+  307░ Identifier
+  Finding: global:BT:Start:ntb
+  307▓ Identifier  ------------>  [boolean]
+  991░ MessageSend
+  157░ Identifier
+  Finding: global:BT:Start:root
+  157▓ Identifier  ------------>  [Tree]
+  192░ ExpressionList
+  192▓ ExpressionList
+  991▓ MessageSend  ------------>  [int]
   global:BT:Start
-  [Tree] == [Tree]
-  185▓ AssignmentStatement
-  349▓ Statement
-  287░ Statement
-  530░ AssignmentStatement
-  775░ Identifier
-  775▓ Identifier  ------------>  [boolean]
-  478░ Expression
-  908░ MessageSend
-  336░ PrimaryExpression
-  549░ Identifier
-  549▓ Identifier  ------------>  [Tree]
-  336▓ PrimaryExpression  ------------>  [Tree]
-  [Tree]
-  603░ ExpressionList
-  956░ Expression
-  454░ PrimaryExpression
-  337░ IntegerLiteral
-  337▓ IntegerLiteral  ------------>  [int]
-  454▓ PrimaryExpression  ------------>  [int]
-  956▓ Expression  ------------>  [int]
-  603▓ ExpressionList
-  908▓ MessageSend  ------------>  [Tree]
-  478▓ Expression  ------------>  [Tree]
-  global:BT:Start
-  [boolean] == [Tree]
+  [boolean] == [int]
   AssignmentStatement: Type Error
 
 ERROR: Type checking failed for tests/minijava-symboltable-tests/correct-tests/BinaryTree.java (exit code: 1)
