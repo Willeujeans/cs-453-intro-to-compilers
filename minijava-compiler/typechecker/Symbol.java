@@ -12,6 +12,12 @@ public class Symbol {
         this.lineDeclared = lineDeclared;
     }
 
+    public Symbol(Symbol other){
+        this.type = new MyType(other.type);
+        this.lineDeclared = other.lineDeclared;
+        this.lineUsed = new ArrayList<>(other.lineUsed);
+    }
+
     public void addLineUsed(int lineNumber){
         if(!lineUsed.contains(lineNumber)){
             lineUsed.add(lineNumber);

@@ -1,4 +1,4 @@
-class Factorial{
+class AAAFactorial{
     public static void main(String[] a){
         System.out.println(new BabyFac().ComputeFac(10));
     }
