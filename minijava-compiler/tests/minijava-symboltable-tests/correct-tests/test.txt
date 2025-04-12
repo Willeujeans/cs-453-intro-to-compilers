@@ -1,45 +1,44 @@
-2025-04-12 11:19:23
+2025-04-12 15:47:15
 === Typecheck < tests/minijava-symboltable-tests/correct-tests/AAAFactorial.java ===
   Nothing to update here;
-  195░ Goal
-  654░ MainClass
-  408░ MessageSend
-  172░ AllocationExpression
-  AllocationExpression]==[BabyFac
-  172▓ AllocationExpression  ------------>  [Fac,BabyFac]
-  408▓ MessageSend  ------------>  [int]
-  654▓ MainClass ----------------------------->  [AAAFactorial]
-  118░ TypeDeclaration
-  208░ ClassDeclaration
-  458░ Identifier
-  458▓ Identifier  ------------>  [int]
-  942░ CompareExpression
-  776░ Identifier
-  776▓ Identifier  ------------>  [int]
-  942▓ CompareExpression  ------------>  [boolean]
-  387░ AssignmentStatement
-  121░ Identifier
-  121▓ Identifier  ------------>  [int]
-  387▓ AssignmentStatement
-  119░ AssignmentStatement
-  268░ Identifier
-  268▓ Identifier  ------------>  [int]
-  922░ Identifier
-  922▓ Identifier  ------------>  [int]
-  208░ MessageSend
-  350░ ThisExpression
-  350▓ ThisExpression  ------------>  [Fac]
-  465░ Identifier
-  465▓ Identifier  ------------>  [int]
-  208▓ MessageSend  ------------>  [int]
-  119▓ AssignmentStatement
-  955░ Identifier
-  955▓ Identifier  ------------>  [int]
-  208▓ ClassDeclaration ----------------------------->  [Fac]
-  118▓ TypeDeclaration ----------------------------->  [Fac]
-  115░ TypeDeclaration
-  929░ ClassExtendsDeclaration
-  929▓ ClassExtendsDeclaration ----------------------------->  [Fac,BabyFac]
-  115▓ TypeDeclaration ----------------------------->  [Fac,BabyFac]
-  195▓ Goal
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
+  global:Fac -> {[Fac], 7, []}
+  global:Fac:BabyFac -> {[Fac,BabyFac], 18, []}
+  global:AAAFactorial -> {[AAAFactorial], 1, []}
+  global:Fac:ComputeFac -> {[int], 8, []}
+  global:AAAFactorial:main -> {[void], 2, []}
+  global:Fac:ComputeFac:num -> {[int], 8, []}
+  global:AAAFactorial:main:a -> {[String,[,]], 2, []}
+  global:Fac:ComputeFac:num_aux -> {[int], 9, []}
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  AAAFactorial -> {[AAAFactorial], 1, []}
+  Fac -> {[Fac], 7, []}
+  BabyFac -> {[Fac,BabyFac], 18, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  912░ Goal
+  836░ MainClass
+  318░ MessageSend
+  318▓ MessageSend  ------------>  [int]
+  836▓ MainClass ----------------------------->  [AAAFactorial]
+  279░ ClassDeclaration
+  classKey : Fac
+  classKey : {[Fac], 7, []}
+  classKey : [Fac]
+  classKey : global:Fac
+  815░ AssignmentStatement
+  815▓ AssignmentStatement
+  192░ AssignmentStatement
+  503░ MessageSend
+  478░ ThisExpression
+  478▓ ThisExpression  ------------>  [Fac]
+  503▓ MessageSend  ------------>  [int]
+  192▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  279▓ ClassDeclaration ----------------------------->  [Fac]
+  460░ ClassExtendsDeclaration
+  classKey : BabyFac
+  460▓ ClassExtendsDeclaration ----------------------------->  [Fac,BabyFac]
+  912▓ Goal
   ✅ Program type checked successfully

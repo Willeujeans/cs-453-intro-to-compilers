@@ -85,6 +85,10 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         return true;
     }
 
+    public HashMap getClasses(){
+        return classes;
+    }
+
     public HashSet<String> getClassMethods(){
         return classMethods;
     }
