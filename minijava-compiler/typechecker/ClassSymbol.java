@@ -12,4 +12,9 @@ public class ClassSymbol extends Symbol{
         super(type, lineDeclared);
         declarationKey = newKey;
     }
+
+    public MyType updateChildrenClasses(SymbolTable symbolTable, MyType argumentType){
+        type = updateChildrenClasses(symbolTable, argumentType);
+        return type;
+    }
 }

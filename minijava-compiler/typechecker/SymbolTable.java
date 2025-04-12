@@ -29,7 +29,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         classInstances = new HashMap<String, Symbol>();
     }
 
-    public void updateClassInstances(){
+    public void updateClassInstances(String... className){
         if(classes.isEmpty() || classInstances.isEmpty()){
             System.out.println("Nothing to update here;");
             return;
@@ -121,6 +121,48 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         return classInstances.get(classInstanceId);
     }
 
+    public void updateClasses(String parentClassId, String childClassId){
+        for(ClassSymbol each : classes.values()){
+            if(each.type.type_array.contains(childClassId)){
+                each.type.type_array.insertElementAt(parentClassId, 0);
+            }
+        }
+    }
+
+    public void updateClassKeys() {
+        // Create a copy of declaration keys to avoid concurrent modification
+        List<String> originalDeclarationKeys = new ArrayList<>(declarations.keySet());
+
+        for (String classKey : classes.keySet()) {
+            for (String declarationKey : originalDeclarationKeys) {
+                System.out.println("<====" + classKey);
+
+                List<String> typeArray = classes.get(classKey).type.type_array;
+                String classKeyWithInheritance = String.join(bufferChar, typeArray);
+
+                String[] splitString = declarationKey.split(bufferChar);
+                List<String> newDeclarationKey = new ArrayList();
+                for(String each : splitString){
+                    if(each.equals(classKey)){
+                        newDeclarationKey.add(classKeyWithInheritance);
+                    }else{
+                        newDeclarationKey.add(each);
+                    }
+                }
+                String newDeclarationKeyJoined = String.join(bufferChar, newDeclarationKey);
+                System.out.println(newDeclarationKeyJoined);
+
+                if (!newDeclarationKeyJoined.equals(declarationKey)) {
+                    Symbol symbolToStore = declarations.get(declarationKey);
+                    declarations.remove(declarationKey);
+                    declarations.put(newDeclarationKeyJoined, new Symbol(symbolToStore));
+                    System.out.println("====>" + newDeclarationKeyJoined);
+                }
+            }
+        }
+        System.out.println("FINISHED replacing all keys");
+    }
+
     public Symbol getNearestClass(String key) {
         String[] keyFragments = key.split(bufferChar);
 
@@ -168,6 +210,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         n.f0.accept(this, key);
         n.f1.accept(this, key);
         n.f2.accept(this, key);
+        updateClassKeys();
         updateClassInstances();
         return null;
     }
@@ -258,10 +301,13 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         String parentClassId = n.f3.f0.toString();
         String childClassId = n.f1.f0.toString();
 
-        String currentScope = key + bufferChar + parentClassId + bufferChar + childClassId;
-        ClassSymbol classSymbol = new ClassSymbol(currentScope, new MyType(childClassId, parentClassId), n.f0.beginLine);
+        updateClasses(parentClassId, childClassId);
+
+        ClassSymbol classSymbol = new ClassSymbol(childClassId, new MyType(parentClassId, childClassId), n.f0.beginLine);
         insertClass(childClassId, classSymbol);
-        insertDeclaration(currentScope, new Symbol(new MyType(childClassId, parentClassId), n.f0.beginLine));
+        
+        String currentScope = key + bufferChar + childClassId;
+        insertDeclaration(currentScope, new Symbol(new MyType(parentClassId, childClassId), n.f0.beginLine));
 
         n.f5.accept(this, currentScope);
         n.f6.accept(this, currentScope);
@@ -384,7 +430,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     */
     @Override
     public Void visit(Identifier n, String key){
-        
         insertClassInstance(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
         insertDeclaration(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
         return null;

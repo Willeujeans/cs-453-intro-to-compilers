@@ -12,6 +12,10 @@ public class MyType {
         this.type_array = new Vector<>(Arrays.asList(components));
     }
 
+    public MyType(MyType other) {
+        this.type_array = new Vector<String>(other.type_array);
+    }
+
     public String getType() {
         if(type_array.isEmpty() || type_array == null){
             return null;

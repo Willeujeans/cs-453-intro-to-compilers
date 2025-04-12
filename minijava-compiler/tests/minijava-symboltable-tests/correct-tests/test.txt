@@ -1,29 +1,172 @@
-2025-04-11 17:37:00
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/AAATwoClassesInstanceInheritance.java ===
+2025-04-11 20:37:26
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/AAAThreeInheritance.java ===
+  <====mainClass
+  global:parentClass:parentClassMethod
+  <====mainClass
+  global:childClass:childClassMethod
+  <====mainClass
+  global:SuperClass:superClassMethod
+  <====mainClass
+  global:mainClass
+  <====mainClass
+  global:mainClass:main:a
+  <====mainClass
+  global:childClass
+  <====mainClass
+  global:SuperClass:x
+  <====mainClass
+  global:parentClass
+  <====mainClass
+  global:SuperClass
+  <====mainClass
+  global:UltraClass:ultraClassMethod
+  <====mainClass
+  global:mainClass:main
+  <====mainClass
+  global:UltraClass
+  <====UltraClass
+  global:parentClass:parentClassMethod
+  <====UltraClass
+  global:childClass:childClassMethod
+  <====UltraClass
+  global:SuperClass:superClassMethod
+  <====UltraClass
+  global:mainClass
+  <====UltraClass
+  global:mainClass:main:a
+  <====UltraClass
+  global:childClass
+  <====UltraClass
+  global:SuperClass:x
+  <====UltraClass
+  global:parentClass
+  <====UltraClass
+  global:SuperClass
+  <====UltraClass
+  global:UltraClass:ultraClassMethod
+  <====UltraClass
+  global:mainClass:main
+  <====UltraClass
+  global:UltraClass
+  <====SuperClass
+  global:parentClass:parentClassMethod
+  <====SuperClass
+  global:childClass:childClassMethod
+  <====SuperClass
+  global:UltraClass:SuperClass:superClassMethod
+  ====>global:UltraClass:SuperClass:superClassMethod
+  <====SuperClass
+  global:mainClass
+  <====SuperClass
+  global:mainClass:main:a
+  <====SuperClass
+  global:childClass
+  <====SuperClass
+  global:UltraClass:SuperClass:x
+  ====>global:UltraClass:SuperClass:x
+  <====SuperClass
+  global:parentClass
+  <====SuperClass
+  global:UltraClass:SuperClass
+  ====>global:UltraClass:SuperClass
+  <====SuperClass
+  global:UltraClass:ultraClassMethod
+  <====SuperClass
+  global:mainClass:main
+  <====SuperClass
+  global:UltraClass
+  <====parentClass
+  global:UltraClass:SuperClass:parentClass:parentClassMethod
+  ====>global:UltraClass:SuperClass:parentClass:parentClassMethod
+  <====parentClass
+  global:childClass:childClassMethod
+  <====parentClass
+  global:SuperClass:superClassMethod
+  <====parentClass
+  global:mainClass
+  <====parentClass
+  global:mainClass:main:a
+  <====parentClass
+  global:childClass
+  <====parentClass
+  global:SuperClass:x
+  <====parentClass
+  global:UltraClass:SuperClass:parentClass
+  ====>global:UltraClass:SuperClass:parentClass
+  <====parentClass
+  global:SuperClass
+  <====parentClass
+  global:UltraClass:ultraClassMethod
+  <====parentClass
+  global:mainClass:main
+  <====parentClass
+  global:UltraClass
+  <====childClass
+  global:parentClass:parentClassMethod
+  <====childClass
+  global:UltraClass:SuperClass:parentClass:childClass:childClassMethod
+  ====>global:UltraClass:SuperClass:parentClass:childClass:childClassMethod
+  <====childClass
+  global:SuperClass:superClassMethod
+  <====childClass
+  global:mainClass
+  <====childClass
+  global:mainClass:main:a
+  <====childClass
+  global:UltraClass:SuperClass:parentClass:childClass
+  ====>global:UltraClass:SuperClass:parentClass:childClass
+  <====childClass
+  global:SuperClass:x
+  <====childClass
+  global:parentClass
+  <====childClass
+  global:SuperClass
+  <====childClass
+  global:UltraClass:ultraClassMethod
+  <====childClass
+  global:mainClass:main
+  <====childClass
+  global:UltraClass
+  FINISHED replacing all keys
   Nothing to update here;
   -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
-  global:superClass -> {[superClass], 1, []}
-  global:superClass:main -> {[void], 2, []}
-  global:superClass:main:a -> {[String,[,]], 2, []}
-  global:ParentClass:ChildClass -> {[ChildClass,ParentClass], 12, []}
-  global:superClass:ParentClass -> {[ParentClass,superClass], 6, []}
-  global:ParentClass:ChildClass:method -> {[int], 13, []}
-  global:superClass:ParentClass:method -> {[int], 7, []}
+  global:mainClass -> {[mainClass], 1, []}
+  global:UltraClass -> {[UltraClass], 25, []}
+  global:mainClass:main -> {[void], 2, []}
+  global:mainClass:main:a -> {[String,[,]], 2, []}
+  global:UltraClass:SuperClass -> {[UltraClass,SuperClass], 18, []}
+  global:UltraClass:SuperClass:x -> {[int], 19, []}
+  global:UltraClass:ultraClassMethod -> {[int], 26, []}
+  global:UltraClass:SuperClass:parentClass -> {[SuperClass,parentClass], 12, []}
+  global:UltraClass:SuperClass:superClassMethod -> {[int], 20, []}
+  global:UltraClass:SuperClass:parentClass:childClass -> {[parentClass,childClass], 6, []}
+  global:UltraClass:SuperClass:parentClass:parentClassMethod -> {[int], 13, []}
+  global:UltraClass:SuperClass:parentClass:childClass:childClassMethod -> {[int], 7, []}
   -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
-  ParentClass -> {[ParentClass,superClass], 6, []}
-  superClass -> {[superClass], 1, []}
-  ChildClass -> {[ChildClass,ParentClass], 12, []}
+  mainClass -> {[mainClass], 1, []}
+  UltraClass -> {[UltraClass], 25, []}
+  SuperClass -> {[UltraClass,SuperClass], 18, []}
+  parentClass -> {[UltraClass,SuperClass,parentClass], 12, []}
+  childClass -> {[UltraClass,SuperClass,parentClass,childClass], 6, []}
   -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
-  837░ Goal
-  907░ MainClass
-  907▓ MainClass ----------------------------->  [superClass]
-  417░ TypeDeclaration
-  781░ ClassExtendsDeclaration
-  781▓ ClassExtendsDeclaration ----------------------------->  [ParentClass,superClass]
-  417▓ TypeDeclaration ----------------------------->  [ParentClass,superClass]
-  730░ TypeDeclaration
-  798░ ClassExtendsDeclaration
-  798▓ ClassExtendsDeclaration ----------------------------->  [ChildClass,ParentClass]
-  730▓ TypeDeclaration ----------------------------->  [ChildClass,ParentClass]
-  837▓ Goal
+  416░ Goal
+  271░ MainClass
+  271▓ MainClass ----------------------------->  [mainClass]
+  723░ TypeDeclaration
+  988░ ClassExtendsDeclaration
+  988▓ ClassExtendsDeclaration ----------------------------->  [UltraClass,SuperClass,parentClass,childClass]
+  723▓ TypeDeclaration ----------------------------->  [UltraClass,SuperClass,parentClass,childClass]
+  763░ TypeDeclaration
+  176░ ClassExtendsDeclaration
+  176▓ ClassExtendsDeclaration ----------------------------->  [UltraClass,SuperClass,parentClass]
+  763▓ TypeDeclaration ----------------------------->  [UltraClass,SuperClass,parentClass]
+  954░ TypeDeclaration
+  204░ ClassExtendsDeclaration
+  204▓ ClassExtendsDeclaration ----------------------------->  [UltraClass,SuperClass]
+  954▓ TypeDeclaration ----------------------------->  [UltraClass,SuperClass]
+  441░ TypeDeclaration
+  394░ ClassDeclaration
+  394▓ ClassDeclaration ----------------------------->  [UltraClass]
+  441▓ TypeDeclaration ----------------------------->  [UltraClass]
+  416▓ Goal
   ✅ Program type checked successfully
