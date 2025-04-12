@@ -41,7 +41,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             MyType instanceType = classInstances.get(instanceKey).type;
             MyType classType = classes.get(instanceType.getType()).type;
             declarations.get(instanceKey).type = classType;
-            System.out.println("Instance key looks like: " + instanceKey);
         }
     }
     
@@ -83,7 +82,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             System.exit(1);
         }
         classMethods.add(key);
-        System.out.println("ADDED: " + key);
         return true;
     }
 
@@ -118,6 +116,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
                 return declarations.get(currentKey);
             }
         }
+        System.out.println("Could not find key: Type Error");
+        System.exit(1);
         return null;
     }
 

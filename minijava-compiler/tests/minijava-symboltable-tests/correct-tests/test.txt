@@ -1,283 +1,43 @@
-2025-04-12 11:04:16
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/AAAThreeInheritance.java ===
-  ADDED: global:childClass:method
-  ADDED: global:parentClass:method
-  ADDED: global:SuperClass:method
-  ADDED: global:UltraClass:method
-  Instance key looks like: global:mainClass:main:child
-  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
-  global:mainClass -> {[mainClass], 1, []}
-  global:UltraClass -> {[UltraClass], 27, []}
-  global:mainClass:main -> {[void], 2, []}
-  global:mainClass:main:a -> {[String,[,]], 2, []}
-  global:UltraClass:method -> {[int], 28, []}
-  global:mainClass:main:child -> {[UltraClass,SuperClass,parentClass,childClass], 3, []}
-  global:UltraClass:SuperClass -> {[UltraClass,SuperClass], 20, []}
-  global:UltraClass:SuperClass:x -> {[int], 21, []}
-  global:UltraClass:SuperClass:method -> {[int], 22, []}
-  global:UltraClass:SuperClass:parentClass -> {[SuperClass,parentClass], 14, []}
-  global:UltraClass:SuperClass:parentClass:method -> {[int], 15, []}
-  global:UltraClass:SuperClass:parentClass:childClass -> {[parentClass,childClass], 8, []}
-  global:UltraClass:SuperClass:parentClass:childClass:method -> {[int], 9, []}
-  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
-  mainClass -> {[mainClass], 1, []}
-  UltraClass -> {[UltraClass], 27, []}
-  SuperClass -> {[UltraClass,SuperClass], 20, []}
-  parentClass -> {[UltraClass,SuperClass,parentClass], 14, []}
-  childClass -> {[UltraClass,SuperClass,parentClass,childClass], 8, []}
-  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
-  Overload check: Type Error
-
-ERROR: Type checking failed for tests/minijava-symboltable-tests/correct-tests/AAAThreeInheritance.java (exit code: 1)
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/AABubbleSort.java ===
-  ADDED: global:BBS:Start
-  ADDED: global:BBS:Sort
-  ADDED: global:BBS:Print
-  ADDED: global:BBS:Init
+2025-04-12 11:15:32
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/AAAFactorial.java ===
   Nothing to update here;
-  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
-  global:BBS -> {[BBS], 11, []}
-  global:BBS:Init -> {[int], 75, []}
-  global:BBS:Sort -> {[int], 30, []}
-  global:BBS:size -> {[int], 14, []}
-  global:BBS:Print -> {[int], 64, []}
-  global:BBS:Start -> {[int], 18, []}
-  global:BBS:Sort:j -> {[int], 38, []}
-  global:BBS:number -> {[int,[]], 13, []}
-  global:BBS:Sort:i -> {[int], 32, []}
-  global:BBS:Sort:t -> {[int], 39, []}
-  global:BBS:Print:j -> {[int], 65, []}
-  global:BBS:Init:sz -> {[int], 75, []}
-  global:BBS:Sort:nt -> {[int], 31, []}
-  global:AABubbleSort -> {[AABubbleSort], 1, []}
-  global:BBS:Start:sz -> {[int], 18, []}
-  global:BBS:Sort:aux02 -> {[int], 33, []}
-  global:BBS:Sort:aux05 -> {[int], 35, []}
-  global:BBS:Sort:aux04 -> {[int], 34, []}
-  global:BBS:Sort:aux07 -> {[int], 37, []}
-  global:BBS:Sort:aux06 -> {[int], 36, []}
-  global:BBS:Start:aux01 -> {[int], 19, []}
-  global:AABubbleSort:main -> {[void], 2, []}
-  global:AABubbleSort:main:a -> {[String,[,]], 2, []}
-  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
-  AABubbleSort -> {[AABubbleSort], 1, []}
-  BBS -> {[BBS], 11, []}
-  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
-  878░ Goal
-  745░ MainClass
-  237░ MessageSend
-  985░ AllocationExpression
-  AllocationExpression]==[BBS
-  985▓ AllocationExpression  ------------>  [BBS]
-  Finding with shadowing: global:BBS:Start
-  FOUND!: global:BBS:Start
-  237▓ MessageSend  ------------>  [int]
-  745▓ MainClass ----------------------------->  [AABubbleSort]
-  859░ TypeDeclaration
-  498░ ClassDeclaration
-  843░ AssignmentStatement
-  793░ Identifier
-  793▓ Identifier  ------------>  [int]
-  400░ MessageSend
-  162░ ThisExpression
-  162▓ ThisExpression  ------------>  [BBS]
-  Finding with shadowing: global:BBS:Init
-  FOUND!: global:BBS:Init
-  800░ Identifier
-  800▓ Identifier  ------------>  [int]
-  400▓ MessageSend  ------------>  [int]
-  843▓ AssignmentStatement
-  148░ AssignmentStatement
-  627░ Identifier
-  627▓ Identifier  ------------>  [int]
-  282░ MessageSend
-  234░ ThisExpression
-  234▓ ThisExpression  ------------>  [BBS]
-  Finding with shadowing: global:BBS:Print
-  FOUND!: global:BBS:Print
-  282▓ MessageSend  ------------>  [int]
-  148▓ AssignmentStatement
-  358░ AssignmentStatement
-  653░ Identifier
-  653▓ Identifier  ------------>  [int]
-  656░ MessageSend
-  690░ ThisExpression
-  690▓ ThisExpression  ------------>  [BBS]
-  Finding with shadowing: global:BBS:Sort
-  FOUND!: global:BBS:Sort
-  656▓ MessageSend  ------------>  [int]
-  358▓ AssignmentStatement
-  502░ AssignmentStatement
-  480░ Identifier
-  480▓ Identifier  ------------>  [int]
-  105░ MessageSend
-  945░ ThisExpression
-  945▓ ThisExpression  ------------>  [BBS]
-  Finding with shadowing: global:BBS:Print
-  FOUND!: global:BBS:Print
-  105▓ MessageSend  ------------>  [int]
-  502▓ AssignmentStatement
-  671░ AssignmentStatement
-  599░ Identifier
-  599▓ Identifier  ------------>  [int]
-  247░ Identifier
-  247▓ Identifier  ------------>  [int]
-  671▓ AssignmentStatement
-  120░ AssignmentStatement
-  489░ Identifier
-  489▓ Identifier  ------------>  [int]
-  120▓ AssignmentStatement
-  821░ CompareExpression
-  229░ Identifier
-  229▓ Identifier  ------------>  [int]
-  361░ Identifier
-  361▓ Identifier  ------------>  [int]
-  821▓ CompareExpression  ------------>  [boolean]
-  161░ AssignmentStatement
-  569░ Identifier
-  569▓ Identifier  ------------>  [int]
-  161▓ AssignmentStatement
-  158░ CompareExpression
-  965░ Identifier
-  965▓ Identifier  ------------>  [int]
-  397░ Identifier
-  397▓ Identifier  ------------>  [int]
-  158▓ CompareExpression  ------------>  [boolean]
-  634░ AssignmentStatement
-  857░ Identifier
-  857▓ Identifier  ------------>  [int]
-  270░ Identifier
-  270▓ Identifier  ------------>  [int]
-  634▓ AssignmentStatement
-  685░ AssignmentStatement
-  294░ Identifier
-  294▓ Identifier  ------------>  [int]
-  325░ ArrayLookup
-  662░ Identifier
-  662▓ Identifier  ------------>  [int,[]]
-  839░ Identifier
-  839▓ Identifier  ------------>  [int]
-  325▓ ArrayLookup  ------------>  [int]
-  685▓ AssignmentStatement
-  635░ AssignmentStatement
-  440░ Identifier
-  440▓ Identifier  ------------>  [int]
-  866░ ArrayLookup
-  946░ Identifier
-  946▓ Identifier  ------------>  [int,[]]
-  645░ Identifier
-  645▓ Identifier  ------------>  [int]
-  866▓ ArrayLookup  ------------>  [int]
-  635▓ AssignmentStatement
-  194░ CompareExpression
-  413░ Identifier
-  413▓ Identifier  ------------>  [int]
-  815░ Identifier
-  815▓ Identifier  ------------>  [int]
-  194▓ CompareExpression  ------------>  [boolean]
-  330░ AssignmentStatement
-  994░ Identifier
-  994▓ Identifier  ------------>  [int]
-  565░ Identifier
-  565▓ Identifier  ------------>  [int]
-  330▓ AssignmentStatement
-  602░ AssignmentStatement
-  808░ Identifier
-  808▓ Identifier  ------------>  [int]
-  880░ ArrayLookup
-  279░ Identifier
-  279▓ Identifier  ------------>  [int,[]]
-  442░ Identifier
-  442▓ Identifier  ------------>  [int]
-  880▓ ArrayLookup  ------------>  [int]
-  602▓ AssignmentStatement
-  893░ Identifier
-  893▓ Identifier  ------------>  [int,[]]
-  984░ Identifier
-  984▓ Identifier  ------------>  [int]
-  474░ ArrayLookup
-  733░ Identifier
-  733▓ Identifier  ------------>  [int,[]]
-  239░ Identifier
-  239▓ Identifier  ------------>  [int]
-  474▓ ArrayLookup  ------------>  [int]
-  105░ Identifier
-  105▓ Identifier  ------------>  [int,[]]
-  128░ Identifier
-  128▓ Identifier  ------------>  [int]
-  453░ Identifier
-  453▓ Identifier  ------------>  [int]
-  252░ AssignmentStatement
-  292░ Identifier
-  292▓ Identifier  ------------>  [int]
-  252▓ AssignmentStatement
-  936░ AssignmentStatement
-  758░ Identifier
-  758▓ Identifier  ------------>  [int]
-  570░ Identifier
-  570▓ Identifier  ------------>  [int]
-  936▓ AssignmentStatement
-  410░ AssignmentStatement
-  835░ Identifier
-  835▓ Identifier  ------------>  [int]
-  802░ Identifier
-  802▓ Identifier  ------------>  [int]
-  410▓ AssignmentStatement
-  513░ AssignmentStatement
-  832░ Identifier
-  832▓ Identifier  ------------>  [int]
-  513▓ AssignmentStatement
-  659░ CompareExpression
-  773░ Identifier
-  773▓ Identifier  ------------>  [int]
-  329░ Identifier
-  329▓ Identifier  ------------>  [int]
-  659▓ CompareExpression  ------------>  [boolean]
-  386░ ArrayLookup
-  758░ Identifier
-  758▓ Identifier  ------------>  [int,[]]
-  678░ Identifier
-  678▓ Identifier  ------------>  [int]
-  386▓ ArrayLookup  ------------>  [int]
-  373░ AssignmentStatement
-  565░ Identifier
-  565▓ Identifier  ------------>  [int]
-  583░ Identifier
-  583▓ Identifier  ------------>  [int]
-  373▓ AssignmentStatement
-  200░ AssignmentStatement
-  663░ Identifier
-  663▓ Identifier  ------------>  [int]
-  168░ Identifier
-  168▓ Identifier  ------------>  [int]
-  200▓ AssignmentStatement
-  333░ AssignmentStatement
-  892░ Identifier
-  892▓ Identifier  ------------>  [int,[]]
-  100░ Identifier
-  100▓ Identifier  ------------>  [int]
-  333▓ AssignmentStatement
-  605░ Identifier
-  605▓ Identifier  ------------>  [int,[]]
-  388░ Identifier
-  388▓ Identifier  ------------>  [int,[]]
-  307░ Identifier
-  307▓ Identifier  ------------>  [int,[]]
-  619░ Identifier
-  619▓ Identifier  ------------>  [int,[]]
-  125░ Identifier
-  125▓ Identifier  ------------>  [int,[]]
-  395░ Identifier
-  395▓ Identifier  ------------>  [int,[]]
-  420░ Identifier
-  420▓ Identifier  ------------>  [int,[]]
-  614░ Identifier
-  614▓ Identifier  ------------>  [int,[]]
-  386░ Identifier
-  386▓ Identifier  ------------>  [int,[]]
-  372░ Identifier
-  372▓ Identifier  ------------>  [int,[]]
-  498▓ ClassDeclaration ----------------------------->  [BBS]
-  859▓ TypeDeclaration ----------------------------->  [BBS]
-  878▓ Goal
+  789░ Goal
+  277░ MainClass
+  208░ MessageSend
+  202░ AllocationExpression
+  AllocationExpression]==[BabyFac
+  202▓ AllocationExpression  ------------>  [Fac,BabyFac]
+  208▓ MessageSend  ------------>  [int]
+  277▓ MainClass ----------------------------->  [AAAFactorial]
+  445░ TypeDeclaration
+  704░ ClassDeclaration
+  276░ CompareExpression
+  181░ Identifier
+  181▓ Identifier  ------------>  [int]
+  276▓ CompareExpression  ------------>  [boolean]
+  295░ AssignmentStatement
+  568░ Identifier
+  568▓ Identifier  ------------>  [int]
+  295▓ AssignmentStatement
+  307░ AssignmentStatement
+  750░ Identifier
+  750▓ Identifier  ------------>  [int]
+  603░ Identifier
+  603▓ Identifier  ------------>  [int]
+  585░ MessageSend
+  297░ ThisExpression
+  297▓ ThisExpression  ------------>  [Fac]
+  909░ Identifier
+  909▓ Identifier  ------------>  [int]
+  585▓ MessageSend  ------------>  [int]
+  307▓ AssignmentStatement
+  234░ Identifier
+  234▓ Identifier  ------------>  [int]
+  704▓ ClassDeclaration ----------------------------->  [Fac]
+  445▓ TypeDeclaration ----------------------------->  [Fac]
+  392░ TypeDeclaration
+  835░ ClassExtendsDeclaration
+  835▓ ClassExtendsDeclaration ----------------------------->  [Fac,BabyFac]
+  392▓ TypeDeclaration ----------------------------->  [Fac,BabyFac]
+  789▓ Goal
   ✅ Program type checked successfully

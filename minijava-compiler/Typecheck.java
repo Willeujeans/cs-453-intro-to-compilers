@@ -17,7 +17,6 @@ public class Typecheck {
 
 			SymbolTable<Void, String> symbolTable = new SymbolTable<Void,String>();
 			root.accept(symbolTable, "global");
-			symbolTable.prettyPrint();
 
 			TypeValidator typeValidator = new TypeValidator(symbolTable);
 			root.accept(typeValidator, "global");

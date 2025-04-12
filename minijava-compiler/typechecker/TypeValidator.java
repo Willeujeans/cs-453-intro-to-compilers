@@ -333,10 +333,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         ClassSymbol classSymbol = symbolTable.findClass(classType.getType());
         String classKey = classSymbol.declarationKey;
         String methodKey = classKey + symbolTable.bufferChar + n.f2.f0.toString();
-
-        System.out.println("Finding with shadowing: " + methodKey);
         Symbol methodSymbol = symbolTable.findWithShadowing(methodKey);
-        System.out.println("FOUND!: " + methodKey);
         MyType methodType = methodSymbol.type;
         n.f4.accept(this, key);
         
