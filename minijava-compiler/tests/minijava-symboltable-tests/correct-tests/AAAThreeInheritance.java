@@ -1,5 +1,7 @@
 class mainClass{
     public static void main(String[] a){
+      childClass child;
+      child = new parentClass();
     }
 }
 

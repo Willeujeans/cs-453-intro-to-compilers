@@ -42,6 +42,21 @@ public class MyType {
         }
     }
 
+    public Boolean checkSimilar(MyType other) {
+        if(other == null || other.type_array.isEmpty()){
+            return false;
+        }else{
+            for(String each : type_array){
+                for(String every : other.type_array){
+                    if(each.equals(every)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public String toString(){
         String output = "[";
         for(int i = 0; i < this.type_array.size(); ++i){

@@ -197,10 +197,9 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         //debug
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-
-        Symbol mySymbol = symbolTable.findWithShadowing(key);
+        
         String classKey = n.f1.f0.toString();
-        System.out.println(classKey);
+        System.out.println(n.getClass().getSimpleName() + "]==[" + classKey);
         MyType returnType = symbolTable.findClass(classKey).type;
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
         return returnType;
@@ -218,22 +217,32 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
         
         MyType idType = n.f0.accept(this, key);
-        System.out.println(symbolTable.findClass(idType.getType()));
-        
         MyType expressionType = n.f2.accept(this, key);
 
-        if(!idType.checkIdentical(expressionType)){
-            System.out.println(key);
-            System.out.println(idType + " == " + expressionType);
-            System.out.println(n.getClass().getSimpleName() + ": Type Error");
-            System.exit(1);
-        }
+        boolean isBothClasses = (symbolTable.classes.containsKey(idType.getType()) && symbolTable.classes.containsKey(expressionType.getType()));
 
+        if(isBothClasses){
+            // Less strict check
+            if(!idType.checkSimilar(expressionType)){
+                System.out.println(key);
+                System.out.println(idType + " != " + expressionType);
+                System.out.println(n.getClass().getSimpleName() + ": Type Error");
+                System.exit(1);
+            }
+        }else{
+            // More strict check
+            if(!idType.checkIdentical(expressionType)){
+                System.out.println(key);
+                System.out.println(idType + " != " + expressionType);
+                System.out.println(n.getClass().getSimpleName() + ": Type Error");
+                System.exit(1);
+            }
+        }
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName());
         return expressionType;
     }
 
-        /**
+    /**
      * f0 -> PrimaryExpression()
      * f1 -> "["
      * f2 -> PrimaryExpression()
@@ -325,7 +334,6 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
 
         String searchKey = key + bufferChar + n.f0.toString();
         Symbol foundSymbol = symbolTable.findWithShadowing(searchKey);
-        System.out.println("Search::::: " + searchKey + " -----------------> " + foundSymbol);
         MyType returnType = foundSymbol.type;
 
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);

@@ -135,8 +135,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
         for (String classKey : classes.keySet()) {
             for (String declarationKey : originalDeclarationKeys) {
-                System.out.println("<====" + classKey);
-
                 List<String> typeArray = classes.get(classKey).type.type_array;
                 String classKeyWithInheritance = String.join(bufferChar, typeArray);
 
@@ -150,17 +148,14 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
                     }
                 }
                 String newDeclarationKeyJoined = String.join(bufferChar, newDeclarationKey);
-                System.out.println(newDeclarationKeyJoined);
 
                 if (!newDeclarationKeyJoined.equals(declarationKey)) {
                     Symbol symbolToStore = declarations.get(declarationKey);
                     declarations.remove(declarationKey);
                     declarations.put(newDeclarationKeyJoined, new Symbol(symbolToStore));
-                    System.out.println("====>" + newDeclarationKeyJoined);
                 }
             }
         }
-        System.out.println("FINISHED replacing all keys");
     }
 
     public Symbol getNearestClass(String key) {
