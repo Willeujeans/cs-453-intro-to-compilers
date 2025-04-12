@@ -32,7 +32,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     }
 
     public void updateClassInstances(String... className){
-        System.out.println("updateClassInstances...");
         if(classes.isEmpty() || classInstances.isEmpty() || className == null){
             System.out.println("Nothing to update here;");
             return;
@@ -52,7 +51,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
                 System.exit(1);
             }
         }
-        System.out.println("updateClassInstances!");
     }
     
     public boolean insertDeclaration(String key, Symbol entry){

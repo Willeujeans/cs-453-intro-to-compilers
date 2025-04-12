@@ -133,13 +133,9 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
 
         String classKey = n.f1.f0.toString();
-        System.out.println("classKey : " + classKey);
         Symbol classSymbol = symbolTable.findClass(classKey);
-        System.out.println("classKey : " + classSymbol);
         MyType returnType = classSymbol.type;
-        System.out.println("classKey : " + returnType);
         String currentScope = key + symbolTable.bufferChar + returnType.getType();
-        System.out.println("classKey : " + currentScope);
         // n.f3.accept(this, currentScope);
         n.f4.accept(this, currentScope);
 
@@ -163,7 +159,6 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
         
         String classKey = n.f1.f0.toString();
-        System.out.println("classKey : " + classKey);
         
         Symbol classSymbol = symbolTable.findClass(classKey);
         MyType returnType = classSymbol.type;
@@ -197,15 +192,11 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         n.f8.accept(this, currentScope);
         MyType expectedReturnType = n.f1.accept(this, key);
         MyType actualReturnType = n.f10.accept(this, currentScope);
-
-        System.out.println(expectedReturnType);
         String className = expectedReturnType.getType();
         
         String otherClassName = actualReturnType.getType();
-        System.out.println(className + "  " + otherClassName);
         boolean firstClass = symbolTable.getClasses().containsKey(className);
         boolean secondClass = symbolTable.getClasses().containsKey(otherClassName);
-        System.out.println("MethodDeclaration 7");
         if(firstClass && secondClass){
             if(!expectedReturnType.checkSimilar(actualReturnType)){
                 System.out.println("Method return type mismatch: Type Error");
@@ -254,16 +245,12 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         if(isBothClasses){
             // Less strict check
             if(!idType.checkSimilar(expressionType)){
-                System.out.println(key);
-                System.out.println(idType + " != " + expressionType);
                 System.out.println(n.getClass().getSimpleName() + ": Type Error");
                 System.exit(1);
             }
         }else{
             // More strict check
             if(!idType.checkIdentical(expressionType)){
-                System.out.println(key);
-                System.out.println(idType + " != " + expressionType);
                 System.out.println(n.getClass().getSimpleName() + ": Type Error");
                 System.exit(1);
             }
