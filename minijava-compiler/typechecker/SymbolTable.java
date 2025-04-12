@@ -398,7 +398,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
      */
     @Override
     public Void visit(ArrayType n, String key) {
-        insertDeclaration(key, new Symbol(new MyType("int", "[", "]"), n.f0.beginLine));
+        insertDeclaration(key, new Symbol(new MyType("int", "[]"), n.f0.beginLine));
         return null;
     }
 

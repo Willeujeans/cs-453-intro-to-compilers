@@ -5,7 +5,7 @@ import syntaxtree.*;
 import visitor.*;
 
 public class MyType {
-    // int[][] would be stored as -> ["int", "[]", "[]"]
+    // int[][] would be stored as -> ["int", "[", "]"]
     public Vector<String> type_array;
 
     public MyType(String... components) {
@@ -24,22 +24,24 @@ public class MyType {
         }
     }
     
-    public Boolean checkIdentical(MyType other) {
-        if(other == null || other.type_array.isEmpty()){
+    public boolean checkIdentical(MyType other) {
+        if (other == null) {
+            System.out.println("checking identical: NULL");
             return false;
-        }else{
-            if (type_array.size() != other.type_array.size()) {
+        }
+        if (type_array.size() != other.type_array.size()) {
+            System.out.println("checking identical: Different Sizes");
+            return false;
+        }
+        for (int i = 0; i < type_array.size(); i++) {
+            String thisType = type_array.get(i);
+            String otherType = other.type_array.get(i);
+            if (!thisType.equals(otherType)) {
+                System.out.println(thisType + " ==!== " + otherType);
                 return false;
             }
-            for (int i = 0; i < type_array.size(); i++) {
-                String thisType = type_array.elementAt(i);
-                String otherType = other.type_array.elementAt(i);
-                if (!thisType.equals(otherType)) {
-                    return false;
-                }
-            }
-            return true;
         }
+        return true;
     }
 
     public Boolean checkSimilar(MyType other) {

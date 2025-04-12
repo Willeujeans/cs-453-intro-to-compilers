@@ -250,25 +250,23 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(ArrayLookup n, String key) {
-        //debug
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-        // f0 needs to return an array type
-        // f2 needs to return a int type
+
         MyType primaryExpressionZero = n.f0.accept(this, key);
         MyType primaryExpressionTwo = n.f2.accept(this, key);
 
-        if(primaryExpressionZero.checkIdentical(new MyType("int", "[", "]"))){
-            System.out.println(n.getClass().getSimpleName() + ": Type Error");
+        if(!primaryExpressionZero.checkIdentical(new MyType("int", "[]"))){
+            System.out.println(n.getClass().getSimpleName() + ": Type Error  primaryExpressionZero" + key);
             System.exit(1);
         }
 
-        if(primaryExpressionTwo.checkIdentical(new MyType("int"))){
-            System.out.println(n.getClass().getSimpleName() + ": Type Error");
+        if(!primaryExpressionTwo.checkIdentical(new MyType("int"))){
+            System.out.println(n.getClass().getSimpleName() + ": Type Error  primaryExpressionTwo");
             System.exit(1);
         }
+
         MyType returnType = new MyType(primaryExpressionZero.getType());
-
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
         return returnType;
     }
@@ -584,11 +582,11 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     @Override
     public MyType visit(ArrayAllocationExpression n, String key) {
         MyType expressionType = n.f3.accept(this, key);
-        if(expressionType.checkIdentical(new MyType("int"))){
+        if(!expressionType.checkIdentical(new MyType("int"))){
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(1);
         }
-        MyType returnType = new MyType("int", "[", "]");
+        MyType returnType = new MyType("int", "[]");
         return returnType;
     }
 
