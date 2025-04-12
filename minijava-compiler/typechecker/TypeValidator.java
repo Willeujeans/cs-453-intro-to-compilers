@@ -6,10 +6,10 @@ import visitor.*;
 import java.util.Random;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class TypeValidator extends GJDepthFirst<MyType, String> {
     SymbolTable symbolTable;
-    private String bufferChar = ":";
 
     public TypeValidator(SymbolTable symbolTable){
         this.symbolTable = symbolTable;
@@ -25,26 +25,22 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     }
 
     public void checkForOverload(){
-        for(String methodKey : symbolTable.classMethods.keySet()){
-            System.out.println(methodKey);
-
-            // Overload: child class has the same method name as a parent class
-            // global:parent:method
-            // global:parent:child:method
-            // STEP1: global:parent:child:method
-            // STEP2: global:parent:method
-            // its the same! so throw an error
-            // stop searching when current key.length() < 3
-
-            // Skip the first search which is the default case
-
-            String[] keyFragments = methodKey.split(bufferChar);
+        HashSet<String> classMethods = symbolTable.getClassMethods();
+        for(String methodKey : classMethods){
+            String[] keyFragments = methodKey.split(symbolTable.bufferChar);
+            String[] keyFragmentsTrimmed = Arrays.copyOf(keyFragments, keyFragments.length - 2);
             String methodName = keyFragments[keyFragments.length - 1];
-            int i = keyFragments.length - 1;
-            String currentKey = "";
-            while(currentKey.length() > 3){
-                currentKey = String.join(bufferChar, Arrays.copyOf(keyFragments, i)) + bufferChar + methodName;
-                symbolTable.classMethods.containsKey(currentKey);
+
+            int i = keyFragmentsTrimmed.length;
+            String currentKey = keyFragmentsTrimmed + symbolTable.bufferChar + methodName;
+            
+            while(i > 2){
+                currentKey = String.join(symbolTable.bufferChar, Arrays.copyOf(keyFragmentsTrimmed, i)) + symbolTable.bufferChar + methodName;
+                if(symbolTable.getClassMethods().contains(currentKey)){
+                    System.out.println("Overload check: Type Error");
+                    System.exit(1);
+                }
+                --i;
             }
         }
     }
@@ -64,13 +60,13 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(Goal n, String key) {
+        checkForOverload();
         //debug
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
         n.f0.accept(this, key);
         n.f1.accept(this, key);
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName());
-        
         return null;
     }
 
@@ -99,7 +95,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         //debug
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-        String currentScope = key + bufferChar + n.f1.f0.toString() + bufferChar + "main";
+        String currentScope = key + symbolTable.bufferChar + n.f1.f0.toString() + symbolTable.bufferChar + "main";
         
         // f15 -> ( Statement() )*
         n.f15.accept(this, currentScope);
@@ -140,7 +136,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         Symbol classSymbol = symbolTable.findClass(classKey);
         MyType returnType = classSymbol.type;
 
-        String currentScope = key + bufferChar + returnType.getType();
+        String currentScope = key + symbolTable.bufferChar + returnType.getType();
         
         // n.f3.accept(this, currentScope);
         n.f4.accept(this, currentScope);
@@ -169,7 +165,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         Symbol classSymbol = symbolTable.findClass(classKey);
         MyType returnType = classSymbol.type;
 
-        String currentScope = key + bufferChar + returnType.getType();
+        String currentScope = key + symbolTable.bufferChar + returnType.getType();
 
         // n.f5.accept(this, currentScope);
         n.f6.accept(this, currentScope);
@@ -197,7 +193,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     public MyType visit(MethodDeclaration n, String key) {
 
         // verify that actual return type matches method's return type
-        String currentScope = key + bufferChar + n.f2.f0.toString();
+        String currentScope = key + symbolTable.bufferChar + n.f2.f0.toString();
 
         // unsure yet
         // n.f4.accept(this, currentScope);
@@ -336,7 +332,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         MyType classType = n.f0.accept(this, key);
         ClassSymbol classSymbol = symbolTable.findClass(classType.getType());
         String classKey = classSymbol.declarationKey;
-        String methodKey = classKey + bufferChar + n.f2.f0.toString();
+        String methodKey = classKey + symbolTable.bufferChar + n.f2.f0.toString();
 
         System.out.println("Finding with shadowing: " + methodKey);
         Symbol methodSymbol = symbolTable.findWithShadowing(methodKey);
@@ -356,7 +352,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
 
-        String searchKey = key + bufferChar + n.f0.toString();
+        String searchKey = key + symbolTable.bufferChar + n.f0.toString();
         Symbol foundSymbol = symbolTable.findWithShadowing(searchKey);
         MyType returnType = foundSymbol.type;
 

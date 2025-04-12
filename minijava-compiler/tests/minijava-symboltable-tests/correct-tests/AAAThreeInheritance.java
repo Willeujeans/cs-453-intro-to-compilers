@@ -6,26 +6,26 @@ class mainClass{
 }
 
 class childClass extends parentClass{
-  public int childClassMethod(){
+  public int method(){
     return 20;
   }
 }
 
 class parentClass extends SuperClass {
-  public int parentClassMethod(){
+  public int method(){
     return 10;
   }
 }
 
 class SuperClass extends UltraClass{
   int x;
-  public int superClassMethod(){
+  public int method(){
     return 10;
   }
 }
 
 class UltraClass {
-  public int ultraClassMethod(){
+  public int method(){
     return 10;
   }
 }

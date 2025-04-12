@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -19,13 +20,14 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public HashMap<String, Symbol> declarations;
 
     public HashMap<String, ClassSymbol> classes;
-    public HashMap<String, Symbol> classMethods;
+    public HashSet<String> classMethods;
     public HashMap<String, Symbol> classInstances;
     public String bufferChar = ":";
 
     public SymbolTable() {
         declarations = new HashMap<String, Symbol>();
         classes = new HashMap<String, ClassSymbol>();
+        classMethods = new HashSet<String>();
         classInstances = new HashMap<String, Symbol>();
     }
 
@@ -69,6 +71,24 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
         classes.put(key, entry);
         return true;
+    }
+
+    public boolean insertClassMethod(String key){
+        if(key == null || key.isEmpty()){
+            throw new IllegalArgumentException("Attempt to call method with null arguments");
+        }
+        
+        if (classMethods.contains(key)) {
+            System.out.println("Type Error");
+            System.exit(1);
+        }
+        classMethods.add(key);
+        System.out.println("ADDED: " + key);
+        return true;
+    }
+
+    public HashSet<String> getClassMethods(){
+        return classMethods;
     }
 
     public boolean insertClassInstance(String classInstanceKey, Symbol entry){
@@ -153,6 +173,12 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
                     Symbol symbolToStore = declarations.get(declarationKey);
                     declarations.remove(declarationKey);
                     declarations.put(newDeclarationKeyJoined, new Symbol(symbolToStore));
+
+                    // update method list
+                    if(classMethods.contains(declarationKey)){
+                        classMethods.remove(declarationKey);
+                        classMethods.add(newDeclarationKeyJoined);
+                    }
                 }
             }
         }
@@ -326,7 +352,9 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
      */
     @Override
     public Void visit(MethodDeclaration n, String key) {
+
         String currentScope = key + bufferChar + n.f2.f0.toString();
+        insertClassMethod(currentScope);
 
         n.f1.accept(this, currentScope);
         n.f4.accept(this, currentScope);
