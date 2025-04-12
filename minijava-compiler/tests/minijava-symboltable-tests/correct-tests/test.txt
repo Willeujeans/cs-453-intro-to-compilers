@@ -1,43 +1,45 @@
-2025-04-12 11:15:32
+2025-04-12 11:19:23
 === Typecheck < tests/minijava-symboltable-tests/correct-tests/AAAFactorial.java ===
   Nothing to update here;
-  789░ Goal
-  277░ MainClass
-  208░ MessageSend
-  202░ AllocationExpression
+  195░ Goal
+  654░ MainClass
+  408░ MessageSend
+  172░ AllocationExpression
   AllocationExpression]==[BabyFac
-  202▓ AllocationExpression  ------------>  [Fac,BabyFac]
+  172▓ AllocationExpression  ------------>  [Fac,BabyFac]
+  408▓ MessageSend  ------------>  [int]
+  654▓ MainClass ----------------------------->  [AAAFactorial]
+  118░ TypeDeclaration
+  208░ ClassDeclaration
+  458░ Identifier
+  458▓ Identifier  ------------>  [int]
+  942░ CompareExpression
+  776░ Identifier
+  776▓ Identifier  ------------>  [int]
+  942▓ CompareExpression  ------------>  [boolean]
+  387░ AssignmentStatement
+  121░ Identifier
+  121▓ Identifier  ------------>  [int]
+  387▓ AssignmentStatement
+  119░ AssignmentStatement
+  268░ Identifier
+  268▓ Identifier  ------------>  [int]
+  922░ Identifier
+  922▓ Identifier  ------------>  [int]
+  208░ MessageSend
+  350░ ThisExpression
+  350▓ ThisExpression  ------------>  [Fac]
+  465░ Identifier
+  465▓ Identifier  ------------>  [int]
   208▓ MessageSend  ------------>  [int]
-  277▓ MainClass ----------------------------->  [AAAFactorial]
-  445░ TypeDeclaration
-  704░ ClassDeclaration
-  276░ CompareExpression
-  181░ Identifier
-  181▓ Identifier  ------------>  [int]
-  276▓ CompareExpression  ------------>  [boolean]
-  295░ AssignmentStatement
-  568░ Identifier
-  568▓ Identifier  ------------>  [int]
-  295▓ AssignmentStatement
-  307░ AssignmentStatement
-  750░ Identifier
-  750▓ Identifier  ------------>  [int]
-  603░ Identifier
-  603▓ Identifier  ------------>  [int]
-  585░ MessageSend
-  297░ ThisExpression
-  297▓ ThisExpression  ------------>  [Fac]
-  909░ Identifier
-  909▓ Identifier  ------------>  [int]
-  585▓ MessageSend  ------------>  [int]
-  307▓ AssignmentStatement
-  234░ Identifier
-  234▓ Identifier  ------------>  [int]
-  704▓ ClassDeclaration ----------------------------->  [Fac]
-  445▓ TypeDeclaration ----------------------------->  [Fac]
-  392░ TypeDeclaration
-  835░ ClassExtendsDeclaration
-  835▓ ClassExtendsDeclaration ----------------------------->  [Fac,BabyFac]
-  392▓ TypeDeclaration ----------------------------->  [Fac,BabyFac]
-  789▓ Goal
+  119▓ AssignmentStatement
+  955░ Identifier
+  955▓ Identifier  ------------>  [int]
+  208▓ ClassDeclaration ----------------------------->  [Fac]
+  118▓ TypeDeclaration ----------------------------->  [Fac]
+  115░ TypeDeclaration
+  929░ ClassExtendsDeclaration
+  929▓ ClassExtendsDeclaration ----------------------------->  [Fac,BabyFac]
+  115▓ TypeDeclaration ----------------------------->  [Fac,BabyFac]
+  195▓ Goal
   ✅ Program type checked successfully

@@ -191,21 +191,25 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(MethodDeclaration n, String key) {
-
-        // verify that actual return type matches method's return type
         String currentScope = key + symbolTable.bufferChar + n.f2.f0.toString();
-
-        // unsure yet
-        // n.f4.accept(this, currentScope);
 
         n.f8.accept(this, currentScope);
 
-        // compare with type of method in symbol table
-        n.f10.accept(this, currentScope);
-
-        MyType returnType = n.f1.accept(this, key);
-
-        return returnType;
+        MyType actualReturnType = n.f10.accept(this, currentScope);
+        MyType expectedReturnType = n.f1.accept(this, key);
+        boolean isBothClasses = (symbolTable.classes.containsKey(expectedReturnType.getType()) && symbolTable.classes.containsKey(actualReturnType.getType()));
+        if(isBothClasses){
+            if(!expectedReturnType.checkSimilar(actualReturnType)){
+                System.out.println("Method return type mismatch: Type Error");
+                System.exit(1);
+            }
+        }else{
+            if(!expectedReturnType.checkIdentical(actualReturnType)){
+                System.out.println("Method return type mismatch: Type Error");
+                System.exit(1);
+            }
+        }
+        return expectedReturnType;
     }
 
     /**
@@ -335,6 +339,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         String methodKey = classKey + symbolTable.bufferChar + n.f2.f0.toString();
         Symbol methodSymbol = symbolTable.findWithShadowing(methodKey);
         MyType methodType = methodSymbol.type;
+
+        // Verify with declared method arguments
         n.f4.accept(this, key);
         
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + methodType);
