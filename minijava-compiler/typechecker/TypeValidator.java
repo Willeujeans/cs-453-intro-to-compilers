@@ -4,6 +4,7 @@ import syntaxtree.*;
 import visitor.*;
 
 import java.util.Random;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class TypeValidator extends GJDepthFirst<MyType, String> {
@@ -21,6 +22,31 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         Random random = new Random();
         int randomNumber = random.nextInt(max - min + 1) + min;
         return randomNumber;
+    }
+
+    public void checkForOverload(){
+        for(String methodKey : symbolTable.classMethods.keySet()){
+            System.out.println(methodKey);
+
+            // Overload: child class has the same method name as a parent class
+            // global:parent:method
+            // global:parent:child:method
+            // STEP1: global:parent:child:method
+            // STEP2: global:parent:method
+            // its the same! so throw an error
+            // stop searching when current key.length() < 3
+
+            // Skip the first search which is the default case
+
+            String[] keyFragments = methodKey.split(bufferChar);
+            String methodName = keyFragments[keyFragments.length - 1];
+            int i = keyFragments.length - 1;
+            String currentKey = "";
+            while(currentKey.length() > 3){
+                currentKey = String.join(bufferChar, Arrays.copyOf(keyFragments, i)) + bufferChar + methodName;
+                symbolTable.classMethods.containsKey(currentKey);
+            }
+        }
     }
 
     // return the type to check it

@@ -17,11 +17,11 @@ import visitor.*;
 // Symbol Table Visitor: Traverses AST to create symbol table.
 public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public HashMap<String, Symbol> declarations;
+
     public HashMap<String, ClassSymbol> classes;
+    public HashMap<String, Symbol> classMethods;
     public HashMap<String, Symbol> classInstances;
     public String bufferChar = ":";
-
-
 
     public SymbolTable() {
         declarations = new HashMap<String, Symbol>();
