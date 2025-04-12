@@ -1,4 +1,4 @@
-2025-04-12 15:47:15
+2025-04-12 15:51:02
 === Typecheck < tests/minijava-symboltable-tests/correct-tests/AAAFactorial.java ===
   Nothing to update here;
   -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
@@ -15,30 +15,1609 @@
   Fac -> {[Fac], 7, []}
   BabyFac -> {[Fac,BabyFac], 18, []}
   -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
-  912░ Goal
-  836░ MainClass
-  318░ MessageSend
-  318▓ MessageSend  ------------>  [int]
-  836▓ MainClass ----------------------------->  [AAAFactorial]
-  279░ ClassDeclaration
+  949░ Goal
+  650░ MainClass
+  108░ MessageSend
+  108▓ MessageSend  ------------>  [int]
+  650▓ MainClass ----------------------------->  [AAAFactorial]
+  317░ ClassDeclaration
   classKey : Fac
   classKey : {[Fac], 7, []}
   classKey : [Fac]
   classKey : global:Fac
-  815░ AssignmentStatement
-  815▓ AssignmentStatement
-  192░ AssignmentStatement
-  503░ MessageSend
-  478░ ThisExpression
-  478▓ ThisExpression  ------------>  [Fac]
-  503▓ MessageSend  ------------>  [int]
-  192▓ AssignmentStatement
+  572░ AssignmentStatement
+  572▓ AssignmentStatement
+  875░ AssignmentStatement
+  828░ MessageSend
+  547░ ThisExpression
+  547▓ ThisExpression  ------------>  [Fac]
+  828▓ MessageSend  ------------>  [int]
+  875▓ AssignmentStatement
   [int]
   int  int
   MethodDeclaration 7
-  279▓ ClassDeclaration ----------------------------->  [Fac]
-  460░ ClassExtendsDeclaration
+  317▓ ClassDeclaration ----------------------------->  [Fac]
+  681░ ClassExtendsDeclaration
   classKey : BabyFac
-  460▓ ClassExtendsDeclaration ----------------------------->  [Fac,BabyFac]
-  912▓ Goal
+  681▓ ClassExtendsDeclaration ----------------------------->  [Fac,BabyFac]
+  949▓ Goal
   ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/AAAThreeInheritance.java ===
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
+  global:mainClass -> {[mainClass], 1, []}
+  global:UltraClass -> {[UltraClass], 27, []}
+  global:mainClass:main -> {[void], 2, []}
+  global:mainClass:main:a -> {[String,[,]], 2, []}
+  global:mainClass:main:child -> {[UltraClass,SuperClass,parentClass,childClass], 3, []}
+  global:UltraClass:methodABBA -> {[int], 28, []}
+  global:UltraClass:SuperClass -> {[UltraClass,SuperClass], 20, []}
+  global:UltraClass:SuperClass:x -> {[int], 21, []}
+  global:UltraClass:SuperClass:methodABB -> {[int], 22, []}
+  global:UltraClass:SuperClass:parentClass -> {[SuperClass,parentClass], 14, []}
+  global:UltraClass:SuperClass:parentClass:methodAB -> {[int], 15, []}
+  global:UltraClass:SuperClass:parentClass:childClass -> {[parentClass,childClass], 8, []}
+  global:UltraClass:SuperClass:parentClass:childClass:methodA -> {[int], 9, []}
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  mainClass -> {[mainClass], 1, []}
+  UltraClass -> {[UltraClass], 27, []}
+  SuperClass -> {[UltraClass,SuperClass], 20, []}
+  parentClass -> {[UltraClass,SuperClass,parentClass], 14, []}
+  childClass -> {[UltraClass,SuperClass,parentClass,childClass], 8, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  843░ Goal
+  775░ MainClass
+  268░ AssignmentStatement
+  268▓ AssignmentStatement
+  775▓ MainClass ----------------------------->  [mainClass]
+  784░ ClassExtendsDeclaration
+  classKey : childClass
+  [int]
+  int  int
+  MethodDeclaration 7
+  784▓ ClassExtendsDeclaration ----------------------------->  [UltraClass,SuperClass,parentClass,childClass]
+  193░ ClassExtendsDeclaration
+  classKey : parentClass
+  [int]
+  int  int
+  MethodDeclaration 7
+  193▓ ClassExtendsDeclaration ----------------------------->  [UltraClass,SuperClass,parentClass]
+  412░ ClassExtendsDeclaration
+  classKey : SuperClass
+  [int]
+  int  int
+  MethodDeclaration 7
+  412▓ ClassExtendsDeclaration ----------------------------->  [UltraClass,SuperClass]
+  456░ ClassDeclaration
+  classKey : UltraClass
+  classKey : {[UltraClass], 27, []}
+  classKey : [UltraClass]
+  classKey : global:UltraClass
+  [int]
+  int  int
+  MethodDeclaration 7
+  456▓ ClassDeclaration ----------------------------->  [UltraClass]
+  843▓ Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/AABubbleSort.java ===
+  Nothing to update here;
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
+  global:BBS -> {[BBS], 11, []}
+  global:BBS:Init -> {[int], 75, []}
+  global:BBS:Sort -> {[int], 30, []}
+  global:BBS:size -> {[int], 14, []}
+  global:BBS:Print -> {[int], 64, []}
+  global:BBS:Start -> {[int], 18, []}
+  global:BBS:Sort:j -> {[int], 38, []}
+  global:BBS:number -> {[int,[]], 13, []}
+  global:BBS:Sort:i -> {[int], 32, []}
+  global:BBS:Sort:t -> {[int], 39, []}
+  global:BBS:Print:j -> {[int], 65, []}
+  global:BBS:Init:sz -> {[int], 75, []}
+  global:BBS:Sort:nt -> {[int], 31, []}
+  global:AABubbleSort -> {[AABubbleSort], 1, []}
+  global:BBS:Start:sz -> {[int], 18, []}
+  global:BBS:Sort:aux02 -> {[int], 33, []}
+  global:BBS:Sort:aux05 -> {[int], 35, []}
+  global:BBS:Sort:aux04 -> {[int], 34, []}
+  global:BBS:Sort:aux07 -> {[int], 37, []}
+  global:BBS:Sort:aux06 -> {[int], 36, []}
+  global:BBS:Start:aux01 -> {[int], 19, []}
+  global:AABubbleSort:main -> {[void], 2, []}
+  global:AABubbleSort:main:a -> {[String,[,]], 2, []}
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  AABubbleSort -> {[AABubbleSort], 1, []}
+  BBS -> {[BBS], 11, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  269░ Goal
+  357░ MainClass
+  510░ MessageSend
+  510▓ MessageSend  ------------>  [int]
+  357▓ MainClass ----------------------------->  [AABubbleSort]
+  240░ ClassDeclaration
+  classKey : BBS
+  classKey : {[BBS], 11, []}
+  classKey : [BBS]
+  classKey : global:BBS
+  469░ AssignmentStatement
+  505░ MessageSend
+  673░ ThisExpression
+  673▓ ThisExpression  ------------>  [BBS]
+  505▓ MessageSend  ------------>  [int]
+  469▓ AssignmentStatement
+  633░ AssignmentStatement
+  648░ MessageSend
+  143░ ThisExpression
+  143▓ ThisExpression  ------------>  [BBS]
+  648▓ MessageSend  ------------>  [int]
+  633▓ AssignmentStatement
+  950░ AssignmentStatement
+  998░ MessageSend
+  752░ ThisExpression
+  752▓ ThisExpression  ------------>  [BBS]
+  998▓ MessageSend  ------------>  [int]
+  950▓ AssignmentStatement
+  386░ AssignmentStatement
+  421░ MessageSend
+  830░ ThisExpression
+  830▓ ThisExpression  ------------>  [BBS]
+  421▓ MessageSend  ------------>  [int]
+  386▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  637░ AssignmentStatement
+  637▓ AssignmentStatement
+  191░ AssignmentStatement
+  191▓ AssignmentStatement
+  498░ AssignmentStatement
+  498▓ AssignmentStatement
+  813░ AssignmentStatement
+  813▓ AssignmentStatement
+  508░ AssignmentStatement
+  928░ ArrayLookup
+  928▓ ArrayLookup  ------------>  [int]
+  508▓ AssignmentStatement
+  975░ AssignmentStatement
+  904░ ArrayLookup
+  904▓ ArrayLookup  ------------>  [int]
+  975▓ AssignmentStatement
+  832░ AssignmentStatement
+  832▓ AssignmentStatement
+  221░ AssignmentStatement
+  354░ ArrayLookup
+  354▓ ArrayLookup  ------------>  [int]
+  221▓ AssignmentStatement
+  759░ ArrayLookup
+  759▓ ArrayLookup  ------------>  [int]
+  527░ AssignmentStatement
+  527▓ AssignmentStatement
+  891░ AssignmentStatement
+  891▓ AssignmentStatement
+  607░ AssignmentStatement
+  607▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  818░ AssignmentStatement
+  818▓ AssignmentStatement
+  295░ ArrayLookup
+  295▓ ArrayLookup  ------------>  [int]
+  285░ AssignmentStatement
+  285▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  869░ AssignmentStatement
+  869▓ AssignmentStatement
+  118░ AssignmentStatement
+  118▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  240▓ ClassDeclaration ----------------------------->  [BBS]
+  269▓ Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/AllTypesAndStatements.java ===
+  Nothing to update here;
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
+  global:BinaryTree -> {[BinaryTree], 1, []}
+  global:BinaryTree:main -> {[void], 2, []}
+  global:BinaryTree:main:k -> {[int,[]], 6, []}
+  global:BinaryTree:main:y -> {[boolean], 4, []}
+  global:BinaryTree:main:x -> {[int], 3, []}
+  global:BinaryTree:main:w -> {[boolean], 5, []}
+  global:BinaryTree:main:a -> {[String,[,]], 2, []}
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  BinaryTree -> {[BinaryTree], 1, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  Is empty!
+  841░ Goal
+  640░ MainClass
+  638░ AssignmentStatement
+  638▓ AssignmentStatement
+  200░ AssignmentStatement
+  200▓ AssignmentStatement
+  815░ AssignmentStatement
+  815▓ AssignmentStatement
+  603░ AssignmentStatement
+  603▓ AssignmentStatement
+  640▓ MainClass ----------------------------->  [BinaryTree]
+  841▓ Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/ATwoClassesInstance.java ===
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
+  global:childClass -> {[childClass], 10, []}
+  global:BinaryTree -> {[BinaryTree], 1, []}
+  global:BinaryTree:main -> {[void], 2, []}
+  global:childClass:method -> {[int], 11, []}
+  global:BinaryTree:main:x -> {[int], 3, []}
+  global:BinaryTree:main:a -> {[String,[,]], 2, []}
+  global:BinaryTree:main:instance -> {[childClass], 4, []}
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  BinaryTree -> {[BinaryTree], 1, []}
+  childClass -> {[childClass], 10, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  863░ Goal
+  289░ MainClass
+  436░ AssignmentStatement
+  436▓ AssignmentStatement
+  981░ AssignmentStatement
+  639░ MessageSend
+  639▓ MessageSend  ------------>  [int]
+  981▓ AssignmentStatement
+  289▓ MainClass ----------------------------->  [BinaryTree]
+  989░ ClassDeclaration
+  classKey : childClass
+  classKey : {[childClass], 10, []}
+  classKey : [childClass]
+  classKey : global:childClass
+  [int]
+  int  int
+  MethodDeclaration 7
+  989▓ ClassDeclaration ----------------------------->  [childClass]
+  863▓ Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/ATwoClassesInts.java ===
+  Nothing to update here;
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
+  global:BT -> {[BT], 10, []}
+  global:BT:x -> {[int], 11, []}
+  global:BinaryTree -> {[BinaryTree], 1, []}
+  global:BinaryTree:main -> {[void], 2, []}
+  global:BinaryTree:main:x -> {[int], 3, []}
+  global:BinaryTree:main:a -> {[String,[,]], 2, []}
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  BT -> {[BT], 10, []}
+  BinaryTree -> {[BinaryTree], 1, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  Is empty!
+  418░ Goal
+  755░ MainClass
+  755▓ MainClass ----------------------------->  [BinaryTree]
+  200░ ClassDeclaration
+  classKey : BT
+  classKey : {[BT], 10, []}
+  classKey : [BT]
+  classKey : global:BT
+  200▓ ClassDeclaration ----------------------------->  [BT]
+  418▓ Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/BinaryTree copy.java ===
+  java.lang.NullPointerException
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/BinaryTree.java ===
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
+  global:BT -> {[BT], 10, []}
+  global:Tree -> {[Tree], 44, []}
+  global:Tree:key -> {[int], 47, []}
+  global:BT:Start -> {[int], 12, []}
+  global:Tree:Init -> {[boolean], 53, []}
+  global:Tree:left -> {[Tree], 45, []}
+  global:Tree:right -> {[Tree], 46, []}
+  global:Tree:Print -> {[boolean], 306, []}
+  global:BinaryTree -> {[BinaryTree], 1, []}
+  global:Tree:Insert -> {[boolean], 124, []}
+  global:Tree:Delete -> {[boolean], 161, []}
+  global:Tree:Remove -> {[boolean], 209, []}
+  global:Tree:Search -> {[int], 277, []}
+  global:Tree:SetKey -> {[boolean], 84, []}
+  global:Tree:GetKey -> {[int], 80, []}
+  global:BT:Start:ntb -> {[boolean], 14, []}
+  global:BT:Start:nti -> {[int], 15, []}
+  global:Tree:SetLeft -> {[boolean], 67, []}
+  global:Tree:GetLeft -> {[Tree], 76, []}
+  global:Tree:Compare -> {[boolean], 110, []}
+  global:Tree:my_null -> {[Tree], 50, []}
+  global:Tree:GetRight -> {[Tree], 72, []}
+  global:Tree:SetRight -> {[boolean], 61, []}
+  global:Tree:has_left -> {[boolean], 48, []}
+  global:BT:Start:root -> {[Tree], 13, []}
+  global:Tree:RecPrint -> {[boolean], 316, []}
+  global:Tree:has_right -> {[boolean], 49, []}
+  global:Tree:Print:ntb -> {[boolean], 308, []}
+  global:Tree:Init:v_key -> {[int], 53, []}
+  global:Tree:Delete:ntb -> {[boolean], 168, []}
+  global:BinaryTree:main -> {[void], 2, []}
+  global:Tree:Remove:ntb -> {[boolean], 210, []}
+  global:Tree:Insert:ntb -> {[boolean], 126, []}
+  global:Tree:SetLeft:ln -> {[Tree], 67, []}
+  global:Tree:RemoveLeft -> {[boolean], 260, []}
+  global:Tree:Delete:cont -> {[boolean], 164, []}
+  global:Tree:Insert:cont -> {[boolean], 127, []}
+  global:Tree:Search:cont -> {[boolean], 278, []}
+  global:Tree:SetHas_Left -> {[boolean], 97, []}
+  global:Tree:SetRight:rn -> {[Tree], 61, []}
+  global:Tree:Compare:nti -> {[int], 112, []}
+  global:Tree:Compare:ntb -> {[boolean], 111, []}
+  global:Tree:GetHas_Left -> {[boolean], 93, []}
+  global:Tree:RemoveRight -> {[boolean], 240, []}
+  global:Tree:SetKey:v_key -> {[int], 84, []}
+  global:Tree:Compare:num2 -> {[int], 110, []}
+  global:BinaryTree:main:a -> {[String,[,]], 2, []}
+  global:Tree:Compare:num1 -> {[int], 110, []}
+  global:Tree:Search:v_key -> {[int], 277, []}
+  global:Tree:Insert:v_key -> {[int], 124, []}
+  global:Tree:SetHas_Right -> {[boolean], 102, []}
+  global:Tree:RecPrint:ntb -> {[boolean], 317, []}
+  global:Tree:GetHas_Right -> {[boolean], 89, []}
+  global:Tree:Delete:found -> {[boolean], 165, []}
+  global:Tree:Delete:v_key -> {[int], 161, []}
+  global:Tree:Search:ifound -> {[int], 279, []}
+  global:Tree:RecPrint:node -> {[Tree], 316, []}
+  global:Tree:Remove:c_node -> {[Tree], 209, []}
+  global:Tree:Remove:p_node -> {[Tree], 209, []}
+  global:Tree:RemoveLeft:ntb -> {[boolean], 261, []}
+  global:Tree:Remove:auxkey2 -> {[int], 212, []}
+  global:Tree:Remove:auxkey1 -> {[int], 211, []}
+  global:Tree:Insert:key_aux -> {[int], 128, []}
+  global:Tree:Delete:is_root -> {[boolean], 166, []}
+  global:Tree:Delete:key_aux -> {[int], 167, []}
+  global:Tree:Search:key_aux -> {[int], 281, []}
+  global:Tree:Insert:new_node -> {[Tree], 125, []}
+  global:Tree:RemoveRight:ntb -> {[boolean], 241, []}
+  global:Tree:SetHas_Left:val -> {[boolean], 97, []}
+  global:Tree:SetHas_Right:val -> {[boolean], 102, []}
+  global:Tree:RemoveLeft:p_node -> {[Tree], 260, []}
+  global:Tree:RemoveLeft:c_node -> {[Tree], 260, []}
+  global:Tree:Print:current_node -> {[Tree], 307, []}
+  global:Tree:RemoveRight:c_node -> {[Tree], 240, []}
+  global:Tree:Delete:parent_node -> {[Tree], 163, []}
+  global:Tree:RemoveRight:p_node -> {[Tree], 240, []}
+  global:Tree:Search:current_node -> {[Tree], 280, []}
+  global:Tree:Delete:current_node -> {[Tree], 162, []}
+  global:Tree:Insert:current_node -> {[Tree], 129, []}
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  BT -> {[BT], 10, []}
+  BinaryTree -> {[BinaryTree], 1, []}
+  Tree -> {[Tree], 44, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  454░ Goal
+  898░ MainClass
+  588░ MessageSend
+  588▓ MessageSend  ------------>  [int]
+  898▓ MainClass ----------------------------->  [BinaryTree]
+  520░ ClassDeclaration
+  classKey : BT
+  classKey : {[BT], 10, []}
+  classKey : [BT]
+  classKey : global:BT
+  439░ AssignmentStatement
+  439▓ AssignmentStatement
+  275░ AssignmentStatement
+  393░ MessageSend
+  393▓ MessageSend  ------------>  [boolean]
+  275▓ AssignmentStatement
+  305░ AssignmentStatement
+  685░ MessageSend
+  685▓ MessageSend  ------------>  [boolean]
+  305▓ AssignmentStatement
+  596░ AssignmentStatement
+  459░ MessageSend
+  459▓ MessageSend  ------------>  [boolean]
+  596▓ AssignmentStatement
+  159░ AssignmentStatement
+  697░ MessageSend
+  697▓ MessageSend  ------------>  [boolean]
+  159▓ AssignmentStatement
+  536░ AssignmentStatement
+  100░ MessageSend
+  100▓ MessageSend  ------------>  [boolean]
+  536▓ AssignmentStatement
+  600░ AssignmentStatement
+  184░ MessageSend
+  184▓ MessageSend  ------------>  [boolean]
+  600▓ AssignmentStatement
+  651░ AssignmentStatement
+  108░ MessageSend
+  108▓ MessageSend  ------------>  [boolean]
+  651▓ AssignmentStatement
+  175░ AssignmentStatement
+  941░ MessageSend
+  941▓ MessageSend  ------------>  [boolean]
+  175▓ AssignmentStatement
+  634░ AssignmentStatement
+  236░ MessageSend
+  236▓ MessageSend  ------------>  [boolean]
+  634▓ AssignmentStatement
+  772░ AssignmentStatement
+  536░ MessageSend
+  536▓ MessageSend  ------------>  [boolean]
+  772▓ AssignmentStatement
+  277░ AssignmentStatement
+  579░ MessageSend
+  579▓ MessageSend  ------------>  [boolean]
+  277▓ AssignmentStatement
+  762░ MessageSend
+  762▓ MessageSend  ------------>  [int]
+  588░ MessageSend
+  588▓ MessageSend  ------------>  [int]
+  359░ MessageSend
+  359▓ MessageSend  ------------>  [int]
+  178░ MessageSend
+  178▓ MessageSend  ------------>  [int]
+  529░ MessageSend
+  529▓ MessageSend  ------------>  [int]
+  371░ AssignmentStatement
+  235░ MessageSend
+  235▓ MessageSend  ------------>  [boolean]
+  371▓ AssignmentStatement
+  407░ AssignmentStatement
+  972░ MessageSend
+  972▓ MessageSend  ------------>  [boolean]
+  407▓ AssignmentStatement
+  862░ MessageSend
+  862▓ MessageSend  ------------>  [int]
+  [int]
+  int  int
+  MethodDeclaration 7
+  520▓ ClassDeclaration ----------------------------->  [BT]
+  795░ ClassDeclaration
+  classKey : Tree
+  classKey : {[Tree], 44, []}
+  classKey : [Tree]
+  classKey : global:Tree
+  340░ AssignmentStatement
+  340▓ AssignmentStatement
+  681░ AssignmentStatement
+  681▓ AssignmentStatement
+  255░ AssignmentStatement
+  255▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  175░ AssignmentStatement
+  175▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  700░ AssignmentStatement
+  700▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  [Tree]
+  Tree  Tree
+  MethodDeclaration 7
+  [Tree]
+  Tree  Tree
+  MethodDeclaration 7
+  [int]
+  int  int
+  MethodDeclaration 7
+  331░ AssignmentStatement
+  331▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  505░ AssignmentStatement
+  505▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  991░ AssignmentStatement
+  991▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  404░ AssignmentStatement
+  404▓ AssignmentStatement
+  600░ AssignmentStatement
+  600▓ AssignmentStatement
+  913░ AssignmentStatement
+  913▓ AssignmentStatement
+  346░ AssignmentStatement
+  346▓ AssignmentStatement
+  384░ AssignmentStatement
+  384▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  826░ AssignmentStatement
+  826▓ AssignmentStatement
+  389░ AssignmentStatement
+  675░ MessageSend
+  675▓ MessageSend  ------------>  [boolean]
+  389▓ AssignmentStatement
+  584░ AssignmentStatement
+  405░ ThisExpression
+  405▓ ThisExpression  ------------>  [Tree]
+  584▓ AssignmentStatement
+  467░ AssignmentStatement
+  467▓ AssignmentStatement
+  597░ AssignmentStatement
+  123░ MessageSend
+  123▓ MessageSend  ------------>  [int]
+  597▓ AssignmentStatement
+  485░ MessageSend
+  485▓ MessageSend  ------------>  [boolean]
+  822░ AssignmentStatement
+  691░ MessageSend
+  691▓ MessageSend  ------------>  [Tree]
+  822▓ AssignmentStatement
+  348░ AssignmentStatement
+  348▓ AssignmentStatement
+  759░ AssignmentStatement
+  732░ MessageSend
+  732▓ MessageSend  ------------>  [boolean]
+  759▓ AssignmentStatement
+  501░ AssignmentStatement
+  909░ MessageSend
+  909▓ MessageSend  ------------>  [boolean]
+  501▓ AssignmentStatement
+  575░ MessageSend
+  575▓ MessageSend  ------------>  [boolean]
+  329░ AssignmentStatement
+  306░ MessageSend
+  306▓ MessageSend  ------------>  [Tree]
+  329▓ AssignmentStatement
+  952░ AssignmentStatement
+  952▓ AssignmentStatement
+  165░ AssignmentStatement
+  155░ MessageSend
+  155▓ MessageSend  ------------>  [boolean]
+  165▓ AssignmentStatement
+  333░ AssignmentStatement
+  389░ MessageSend
+  389▓ MessageSend  ------------>  [boolean]
+  333▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  244░ AssignmentStatement
+  817░ ThisExpression
+  817▓ ThisExpression  ------------>  [Tree]
+  244▓ AssignmentStatement
+  712░ AssignmentStatement
+  713░ ThisExpression
+  713▓ ThisExpression  ------------>  [Tree]
+  712▓ AssignmentStatement
+  299░ AssignmentStatement
+  299▓ AssignmentStatement
+  239░ AssignmentStatement
+  239▓ AssignmentStatement
+  288░ AssignmentStatement
+  288▓ AssignmentStatement
+  861░ AssignmentStatement
+  343░ MessageSend
+  343▓ MessageSend  ------------>  [int]
+  861▓ AssignmentStatement
+  523░ MessageSend
+  523▓ MessageSend  ------------>  [boolean]
+  910░ AssignmentStatement
+  910▓ AssignmentStatement
+  907░ AssignmentStatement
+  141░ MessageSend
+  141▓ MessageSend  ------------>  [Tree]
+  907▓ AssignmentStatement
+  108░ AssignmentStatement
+  108▓ AssignmentStatement
+  898░ MessageSend
+  898▓ MessageSend  ------------>  [boolean]
+  308░ AssignmentStatement
+  308▓ AssignmentStatement
+  975░ AssignmentStatement
+  164░ MessageSend
+  164▓ MessageSend  ------------>  [Tree]
+  975▓ AssignmentStatement
+  180░ AssignmentStatement
+  180▓ AssignmentStatement
+  551░ MessageSend
+  551▓ MessageSend  ------------>  [boolean]
+  616░ MessageSend
+  616▓ MessageSend  ------------>  [boolean]
+  505░ AssignmentStatement
+  505▓ AssignmentStatement
+  230░ AssignmentStatement
+  602░ MessageSend
+  652░ ThisExpression
+  652▓ ThisExpression  ------------>  [Tree]
+  602▓ MessageSend  ------------>  [boolean]
+  230▓ AssignmentStatement
+  142░ AssignmentStatement
+  867░ MessageSend
+  266░ ThisExpression
+  266▓ ThisExpression  ------------>  [Tree]
+  867▓ MessageSend  ------------>  [boolean]
+  142▓ AssignmentStatement
+  111░ AssignmentStatement
+  111▓ AssignmentStatement
+  791░ AssignmentStatement
+  791▓ AssignmentStatement
+  925░ AssignmentStatement
+  925▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  504░ MessageSend
+  504▓ MessageSend  ------------>  [boolean]
+  494░ AssignmentStatement
+  190░ MessageSend
+  554░ ThisExpression
+  554▓ ThisExpression  ------------>  [Tree]
+  190▓ MessageSend  ------------>  [boolean]
+  494▓ AssignmentStatement
+  716░ MessageSend
+  716▓ MessageSend  ------------>  [boolean]
+  579░ AssignmentStatement
+  344░ MessageSend
+  832░ ThisExpression
+  832▓ ThisExpression  ------------>  [Tree]
+  344▓ MessageSend  ------------>  [boolean]
+  579▓ AssignmentStatement
+  393░ AssignmentStatement
+  423░ MessageSend
+  423▓ MessageSend  ------------>  [int]
+  393▓ AssignmentStatement
+  663░ AssignmentStatement
+  374░ MessageSend
+  900░ MessageSend
+  900▓ MessageSend  ------------>  [Tree]
+  374▓ MessageSend  ------------>  [int]
+  663▓ AssignmentStatement
+  546░ MessageSend
+  167░ ThisExpression
+  167▓ ThisExpression  ------------>  [Tree]
+  546▓ MessageSend  ------------>  [boolean]
+  220░ AssignmentStatement
+  712░ MessageSend
+  712▓ MessageSend  ------------>  [boolean]
+  220▓ AssignmentStatement
+  222░ AssignmentStatement
+  853░ MessageSend
+  853▓ MessageSend  ------------>  [boolean]
+  222▓ AssignmentStatement
+  815░ AssignmentStatement
+  590░ MessageSend
+  590▓ MessageSend  ------------>  [boolean]
+  815▓ AssignmentStatement
+  218░ AssignmentStatement
+  175░ MessageSend
+  175▓ MessageSend  ------------>  [boolean]
+  218▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  816░ MessageSend
+  816▓ MessageSend  ------------>  [boolean]
+  822░ AssignmentStatement
+  910░ MessageSend
+  910▓ MessageSend  ------------>  [boolean]
+  822▓ AssignmentStatement
+  149░ AssignmentStatement
+  149▓ AssignmentStatement
+  628░ AssignmentStatement
+  373░ MessageSend
+  373▓ MessageSend  ------------>  [Tree]
+  628▓ AssignmentStatement
+  687░ AssignmentStatement
+  820░ MessageSend
+  820▓ MessageSend  ------------>  [boolean]
+  687▓ AssignmentStatement
+  130░ AssignmentStatement
+  967░ MessageSend
+  967▓ MessageSend  ------------>  [boolean]
+  130▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  845░ MessageSend
+  845▓ MessageSend  ------------>  [boolean]
+  479░ AssignmentStatement
+  194░ MessageSend
+  194▓ MessageSend  ------------>  [boolean]
+  479▓ AssignmentStatement
+  852░ AssignmentStatement
+  852▓ AssignmentStatement
+  677░ AssignmentStatement
+  834░ MessageSend
+  834▓ MessageSend  ------------>  [Tree]
+  677▓ AssignmentStatement
+  213░ AssignmentStatement
+  555░ MessageSend
+  555▓ MessageSend  ------------>  [boolean]
+  213▓ AssignmentStatement
+  101░ AssignmentStatement
+  592░ MessageSend
+  592▓ MessageSend  ------------>  [boolean]
+  101▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  658░ AssignmentStatement
+  749░ ThisExpression
+  749▓ ThisExpression  ------------>  [Tree]
+  658▓ AssignmentStatement
+  520░ AssignmentStatement
+  520▓ AssignmentStatement
+  408░ AssignmentStatement
+  408▓ AssignmentStatement
+  680░ AssignmentStatement
+  392░ MessageSend
+  392▓ MessageSend  ------------>  [int]
+  680▓ AssignmentStatement
+  686░ MessageSend
+  686▓ MessageSend  ------------>  [boolean]
+  206░ AssignmentStatement
+  125░ MessageSend
+  125▓ MessageSend  ------------>  [Tree]
+  206▓ AssignmentStatement
+  636░ AssignmentStatement
+  636▓ AssignmentStatement
+  843░ MessageSend
+  843▓ MessageSend  ------------>  [boolean]
+  810░ AssignmentStatement
+  866░ MessageSend
+  866▓ MessageSend  ------------>  [Tree]
+  810▓ AssignmentStatement
+  598░ AssignmentStatement
+  598▓ AssignmentStatement
+  835░ AssignmentStatement
+  835▓ AssignmentStatement
+  683░ AssignmentStatement
+  683▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  490░ AssignmentStatement
+  662░ ThisExpression
+  662▓ ThisExpression  ------------>  [Tree]
+  490▓ AssignmentStatement
+  857░ AssignmentStatement
+  135░ MessageSend
+  617░ ThisExpression
+  617▓ ThisExpression  ------------>  [Tree]
+  135▓ MessageSend  ------------>  [boolean]
+  857▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  170░ MessageSend
+  170▓ MessageSend  ------------>  [boolean]
+  283░ AssignmentStatement
+  584░ MessageSend
+  877░ ThisExpression
+  877▓ ThisExpression  ------------>  [Tree]
+  584▓ MessageSend  ------------>  [boolean]
+  283▓ AssignmentStatement
+  840░ AssignmentStatement
+  840▓ AssignmentStatement
+  965░ MessageSend
+  965▓ MessageSend  ------------>  [int]
+  569░ MessageSend
+  569▓ MessageSend  ------------>  [boolean]
+  950░ AssignmentStatement
+  301░ MessageSend
+  590░ ThisExpression
+  590▓ ThisExpression  ------------>  [Tree]
+  301▓ MessageSend  ------------>  [boolean]
+  950▓ AssignmentStatement
+  367░ AssignmentStatement
+  367▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  795▓ ClassDeclaration ----------------------------->  [Tree]
+  454▓ Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/class_inheritance.java ===
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
+  global:myParentClass -> {[myParentClass], 1, []}
+  global:myParentClass:main -> {[void], 2, []}
+  global:myParentClass:main:a -> {[String,[,]], 2, []}
+  global:myParentClass:main:x -> {[int], 3, []}
+  global:myParentClass:myChildClass -> {[myParentClass,myChildClass], 10, []}
+  global:myParentClass:myChildClass:x -> {[int], 11, []}
+  global:myParentClass:main:childInstance -> {[myParentClass,myChildClass], 4, []}
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  myParentClass -> {[myParentClass], 1, []}
+  myChildClass -> {[myParentClass,myChildClass], 10, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  Is empty!
+  714░ Goal
+  580░ MainClass
+  810░ AssignmentStatement
+  810▓ AssignmentStatement
+  817░ AssignmentStatement
+  817▓ AssignmentStatement
+  580▓ MainClass ----------------------------->  [myParentClass]
+  689░ ClassExtendsDeclaration
+  classKey : myChildClass
+  689▓ ClassExtendsDeclaration ----------------------------->  [myParentClass,myChildClass]
+  714▓ Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/LinearSearch.java ===
+  Nothing to update here;
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
+  global:LS -> {[LS], 11, []}
+  global:LS:size -> {[int], 13, []}
+  global:LS:Init -> {[int], 78, []}
+  global:LS:Start -> {[int], 17, []}
+  global:LS:Print -> {[int], 32, []}
+  global:LS:number -> {[int,[]], 12, []}
+  global:LS:Init:k -> {[int], 80, []}
+  global:LS:Init:j -> {[int], 79, []}
+  global:LS:Search -> {[int], 45, []}
+  global:LS:Print:j -> {[int], 33, []}
+  global:LS:Init:sz -> {[int], 78, []}
+  global:LS:Search:j -> {[int], 46, []}
+  global:LS:Start:sz -> {[int], 17, []}
+  global:LS:Search:nt -> {[int], 51, []}
+  global:LinearSearch -> {[LinearSearch], 1, []}
+  global:LS:Init:aux02 -> {[int], 82, []}
+  global:LS:Search:num -> {[int], 45, []}
+  global:LS:Init:aux01 -> {[int], 81, []}
+  global:LS:Search:ls01 -> {[boolean], 47, []}
+  global:LS:Start:aux01 -> {[int], 18, []}
+  global:LS:Start:aux02 -> {[int], 19, []}
+  global:LS:Search:aux02 -> {[int], 50, []}
+  global:LS:Search:aux01 -> {[int], 49, []}
+  global:LS:Search:ifound -> {[int], 48, []}
+  global:LinearSearch:main -> {[void], 2, []}
+  global:LinearSearch:main:a -> {[String,[,]], 2, []}
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  LS -> {[LS], 11, []}
+  LinearSearch -> {[LinearSearch], 1, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  948░ Goal
+  328░ MainClass
+  358░ MessageSend
+  358▓ MessageSend  ------------>  [int]
+  328▓ MainClass ----------------------------->  [LinearSearch]
+  258░ ClassDeclaration
+  classKey : LS
+  classKey : {[LS], 11, []}
+  classKey : [LS]
+  classKey : global:LS
+  491░ AssignmentStatement
+  667░ MessageSend
+  914░ ThisExpression
+  914▓ ThisExpression  ------------>  [LS]
+  667▓ MessageSend  ------------>  [int]
+  491▓ AssignmentStatement
+  675░ AssignmentStatement
+  399░ MessageSend
+  227░ ThisExpression
+  227▓ ThisExpression  ------------>  [LS]
+  399▓ MessageSend  ------------>  [int]
+  675▓ AssignmentStatement
+  879░ MessageSend
+  703░ ThisExpression
+  703▓ ThisExpression  ------------>  [LS]
+  879▓ MessageSend  ------------>  [int]
+  158░ MessageSend
+  362░ ThisExpression
+  362▓ ThisExpression  ------------>  [LS]
+  158▓ MessageSend  ------------>  [int]
+  348░ MessageSend
+  202░ ThisExpression
+  202▓ ThisExpression  ------------>  [LS]
+  348▓ MessageSend  ------------>  [int]
+  741░ MessageSend
+  667░ ThisExpression
+  667▓ ThisExpression  ------------>  [LS]
+  741▓ MessageSend  ------------>  [int]
+  [int]
+  int  int
+  MethodDeclaration 7
+  638░ AssignmentStatement
+  638▓ AssignmentStatement
+  903░ ArrayLookup
+  903▓ ArrayLookup  ------------>  [int]
+  225░ AssignmentStatement
+  225▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  104░ AssignmentStatement
+  104▓ AssignmentStatement
+  888░ AssignmentStatement
+  888▓ AssignmentStatement
+  224░ AssignmentStatement
+  224▓ AssignmentStatement
+  470░ AssignmentStatement
+  269░ ArrayLookup
+  269▓ ArrayLookup  ------------>  [int]
+  470▓ AssignmentStatement
+  753░ AssignmentStatement
+  753▓ AssignmentStatement
+  969░ AssignmentStatement
+  969▓ AssignmentStatement
+  795░ AssignmentStatement
+  795▓ AssignmentStatement
+  913░ AssignmentStatement
+  913▓ AssignmentStatement
+  573░ AssignmentStatement
+  573▓ AssignmentStatement
+  228░ AssignmentStatement
+  228▓ AssignmentStatement
+  797░ AssignmentStatement
+  797▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  291░ AssignmentStatement
+  291▓ AssignmentStatement
+  846░ AssignmentStatement
+  846▓ AssignmentStatement
+  689░ AssignmentStatement
+  689▓ AssignmentStatement
+  477░ AssignmentStatement
+  477▓ AssignmentStatement
+  511░ AssignmentStatement
+  511▓ AssignmentStatement
+  100░ AssignmentStatement
+  100▓ AssignmentStatement
+  476░ AssignmentStatement
+  476▓ AssignmentStatement
+  789░ AssignmentStatement
+  789▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  258▓ ClassDeclaration ----------------------------->  [LS]
+  948▓ Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/LinkedList.java ===
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
+  global:LL -> {[LL], 217, []}
+  global:List -> {[List], 74, []}
+  global:Element -> {[Element], 7, []}
+  global:List:end -> {[boolean], 77, []}
+  global:LL:Start -> {[int], 219, []}
+  global:List:Init -> {[boolean], 80, []}
+  global:List:elem -> {[Element], 75, []}
+  global:List:next -> {[List], 76, []}
+  global:LinkedList -> {[LinkedList], 1, []}
+  global:List:Print -> {[boolean], 195, []}
+  global:List:GetEnd -> {[boolean], 181, []}
+  global:List:Insert -> {[List], 94, []}
+  global:List:Search -> {[int], 158, []}
+  global:List:Delete -> {[List], 112, []}
+  global:Element:Age -> {[int], 8, []}
+  global:List:SetNext -> {[boolean], 106, []}
+  global:List:GetNext -> {[List], 189, []}
+  global:List:GetElem -> {[Element], 185, []}
+  global:List:InitNew -> {[boolean], 86, []}
+  global:Element:Init -> {[boolean], 13, []}
+  global:LL:Start:el02 -> {[Element], 225, []}
+  global:LL:Start:el03 -> {[Element], 226, []}
+  global:LL:Start:el01 -> {[Element], 224, []}
+  global:List:Search:e -> {[Element], 158, []}
+  global:List:Delete:e -> {[Element], 112, []}
+  global:Element:Equal -> {[boolean], 34, []}
+  global:LL:Start:head -> {[List], 221, []}
+  global:List:Delete:nt -> {[int], 121, []}
+  global:List:Search:nt -> {[int], 163, []}
+  global:Element:Salary -> {[int], 9, []}
+  global:Element:GetAge -> {[int], 20, []}
+  global:LL:Start:aux01 -> {[boolean], 223, []}
+  global:Element:Married -> {[boolean], 10, []}
+  global:Element:Compare -> {[boolean], 61, []}
+  global:LinkedList:main -> {[void], 2, []}
+  global:Element:Equal:nt -> {[int], 38, []}
+  global:List:Print:aux01 -> {[List], 196, []}
+  global:List:Delete:prev -> {[List], 117, []}
+  global:LinkedList:main:a -> {[String,[,]], 2, []}
+  global:List:Search:aux01 -> {[List], 160, []}
+  global:Element:GetSalary -> {[int], 24, []}
+  global:List:Delete:aux01 -> {[List], 116, []}
+  global:List:Delete:aux05 -> {[boolean], 115, []}
+  global:List:Delete:aux04 -> {[int], 120, []}
+  global:List:Insert:aux03 -> {[List], 96, []}
+  global:List:Insert:aux02 -> {[List], 97, []}
+  global:List:Print:var_end -> {[boolean], 197, []}
+  global:List:InitNew:v_end -> {[boolean], 86, []}
+  global:LL:Start:last_elem -> {[List], 222, []}
+  global:Element:GetMarried -> {[boolean], 28, []}
+  global:Element:Init:v_Age -> {[int], 13, []}
+  global:List:InitNew:v_next -> {[List], 86, []}
+  global:List:Search:var_end -> {[boolean], 162, []}
+  global:List:Delete:my_head -> {[List], 113, []}
+  global:Element:Equal:other -> {[Element], 34, []}
+  global:List:Print:var_elem -> {[Element], 198, []}
+  global:Element:Equal:aux02 -> {[int], 37, []}
+  global:Element:Equal:aux01 -> {[int], 36, []}
+  global:List:Insert:ret_val -> {[boolean], 95, []}
+  global:List:Delete:ret_val -> {[boolean], 114, []}
+  global:List:InitNew:v_elem -> {[Element], 86, []}
+  global:List:Delete:var_end -> {[boolean], 118, []}
+  global:List:SetNext:v_next -> {[List], 106, []}
+  global:List:Search:var_elem -> {[Element], 161, []}
+  global:List:Insert:new_elem -> {[Element], 94, []}
+  global:Element:Compare:num1 -> {[int], 61, []}
+  global:Element:Compare:num2 -> {[int], 61, []}
+  global:List:Delete:var_elem -> {[Element], 119, []}
+  global:Element:Equal:ret_val -> {[boolean], 35, []}
+  global:Element:Init:v_Salary -> {[int], 13, []}
+  global:Element:Compare:aux02 -> {[int], 63, []}
+  global:Element:Compare:retval -> {[boolean], 62, []}
+  global:Element:Init:v_Married -> {[boolean], 13, []}
+  global:List:Search:int_ret_val -> {[int], 159, []}
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  LL -> {[LL], 217, []}
+  Element -> {[Element], 7, []}
+  List -> {[List], 74, []}
+  LinkedList -> {[LinkedList], 1, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  174░ Goal
+  789░ MainClass
+  906░ MessageSend
+  906▓ MessageSend  ------------>  [int]
+  789▓ MainClass ----------------------------->  [LinkedList]
+  829░ ClassDeclaration
+  classKey : Element
+  classKey : {[Element], 7, []}
+  classKey : [Element]
+  classKey : global:Element
+  749░ AssignmentStatement
+  749▓ AssignmentStatement
+  892░ AssignmentStatement
+  892▓ AssignmentStatement
+  480░ AssignmentStatement
+  480▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  [int]
+  int  int
+  MethodDeclaration 7
+  [int]
+  int  int
+  MethodDeclaration 7
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  281░ AssignmentStatement
+  281▓ AssignmentStatement
+  812░ AssignmentStatement
+  877░ MessageSend
+  877▓ MessageSend  ------------>  [int]
+  812▓ AssignmentStatement
+  441░ MessageSend
+  490░ ThisExpression
+  490▓ ThisExpression  ------------>  [Element]
+  441▓ MessageSend  ------------>  [boolean]
+  910░ AssignmentStatement
+  910▓ AssignmentStatement
+  395░ AssignmentStatement
+  214░ MessageSend
+  214▓ MessageSend  ------------>  [int]
+  395▓ AssignmentStatement
+  178░ MessageSend
+  495░ ThisExpression
+  495▓ ThisExpression  ------------>  [Element]
+  178▓ MessageSend  ------------>  [boolean]
+  266░ AssignmentStatement
+  266▓ AssignmentStatement
+  977░ MessageSend
+  977▓ MessageSend  ------------>  [boolean]
+  358░ AssignmentStatement
+  358▓ AssignmentStatement
+  461░ AssignmentStatement
+  461▓ AssignmentStatement
+  873░ MessageSend
+  873▓ MessageSend  ------------>  [boolean]
+  684░ AssignmentStatement
+  684▓ AssignmentStatement
+  637░ AssignmentStatement
+  637▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  827░ AssignmentStatement
+  827▓ AssignmentStatement
+  576░ AssignmentStatement
+  576▓ AssignmentStatement
+  960░ AssignmentStatement
+  960▓ AssignmentStatement
+  831░ AssignmentStatement
+  831▓ AssignmentStatement
+  850░ AssignmentStatement
+  850▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  829▓ ClassDeclaration ----------------------------->  [Element]
+  641░ ClassDeclaration
+  classKey : List
+  classKey : {[List], 74, []}
+  classKey : [List]
+  classKey : global:List
+  579░ AssignmentStatement
+  579▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  191░ AssignmentStatement
+  191▓ AssignmentStatement
+  412░ AssignmentStatement
+  412▓ AssignmentStatement
+  997░ AssignmentStatement
+  997▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  836░ AssignmentStatement
+  291░ ThisExpression
+  291▓ ThisExpression  ------------>  [List]
+  836▓ AssignmentStatement
+  783░ AssignmentStatement
+  783▓ AssignmentStatement
+  209░ AssignmentStatement
+  595░ MessageSend
+  595▓ MessageSend  ------------>  [boolean]
+  209▓ AssignmentStatement
+  [List]
+  List  List
+  MethodDeclaration 7
+  945░ AssignmentStatement
+  945▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  835░ AssignmentStatement
+  616░ ThisExpression
+  616▓ ThisExpression  ------------>  [List]
+  835▓ AssignmentStatement
+  834░ AssignmentStatement
+  834▓ AssignmentStatement
+  941░ AssignmentStatement
+  941▓ AssignmentStatement
+  426░ AssignmentStatement
+  666░ ThisExpression
+  666▓ ThisExpression  ------------>  [List]
+  426▓ AssignmentStatement
+  797░ AssignmentStatement
+  132░ ThisExpression
+  132▓ ThisExpression  ------------>  [List]
+  797▓ AssignmentStatement
+  407░ AssignmentStatement
+  407▓ AssignmentStatement
+  769░ AssignmentStatement
+  769▓ AssignmentStatement
+  435░ MessageSend
+  435▓ MessageSend  ------------>  [boolean]
+  809░ AssignmentStatement
+  809▓ AssignmentStatement
+  250░ AssignmentStatement
+  223░ MessageSend
+  223▓ MessageSend  ------------>  [List]
+  250▓ AssignmentStatement
+  925░ AssignmentStatement
+  398░ MessageSend
+  398▓ MessageSend  ------------>  [boolean]
+  925▓ AssignmentStatement
+  398░ AssignmentStatement
+  398▓ AssignmentStatement
+  405░ AssignmentStatement
+  405▓ AssignmentStatement
+  823░ AssignmentStatement
+  643░ MessageSend
+  643▓ MessageSend  ------------>  [List]
+  823▓ AssignmentStatement
+  794░ AssignmentStatement
+  805░ MessageSend
+  805▓ MessageSend  ------------>  [boolean]
+  794▓ AssignmentStatement
+  530░ AssignmentStatement
+  221░ MessageSend
+  221▓ MessageSend  ------------>  [Element]
+  530▓ AssignmentStatement
+  233░ AssignmentStatement
+  233▓ AssignmentStatement
+  213░ AssignmentStatement
+  213▓ AssignmentStatement
+  [List]
+  List  List
+  MethodDeclaration 7
+  952░ AssignmentStatement
+  952▓ AssignmentStatement
+  643░ AssignmentStatement
+  308░ ThisExpression
+  308▓ ThisExpression  ------------>  [List]
+  643▓ AssignmentStatement
+  151░ AssignmentStatement
+  151▓ AssignmentStatement
+  303░ AssignmentStatement
+  303▓ AssignmentStatement
+  301░ MessageSend
+  301▓ MessageSend  ------------>  [boolean]
+  314░ AssignmentStatement
+  314▓ AssignmentStatement
+  791░ AssignmentStatement
+  791▓ AssignmentStatement
+  149░ AssignmentStatement
+  506░ MessageSend
+  506▓ MessageSend  ------------>  [List]
+  149▓ AssignmentStatement
+  887░ AssignmentStatement
+  753░ MessageSend
+  753▓ MessageSend  ------------>  [boolean]
+  887▓ AssignmentStatement
+  742░ AssignmentStatement
+  224░ MessageSend
+  224▓ MessageSend  ------------>  [Element]
+  742▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  [Element]
+  Element  Element
+  MethodDeclaration 7
+  [List]
+  List  List
+  MethodDeclaration 7
+  225░ AssignmentStatement
+  542░ ThisExpression
+  542▓ ThisExpression  ------------>  [List]
+  225▓ AssignmentStatement
+  340░ AssignmentStatement
+  340▓ AssignmentStatement
+  739░ AssignmentStatement
+  739▓ AssignmentStatement
+  492░ MessageSend
+  492▓ MessageSend  ------------>  [int]
+  123░ AssignmentStatement
+  627░ MessageSend
+  627▓ MessageSend  ------------>  [List]
+  123▓ AssignmentStatement
+  660░ AssignmentStatement
+  750░ MessageSend
+  750▓ MessageSend  ------------>  [boolean]
+  660▓ AssignmentStatement
+  325░ AssignmentStatement
+  800░ MessageSend
+  800▓ MessageSend  ------------>  [Element]
+  325▓ AssignmentStatement
+  [boolean]
+  boolean  boolean
+  MethodDeclaration 7
+  641▓ ClassDeclaration ----------------------------->  [List]
+  991░ ClassDeclaration
+  classKey : LL
+  classKey : {[LL], 217, []}
+  classKey : [LL]
+  classKey : global:LL
+  342░ AssignmentStatement
+  342▓ AssignmentStatement
+  389░ AssignmentStatement
+  364░ MessageSend
+  364▓ MessageSend  ------------>  [boolean]
+  389▓ AssignmentStatement
+  849░ AssignmentStatement
+  849▓ AssignmentStatement
+  509░ AssignmentStatement
+  401░ MessageSend
+  401▓ MessageSend  ------------>  [boolean]
+  509▓ AssignmentStatement
+  845░ AssignmentStatement
+  993░ MessageSend
+  993▓ MessageSend  ------------>  [boolean]
+  845▓ AssignmentStatement
+  257░ AssignmentStatement
+  257▓ AssignmentStatement
+  415░ AssignmentStatement
+  503░ MessageSend
+  503▓ MessageSend  ------------>  [boolean]
+  415▓ AssignmentStatement
+  175░ AssignmentStatement
+  917░ MessageSend
+  917▓ MessageSend  ------------>  [List]
+  175▓ AssignmentStatement
+  362░ AssignmentStatement
+  124░ MessageSend
+  124▓ MessageSend  ------------>  [boolean]
+  362▓ AssignmentStatement
+  541░ AssignmentStatement
+  541▓ AssignmentStatement
+  275░ AssignmentStatement
+  584░ MessageSend
+  584▓ MessageSend  ------------>  [boolean]
+  275▓ AssignmentStatement
+  982░ AssignmentStatement
+  982▓ AssignmentStatement
+  960░ AssignmentStatement
+  602░ MessageSend
+  602▓ MessageSend  ------------>  [List]
+  960▓ AssignmentStatement
+  237░ AssignmentStatement
+  925░ MessageSend
+  925▓ MessageSend  ------------>  [boolean]
+  237▓ AssignmentStatement
+  136░ AssignmentStatement
+  136▓ AssignmentStatement
+  935░ AssignmentStatement
+  875░ MessageSend
+  875▓ MessageSend  ------------>  [boolean]
+  935▓ AssignmentStatement
+  957░ AssignmentStatement
+  889░ MessageSend
+  889▓ MessageSend  ------------>  [List]
+  957▓ AssignmentStatement
+  392░ AssignmentStatement
+  710░ MessageSend
+  710▓ MessageSend  ------------>  [boolean]
+  392▓ AssignmentStatement
+  557░ AssignmentStatement
+  557▓ AssignmentStatement
+  234░ AssignmentStatement
+  419░ MessageSend
+  419▓ MessageSend  ------------>  [boolean]
+  234▓ AssignmentStatement
+  512░ MessageSend
+  512▓ MessageSend  ------------>  [int]
+  938░ MessageSend
+  938▓ MessageSend  ------------>  [int]
+  320░ AssignmentStatement
+  320▓ AssignmentStatement
+  439░ AssignmentStatement
+  963░ MessageSend
+  963▓ MessageSend  ------------>  [boolean]
+  439▓ AssignmentStatement
+  584░ AssignmentStatement
+  714░ MessageSend
+  714▓ MessageSend  ------------>  [List]
+  584▓ AssignmentStatement
+  193░ AssignmentStatement
+  153░ MessageSend
+  153▓ MessageSend  ------------>  [boolean]
+  193▓ AssignmentStatement
+  653░ AssignmentStatement
+  915░ MessageSend
+  915▓ MessageSend  ------------>  [List]
+  653▓ AssignmentStatement
+  634░ AssignmentStatement
+  124░ MessageSend
+  124▓ MessageSend  ------------>  [boolean]
+  634▓ AssignmentStatement
+  303░ AssignmentStatement
+  437░ MessageSend
+  437▓ MessageSend  ------------>  [List]
+  303▓ AssignmentStatement
+  610░ AssignmentStatement
+  508░ MessageSend
+  508▓ MessageSend  ------------>  [boolean]
+  610▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  991▓ ClassDeclaration ----------------------------->  [LL]
+  174▓ Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/MoreThan4.java ===
+  Nothing to update here;
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
+  global:MT4 -> {[MT4], 7, []}
+  global:MT4:Start -> {[int], 8, []}
+  global:MoreThan4 -> {[MoreThan4], 1, []}
+  global:MT4:Change -> {[int], 20, []}
+  global:MT4:Start:p2 -> {[int], 8, []}
+  global:MT4:Start:p3 -> {[int], 8, []}
+  global:MT4:Start:p1 -> {[int], 8, []}
+  global:MT4:Start:p6 -> {[int], 8, []}
+  global:MT4:Start:p4 -> {[int], 8, []}
+  global:MT4:Start:p5 -> {[int], 8, []}
+  global:MT4:Start:aux -> {[int], 9, []}
+  global:MT4:Change:p1 -> {[int], 20, []}
+  global:MT4:Change:p6 -> {[int], 20, []}
+  global:MT4:Change:p4 -> {[int], 20, []}
+  global:MT4:Change:p5 -> {[int], 20, []}
+  global:MT4:Change:p2 -> {[int], 20, []}
+  global:MT4:Change:p3 -> {[int], 20, []}
+  global:MoreThan4:main -> {[void], 2, []}
+  global:MoreThan4:main:a -> {[String,[,]], 2, []}
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  MoreThan4 -> {[MoreThan4], 1, []}
+  MT4 -> {[MT4], 7, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  306░ Goal
+  324░ MainClass
+  812░ MessageSend
+  812▓ MessageSend  ------------>  [int]
+  324▓ MainClass ----------------------------->  [MoreThan4]
+  152░ ClassDeclaration
+  classKey : MT4
+  classKey : {[MT4], 7, []}
+  classKey : [MT4]
+  classKey : global:MT4
+  598░ AssignmentStatement
+  691░ MessageSend
+  800░ ThisExpression
+  800▓ ThisExpression  ------------>  [MT4]
+  691▓ MessageSend  ------------>  [int]
+  598▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  [int]
+  int  int
+  MethodDeclaration 7
+  152▓ ClassDeclaration ----------------------------->  [MT4]
+  306▓ Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/QuickSort.java ===
+  Nothing to update here;
+  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
+  global:QS -> {[QS], 11, []}
+  global:QS:size -> {[int], 14, []}
+  global:QS:Init -> {[int], 94, []}
+  global:QS:Sort -> {[int], 31, []}
+  global:QS:Print -> {[int], 82, []}
+  global:QS:Start -> {[int], 18, []}
+  global:QS:Sort:i -> {[int], 33, []}
+  global:QS:number -> {[int,[]], 13, []}
+  global:QS:Sort:j -> {[int], 34, []}
+  global:QuickSort -> {[QuickSort], 1, []}
+  global:QS:Sort:t -> {[int], 36, []}
+  global:QS:Sort:v -> {[int], 32, []}
+  global:QS:Print:j -> {[int], 83, []}
+  global:QS:Init:sz -> {[int], 94, []}
+  global:QS:Sort:nt -> {[int], 35, []}
+  global:QS:Start:sz -> {[int], 18, []}
+  global:QS:Sort:left -> {[int], 31, []}
+  global:QS:Sort:aux03 -> {[int], 39, []}
+  global:QS:Sort:right -> {[int], 31, []}
+  global:QS:Start:aux01 -> {[int], 19, []}
+  global:QS:Sort:cont02 -> {[boolean], 38, []}
+  global:QS:Sort:cont01 -> {[boolean], 37, []}
+  global:QuickSort:main -> {[void], 2, []}
+  global:QuickSort:main:a -> {[String,[,]], 2, []}
+  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
+  QuickSort -> {[QuickSort], 1, []}
+  QS -> {[QS], 11, []}
+  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
+  758░ Goal
+  285░ MainClass
+  419░ MessageSend
+  419▓ MessageSend  ------------>  [int]
+  285▓ MainClass ----------------------------->  [QuickSort]
+  271░ ClassDeclaration
+  classKey : QS
+  classKey : {[QS], 11, []}
+  classKey : [QS]
+  classKey : global:QS
+  447░ AssignmentStatement
+  399░ MessageSend
+  853░ ThisExpression
+  853▓ ThisExpression  ------------>  [QS]
+  399▓ MessageSend  ------------>  [int]
+  447▓ AssignmentStatement
+  260░ AssignmentStatement
+  807░ MessageSend
+  679░ ThisExpression
+  679▓ ThisExpression  ------------>  [QS]
+  807▓ MessageSend  ------------>  [int]
+  260▓ AssignmentStatement
+  483░ AssignmentStatement
+  483▓ AssignmentStatement
+  896░ AssignmentStatement
+  883░ MessageSend
+  829░ ThisExpression
+  829▓ ThisExpression  ------------>  [QS]
+  883▓ MessageSend  ------------>  [int]
+  896▓ AssignmentStatement
+  924░ AssignmentStatement
+  133░ MessageSend
+  328░ ThisExpression
+  328▓ ThisExpression  ------------>  [QS]
+  133▓ MessageSend  ------------>  [int]
+  924▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  683░ AssignmentStatement
+  683▓ AssignmentStatement
+  784░ AssignmentStatement
+  316░ ArrayLookup
+  316▓ ArrayLookup  ------------>  [int]
+  784▓ AssignmentStatement
+  792░ AssignmentStatement
+  792▓ AssignmentStatement
+  776░ AssignmentStatement
+  776▓ AssignmentStatement
+  612░ AssignmentStatement
+  612▓ AssignmentStatement
+  338░ AssignmentStatement
+  338▓ AssignmentStatement
+  863░ AssignmentStatement
+  863▓ AssignmentStatement
+  533░ AssignmentStatement
+  373░ ArrayLookup
+  373▓ ArrayLookup  ------------>  [int]
+  533▓ AssignmentStatement
+  991░ AssignmentStatement
+  991▓ AssignmentStatement
+  862░ AssignmentStatement
+  862▓ AssignmentStatement
+  742░ AssignmentStatement
+  742▓ AssignmentStatement
+  532░ AssignmentStatement
+  532▓ AssignmentStatement
+  377░ AssignmentStatement
+  192░ ArrayLookup
+  192▓ ArrayLookup  ------------>  [int]
+  377▓ AssignmentStatement
+  567░ AssignmentStatement
+  567▓ AssignmentStatement
+  659░ AssignmentStatement
+  659▓ AssignmentStatement
+  920░ AssignmentStatement
+  756░ ArrayLookup
+  756▓ ArrayLookup  ------------>  [int]
+  920▓ AssignmentStatement
+  783░ ArrayLookup
+  783▓ ArrayLookup  ------------>  [int]
+  205░ AssignmentStatement
+  205▓ AssignmentStatement
+  410░ AssignmentStatement
+  410▓ AssignmentStatement
+  607░ ArrayLookup
+  607▓ ArrayLookup  ------------>  [int]
+  961░ ArrayLookup
+  961▓ ArrayLookup  ------------>  [int]
+  837░ AssignmentStatement
+  935░ MessageSend
+  358░ ThisExpression
+  358▓ ThisExpression  ------------>  [QS]
+  935▓ MessageSend  ------------>  [int]
+  837▓ AssignmentStatement
+  481░ AssignmentStatement
+  540░ MessageSend
+  898░ ThisExpression
+  898▓ ThisExpression  ------------>  [QS]
+  540▓ MessageSend  ------------>  [int]
+  481▓ AssignmentStatement
+  376░ AssignmentStatement
+  376▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  487░ AssignmentStatement
+  487▓ AssignmentStatement
+  411░ ArrayLookup
+  411▓ ArrayLookup  ------------>  [int]
+  784░ AssignmentStatement
+  784▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  309░ AssignmentStatement
+  309▓ AssignmentStatement
+  567░ AssignmentStatement
+  567▓ AssignmentStatement
+  [int]
+  int  int
+  MethodDeclaration 7
+  271▓ ClassDeclaration ----------------------------->  [QS]
+  758▓ Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/TreeVisitor.java ===
+  java.lang.NullPointerException
