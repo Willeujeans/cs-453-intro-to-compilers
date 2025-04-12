@@ -32,16 +32,27 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     }
 
     public void updateClassInstances(String... className){
-        if(classes.isEmpty() || classInstances.isEmpty()){
+        System.out.println("updateClassInstances...");
+        if(classes.isEmpty() || classInstances.isEmpty() || className == null){
             System.out.println("Nothing to update here;");
             return;
         }
 
         for(String instanceKey : classInstances.keySet()){
             MyType instanceType = classInstances.get(instanceKey).type;
-            MyType classType = classes.get(instanceType.getType()).type;
-            declarations.get(instanceKey).type = classType;
+
+            MyType classType = findClass(instanceType.getType()).type;
+
+            if(declarations.containsKey(instanceKey)){
+                declarations.get(instanceKey).type = classType;
+            }else{
+                System.out.println(instanceKey);
+                prettyPrint();
+                System.out.println("tried to get a declaration that does not exist");
+                System.exit(1);
+            }
         }
+        System.out.println("updateClassInstances!");
     }
     
     public boolean insertDeclaration(String key, Symbol entry){
@@ -235,8 +246,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         n.f0.accept(this, key);
         n.f1.accept(this, key);
         n.f2.accept(this, key);
-        updateClassKeys();
         updateClassInstances();
+        updateClassKeys();
         return null;
     }
 
