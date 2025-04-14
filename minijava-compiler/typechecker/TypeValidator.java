@@ -25,12 +25,12 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     }
 
     public void checkForOverload(){
-        HashSet<String> classMethods = symbolTable.getClassMethods();
-        if(classMethods.isEmpty()){
+        HashMap<String, MethodSymbol> methods = symbolTable.getMethods();
+        if(methods.isEmpty()){
             System.out.println("Is empty!");
             return;
         }
-        for(String methodKey : classMethods){
+        for(String methodKey : methods.keySet()){
             String[] keyFragments = methodKey.split(symbolTable.bufferChar);
             String[] keyFragmentsTrimmed = Arrays.copyOf(keyFragments, keyFragments.length - 2);
             String methodName = keyFragments[keyFragments.length - 1];
@@ -40,7 +40,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
             
             while(i > 2){
                 currentKey = String.join(symbolTable.bufferChar, Arrays.copyOf(keyFragmentsTrimmed, i)) + symbolTable.bufferChar + methodName;
-                if(symbolTable.getClassMethods().contains(currentKey)){
+                if(symbolTable.getMethods().containsKey(currentKey)){
                     System.out.println("Overload check: Type Error");
                     System.exit(1);
                 }
@@ -332,7 +332,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         MyType methodType = methodSymbol.type;
 
         // Verify with declared method arguments
-        // n.f4.accept(this, key);
+        n.f4.accept(this, key);
         
         System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + methodType);
         return methodType;
@@ -372,6 +372,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(ExpressionList n, String key) {
+        // Compare return type with the provided key
         MyType returnType = n.f0.accept(this, key);
         n.f1.accept(this, key);
         return returnType;
