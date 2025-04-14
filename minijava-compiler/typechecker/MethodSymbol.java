@@ -6,30 +6,31 @@ import typechecker.MyType;
 import visitor.*;
 
 public class MethodSymbol extends Symbol{
-    public List<MyType> argumentList;
+    public MyType argumentTypes;
 
     public MethodSymbol(MyType type, int lineDeclared) {
         super(type, lineDeclared);
-        this.argumentList = new ArrayList();
+        this.argumentTypes = new MyType();
     }
 
     public MethodSymbol(MethodSymbol methodSymbol){
         super(methodSymbol);
-        this.argumentList = new ArrayList<MyType>(methodSymbol.argumentList);
+        argumentTypes = new MyType();
+        argumentTypes.addToType(methodSymbol.getArgumentTypes());
     }
 
     public void addArgumentType(MyType argumentType){
         if(argumentType == null){
             throw new IllegalArgumentException("Can't add an argument type that does not exist");
         }
-        argumentList.add(argumentType);
+        argumentTypes.addToType(argumentType);
     }
 
-    public List<MyType> getArgumentList(){
-        if(argumentList.isEmpty()){
+    public MyType getArgumentTypes(){
+        if(argumentTypes.type_array.isEmpty()){
             return null;
         }else{
-            return argumentList;
+            return argumentTypes;
         }
     }
 

@@ -8,12 +8,22 @@ public class MyType {
     // int[][] would be stored as -> ["int", "[", "]"]
     public Vector<String> type_array;
 
+    public MyType() {
+        this.type_array = new Vector<String>();
+    }
+
     public MyType(String... components) {
         this.type_array = new Vector<>(Arrays.asList(components));
     }
 
     public MyType(MyType other) {
         this.type_array = new Vector<String>(other.type_array);
+    }
+
+    public void addToType(MyType otherType) {
+        for(String each : otherType.type_array){
+            type_array.add(each);
+        }
     }
 
     public String getType() {
