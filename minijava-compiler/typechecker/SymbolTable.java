@@ -64,7 +64,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
     public void updateClassInstances(String... className){
         if(classes.isEmpty() || classInstances.isEmpty() || className == null){
-            System.out.println("Nothing to update here;");
             return;
         }
 
@@ -76,9 +75,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             if(declarations.containsKey(instanceKey)){
                 declarations.get(instanceKey).type = classType;
             }else{
-                System.out.println(instanceKey);
                 prettyPrint();
-                System.out.println("tried to get a declaration that does not exist");
+                System.out.println("Type Error: Tried to get a declaration that does not exist");
                 System.exit(1);
             }
         }
@@ -146,7 +144,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     }
 
     public MethodSymbol findMethodWithShadowing(String key) {
-        System.out.println("finding method..." + key);
         if(key == null || key.isEmpty()){
             throw new IllegalArgumentException("Attempt to call method with null arguments");
         }
@@ -161,14 +158,14 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
                 return methods.get(currentKey);
             }
         }
-        System.out.println("Could not find method: Type Error");
+        System.out.println("Type Error: Could not find method");
         System.exit(1);
         return null;
     }
 
     public Symbol findVariableWithShadowing(String key) {
         if(key == null || key.isEmpty()){
-            throw new IllegalArgumentException("Attempt to call method with null arguments");
+            throw new IllegalArgumentException("Type Error: Attempt to call method with null arguments");
         }
         String[] keyFragments = key.split(bufferChar);
         String idToFind = keyFragments[keyFragments.length - 1];
@@ -181,7 +178,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
                 return declarations.get(currentKey);
             }
         }
-        System.out.println("Could not find variable: Type Error");
+        System.out.println("Type Error: Could not find variable with shadowing");
         System.exit(1);
         return null;
     }
@@ -235,15 +232,12 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
                 String newDeclarationKeyJoined = String.join(bufferChar, newDeclarationKey);
 
                 if (!newDeclarationKeyJoined.equals(declarationKey)) {
-                    System.out.println("Updating declarations" + declarationKey);
                     Symbol symbolToStore = declarations.get(declarationKey);
                     declarations.remove(declarationKey);
                     declarations.put(newDeclarationKeyJoined, new Symbol(symbolToStore));
 
                     // update method list
                     if(methods.containsKey(declarationKey)){
-                        System.out.println("Method return type is: ");
-                        System.out.println(symbolToStore.type);
                         MethodSymbol methodSymbolToStore = methods.get(declarationKey);
                         methods.remove(declarationKey);
                         MethodSymbol updatedMethodSymbol = new MethodSymbol(methodSymbolToStore);
@@ -270,7 +264,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
                 }
             }
         }
-        System.err.println("Could not find the nearest class");
+        System.err.println("Type Error: Could not find the nearest class");
         System.exit(1);
         return null;
     }
@@ -517,9 +511,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         if(key.contains(methodArgumentDelineator)){
             String methodKey = new String(key);
             methodKey = removeAfter(methodKey, methodArgumentDelineator);
-            System.out.println(methodKey);
             getMethods().get(methodKey).addArgumentType(new MyType("int", "[]"));
-            System.out.println(getMethods().get(methodKey).argumentTypes);
             key = key.replace(methodArgumentDelineator, bufferChar);
         }
         insertDeclaration(key, new Symbol(new MyType("int", "[]"), n.f0.beginLine));
@@ -534,9 +526,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         if(key.contains(methodArgumentDelineator)){
             String methodKey = new String(key);
             methodKey = removeAfter(methodKey, methodArgumentDelineator);
-            System.out.println(methodKey);
             getMethods().get(methodKey).addArgumentType(new MyType("boolean"));
-            System.out.println(getMethods().get(methodKey).argumentTypes);
             key = key.replace(methodArgumentDelineator, bufferChar);
         }
         insertDeclaration(key, new Symbol(new MyType("boolean"), n.f0.beginLine));
@@ -551,9 +541,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         if(key.contains(methodArgumentDelineator)){
             String methodKey = new String(key);
             methodKey = removeAfter(methodKey, methodArgumentDelineator);
-            System.out.println(methodKey);
             getMethods().get(methodKey).addArgumentType(new MyType("int"));
-            System.out.println(getMethods().get(methodKey).argumentTypes);
             key = key.replace(methodArgumentDelineator, bufferChar);
         }
         insertDeclaration(key, new Symbol(new MyType("int"), n.f0.beginLine));
@@ -565,18 +553,14 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     */
     @Override
     public Void visit(Identifier n, String key){
-        System.out.println("ID.....");
         if(key.contains(methodArgumentDelineator)){
             String methodKey = new String(key);
             methodKey = removeAfter(methodKey, methodArgumentDelineator);
-            System.out.println(methodKey);
             getMethods().get(methodKey).addArgumentType(new MyType(n.f0.toString()));
-            System.out.println(getMethods().get(methodKey).argumentTypes);
             key = key.replace(methodArgumentDelineator, bufferChar);
         }
         insertClassInstance(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
         insertDeclaration(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
-        System.out.println("ID!");
         return null;
     }
 
