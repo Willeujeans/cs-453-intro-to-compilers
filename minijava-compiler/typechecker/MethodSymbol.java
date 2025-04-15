@@ -23,9 +23,6 @@ public class MethodSymbol extends Symbol{
         if(argumentType == null){
             throw new IllegalArgumentException("Can't add an argument type that does not exist");
         }
-        if(argumentTypes.type_array.contains("void")){
-            argumentTypes = new MyType();
-        }
         argumentTypes.addToType(argumentType);
     }
 

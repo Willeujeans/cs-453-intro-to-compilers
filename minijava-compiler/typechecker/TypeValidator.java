@@ -3,7 +3,6 @@ package typechecker;
 import syntaxtree.*;
 import visitor.*;
 
-import java.util.Random;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -22,7 +21,6 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         if(!methods.isEmpty()){
             System.out.println("checking...");
             for(String methodKey : methods.keySet()){
-                System.out.println(methodKey);
                 String[] keyFragments = methodKey.split(symbolTable.bufferChar);
                 String[] keyFragmentsTrimmed = Arrays.copyOf(keyFragments, keyFragments.length - 2);
                 String methodName = keyFragments[keyFragments.length - 1];
@@ -34,9 +32,16 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
                 while(i > 1){
                     currentKey = String.join(symbolTable.bufferChar, Arrays.copyOf(keyFragmentsTrimmed, i)) + symbolTable.bufferChar + methodName;
                     System.out.println(currentKey);
-                    if(symbolTable.getMethods().containsKey(currentKey)){
-                        System.out.println("Overload check: Type Error");
-                        System.exit(1);
+                    if(methods.containsKey(currentKey)){
+                        MethodSymbol originalMethod = methods.get(methodKey);
+                        MethodSymbol methodToCheck = methods.get(currentKey);
+
+                        System.out.println(methodKey + " : " + originalMethod.argumentTypes);
+                        System.out.println(currentKey + " : " + methodToCheck.argumentTypes);
+                        if(!originalMethod.argumentTypes.checkIdentical(methodToCheck.argumentTypes)){
+                            System.out.println("Overload check: Type Error");
+                            System.exit(1);
+                        }
                     }
                     --i;
                 }

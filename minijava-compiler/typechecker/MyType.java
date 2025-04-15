@@ -37,6 +37,9 @@ public class MyType {
                 }
             }
         }
+        if(type_array.size() > 1){
+            type_array.remove("void");
+        }   
     }
 
     public String getType() {
