@@ -12,7 +12,6 @@ run_tests() {
 
     # Create timestamp and clear previous results
     local current_date_time="$(date "+%Y-%m-%d %H:%M:%S")"
-    echo "${current_date_time}" > "${test_dir}/test.txt"
 
     # Process each Java file
     local dir_file_count=0
@@ -44,7 +43,7 @@ run_tests() {
             if [ ${exit_code} -ne 0 ]; then
                 echo -e "\nERROR: Type checking failed for ${file} (exit code: ${exit_code})"
             fi
-        } | tee -a "${test_dir}/test.txt"
+        }
         
         echo "------------------------------------"
     done
