@@ -1,83 +1,68 @@
-2025-04-15 10:24:02
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/1classMethod.java ===
-  ID.....
-  ID!
-  global:singleClassMethod:myMethod
-  [int]
-  global:singleClassMethod:myMethod
-  [int,boolean]
-  global:singleClassMethod:myMethod
-  [int,boolean,int,[]]
-  global:singleClassMethod:myMethod
-  [int,boolean,int,[],int]
-  | | | | | | | Declaration Table | | | | | | |
-  global:mainClass -> {[mainClass], 1, []}
-  global:mainClass:main -> {[void], 2, []}
-  global:mainClass:main:a -> {[String,[,]], 2, []}
-  global:singleClassMethod -> {[singleClassMethod], 16, []}
-  global:singleClassMethod:myMethod -> {[int], 19, []}
-  global:mainClass:main:intVariable -> {[int], 3, []}
-  global:mainClass:main:classVariable -> {[singleClassMethod], 6, []}
-  global:singleClassMethod:intVariable -> {[int], 17, []}
-  global:mainClass:main:booleanVariable -> {[boolean], 5, []}
-  global:mainClass:main:intArrayVariable -> {[int,[]], 4, []}
-  global:singleClassMethod:myMethod:methodInt -> {[int], 20, []}
-  global:singleClassMethod:myMethod:argumentInt -> {[int], 19, []}
-  global:singleClassMethod:myMethod:argumentArray -> {[int,[]], 19, []}
-  global:singleClassMethod:myMethod:argumentBoolean -> {[boolean], 19, []}
-  global:singleClassMethod:myMethod:argumentIntAgain -> {[int], 19, []}
-  | | | | | | | | | | | | | | | | | | | | | | |
-  = = = = = = = = = Class Table = = = = = = = = =
-  mainClass -> {[mainClass], 1, []} :: global:mainClass
-  singleClassMethod -> {[singleClassMethod], 16, []} :: global:singleClassMethod
-  = = = = = = = = = = = = = = = = = = = = = = = =
-  - - - - - - - - - Method Table - - - - - - - - -
-  global:singleClassMethod:myMethod()=[int,boolean,int,[],int] -> [null]
-  - - - - - - - - - - - - - - - - - - - - - - - -
-  . . . . . . . . . . . . ClassInstances Table . . . . . . . . . . . .
-  global:mainClass:main:classVariable()=[singleClassMethod]
-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-  249░ Goal
-  612░ MainClass
-  951░ AssignmentStatement
-  Expression: global:mainClass:main
-  951▓ AssignmentStatement
-  953░ AssignmentStatement
-  Expression: global:mainClass:main
-  Expression: global:mainClass:main
-  953▓ AssignmentStatement
-  538░ AssignmentStatement
-  Expression: global:mainClass:main
-  538▓ AssignmentStatement
-  240░ AssignmentStatement
-  Expression: global:mainClass:main
-  240▓ AssignmentStatement
-  544░ AssignmentStatement
-  Expression: global:mainClass:main
-  607░ MessageSend
-  Message SEND! ::::::::::::::: global:singleClassMethod:myMethod
-  finding method...global:singleClassMethod:myMethod
-  Getting passed arguments... global:mainClass:main
-  0
-  Expression: global:mainClass:main
-  1
-  ExpressionRest.
-  Expression: global:mainClass:main
-  ExpressionRest.
-  Expression: global:mainClass:main
-  ExpressionRest.
-  Expression: global:mainClass:main
-  number ofhsdfhskjdfhkj [int,boolean,int,[],int]
+2025-04-15 10:42:18
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/allAssignments.java ===
+  # checkForOverload
+  # Statement
+  # Statement
+  # Statement
+  # Statement
+  # Statement
+  # Statement
+  # Statement
+  # MainClass
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/allDeclarations.java ===
+  # checkForOverload
+  # MainClass
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/classMethod.java ===
+  # checkForOverload
+  # Statement
+  # Statement
+  # Statement
+  # Statement
   {[null], 0, []}
-  607▓ MessageSend  ------------>  [int]
-  544▓ AssignmentStatement
-  612▓ MainClass ----------------------------->  [mainClass]
-  855░ ClassDeclaration
-  MethodDeclaration!!
-  571░ AssignmentStatement
-  Expression: global:singleClassMethod:myMethod
-  571▓ AssignmentStatement
-  Expression: global:singleClassMethod:myMethod
-  855▓ ClassDeclaration ----------------------------->  null
-  249▓ Goal
+  # MessageSend
+  # Statement
+  # MainClass
+  # Statement
+  # MethodDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/emptyClasses.java ===
+  # checkForOverload
+  # MainClass
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/emptyMain.java ===
+  # checkForOverload
+  # MainClass
+  # Goal
   ✅ Program type checked successfully
