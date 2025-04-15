@@ -1,5 +1,235 @@
-2025-04-15 11:20:42
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/1classMethodParent.java ===
+2025-04-15 12:02:13
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/allAssignments.java ===
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # MainClass
+  # MethodDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # Goal
+  | | | | | | | Declaration Table | | | | | | |
+  global:classGiver -> {[classGiver], 21, []}
+  global:allAssignments -> {[allAssignments], 1, []}
+  global:grandparentClass -> {[grandparentClass], 28, []}
+  global:emptySingleClass -> {[emptySingleClass], 26, []}
+  global:allAssignments:main -> {[void], 2, []}
+  global:classGiver:giveClass -> {[emptySingleClass], 22, []}
+  global:allAssignments:main:a -> {[String,[,]], 2, []}
+  global:parentClass:childClass -> {[parentClass,childClass], 32, []}
+  global:grandparentClass:parentClass -> {[grandparentClass,parentClass], 30, []}
+  global:allAssignments:main:intVariable -> {[int], 3, []}
+  global:allAssignments:main:newClassGiver -> {[classGiver], 7, []}
+  global:allAssignments:main:classVariable -> {[emptySingleClass], 6, []}
+  global:allAssignments:main:booleanVariable -> {[boolean], 5, []}
+  global:allAssignments:main:intArrayVariable -> {[int,[]], 4, []}
+  | | | | | | | | | | | | | | | | | | | | | | |
+  = = = = = = = = = Class Table = = = = = = = = =
+  classGiver -> {[classGiver], 21, []} :: global:classGiver
+  allAssignments -> {[allAssignments], 1, []} :: global:allAssignments
+  grandparentClass -> {[grandparentClass], 28, []} :: global:grandparentClass
+  emptySingleClass -> {[emptySingleClass], 26, []} :: global:emptySingleClass
+  parentClass -> {[grandparentClass,parentClass], 30, []} :: parentClass
+  childClass -> {[parentClass,childClass], 32, []} :: childClass
+  = = = = = = = = = = = = = = = = = = = = = = = =
+  - - - - - - - - - Method Table - - - - - - - - -
+  global:classGiver:giveClass()=[void] -> [void]
+  - - - - - - - - - - - - - - - - - - - - - - - -
+  . . . . . . . . . . . . ClassInstances Table . . . . . . . . . . . .
+  global:allAssignments:main:classVariable()=[emptySingleClass]
+  global:classGiver:giveClass()=[emptySingleClass]
+  global:allAssignments:main:newClassGiver()=[classGiver]
+  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  # checkForOverload
+  # Statement
+  # Statement
+  # Statement
+  # Statement
+  # Statement
+  # Statement
+  # Statement
+  # Statement
+  {[void], 0, []}
+  # MessageSend
+  # Statement
+  # PrintStatement
+  # Statement
+  # MainClass
+  # MethodDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/allDeclarations.java ===
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # MainClass
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # Goal
+  | | | | | | | Declaration Table | | | | | | |
+  global:emptyMain -> {[emptyMain], 1, []}
+  global:emptyMain:main -> {[void], 2, []}
+  global:grandparentClass -> {[grandparentClass], 16, []}
+  global:emptySingleClass -> {[emptySingleClass], 10, []}
+  global:emptyMain:main:a -> {[String,[,]], 2, []}
+  global:parentClass:childClass -> {[parentClass,childClass], 28, []}
+  global:emptyMain:main:intVariable -> {[int], 3, []}
+  global:emptySingleClass:intVariable -> {[int], 11, []}
+  global:grandparentClass:intVariable -> {[int], 17, []}
+  global:grandparentClass:parentClass -> {[grandparentClass,parentClass], 22, []}
+  global:emptyMain:main:classVariable -> {[emptySingleClass], 6, []}
+  global:grandparentClass:classVariable -> {[emptySingleClass], 20, []}
+  global:emptyMain:main:booleanVariable -> {[boolean], 5, []}
+  global:emptySingleClass:classVariable -> {[emptySingleClass], 14, []}
+  global:emptyMain:main:intArrayVariable -> {[int,[]], 4, []}
+  global:emptySingleClass:booleanVariable -> {[boolean], 13, []}
+  global:grandparentClass:booleanVariable -> {[boolean], 19, []}
+  global:grandparentClass:intArrayVariable -> {[int,[]], 18, []}
+  global:emptySingleClass:intArrayVariable -> {[int,[]], 12, []}
+  global:parentClass:childClass:intVariable -> {[int], 29, []}
+  global:parentClass:childClass:classVariable -> {[emptySingleClass], 32, []}
+  global:parentClass:childClass:booleanVariable -> {[boolean], 31, []}
+  global:parentClass:childClass:intArrayVariable -> {[int,[]], 30, []}
+  global:grandparentClass:parentClass:intVariable -> {[int], 23, []}
+  global:grandparentClass:parentClass:classVariable -> {[emptySingleClass], 26, []}
+  global:grandparentClass:parentClass:booleanVariable -> {[boolean], 25, []}
+  global:grandparentClass:parentClass:intArrayVariable -> {[int,[]], 24, []}
+  | | | | | | | | | | | | | | | | | | | | | | |
+  = = = = = = = = = Class Table = = = = = = = = =
+  grandparentClass -> {[grandparentClass], 16, []} :: global:grandparentClass
+  emptySingleClass -> {[emptySingleClass], 10, []} :: global:emptySingleClass
+  parentClass -> {[grandparentClass,parentClass], 22, []} :: parentClass
+  childClass -> {[parentClass,childClass], 28, []} :: childClass
+  emptyMain -> {[emptyMain], 1, []} :: global:emptyMain
+  = = = = = = = = = = = = = = = = = = = = = = = =
+  - - - - - - - - - Method Table - - - - - - - - -
+  - - - - - - - - - - - - - - - - - - - - - - - -
+  . . . . . . . . . . . . ClassInstances Table . . . . . . . . . . . .
+  global:emptyMain:main:classVariable()=[emptySingleClass]
+  global:parentClass:classVariable()=[emptySingleClass]
+  global:grandparentClass:classVariable()=[emptySingleClass]
+  global:emptySingleClass:classVariable()=[emptySingleClass]
+  global:childClass:classVariable()=[emptySingleClass]
+  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  # checkForOverload
+  # MainClass
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/classMethodArguments.java ===
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # VarDeclaration
+  # MainClass
+  # VarDeclaration
+  # FormalParameter
+  BOOLEAN ARGUMENT: global:singleClassMethod:myMethod#argumentBoolean
+  # FormalParameter
+  # FormalParameterRest
+  # FormalParameter
+  # FormalParameterRest
+  # FormalParameter
+  # FormalParameterRest
+  # FormalParameterList
+  # VarDeclaration
+  # MethodDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # Goal
+  | | | | | | | Declaration Table | | | | | | |
+  global:mainClass -> {[mainClass], 1, []}
+  global:mainClass:main -> {[void], 2, []}
+  global:mainClass:main:a -> {[String,[,]], 2, []}
+  global:singleClassMethod -> {[singleClassMethod], 16, []}
+  global:singleClassMethod:myMethod -> {[int], 19, []}
+  global:mainClass:main:intVariable -> {[int], 3, []}
+  global:mainClass:main:classVariable -> {[singleClassMethod], 6, []}
+  global:singleClassMethod:intVariable -> {[int], 17, []}
+  global:mainClass:main:booleanVariable -> {[boolean], 5, []}
+  global:mainClass:main:intArrayVariable -> {[int,[]], 4, []}
+  global:singleClassMethod:myMethod:methodInt -> {[int], 20, []}
+  global:singleClassMethod:myMethod:argumentInt -> {[int], 19, []}
+  global:singleClassMethod:myMethod:argumentArray -> {[int,[]], 19, []}
+  global:singleClassMethod:myMethod:argumentBoolean -> {[boolean], 19, []}
+  global:singleClassMethod:myMethod:argumentIntAgain -> {[int], 19, []}
+  | | | | | | | | | | | | | | | | | | | | | | |
+  = = = = = = = = = Class Table = = = = = = = = =
+  mainClass -> {[mainClass], 1, []} :: global:mainClass
+  singleClassMethod -> {[singleClassMethod], 16, []} :: global:singleClassMethod
+  = = = = = = = = = = = = = = = = = = = = = = = =
+  - - - - - - - - - Method Table - - - - - - - - -
+  global:singleClassMethod:myMethod()=[int,boolean,int,[],int] -> [void]
+  - - - - - - - - - - - - - - - - - - - - - - - -
+  . . . . . . . . . . . . ClassInstances Table . . . . . . . . . . . .
+  global:mainClass:main:classVariable()=[singleClassMethod]
+  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  # checkForOverload
+  # Statement
+  # Statement
+  # Statement
+  # Statement
+  {[void], 0, []}
+  # MessageSend
+  # Statement
+  # MainClass
+  # Statement
+  # MethodDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/classMethodParent.java ===
   # VarDeclaration
   # VarDeclaration
   # MainClass
@@ -15,18 +245,18 @@
   global:mainClass -> {[mainClass], 1, []}
   global:mainClass:main -> {[void], 2, []}
   global:mainClass:main:a -> {[String,[,]], 2, []}
-  global:grandparentClass -> {[grandparentClass], 17, []}
+  global:grandparentClass -> {[grandparentClass], 16, []}
   global:mainClass:main:booleanValue -> {[boolean], 3, []}
   global:mainClass:main:classInstance -> {[grandparentClass,parentClass,childClass], 4, []}
-  global:grandparentClass:parentClass -> {[grandparentClass,parentClass], 14, []}
-  global:grandparentClass:parentClass:childClass -> {[parentClass,childClass], 11, []}
-  global:grandparentClass:grandparentClassMethod -> {[boolean], 18, []}
+  global:grandparentClass:parentClass -> {[grandparentClass,parentClass], 13, []}
+  global:grandparentClass:parentClass:childClass -> {[parentClass,childClass], 10, []}
+  global:grandparentClass:grandparentClassMethod -> {[boolean], 17, []}
   | | | | | | | | | | | | | | | | | | | | | | |
   = = = = = = = = = Class Table = = = = = = = = =
   mainClass -> {[mainClass], 1, []} :: global:mainClass
-  grandparentClass -> {[grandparentClass], 17, []} :: global:grandparentClass
-  parentClass -> {[grandparentClass,parentClass], 14, []} :: parentClass
-  childClass -> {[grandparentClass,parentClass,childClass], 11, []} :: childClass
+  grandparentClass -> {[grandparentClass], 16, []} :: global:grandparentClass
+  parentClass -> {[grandparentClass,parentClass], 13, []} :: parentClass
+  childClass -> {[grandparentClass,parentClass,childClass], 10, []} :: childClass
   = = = = = = = = = = = = = = = = = = = = = = = =
   - - - - - - - - - Method Table - - - - - - - - -
   global:grandparentClass:grandparentClassMethod()=[void] -> [void]
@@ -47,5 +277,67 @@
   # MethodDeclaration
   # ClassDeclaration
   # TypeDeclaration
+  # Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/emptyClasses.java ===
+  # MainClass
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # Goal
+  | | | | | | | Declaration Table | | | | | | |
+  global:emptyMain -> {[emptyMain], 1, []}
+  global:emptyMain:main -> {[void], 2, []}
+  global:grandparentClass -> {[grandparentClass], 7, []}
+  global:emptyMain:main:a -> {[String,[,]], 2, []}
+  global:emptySingleClass -> {[emptySingleClass], 5, []}
+  global:parentClass:childClass -> {[parentClass,childClass], 11, []}
+  global:grandparentClass:parentClass -> {[grandparentClass,parentClass], 9, []}
+  | | | | | | | | | | | | | | | | | | | | | | |
+  = = = = = = = = = Class Table = = = = = = = = =
+  grandparentClass -> {[grandparentClass], 7, []} :: global:grandparentClass
+  emptySingleClass -> {[emptySingleClass], 5, []} :: global:emptySingleClass
+  parentClass -> {[grandparentClass,parentClass], 9, []} :: parentClass
+  childClass -> {[parentClass,childClass], 11, []} :: childClass
+  emptyMain -> {[emptyMain], 1, []} :: global:emptyMain
+  = = = = = = = = = = = = = = = = = = = = = = = =
+  - - - - - - - - - Method Table - - - - - - - - -
+  - - - - - - - - - - - - - - - - - - - - - - - -
+  . . . . . . . . . . . . ClassInstances Table . . . . . . . . . . . .
+  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  # checkForOverload
+  # MainClass
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # Goal
+  ✅ Program type checked successfully
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/emptyMain.java ===
+  # MainClass
+  # Goal
+  | | | | | | | Declaration Table | | | | | | |
+  global:emptyMain -> {[emptyMain], 1, []}
+  global:emptyMain:main -> {[void], 2, []}
+  global:emptyMain:main:a -> {[String,[,]], 2, []}
+  | | | | | | | | | | | | | | | | | | | | | | |
+  = = = = = = = = = Class Table = = = = = = = = =
+  emptyMain -> {[emptyMain], 1, []} :: global:emptyMain
+  = = = = = = = = = = = = = = = = = = = = = = = =
+  - - - - - - - - - Method Table - - - - - - - - -
+  - - - - - - - - - - - - - - - - - - - - - - - -
+  . . . . . . . . . . . . ClassInstances Table . . . . . . . . . . . .
+  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  # checkForOverload
+  # MainClass
   # Goal
   ✅ Program type checked successfully

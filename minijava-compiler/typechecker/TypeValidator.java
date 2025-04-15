@@ -678,6 +678,23 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         return returnType;
     }
 
+    /**
+    * f0 -> "System.out.println"
+    * f1 -> "("
+    * f2 -> Expression()
+    * f3 -> ")"
+    * f4 -> ";"
+    */
+    public MyType visit(PrintStatement n, String key){
+        MyType typeToPrint = n.f2.accept(this, key);
+        if(!typeToPrint.checkIdentical(new MyType("int"))){
+            System.out.println("Type Error: Cannot print types other than int");
+            System.exit(1);
+        }
+        System.out.println("# " + n.getClass().getSimpleName());
+        return typeToPrint;
+    }
+
     @Override
     public MyType visit(VarDeclaration n, String key) {
         return null;

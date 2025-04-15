@@ -4,7 +4,6 @@ class mainClass {
         childClass classInstance ;
         classInstance = new childClass();
         booleanValue = classInstance.grandparentClassMethod();
-        
     }
 }
 

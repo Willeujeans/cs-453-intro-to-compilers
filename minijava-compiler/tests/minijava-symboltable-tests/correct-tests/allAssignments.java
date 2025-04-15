@@ -4,6 +4,7 @@ class allAssignments {
         int[] intArrayVariable ;
         boolean booleanVariable ;
         emptySingleClass classVariable ;
+        classGiver newClassGiver ;
 
         intVariable = 5;
         intVariable = intVariable;
@@ -12,7 +13,14 @@ class allAssignments {
         booleanVariable = true;
         booleanVariable = false;
         classVariable = new emptySingleClass();
-
+        newClassGiver = new classGiver();
+        classVariable = newClassGiver.giveClass();
+        System.out.println(5);
+    }
+}
+class classGiver{
+    public emptySingleClass giveClass(){
+        return new emptySingleClass();
     }
 }
 class emptySingleClass{
