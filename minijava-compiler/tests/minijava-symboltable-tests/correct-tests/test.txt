@@ -1,4 +1,4 @@
-2025-04-15 10:02:06
+2025-04-15 10:11:45
 === Typecheck < tests/minijava-symboltable-tests/correct-tests/allAssignments.java ===
   ID.....
   ID!
@@ -30,18 +30,28 @@
   global:allAssignments:main:classVariable()=[emptySingleClass]
   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
   Is empty!
-  463░ Goal
-  282░ MainClass
-  513░ AssignmentStatement
+  985░ Goal
+  320░ MainClass
+  568░ AssignmentStatement
   Expression: global:allAssignments:main
-  513▓ AssignmentStatement
-  462░ AssignmentStatement
+  568▓ AssignmentStatement
+  624░ AssignmentStatement
   Expression: global:allAssignments:main
-  462▓ AssignmentStatement
-  535░ AssignmentStatement
-  Expression: global:allAssignments:main
-  Expression: global:allAssignments:main
-  535▓ AssignmentStatement
+  624▓ AssignmentStatement
+  122░ AssignmentStatement
   Expression: global:allAssignments:main
   Expression: global:allAssignments:main
-  java.lang.NullPointerException
+  122▓ AssignmentStatement
+  Expression: global:allAssignments:main
+  Expression: global:allAssignments:main
+  320▓ MainClass ----------------------------->  [allAssignments]
+  829░ ClassDeclaration
+  829▓ ClassDeclaration ----------------------------->  null
+  722░ ClassDeclaration
+  722▓ ClassDeclaration ----------------------------->  null
+  703░ ClassExtendsDeclaration
+  703▓ ClassExtendsDeclaration ----------------------------->  
+  702░ ClassExtendsDeclaration
+  702▓ ClassExtendsDeclaration ----------------------------->  
+  985▓ Goal
+  ✅ Program type checked successfully
