@@ -1,30 +1,47 @@
-2025-04-14 23:26:22
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/AAAAAAAAsimple.java ===
-  Nothing to update here;
-  Updating declarationsglobal:myChildClass
+2025-04-15 10:02:06
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/allAssignments.java ===
+  ID.....
+  ID!
+  Updating declarationsglobal:parentClass
+  Updating declarationsglobal:childClass
   | | | | | | | Declaration Table | | | | | | |
-  global:myParentClass -> {[myParentClass], 9, []}
-  global:AAAAAAAAsimple -> {[AAAAAAAAsimple], 1, []}
-  global:AAAAAAAAsimple:main -> {[void], 2, []}
-  global:AAAAAAAAsimple:main:a -> {[String,[,]], 2, []}
-  global:myParentClass:myChildClass -> {[myParentClass,myChildClass], 6, []}
+  global:allAssignments -> {[allAssignments], 1, []}
+  global:grandparentClass -> {[grandparentClass], 19, []}
+  global:emptySingleClass -> {[emptySingleClass], 17, []}
+  global:allAssignments:main -> {[void], 2, []}
+  global:allAssignments:main:a -> {[String,[,]], 2, []}
+  global:parentClass:childClass -> {[parentClass,childClass], 23, []}
+  global:grandparentClass:parentClass -> {[grandparentClass,parentClass], 21, []}
+  global:allAssignments:main:intVariable -> {[int], 3, []}
+  global:allAssignments:main:classVariable -> {[emptySingleClass], 6, []}
+  global:allAssignments:main:booleanVariable -> {[boolean], 5, []}
+  global:allAssignments:main:intArrayVariable -> {[int,[]], 4, []}
   | | | | | | | | | | | | | | | | | | | | | | |
   = = = = = = = = = Class Table = = = = = = = = =
-  AAAAAAAAsimple -> {[AAAAAAAAsimple], 1, []} :: global:AAAAAAAAsimple
-  myChildClass -> {[myParentClass,myChildClass], 6, []} :: myChildClass
-  myParentClass -> {[myParentClass], 9, []} :: global:myParentClass
+  allAssignments -> {[allAssignments], 1, []} :: global:allAssignments
+  grandparentClass -> {[grandparentClass], 19, []} :: global:grandparentClass
+  emptySingleClass -> {[emptySingleClass], 17, []} :: global:emptySingleClass
+  parentClass -> {[grandparentClass,parentClass], 21, []} :: parentClass
+  childClass -> {[parentClass,childClass], 23, []} :: childClass
   = = = = = = = = = = = = = = = = = = = = = = = =
   - - - - - - - - - Method Table - - - - - - - - -
   - - - - - - - - - - - - - - - - - - - - - - - -
   . . . . . . . . . . . . ClassInstances Table . . . . . . . . . . . .
+  global:allAssignments:main:classVariable()=[emptySingleClass]
   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
   Is empty!
-  676░ Goal
-  947░ MainClass
-  947▓ MainClass ----------------------------->  [AAAAAAAAsimple]
-  414░ ClassExtendsDeclaration
-  414▓ ClassExtendsDeclaration ----------------------------->  
-  469░ ClassDeclaration
-  469▓ ClassDeclaration ----------------------------->  null
-  676▓ Goal
-  ✅ Program type checked successfully
+  463░ Goal
+  282░ MainClass
+  513░ AssignmentStatement
+  Expression: global:allAssignments:main
+  513▓ AssignmentStatement
+  462░ AssignmentStatement
+  Expression: global:allAssignments:main
+  462▓ AssignmentStatement
+  535░ AssignmentStatement
+  Expression: global:allAssignments:main
+  Expression: global:allAssignments:main
+  535▓ AssignmentStatement
+  Expression: global:allAssignments:main
+  Expression: global:allAssignments:main
+  java.lang.NullPointerException

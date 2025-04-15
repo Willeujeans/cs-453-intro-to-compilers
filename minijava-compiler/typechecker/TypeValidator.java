@@ -273,6 +273,34 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         return expressionType;
     }
 
+       /**
+    * f0 -> Identifier()
+    * f1 -> "["
+    * f2 -> Expression()
+    * f3 -> "]"
+    * f4 -> "="
+    * f5 -> Expression()
+    * f6 -> ";"
+    */
+    public MyType visit(ArrayAssignmentStatement n, String key){
+        MyType arrayType = n.f0.accept(this, key);
+        MyType arrayIndexType = n.f2.accept(this, key);
+        MyType typeToAssignTo = n.f5.accept(this, key);
+
+        // Array index should ALWAYS be an int
+        if(!arrayIndexType.checkIdentical(new MyType("int"))){
+            System.out.println("Type Error");
+            System.out.println("!Array index must be an int");
+            System.exit(1);
+        }
+        if(!arrayType.checkIdentical(typeToAssignTo)){
+            System.out.println("Type Error");
+            System.out.println("!Incorrect type assignment to array");
+            System.exit(1);
+        }
+        return arrayType;
+    }
+
     /**
      * f0 -> PrimaryExpression()
      * f1 -> "["
