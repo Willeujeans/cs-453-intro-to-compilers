@@ -23,7 +23,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public HashMap<String, MethodSymbol> methods;
     public HashMap<String, Symbol> classInstances;
     public String bufferChar = ":";
-    public int argumentCounter = 0;
     public String methodArgumentDelineator = "#";
 
     public SymbolTable() {
@@ -308,6 +307,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         n.f0.accept(this, key);
         n.f1.accept(this, key);
         n.f2.accept(this, key);
+        System.out.println("# " + n.getClass().getSimpleName());
         postTraversalOperations();
         return null;
     }
@@ -348,6 +348,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
         n.f14.accept(this, currentScope);
         n.f15.accept(this, currentScope);
+        System.out.println("# " + n.getClass().getSimpleName());
         return null;
     }
 
@@ -358,6 +359,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(TypeDeclaration n, String key) {
         n.f0.accept(this, key);
+        System.out.println("# " + n.getClass().getSimpleName());
         return null;
     }
 
@@ -380,6 +382,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         n.f3.accept(this, currentScope);
         n.f4.accept(this, currentScope);
 
+        System.out.println("# " + n.getClass().getSimpleName());
         return null;
     }
 
@@ -408,7 +411,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
         n.f5.accept(this, currentScope);
         n.f6.accept(this, currentScope);
-        
+
+        System.out.println("# " + n.getClass().getSimpleName());
         return null;
     }
 
@@ -433,7 +437,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         // MethodSymbol: place it using the current scope
         MethodSymbol methodSymbol = new MethodSymbol(new MyType("void"), 0);
         insertMethod(currentScope, methodSymbol);
-
         n.f1.accept(this, currentScope);
 
         n.f4.accept(this, currentScope);
@@ -454,6 +457,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public Void visit(FormalParameterList n, String key) {
         n.f0.accept(this, key);
         n.f1.accept(this, key);
+
+        System.out.println("# " + n.getClass().getSimpleName());
         return null;
     }
 
@@ -463,9 +468,9 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
      */
     @Override
     public Void visit(FormalParameter n, String key) {
-        System.out.println("formal parameter: " + key);
         n.f0.accept(this, key + methodArgumentDelineator + n.f1.f0.toString());
-        argumentCounter++;
+
+        System.out.println("# " + n.getClass().getSimpleName());
         return null;
     }
 
@@ -476,6 +481,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(FormalParameterRest n, String key) {
         n.f1.accept(this, key);
+
+        System.out.println("# " + n.getClass().getSimpleName());
         return null;
     }
 
@@ -487,6 +494,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(VarDeclaration n, String key) {
         n.f0.accept(this, key + bufferChar + n.f1.f0.toString());
+
+        System.out.println("# " + n.getClass().getSimpleName());
         return null;
     }
 
@@ -515,6 +524,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             getMethods().get(methodKey).addArgumentType(new MyType("int", "[]"));
             key = key.replace(methodArgumentDelineator, bufferChar);
         }
+
         insertDeclaration(key, new Symbol(new MyType("int", "[]"), n.f0.beginLine));
         return null;
     }
@@ -525,6 +535,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(BooleanType n, String key) {
         if(key.contains(methodArgumentDelineator)){
+            System.out.println("BOOLEAN ARGUMENT: " + key);
             String methodKey = new String(key);
             methodKey = removeAfter(methodKey, methodArgumentDelineator);
             getMethods().get(methodKey).addArgumentType(new MyType("boolean"));

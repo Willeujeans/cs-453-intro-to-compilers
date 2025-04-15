@@ -1,32 +1,51 @@
-2025-04-15 11:06:13
+2025-04-15 11:20:42
 === Typecheck < tests/minijava-symboltable-tests/correct-tests/1classMethodParent.java ===
+  # VarDeclaration
+  # VarDeclaration
+  # MainClass
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
   # MethodDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # Goal
   | | | | | | | Declaration Table | | | | | | |
   global:mainClass -> {[mainClass], 1, []}
   global:mainClass:main -> {[void], 2, []}
   global:mainClass:main:a -> {[String,[,]], 2, []}
-  global:grandparentClass -> {[grandparentClass], 14, []}
+  global:grandparentClass -> {[grandparentClass], 17, []}
   global:mainClass:main:booleanValue -> {[boolean], 3, []}
   global:mainClass:main:classInstance -> {[grandparentClass,parentClass,childClass], 4, []}
-  global:grandparentClass:parentClass -> {[grandparentClass,parentClass], 12, []}
-  global:grandparentClass:parentClass:childClass -> {[parentClass,childClass], 10, []}
-  global:grandparentClass:grandparentClassMethod -> {[boolean], 15, []}
+  global:grandparentClass:parentClass -> {[grandparentClass,parentClass], 14, []}
+  global:grandparentClass:parentClass:childClass -> {[parentClass,childClass], 11, []}
+  global:grandparentClass:grandparentClassMethod -> {[boolean], 18, []}
   | | | | | | | | | | | | | | | | | | | | | | |
   = = = = = = = = = Class Table = = = = = = = = =
   mainClass -> {[mainClass], 1, []} :: global:mainClass
-  grandparentClass -> {[grandparentClass], 14, []} :: global:grandparentClass
-  parentClass -> {[grandparentClass,parentClass], 12, []} :: parentClass
-  childClass -> {[grandparentClass,parentClass,childClass], 10, []} :: childClass
+  grandparentClass -> {[grandparentClass], 17, []} :: global:grandparentClass
+  parentClass -> {[grandparentClass,parentClass], 14, []} :: parentClass
+  childClass -> {[grandparentClass,parentClass,childClass], 11, []} :: childClass
   = = = = = = = = = = = = = = = = = = = = = = = =
   - - - - - - - - - Method Table - - - - - - - - -
-  global:grandparentClass:grandparentClassMethod()=[] -> [void]
+  global:grandparentClass:grandparentClassMethod()=[void] -> [void]
   - - - - - - - - - - - - - - - - - - - - - - - -
   . . . . . . . . . . . . ClassInstances Table . . . . . . . . . . . .
   global:mainClass:main:classInstance()=[childClass]
   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
   # checkForOverload
   # Statement
-  global:grandparentClass:grandparentClassMethod
   {[void], 0, []}
-  null
-  java.lang.NullPointerException
+  # MessageSend
+  # Statement
+  # MainClass
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # ClassExtendsDeclaration
+  # TypeDeclaration
+  # MethodDeclaration
+  # ClassDeclaration
+  # TypeDeclaration
+  # Goal
+  ✅ Program type checked successfully
