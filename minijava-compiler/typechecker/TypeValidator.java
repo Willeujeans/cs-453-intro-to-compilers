@@ -17,7 +17,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     public MyType visit(NodeListOptional n, String key) {
       if (n.present()){
         MyType stackedType = new MyType();
-        int _count=0;
+        int _count = 0;
 
         for ( Enumeration<Node> e = n.elements(); e.hasMoreElements(); ) {
             stackedType.addToType(e.nextElement().accept(this, key));
@@ -25,7 +25,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
          }
          return stackedType;
         }else{
-            return null;
+            return new MyType("void");
         }
     }
 
@@ -134,8 +134,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     */
     @Override
     public MyType visit(TypeDeclaration n, String key){
-        MyType returnType = n.f0.accept(this, key);
-        return returnType;
+        return n.f0.accept(this, key);
     }
 
     /**
@@ -151,15 +150,13 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
 
         String classKey = n.f1.f0.toString();
-        Symbol classSymbol = symbolTable.findClass(classKey);
-        MyType returnType = classSymbol.type;
-        String currentScope = key + symbolTable.bufferChar + returnType.getType();
-        // n.f3.accept(this, currentScope);
+        ClassSymbol classSymbol = symbolTable.findClass(classKey);
+        String currentScope = classSymbol.getKeyWithInheritance();
+
         n.f4.accept(this, currentScope);
 
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------------------->  " + returnType);
-
-        return returnType;
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------------------->  " + null);
+        return classSymbol.type;
     }
 
    /**
@@ -175,18 +172,15 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     public MyType visit(ClassExtendsDeclaration n, String key){
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-        
+
         String classKey = n.f1.f0.toString();
-        
-        Symbol classSymbol = symbolTable.findClass(classKey);
-        MyType returnType = classSymbol.type;
+        ClassSymbol classSymbol = symbolTable.findClass(classKey);
+        String currentScope = classSymbol.getKeyWithInheritance();
 
-        String currentScope = key + symbolTable.bufferChar + returnType.getType();
-
-        // n.f5.accept(this, currentScope);
         n.f6.accept(this, currentScope);
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------------------->  " + returnType);
-        return returnType;
+
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------------------->  ");
+        return classSymbol.type;
     }
 
     /**
@@ -206,6 +200,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(MethodDeclaration n, String key) {
+        System.out.println("MethodDeclaration!!");
         String currentScope = key + symbolTable.bufferChar + n.f2.f0.toString();
         n.f8.accept(this, currentScope);
         MyType expectedReturnType = n.f1.accept(this, key);
@@ -215,6 +210,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         String otherClassName = actualReturnType.getType();
         boolean firstClass = symbolTable.getClasses().containsKey(className);
         boolean secondClass = symbolTable.getClasses().containsKey(otherClassName);
+
         if(firstClass && secondClass){
             if(!expectedReturnType.checkSimilar(actualReturnType)){
                 System.out.println("Method return type mismatch: Type Error");
@@ -377,8 +373,11 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     public MyType visit(Identifier n, String key) {
         String searchKey = key + symbolTable.bufferChar + n.f0.toString();
         Symbol foundSymbol = symbolTable.findVariableWithShadowing(searchKey);
-        MyType returnType = foundSymbol.type;
-        return returnType;
+        if (foundSymbol == null) {
+            System.out.println("Undeclared variable: " + n.f0.toString());
+            System.exit(1);
+        }
+        return foundSymbol.type;
     }
 
     /**

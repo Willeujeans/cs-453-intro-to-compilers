@@ -146,6 +146,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     }
 
     public MethodSymbol findMethodWithShadowing(String key) {
+        System.out.println("finding method..." + key);
         if(key == null || key.isEmpty()){
             throw new IllegalArgumentException("Attempt to call method with null arguments");
         }
@@ -160,7 +161,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
                 return methods.get(currentKey);
             }
         }
-        System.out.println("Could not find key: Type Error");
+        System.out.println("Could not find method: Type Error");
         System.exit(1);
         return null;
     }
@@ -180,14 +181,14 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
                 return declarations.get(currentKey);
             }
         }
-        System.out.println("Could not find key: Type Error");
+        System.out.println("Could not find variable: Type Error");
         System.exit(1);
         return null;
     }
 
     public ClassSymbol findClass(String classId){
         if(classId == null || classId.isEmpty()){
-            throw new IllegalArgumentException("Attempt to call method with null arguments");
+            throw new IllegalArgumentException("Attempt to find class with illegal arguments");
         }
         if (classes.containsKey(classId)) {
             return classes.get(classId);
@@ -269,6 +270,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
                 }
             }
         }
+        System.err.println("Could not find the nearest class");
+        System.exit(1);
         return null;
     }
 
@@ -285,8 +288,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
         System.out.println("= = = = = = = = = Class Table = = = = = = = = =");
         for(String key : classes.keySet()){
-            System.out.print(key);
-            System.out.print(" -> " + classes.get(key) + "\n");
+            System.out.print(key + " -> " + classes.get(key) + " :: " + classes.get(key).declarationKey + "\n");
         }
         System.out.println("= = = = = = = = = = = = = = = = = = = = = = = =");
 
@@ -413,6 +415,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
         n.f5.accept(this, currentScope);
         n.f6.accept(this, currentScope);
+        
         return null;
     }
 
@@ -562,6 +565,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     */
     @Override
     public Void visit(Identifier n, String key){
+        System.out.println("ID.....");
         if(key.contains(methodArgumentDelineator)){
             String methodKey = new String(key);
             methodKey = removeAfter(methodKey, methodArgumentDelineator);
@@ -572,6 +576,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         }
         insertClassInstance(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
         insertDeclaration(key, new Symbol(new MyType(n.f0.toString()), n.f0.beginLine));
+        System.out.println("ID!");
         return null;
     }
 

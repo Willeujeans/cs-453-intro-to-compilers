@@ -1,6 +1,9 @@
 package typechecker;
 
 import java.util.*;
+
+import javax.management.RuntimeErrorException;
+
 import syntaxtree.*;
 import visitor.*;
 
@@ -28,7 +31,7 @@ public class MyType {
 
     public String getType() {
         if(type_array.isEmpty() || type_array == null){
-            return null;
+            throw new RuntimeException("Trying to get type from nothing");
         }else{
             return type_array.firstElement();
         }
