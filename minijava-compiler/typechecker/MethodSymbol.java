@@ -31,7 +31,7 @@ public class MethodSymbol extends Symbol{
 
     public MyType getArgumentTypes(){
         if(argumentTypes.type_array.isEmpty()){
-            return null;
+            return new MyType("void");
         }else{
             return argumentTypes;
         }

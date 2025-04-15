@@ -13,22 +13,6 @@ import java.util.HashSet;
 public class TypeValidator extends GJDepthFirst<MyType, String> {
     SymbolTable symbolTable;
 
-    @Override
-    public MyType visit(NodeListOptional n, String key) {
-      if (n.present()){
-        MyType stackedType = new MyType();
-        int _count = 0;
-
-        for ( Enumeration<Node> e = n.elements(); e.hasMoreElements(); ) {
-            stackedType.addToType(e.nextElement().accept(this, key));
-            _count++;
-         }
-         return stackedType;
-        }else{
-            return new MyType("void");
-        }
-    }
-
     public TypeValidator(SymbolTable symbolTable){
         this.symbolTable = symbolTable;
     }
@@ -36,16 +20,20 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     public void checkForOverload(){
         HashMap<String, MethodSymbol> methods = symbolTable.getMethods();
         if(!methods.isEmpty()){
+            System.out.println("checking...");
             for(String methodKey : methods.keySet()){
+                System.out.println(methodKey);
                 String[] keyFragments = methodKey.split(symbolTable.bufferChar);
                 String[] keyFragmentsTrimmed = Arrays.copyOf(keyFragments, keyFragments.length - 2);
                 String methodName = keyFragments[keyFragments.length - 1];
     
                 int i = keyFragmentsTrimmed.length;
                 String currentKey = keyFragmentsTrimmed + symbolTable.bufferChar + methodName;
+
                 
-                while(i > 2){
+                while(i > 1){
                     currentKey = String.join(symbolTable.bufferChar, Arrays.copyOf(keyFragmentsTrimmed, i)) + symbolTable.bufferChar + methodName;
+                    System.out.println(currentKey);
                     if(symbolTable.getMethods().containsKey(currentKey)){
                         System.out.println("Overload check: Type Error");
                         System.exit(1);
@@ -339,11 +327,15 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         // we expect a MyType() with many type names
         // eg. method(x, y, z) -> MyType("x", "y", "z")
         MyType passedArguments = n.f4.accept(this, key);
+
         if(passedArguments == null){
             passedArguments = new MyType("void");
         }
+        
+        System.out.println(methodSymbol.getArgumentTypes());
+
         if(!methodSymbol.getArgumentTypes().checkIdentical(passedArguments)){
-            System.out.println(methodSymbol.argumentTypes + " != " + passedArguments);
+            System.out.println(methodSymbol.getArgumentTypes() + " != " + passedArguments);
             System.out.println("Type Error: Calling method with incorrect arguments");
             System.exit(1);
         }
@@ -381,25 +373,23 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         return returnType;
     }
 
-    /**
-     * f0 -> Expression()
-     * f1 -> ( ExpressionRest() )*
-     */
     @Override
     public MyType visit(ExpressionList n, String key) {
-        MyType returnType = n.f0.accept(this, key);
-        returnType.addToType(n.f1.accept(this, key));
-        return returnType;
+        MyType argTypes = new MyType();
+        argTypes.addToType(n.f0.accept(this, key));
+        
+        if (n.f1.present()) {
+            for (Node node : n.f1.nodes) {
+                MyType restType = node.accept(this, key);
+                argTypes.addToType(restType);
+            }
+        }
+        return argTypes;
     }
-
-    /**
-     * f0 -> ","
-     * f1 -> Expression()
-     */
+    
     @Override
     public MyType visit(ExpressionRest n, String key) {
-        MyType returnType = n.f1.accept(this, key);
-        return returnType;
+        return n.f1.accept(this, key);
     }
 
     /**

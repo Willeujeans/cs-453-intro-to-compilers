@@ -16,21 +16,31 @@ public class MyType {
     }
 
     public MyType(String... components) {
+        if(components == null){
+            throw new IllegalArgumentException("Cannot construct my type from nothing");
+        }
         this.type_array = new Vector<>(Arrays.asList(components));
     }
 
     public MyType(MyType other) {
+        if(other == null || other.type_array.isEmpty()){
+            throw new IllegalArgumentException("Cannot construct my type from nothing");
+        }
         this.type_array = new Vector<String>(other.type_array);
     }
 
     public void addToType(MyType otherType) {
-        for(String each : otherType.type_array){
-            type_array.add(each);
+        if(otherType != null && !otherType.type_array.isEmpty()){
+            for(String each : otherType.type_array){
+                if(!each.equals("void")){
+                    type_array.add(each);
+                }
+            }
         }
     }
 
     public String getType() {
-        if(type_array.isEmpty() || type_array == null){
+        if(type_array == null || type_array.isEmpty()){
             throw new RuntimeException("Trying to get type from nothing");
         }else{
             return type_array.firstElement();
