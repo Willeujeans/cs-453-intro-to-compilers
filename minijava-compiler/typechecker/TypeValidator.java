@@ -334,15 +334,17 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         // now we need to get the class key with inheritance
         String classkeyWithInheritance = symbolTable.findClass(className).declarationKey;
         String classMethodKey = classkeyWithInheritance + symbolTable.bufferChar + methodName;
-
         MethodSymbol methodSymbol = symbolTable.findMethodWithShadowing(classMethodKey);
+        System.out.println(classMethodKey);
+        System.out.println(methodSymbol);
+        System.out.println(methodSymbol.getArgumentTypes());
+        
         Symbol methodVarDeclaration = symbolTable.findVariableWithShadowing(classMethodKey);
         
         // we expect a MyType() with many type names
         // eg. method(x, y, z) -> MyType("x", "y", "z")
         MyType passedArguments = n.f4.accept(this, key);
-
-        if(!methodSymbol.argumentTypes.checkIdentical(passedArguments)){
+        if(!methodSymbol.getArgumentTypes().checkIdentical(passedArguments)){
             System.out.println("Type Error: Calling method with incorrect arguments");
             System.exit(1);
         }

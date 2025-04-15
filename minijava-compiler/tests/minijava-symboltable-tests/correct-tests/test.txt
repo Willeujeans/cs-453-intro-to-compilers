@@ -1,68 +1,32 @@
-2025-04-15 10:42:18
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/allAssignments.java ===
-  # checkForOverload
-  # Statement
-  # Statement
-  # Statement
-  # Statement
-  # Statement
-  # Statement
-  # Statement
-  # MainClass
-  # ClassDeclaration
-  # TypeDeclaration
-  # ClassDeclaration
-  # TypeDeclaration
-  # ClassExtendsDeclaration
-  # TypeDeclaration
-  # ClassExtendsDeclaration
-  # TypeDeclaration
-  # Goal
-  ✅ Program type checked successfully
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/allDeclarations.java ===
-  # checkForOverload
-  # MainClass
-  # ClassDeclaration
-  # TypeDeclaration
-  # ClassDeclaration
-  # TypeDeclaration
-  # ClassExtendsDeclaration
-  # TypeDeclaration
-  # ClassExtendsDeclaration
-  # TypeDeclaration
-  # Goal
-  ✅ Program type checked successfully
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/classMethod.java ===
-  # checkForOverload
-  # Statement
-  # Statement
-  # Statement
-  # Statement
-  {[null], 0, []}
-  # MessageSend
-  # Statement
-  # MainClass
-  # Statement
+2025-04-15 11:06:13
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/1classMethodParent.java ===
   # MethodDeclaration
-  # ClassDeclaration
-  # TypeDeclaration
-  # Goal
-  ✅ Program type checked successfully
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/emptyClasses.java ===
+  | | | | | | | Declaration Table | | | | | | |
+  global:mainClass -> {[mainClass], 1, []}
+  global:mainClass:main -> {[void], 2, []}
+  global:mainClass:main:a -> {[String,[,]], 2, []}
+  global:grandparentClass -> {[grandparentClass], 14, []}
+  global:mainClass:main:booleanValue -> {[boolean], 3, []}
+  global:mainClass:main:classInstance -> {[grandparentClass,parentClass,childClass], 4, []}
+  global:grandparentClass:parentClass -> {[grandparentClass,parentClass], 12, []}
+  global:grandparentClass:parentClass:childClass -> {[parentClass,childClass], 10, []}
+  global:grandparentClass:grandparentClassMethod -> {[boolean], 15, []}
+  | | | | | | | | | | | | | | | | | | | | | | |
+  = = = = = = = = = Class Table = = = = = = = = =
+  mainClass -> {[mainClass], 1, []} :: global:mainClass
+  grandparentClass -> {[grandparentClass], 14, []} :: global:grandparentClass
+  parentClass -> {[grandparentClass,parentClass], 12, []} :: parentClass
+  childClass -> {[grandparentClass,parentClass,childClass], 10, []} :: childClass
+  = = = = = = = = = = = = = = = = = = = = = = = =
+  - - - - - - - - - Method Table - - - - - - - - -
+  global:grandparentClass:grandparentClassMethod()=[] -> [void]
+  - - - - - - - - - - - - - - - - - - - - - - - -
+  . . . . . . . . . . . . ClassInstances Table . . . . . . . . . . . .
+  global:mainClass:main:classInstance()=[childClass]
+  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
   # checkForOverload
-  # MainClass
-  # ClassDeclaration
-  # TypeDeclaration
-  # ClassDeclaration
-  # TypeDeclaration
-  # ClassExtendsDeclaration
-  # TypeDeclaration
-  # ClassExtendsDeclaration
-  # TypeDeclaration
-  # Goal
-  ✅ Program type checked successfully
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/emptyMain.java ===
-  # checkForOverload
-  # MainClass
-  # Goal
-  ✅ Program type checked successfully
+  # Statement
+  global:grandparentClass:grandparentClassMethod
+  {[void], 0, []}
+  null
+  java.lang.NullPointerException

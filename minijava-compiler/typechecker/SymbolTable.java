@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.Vector;
-
 import syntaxtree.*;
 import visitor.*;
 
@@ -432,7 +431,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public Void visit(MethodDeclaration n, String key) {
         String currentScope = key + bufferChar + n.f2.f0.toString();
         // MethodSymbol: place it using the current scope
-        MethodSymbol methodSymbol = new MethodSymbol(new MyType("null"), 0);
+        MethodSymbol methodSymbol = new MethodSymbol(new MyType("void"), 0);
         insertMethod(currentScope, methodSymbol);
 
         n.f1.accept(this, currentScope);
@@ -443,6 +442,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         n.f8.accept(this, currentScope);
         n.f10.accept(this, currentScope);
 
+        System.out.println("# " + n.getClass().getSimpleName());
         return null;
     }
 
@@ -463,6 +463,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
      */
     @Override
     public Void visit(FormalParameter n, String key) {
+        System.out.println("formal parameter: " + key);
         n.f0.accept(this, key + methodArgumentDelineator + n.f1.f0.toString());
         argumentCounter++;
         return null;
