@@ -1,12 +1,19 @@
 package typechecker;
 
 import java.util.*;
+
+import javax.management.RuntimeErrorException;
+
 import syntaxtree.*;
 import visitor.*;
 
 public class MyType {
     // int[][] would be stored as -> ["int", "[", "]"]
     public Vector<String> type_array;
+
+    public MyType() {
+        this.type_array = new Vector<String>();
+    }
 
     public MyType(String... components) {
         this.type_array = new Vector<>(Arrays.asList(components));
@@ -16,9 +23,15 @@ public class MyType {
         this.type_array = new Vector<String>(other.type_array);
     }
 
+    public void addToType(MyType otherType) {
+        for(String each : otherType.type_array){
+            type_array.add(each);
+        }
+    }
+
     public String getType() {
         if(type_array.isEmpty() || type_array == null){
-            return null;
+            throw new RuntimeException("Trying to get type from nothing");
         }else{
             return type_array.firstElement();
         }

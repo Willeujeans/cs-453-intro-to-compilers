@@ -1,28 +1,30 @@
-2025-04-13 19:09:56
+2025-04-14 23:26:22
 === Typecheck < tests/minijava-symboltable-tests/correct-tests/AAAAAAAAsimple.java ===
-  -=-=-=-=-=-=-=-=-=-Symbol-Table-=-=-=-=-=-=-=-=-=-
-  global:myParentClass -> {[myParentClass], 11, []}
+  Nothing to update here;
+  Updating declarationsglobal:myChildClass
+  | | | | | | | Declaration Table | | | | | | |
+  global:myParentClass -> {[myParentClass], 9, []}
   global:AAAAAAAAsimple -> {[AAAAAAAAsimple], 1, []}
   global:AAAAAAAAsimple:main -> {[void], 2, []}
   global:AAAAAAAAsimple:main:a -> {[String,[,]], 2, []}
-  global:AAAAAAAAsimple:main:x -> {[myParentClass], 3, []}
-  global:myParentClass:myChildClass -> {[myParentClass,myChildClass], 8, []}
-  global:myParentClass:myClassMethod -> {[myParentClass], 12, []}
-  -=-=-=-=-=-=-=-=-=-Class-Table-=-=-=-=-=-=-=-=-=-
-  AAAAAAAAsimple -> {[AAAAAAAAsimple], 1, []}
-  myChildClass -> {[myParentClass,myChildClass], 8, []}
-  myParentClass -> {[myParentClass], 11, []}
-  -=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-
-  199░ Goal
-  437░ MainClass
-  736░ AssignmentStatement
-  653░ MessageSend
-  653▓ MessageSend  ------------>  [myParentClass]
-  736▓ AssignmentStatement
-  437▓ MainClass ----------------------------->  [AAAAAAAAsimple]
-  805░ ClassExtendsDeclaration
-  805▓ ClassExtendsDeclaration ----------------------------->  [myParentClass,myChildClass]
-  185░ ClassDeclaration
-  185▓ ClassDeclaration ----------------------------->  [myParentClass]
-  199▓ Goal
+  global:myParentClass:myChildClass -> {[myParentClass,myChildClass], 6, []}
+  | | | | | | | | | | | | | | | | | | | | | | |
+  = = = = = = = = = Class Table = = = = = = = = =
+  AAAAAAAAsimple -> {[AAAAAAAAsimple], 1, []} :: global:AAAAAAAAsimple
+  myChildClass -> {[myParentClass,myChildClass], 6, []} :: myChildClass
+  myParentClass -> {[myParentClass], 9, []} :: global:myParentClass
+  = = = = = = = = = = = = = = = = = = = = = = = =
+  - - - - - - - - - Method Table - - - - - - - - -
+  - - - - - - - - - - - - - - - - - - - - - - - -
+  . . . . . . . . . . . . ClassInstances Table . . . . . . . . . . . .
+  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  Is empty!
+  676░ Goal
+  947░ MainClass
+  947▓ MainClass ----------------------------->  [AAAAAAAAsimple]
+  414░ ClassExtendsDeclaration
+  414▓ ClassExtendsDeclaration ----------------------------->  
+  469░ ClassDeclaration
+  469▓ ClassDeclaration ----------------------------->  null
+  676▓ Goal
   ✅ Program type checked successfully

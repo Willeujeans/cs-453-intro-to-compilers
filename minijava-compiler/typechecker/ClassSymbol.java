@@ -17,4 +17,14 @@ public class ClassSymbol extends Symbol{
         type = updateChildrenClasses(symbolTable, argumentType);
         return type;
     }
+
+    public String getKeyWithInheritance(){
+        ArrayList<String> output = new ArrayList<String>();
+        output.add("global");
+        for(String item : type.type_array){
+            output.add(item);
+        }
+        String outputString = String.join(":", output);
+        return outputString;
+    }
 }

@@ -4,12 +4,30 @@ import syntaxtree.*;
 import visitor.*;
 
 import java.util.Random;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class TypeValidator extends GJDepthFirst<MyType, String> {
     SymbolTable symbolTable;
+
+    @Override
+    public MyType visit(NodeListOptional n, String key) {
+      if (n.present()){
+        MyType stackedType = new MyType();
+        int _count = 0;
+
+        for ( Enumeration<Node> e = n.elements(); e.hasMoreElements(); ) {
+            stackedType.addToType(e.nextElement().accept(this, key));
+            _count++;
+         }
+         return stackedType;
+        }else{
+            return new MyType("void");
+        }
+    }
 
     public TypeValidator(SymbolTable symbolTable){
         this.symbolTable = symbolTable;
@@ -25,12 +43,12 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     }
 
     public void checkForOverload(){
-        HashSet<String> classMethods = symbolTable.getClassMethods();
-        if(classMethods.isEmpty()){
+        HashMap<String, MethodSymbol> methods = symbolTable.getMethods();
+        if(methods.isEmpty()){
             System.out.println("Is empty!");
             return;
         }
-        for(String methodKey : classMethods){
+        for(String methodKey : methods.keySet()){
             String[] keyFragments = methodKey.split(symbolTable.bufferChar);
             String[] keyFragmentsTrimmed = Arrays.copyOf(keyFragments, keyFragments.length - 2);
             String methodName = keyFragments[keyFragments.length - 1];
@@ -40,7 +58,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
             
             while(i > 2){
                 currentKey = String.join(symbolTable.bufferChar, Arrays.copyOf(keyFragmentsTrimmed, i)) + symbolTable.bufferChar + methodName;
-                if(symbolTable.getClassMethods().contains(currentKey)){
+                if(symbolTable.getMethods().containsKey(currentKey)){
                     System.out.println("Overload check: Type Error");
                     System.exit(1);
                 }
@@ -116,8 +134,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     */
     @Override
     public MyType visit(TypeDeclaration n, String key){
-        MyType returnType = n.f0.accept(this, key);
-        return returnType;
+        return n.f0.accept(this, key);
     }
 
     /**
@@ -133,15 +150,13 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
 
         String classKey = n.f1.f0.toString();
-        Symbol classSymbol = symbolTable.findClass(classKey);
-        MyType returnType = classSymbol.type;
-        String currentScope = key + symbolTable.bufferChar + returnType.getType();
-        // n.f3.accept(this, currentScope);
+        ClassSymbol classSymbol = symbolTable.findClass(classKey);
+        String currentScope = classSymbol.getKeyWithInheritance();
+
         n.f4.accept(this, currentScope);
 
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------------------->  " + returnType);
-
-        return returnType;
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------------------->  " + null);
+        return classSymbol.type;
     }
 
    /**
@@ -157,18 +172,15 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     public MyType visit(ClassExtendsDeclaration n, String key){
         int uuid = randomNumber();
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
-        
+
         String classKey = n.f1.f0.toString();
-        
-        Symbol classSymbol = symbolTable.findClass(classKey);
-        MyType returnType = classSymbol.type;
+        ClassSymbol classSymbol = symbolTable.findClass(classKey);
+        String currentScope = classSymbol.getKeyWithInheritance();
 
-        String currentScope = key + symbolTable.bufferChar + returnType.getType();
-
-        // n.f5.accept(this, currentScope);
         n.f6.accept(this, currentScope);
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------------------->  " + returnType);
-        return returnType;
+
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + " ----------------------------->  ");
+        return classSymbol.type;
     }
 
     /**
@@ -188,6 +200,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(MethodDeclaration n, String key) {
+        System.out.println("MethodDeclaration!!");
         String currentScope = key + symbolTable.bufferChar + n.f2.f0.toString();
         n.f8.accept(this, currentScope);
         MyType expectedReturnType = n.f1.accept(this, key);
@@ -197,6 +210,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         String otherClassName = actualReturnType.getType();
         boolean firstClass = symbolTable.getClasses().containsKey(className);
         boolean secondClass = symbolTable.getClasses().containsKey(otherClassName);
+
         if(firstClass && secondClass){
             if(!expectedReturnType.checkSimilar(actualReturnType)){
                 System.out.println("Method return type mismatch: Type Error");
@@ -325,17 +339,31 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         System.out.println(uuid + "░ " + n.getClass().getSimpleName());
 
         MyType classType = n.f0.accept(this, key);
-        ClassSymbol classSymbol = symbolTable.findClass(classType.getType());
-        String classKey = classSymbol.declarationKey;
-        String methodKey = classKey + symbolTable.bufferChar + n.f2.f0.toString();
-        Symbol methodSymbol = symbolTable.findWithShadowing(methodKey);
-        MyType methodType = methodSymbol.type;
+        String className = classType.getType();
+        String methodName = n.f2.f0.toString();
 
-        // Verify with declared method arguments
-        // n.f4.accept(this, key);
+        // now we need to get the class key with inheritance
+        String classkeyWithInheritance = symbolTable.findClass(className).declarationKey;
+        String classMethodKey = classkeyWithInheritance + symbolTable.bufferChar + methodName;
+        System.out.println("Message SEND! ::::::::::::::: " + classMethodKey);
+
+        MethodSymbol methodSymbol = symbolTable.findMethodWithShadowing(classMethodKey);
+        Symbol methodVarDeclaration = symbolTable.findVariableWithShadowing(classMethodKey);
         
-        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + methodType);
-        return methodType;
+        // we expect a MyType() with many type names
+        // eg. method(x, y, z) -> MyType("x", "y", "z")
+        System.out.println("Getting passed arguments... " + key);
+        MyType passedArguments = n.f4.accept(this, key);
+
+        if(!methodSymbol.argumentTypes.checkIdentical(passedArguments)){
+            System.out.println("TYPE ERROR THESE FUCKING ARGUMENTS ARE WRONG BITCH");
+            System.exit(1);
+        }
+
+        System.out.println(methodSymbol);
+        MyType returnType = new MyType(methodVarDeclaration.type);
+        System.out.println(uuid + "▓ " + n.getClass().getSimpleName() + "  ------------>  " + returnType);
+        return returnType;
     }
 
     /**
@@ -344,9 +372,12 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     @Override
     public MyType visit(Identifier n, String key) {
         String searchKey = key + symbolTable.bufferChar + n.f0.toString();
-        Symbol foundSymbol = symbolTable.findWithShadowing(searchKey);
-        MyType returnType = foundSymbol.type;
-        return returnType;
+        Symbol foundSymbol = symbolTable.findVariableWithShadowing(searchKey);
+        if (foundSymbol == null) {
+            System.out.println("Undeclared variable: " + n.f0.toString());
+            System.exit(1);
+        }
+        return foundSymbol.type;
     }
 
     /**
@@ -372,8 +403,11 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(ExpressionList n, String key) {
+        System.out.println("0");
         MyType returnType = n.f0.accept(this, key);
-        n.f1.accept(this, key);
+        System.out.println("1");
+        returnType.addToType(n.f1.accept(this, key));
+        System.out.println("number ofhsdfhskjdfhkj " + returnType);
         return returnType;
     }
 
@@ -383,6 +417,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      */
     @Override
     public MyType visit(ExpressionRest n, String key) {
+        System.out.println("ExpressionRest.");
         MyType returnType = n.f1.accept(this, key);
         return returnType;
     }
@@ -658,6 +693,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     */
     @Override
     public MyType visit(Expression n, String key) {
+        System.out.println("Expression: " + key);
         MyType returnType = n.f0.accept(this, key);
         return returnType;
     }
