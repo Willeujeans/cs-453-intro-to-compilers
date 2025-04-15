@@ -1,57 +1,83 @@
-2025-04-15 10:11:45
-=== Typecheck < tests/minijava-symboltable-tests/correct-tests/allAssignments.java ===
+2025-04-15 10:24:02
+=== Typecheck < tests/minijava-symboltable-tests/correct-tests/1classMethod.java ===
   ID.....
   ID!
-  Updating declarationsglobal:parentClass
-  Updating declarationsglobal:childClass
+  global:singleClassMethod:myMethod
+  [int]
+  global:singleClassMethod:myMethod
+  [int,boolean]
+  global:singleClassMethod:myMethod
+  [int,boolean,int,[]]
+  global:singleClassMethod:myMethod
+  [int,boolean,int,[],int]
   | | | | | | | Declaration Table | | | | | | |
-  global:allAssignments -> {[allAssignments], 1, []}
-  global:grandparentClass -> {[grandparentClass], 19, []}
-  global:emptySingleClass -> {[emptySingleClass], 17, []}
-  global:allAssignments:main -> {[void], 2, []}
-  global:allAssignments:main:a -> {[String,[,]], 2, []}
-  global:parentClass:childClass -> {[parentClass,childClass], 23, []}
-  global:grandparentClass:parentClass -> {[grandparentClass,parentClass], 21, []}
-  global:allAssignments:main:intVariable -> {[int], 3, []}
-  global:allAssignments:main:classVariable -> {[emptySingleClass], 6, []}
-  global:allAssignments:main:booleanVariable -> {[boolean], 5, []}
-  global:allAssignments:main:intArrayVariable -> {[int,[]], 4, []}
+  global:mainClass -> {[mainClass], 1, []}
+  global:mainClass:main -> {[void], 2, []}
+  global:mainClass:main:a -> {[String,[,]], 2, []}
+  global:singleClassMethod -> {[singleClassMethod], 16, []}
+  global:singleClassMethod:myMethod -> {[int], 19, []}
+  global:mainClass:main:intVariable -> {[int], 3, []}
+  global:mainClass:main:classVariable -> {[singleClassMethod], 6, []}
+  global:singleClassMethod:intVariable -> {[int], 17, []}
+  global:mainClass:main:booleanVariable -> {[boolean], 5, []}
+  global:mainClass:main:intArrayVariable -> {[int,[]], 4, []}
+  global:singleClassMethod:myMethod:methodInt -> {[int], 20, []}
+  global:singleClassMethod:myMethod:argumentInt -> {[int], 19, []}
+  global:singleClassMethod:myMethod:argumentArray -> {[int,[]], 19, []}
+  global:singleClassMethod:myMethod:argumentBoolean -> {[boolean], 19, []}
+  global:singleClassMethod:myMethod:argumentIntAgain -> {[int], 19, []}
   | | | | | | | | | | | | | | | | | | | | | | |
   = = = = = = = = = Class Table = = = = = = = = =
-  allAssignments -> {[allAssignments], 1, []} :: global:allAssignments
-  grandparentClass -> {[grandparentClass], 19, []} :: global:grandparentClass
-  emptySingleClass -> {[emptySingleClass], 17, []} :: global:emptySingleClass
-  parentClass -> {[grandparentClass,parentClass], 21, []} :: parentClass
-  childClass -> {[parentClass,childClass], 23, []} :: childClass
+  mainClass -> {[mainClass], 1, []} :: global:mainClass
+  singleClassMethod -> {[singleClassMethod], 16, []} :: global:singleClassMethod
   = = = = = = = = = = = = = = = = = = = = = = = =
   - - - - - - - - - Method Table - - - - - - - - -
+  global:singleClassMethod:myMethod()=[int,boolean,int,[],int] -> [null]
   - - - - - - - - - - - - - - - - - - - - - - - -
   . . . . . . . . . . . . ClassInstances Table . . . . . . . . . . . .
-  global:allAssignments:main:classVariable()=[emptySingleClass]
+  global:mainClass:main:classVariable()=[singleClassMethod]
   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-  Is empty!
-  985░ Goal
-  320░ MainClass
-  568░ AssignmentStatement
-  Expression: global:allAssignments:main
-  568▓ AssignmentStatement
-  624░ AssignmentStatement
-  Expression: global:allAssignments:main
-  624▓ AssignmentStatement
-  122░ AssignmentStatement
-  Expression: global:allAssignments:main
-  Expression: global:allAssignments:main
-  122▓ AssignmentStatement
-  Expression: global:allAssignments:main
-  Expression: global:allAssignments:main
-  320▓ MainClass ----------------------------->  [allAssignments]
-  829░ ClassDeclaration
-  829▓ ClassDeclaration ----------------------------->  null
-  722░ ClassDeclaration
-  722▓ ClassDeclaration ----------------------------->  null
-  703░ ClassExtendsDeclaration
-  703▓ ClassExtendsDeclaration ----------------------------->  
-  702░ ClassExtendsDeclaration
-  702▓ ClassExtendsDeclaration ----------------------------->  
-  985▓ Goal
+  249░ Goal
+  612░ MainClass
+  951░ AssignmentStatement
+  Expression: global:mainClass:main
+  951▓ AssignmentStatement
+  953░ AssignmentStatement
+  Expression: global:mainClass:main
+  Expression: global:mainClass:main
+  953▓ AssignmentStatement
+  538░ AssignmentStatement
+  Expression: global:mainClass:main
+  538▓ AssignmentStatement
+  240░ AssignmentStatement
+  Expression: global:mainClass:main
+  240▓ AssignmentStatement
+  544░ AssignmentStatement
+  Expression: global:mainClass:main
+  607░ MessageSend
+  Message SEND! ::::::::::::::: global:singleClassMethod:myMethod
+  finding method...global:singleClassMethod:myMethod
+  Getting passed arguments... global:mainClass:main
+  0
+  Expression: global:mainClass:main
+  1
+  ExpressionRest.
+  Expression: global:mainClass:main
+  ExpressionRest.
+  Expression: global:mainClass:main
+  ExpressionRest.
+  Expression: global:mainClass:main
+  number ofhsdfhskjdfhkj [int,boolean,int,[],int]
+  {[null], 0, []}
+  607▓ MessageSend  ------------>  [int]
+  544▓ AssignmentStatement
+  612▓ MainClass ----------------------------->  [mainClass]
+  855░ ClassDeclaration
+  MethodDeclaration!!
+  571░ AssignmentStatement
+  Expression: global:singleClassMethod:myMethod
+  571▓ AssignmentStatement
+  Expression: global:singleClassMethod:myMethod
+  855▓ ClassDeclaration ----------------------------->  null
+  249▓ Goal
   ✅ Program type checked successfully

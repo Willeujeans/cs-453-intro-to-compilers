@@ -9,9 +9,10 @@ class allAssignments {
         intVariable = intVariable;
         intArrayVariable = new int[10];
         intArrayVariable[1] = intVariable;
-        // booleanVariable = true;
-        // booleanVariable = false;
-        // classVariable = new emptySingleClass();
+        booleanVariable = true;
+        booleanVariable = false;
+        classVariable = new emptySingleClass();
+
     }
 }
 class emptySingleClass{
