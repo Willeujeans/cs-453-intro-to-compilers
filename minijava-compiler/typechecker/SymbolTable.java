@@ -535,7 +535,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(BooleanType n, String key) {
         if(key.contains(methodArgumentDelineator)){
-            System.out.println("BOOLEAN ARGUMENT: " + key);
             String methodKey = new String(key);
             methodKey = removeAfter(methodKey, methodArgumentDelineator);
             getMethods().get(methodKey).addArgumentType(new MyType("boolean"));
