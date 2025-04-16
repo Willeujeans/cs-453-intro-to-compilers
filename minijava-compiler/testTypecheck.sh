@@ -65,6 +65,7 @@ run_tests() {
     fi
 
     # Compile Java files first
+    find . -name "*.class" -delete
     echo "Compiling Java sources..."
     if ! javac Typecheck.java; then
         echo "Compilation failed! Fix errors and try again."

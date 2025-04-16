@@ -34,15 +34,14 @@ public class MyType {
     }
     
     public boolean checkIdentical(MyType other) {
-        if (other == null) {
-            System.out.println("checking identical: NULL");
+        if (other == null)
             return false;
-        }
 
         System.out.println(typeArray + " <-=========-> " + other.typeArray);
 
         if (typeArray.size() != other.typeArray.size()) {
-            System.out.println("checking identical: Different Sizes: ", typeArray.size());
+            System.out.println(typeArray.size() + " != " + other.typeArray.size());
+            System.out.println("checking identical: Different Sizes: ");
             return false;
         }
         
