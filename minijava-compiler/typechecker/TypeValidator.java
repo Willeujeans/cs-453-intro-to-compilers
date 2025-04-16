@@ -17,8 +17,8 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
     }
 
     public void checkForOverload(){
-        HashMap<String, MethodSymbol> methods = symbolTable.getMethods();
-        HashMap<String, MethodSymbol> declarations = symbolTable.declarations;
+        HashMap<String, Symbol> methods = symbolTable.getMethods();
+        HashMap<String, Symbol> declarations = symbolTable.declarations;
         if(!methods.isEmpty()){
             System.out.println("checking...");
             for(String methodKey : methods.keySet()){
@@ -33,8 +33,8 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
                 while(i > 1){
                     currentKey = String.join(symbolTable.bufferChar, Arrays.copyOf(keyFragmentsTrimmed, i)) + symbolTable.bufferChar + methodName;
                     if(methods.containsKey(currentKey)){
-                        MethodSymbol originalMethod = methods.get(methodKey);
-                        MethodSymbol methodToCheck = methods.get(currentKey);
+                        Symbol originalMethod = methods.get(methodKey);
+                        Symbol methodToCheck = methods.get(currentKey);
                         
                         if(!originalMethod.isSameArgumentTypes(methodToCheck)){
                             System.out.println("Overload check return not the same: Type Error");
@@ -101,10 +101,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
     @Override
     public Symbol visit(MainClass n, String key) {
         String currentScope = key + symbolTable.bufferChar + n.f1.f0.toString() + symbolTable.bufferChar + "main";
-        
-        // f15 -> ( Statement() )*
         n.f15.accept(this, currentScope);
-        
         Symbol returnSymbol = new Symbol(new MyType(n.f1.f0.toString()));
         System.out.println("# " + n.getClass().getSimpleName());
         return returnSymbol;
@@ -268,7 +265,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
             System.exit(1);
         }
         
-        if(arraySymbol.getType() != assignmentSymbol.getType()){
+        if(!arraySymbol.isSameBaseType(assignmentSymbol)){
             System.out.println("Type Error");
             System.out.println("!Incorrect type assignment to array");
             System.exit(1);
@@ -297,7 +294,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
             System.exit(1);
         }
 
-        Symbol returnSymbol = new Symbol(new MyType(primaryExpressionZero.getType()));
+        Symbol returnSymbol = new Symbol(primaryExpressionZero);
         return returnSymbol;
     }
 
@@ -329,27 +326,28 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
      */
     @Override
     public Symbol visit(MessageSend n, String key) {
-        Symbol classType = n.f0.accept(this, key);
-        String className = classType.getType();
+        Symbol classSymbol = n.f0.accept(this, key);
         String methodName = n.f2.f0.toString();
 
-        // now we need to get the class key with inheritance
-        String classkeyWithInheritance = symbolTable.findClass(className).declarationKey;
-        String classMethodKey = classkeyWithInheritance + symbolTable.bufferChar + methodName;
-        MethodSymbol methodSymbol = symbolTable.findMethodWithShadowing(classMethodKey);
-        Symbol methodReturnSymbol = symbolTable.findVariableWithShadowing(classMethodKey);
-        // we expect a MyType() with many type names
-        // eg. method(x, y, z) -> MyType("x", "y", "z")
-        Symbol passedArguments = n.f4.accept(this, key);
+        String classkeyWithInheritance = symbolTable.findClass(classSymbol.getClassName()).declarationKey;
 
+        String classMethodKey = classkeyWithInheritance + symbolTable.bufferChar + methodName;
+        
+        Symbol methodSymbol = symbolTable.findMethodWithShadowing(classMethodKey);
+        Symbol methodReturnSymbol = symbolTable.findVariableWithShadowing(classMethodKey);
+
+        Symbol passedArguments = n.f4.accept(this, key);
+        // Because arguments are optional it might not return anything
         if(passedArguments == null){
-            passedArguments = new Symbol(new MyType("void"));
+            passedArguments = new Symbol(new MyType());
         }
-        System.out.println(methodSymbol.arguments);
+        
+        System.out.println(methodSymbol.getArguments());
         System.out.println("===}{===");
-        System.out.println(passedArguments.arguments);
+        System.out.println(passedArguments.getArguments());
+
         if(!methodSymbol.isSameArgumentTypes(passedArguments)){
-            System.out.println(methodSymbol.getArgumentTypes() + " != " + passedArguments);
+            System.out.println(methodSymbol.getArguments() + " != " + passedArguments.getArguments());
             System.out.println("Type Error: Calling method with incorrect arguments");
             System.exit(1);
         }
@@ -378,16 +376,13 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
     @Override
     public Symbol visit(ThisExpression n, String key) {
         // return the closest class we are inside of
-        Symbol mySymbol = symbolTable.getNearestClass(key);
-        Symbol returnSymbol = mySymbol;
-
-        System.out.println("# " + n.getClass().getSimpleName());
+        Symbol returnSymbol = symbolTable.getNearestClass(key);
         return returnSymbol;
     }
 
     @Override
     public Symbol visit(ExpressionList n, String key) {
-        Symbol argumentSymbol = new Symbol();
+        Symbol argumentSymbol = new Symbol(new MyType());
         argumentSymbol.addArgument(n.f0.accept(this, key));
         
         if (n.f1.present()) {
@@ -398,7 +393,11 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         }
         return argumentSymbol;
     }
-    
+
+    /**
+    * f0 -> ","
+    * f1 -> Expression()
+    */
     @Override
     public Symbol visit(ExpressionRest n, String key) {
         Symbol returnSymbol = n.f1.accept(this, key);
@@ -700,10 +699,5 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         }
         System.out.println("# " + n.getClass().getSimpleName());
         return typeToPrint;
-    }
-
-    @Override
-    public Symbol visit(VarDeclaration n, String key) {
-        return null;
     }
 }

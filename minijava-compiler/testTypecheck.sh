@@ -72,9 +72,9 @@ run_tests() {
     fi
 
     # Run tests for both directories
-    run_tests "tests/minijava-symboltable-tests/incorrect-tests"
+    # run_tests "tests/minijava-symboltable-tests/incorrect-tests"
     
-    # run_tests "tests/minijava-symboltable-tests/correct-tests"
+    run_tests "tests/minijava-symboltable-tests/correct-tests"
 
 }  # Save complete output to log file
 

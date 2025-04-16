@@ -9,7 +9,7 @@ import visitor.*;
 
 public class MyType {
     // int[][] would be stored as -> ["int", "[", "]"]
-    public Vector<String> typeArray;
+    public Vector<String> typeArray = new Vector<String>();
 
     public MyType() {
         this.typeArray = new Vector<String>();
@@ -22,30 +22,15 @@ public class MyType {
     }
 
     public MyType(MyType other) {
-        if(other == null || other.typeArray.isEmpty())
+        if(other == null)
             throw new IllegalArgumentException("Cannot construct my type from nothing");
         this.typeArray = new Vector<String>(other.typeArray);
     }
 
-    public void addToType(MyType otherType) {
-        if(otherType != null && !otherType.typeArray.isEmpty()){
-            for(String each : otherType.typeArray){
-                if(!each.equals("void")){
-                    typeArray.add(each);
-                }
-            }
-        }
-        if(typeArray.size() > 1){
-            typeArray.remove("void");
-        }   
-    }
-
-    public String getType() {
-        if(typeArray == null || typeArray.isEmpty()){
+    public String getBaseType() {
+        if(typeArray.isEmpty())
             throw new RuntimeException("Trying to get type from nothing");
-        }else{
-            return typeArray.firstElement();
-        }
+        return typeArray.firstElement();
     }
     
     public boolean checkIdentical(MyType other) {
@@ -53,6 +38,7 @@ public class MyType {
             System.out.println("checking identical: NULL");
             return false;
         }
+        System.out.println(typeArray + " <-=========-> " + other.typeArray);
         if (typeArray.size() != other.typeArray.size()) {
             System.out.println("checking identical: Different Sizes");
             return false;

@@ -3,15 +3,11 @@ package typechecker;
 import java.util.ArrayList;
 
 public class Symbol {
-    public MyType type;
+    public MyType type = new MyType();
     public int lineDeclared = 0;
     public ArrayList<Integer> lineUsed = new ArrayList<Integer>();
-    public ArrayList<Symbol> arguments = new ArrayList<Symbol>();
+    private ArrayList<Symbol> arguments = new ArrayList<Symbol>();
     
-    public Symbol(){
-        this.type = new MyType();
-    }
-
     public Symbol(MyType type, int lineDeclared) {
         this.type = type;
         this.lineDeclared = lineDeclared;
@@ -23,12 +19,19 @@ public class Symbol {
 
     public Symbol(Symbol other){
         this.type = new MyType(other.type);
+        this.arguments = new ArrayList<Symbol>(other.arguments);
         this.lineDeclared = other.lineDeclared;
         this.lineUsed = new ArrayList<>(other.lineUsed);
     }
 
+    public ArrayList<Symbol> getArguments(){
+        if(arguments == null)
+            throw new IllegalArgumentException("Trying to get something that is null");
+        return arguments;
+    }
+
     public String getClassName(){
-        return new String(type.getType());
+        return new String(type.getBaseType());
     }
 
     public void addLineUsed(int lineNumber){
@@ -45,10 +48,9 @@ public class Symbol {
     }
 
     public boolean isSameBaseType(Symbol other){
-        if(other == null){
+        if(other == null)
             return false;
-        }
-        return type.getType() == other.getType();
+        return type.getBaseType() == other.type.getBaseType();
     }
 
     public boolean isRelated(Symbol other){
@@ -58,15 +60,13 @@ public class Symbol {
         return type.checkSimilar(other.type);
     }
 
-    public String getType(){
-        return type.getType();
-    }
-
     public void addArgument(Symbol other){
+        if(other == null)
+            throw new IllegalArgumentException("Cannot add argument using null");
         arguments.add(other);
     }
 
-    public Boolean isSameArgumentTypes(Symbol other){
+    public boolean isSameArgumentTypes(Symbol other){
         if(arguments.size() != other.arguments.size()){
             return false;
         }
@@ -82,8 +82,7 @@ public class Symbol {
         StringBuilder output = new StringBuilder();
         output.append("{");
         output.append(type.toString()).append(", ");
-        output.append(lineDeclared).append(", ");
-        output.append(lineUsed);
+        output.append(arguments.toString());
         output.append("}");
         
         return output.toString();
