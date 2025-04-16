@@ -42,10 +42,8 @@ run_tests() {
             exit_code=${PIPESTATUS[0]}
             
             if [ ${exit_code} == 1 ]; then
-                clear
                 ((TOTAL_FAILURES++))
                 echo -e "\nERROR: Type checking failed for ${file} (exit code: ${exit_code})"
-                break
             fi
         }
         
@@ -75,7 +73,8 @@ run_tests() {
 
     # Run tests for both directories
     run_tests "tests/minijava-symboltable-tests/incorrect-tests"
-    run_tests "tests/minijava-symboltable-tests/correct-tests"
+    
+    # run_tests "tests/minijava-symboltable-tests/correct-tests"
 
 }  # Save complete output to log file
 

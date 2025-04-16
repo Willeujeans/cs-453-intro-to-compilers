@@ -225,25 +225,26 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
      */
     @Override
     public Symbol visit(AssignmentStatement n, String key) {
-        Symbol idType = n.f0.accept(this, key);
-        Symbol expressionType = n.f2.accept(this, key);
-
-        boolean isBothClasses = (symbolTable.classes.containsKey(idType.getClassName()) && symbolTable.classes.containsKey(expressionType.getClassName()));
-
+        Symbol identifierSymbol = n.f0.accept(this, key);
+        Symbol expressionSymbol = n.f2.accept(this, key);
+        boolean isClass = symbolTable.classes.containsKey(identifierSymbol.getClassName());
+        boolean isClassB = symbolTable.classes.containsKey(expressionSymbol.getClassName());
+        boolean isBothClasses = (isClass && isClassB);
         if(isBothClasses){
             // Less strict check
-            if(!idType.isRelated(expressionType)){
+            if(!identifierSymbol.isRelated(expressionSymbol)){
                 System.out.println(n.getClass().getSimpleName() + ": Type Error");
                 System.exit(1);
             }
         }else{
             // More strict check
-            if(!idType.isSameType(expressionType)){
+            if(!identifierSymbol.isSameType(expressionSymbol)){
                 System.out.println(n.getClass().getSimpleName() + ": Type Error");
                 System.exit(1);
             }
         }
-        return expressionType;
+
+        return expressionSymbol;
     }
 
        /**
@@ -336,7 +337,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         String classkeyWithInheritance = symbolTable.findClass(className).declarationKey;
         String classMethodKey = classkeyWithInheritance + symbolTable.bufferChar + methodName;
         MethodSymbol methodSymbol = symbolTable.findMethodWithShadowing(classMethodKey);
-        Symbol methodVarDeclaration = symbolTable.findVariableWithShadowing(classMethodKey);
+        Symbol methodReturnSymbol = symbolTable.findVariableWithShadowing(classMethodKey);
         // we expect a MyType() with many type names
         // eg. method(x, y, z) -> MyType("x", "y", "z")
         Symbol passedArguments = n.f4.accept(this, key);
@@ -344,16 +345,17 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         if(passedArguments == null){
             passedArguments = new Symbol(new MyType("void"));
         }
-
+        System.out.println(methodSymbol.arguments);
+        System.out.println("===}{===");
+        System.out.println(passedArguments.arguments);
         if(!methodSymbol.isSameArgumentTypes(passedArguments)){
             System.out.println(methodSymbol.getArgumentTypes() + " != " + passedArguments);
             System.out.println("Type Error: Calling method with incorrect arguments");
             System.exit(1);
         }
 
-        Symbol returnSymbol = new Symbol(new MyType(methodVarDeclaration.type));
         System.out.println("# " + n.getClass().getSimpleName());
-        return returnSymbol;
+        return methodReturnSymbol;
     }
 
     /**

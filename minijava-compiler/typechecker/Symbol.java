@@ -67,6 +67,9 @@ public class Symbol {
     }
 
     public Boolean isSameArgumentTypes(Symbol other){
+        if(arguments.size() != other.arguments.size()){
+            return false;
+        }
         for(Symbol each : arguments){
             if(!each.isSameType(other)){
                 return false;

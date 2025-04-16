@@ -13,7 +13,7 @@ class parentClass extends grandparentClass{
 }
 
 class grandparentClass {
-    public boolean giveBoolean(){
-        return false;
+    public int giveBoolean(){
+        return 0;
     }
 }
