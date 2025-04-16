@@ -6,7 +6,7 @@ class mainClass {
         childClass classVariable ;
         parentClass pclassVariable ;
 
-        intVariable = 2 ;
+        intVariable = 1 ;
         intArrayVariable = new int[5] ;
         booleanVariable = true ;
         

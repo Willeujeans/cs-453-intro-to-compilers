@@ -32,20 +32,15 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
                 
                 while(i > 1){
                     currentKey = String.join(symbolTable.bufferChar, Arrays.copyOf(keyFragmentsTrimmed, i)) + symbolTable.bufferChar + methodName;
-                    System.out.println(currentKey);
                     if(methods.containsKey(currentKey)){
                         MethodSymbol originalMethod = methods.get(methodKey);
                         MethodSymbol methodToCheck = methods.get(currentKey);
-
-                        System.out.println(methodKey + " : " + originalMethod.argumentTypes);
-                        System.out.println(currentKey + " : " + methodToCheck.argumentTypes);
                         
                         if(!originalMethod.isSameArgumentTypes(methodToCheck)){
                             System.out.println("Overload check return not the same: Type Error");
                             System.exit(1);
                         }
 
-                        System.out.println("---");
                         Symbol methodOneSymbol = declarations.get(methodKey);
                         Symbol methodTwoSymbol = declarations.get(currentKey);
                         
@@ -206,7 +201,6 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
                 System.exit(1);
             }
         }
-        System.out.println("# " + n.getClass().getSimpleName());
         return expectedreturnSymbol;
     }
 
@@ -350,8 +344,6 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         if(passedArguments == null){
             passedArguments = new Symbol(new MyType("void"));
         }
-        
-        System.out.println(methodSymbol.getArgumentTypes());
 
         if(!methodSymbol.isSameArgumentTypes(passedArguments)){
             System.out.println(methodSymbol.getArgumentTypes() + " != " + passedArguments);
@@ -359,7 +351,6 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
             System.exit(1);
         }
 
-        System.out.println(methodSymbol);
         Symbol returnSymbol = new Symbol(new MyType(methodVarDeclaration.type));
         System.out.println("# " + n.getClass().getSimpleName());
         return returnSymbol;
@@ -463,7 +454,6 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
     @Override
     public Symbol visit(Statement n, String key) {
         Symbol returnSymbol = n.f0.accept(this, key);
-        System.out.println("# " + n.getClass().getSimpleName());
         return returnSymbol;
     }
 

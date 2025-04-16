@@ -359,7 +359,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(TypeDeclaration n, String key) {
         n.f0.accept(this, key);
-        System.out.println("# " + n.getClass().getSimpleName());
         return null;
     }
 
@@ -457,8 +456,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public Void visit(FormalParameterList n, String key) {
         n.f0.accept(this, key);
         n.f1.accept(this, key);
-
-        System.out.println("# " + n.getClass().getSimpleName());
         return null;
     }
 
@@ -469,8 +466,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(FormalParameter n, String key) {
         n.f0.accept(this, key + methodArgumentDelineator + n.f1.f0.toString());
-
-        System.out.println("# " + n.getClass().getSimpleName());
         return null;
     }
 
@@ -481,8 +476,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(FormalParameterRest n, String key) {
         n.f1.accept(this, key);
-
-        System.out.println("# " + n.getClass().getSimpleName());
         return null;
     }
 
@@ -494,8 +487,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     @Override
     public Void visit(VarDeclaration n, String key) {
         n.f0.accept(this, key + bufferChar + n.f1.f0.toString());
-
-        System.out.println("# " + n.getClass().getSimpleName());
         return null;
     }
 
