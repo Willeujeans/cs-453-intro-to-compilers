@@ -16,16 +16,14 @@ public class MyType {
     }
 
     public MyType(String... components) {
-        if(components == null){
+        if(components == null)
             throw new IllegalArgumentException("Cannot construct my type from nothing");
-        }
         this.typeArray = new Vector<>(Arrays.asList(components));
     }
 
     public MyType(MyType other) {
-        if(other == null || other.typeArray.isEmpty()){
+        if(other == null || other.typeArray.isEmpty())
             throw new IllegalArgumentException("Cannot construct my type from nothing");
-        }
         this.typeArray = new Vector<String>(other.typeArray);
     }
 
