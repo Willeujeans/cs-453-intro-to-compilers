@@ -348,7 +348,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         
         System.out.println(methodSymbol.getArguments());
         System.out.println("===}{===");
-        System.out.println(passedArguments.getArguments());
+        System.out.println("Passed Arguments ====> " + passedArguments.getArguments());
 
         if(!methodSymbol.isSameArgumentTypes(passedArguments)){
             System.out.println(methodSymbol.getArguments() + " != " + passedArguments.getArguments());

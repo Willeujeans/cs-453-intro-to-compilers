@@ -63,18 +63,18 @@ public class Symbol {
     public void addArgument(Symbol other){
         if(other == null)
             throw new IllegalArgumentException("Cannot add argument using null");
-        for(Symbol each : other.arguments){
-            arguments.add(each);
-        }
+            arguments.add(other);
     }
 
     public boolean isSameArgumentTypes(Symbol other){
         if(arguments.size() != other.arguments.size()){
             return false;
         }
-        for(Symbol each : arguments){
-            if(!each.isSameType(other)){
-                return false;
+        for(Symbol thisSymbol : arguments){
+            for(Symbol otherSymbol : other.getArguments()){
+                if(!thisSymbol.isSameType(otherSymbol)){
+                    return false;
+                }
             }
         }
         return true;
