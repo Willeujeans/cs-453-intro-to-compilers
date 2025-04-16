@@ -38,11 +38,14 @@ public class MyType {
             System.out.println("checking identical: NULL");
             return false;
         }
+
         System.out.println(typeArray + " <-=========-> " + other.typeArray);
+
         if (typeArray.size() != other.typeArray.size()) {
-            System.out.println("checking identical: Different Sizes");
+            System.out.println("checking identical: Different Sizes: ", typeArray.size());
             return false;
         }
+        
         for (int i = 0; i < typeArray.size(); i++) {
             String thisType = typeArray.get(i);
             String otherType = other.typeArray.get(i);
