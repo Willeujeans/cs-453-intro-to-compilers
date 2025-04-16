@@ -2,7 +2,7 @@
 // file except the visitor classes and the accept method
 // in the Tree class
 
-class AAAAAATreeVisitor{
+class TreeVisitor{
     public static void main(String[] a){
 	System.out.println(new TV().Start());
     }

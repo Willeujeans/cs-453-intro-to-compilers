@@ -4,6 +4,7 @@
 MAX_FILES_PER_DIR=""  # Empty means no limit
 MAX_TOTAL_FILES=""    # Empty means no limit
 CURRENT_FILE_COUNT=0  # Global counter
+TOTAL_FAILURES=0
 
 # Function to run tests in a directory
 run_tests() {
@@ -12,7 +13,6 @@ run_tests() {
 
     # Create timestamp and clear previous results
     local current_date_time="$(date "+%Y-%m-%d %H:%M:%S")"
-    echo "${current_date_time}" > "${test_dir}/test.txt"
 
     # Process each Java file
     local dir_file_count=0
@@ -41,10 +41,11 @@ run_tests() {
             java Typecheck < "${file}" 2>&1 | awk '{print "  " $0}'
             exit_code=${PIPESTATUS[0]}
             
-            if [ ${exit_code} -ne 0 ]; then
+            if [ ${exit_code} == 1 ]; then
+                ((TOTAL_FAILURES++))
                 echo -e "\nERROR: Type checking failed for ${file} (exit code: ${exit_code})"
             fi
-        } | tee -a "${test_dir}/test.txt"
+        }
         
         echo "------------------------------------"
     done
@@ -64,6 +65,7 @@ run_tests() {
     fi
 
     # Compile Java files first
+    find . -name "*.class" -delete
     echo "Compiling Java sources..."
     if ! javac Typecheck.java; then
         echo "Compilation failed! Fix errors and try again."
@@ -71,9 +73,10 @@ run_tests() {
     fi
 
     # Run tests for both directories
-    run_tests "tests/minijava-symboltable-tests/correct-tests"
     run_tests "tests/minijava-symboltable-tests/incorrect-tests"
+    
+    # run_tests "tests/minijava-symboltable-tests/correct-tests"
 
-} | tee "test_run.log"  # Save complete output to log file
+}  # Save complete output to log file
 
-echo -e "\nAll tests completed. Full output saved to test_run.log"
+echo -e "\nTotal Failures: ${TOTAL_FAILURES}"

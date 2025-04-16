@@ -21,7 +21,7 @@ public class ClassSymbol extends Symbol{
     public String getKeyWithInheritance(){
         ArrayList<String> output = new ArrayList<String>();
         output.add("global");
-        for(String item : type.type_array){
+        for(String item : type.typeArray){
             output.add(item);
         }
         String outputString = String.join(":", output);
