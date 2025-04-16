@@ -224,9 +224,12 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
     public Symbol visit(AssignmentStatement n, String key) {
         Symbol identifierSymbol = n.f0.accept(this, key);
         Symbol expressionSymbol = n.f2.accept(this, key);
+
         boolean isClass = symbolTable.classes.containsKey(identifierSymbol.getClassName());
         boolean isClassB = symbolTable.classes.containsKey(expressionSymbol.getClassName());
+
         boolean isBothClasses = (isClass && isClassB);
+
         if(isBothClasses){
             // Less strict check
             if(!identifierSymbol.isRelated(expressionSymbol)){
@@ -235,6 +238,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
             }
         }else{
             // More strict check
+            System.out.println("identifierSymbol: " + n.f0.f0.toString() + " " + identifierSymbol + " ----- expressionSymbol: " + key + " " + expressionSymbol);
             if(!identifierSymbol.isSameType(expressionSymbol)){
                 System.out.println(n.getClass().getSimpleName() + ": Type Error");
                 System.exit(1);
@@ -294,7 +298,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
             System.exit(1);
         }
 
-        Symbol returnSymbol = new Symbol(primaryExpressionZero);
+        Symbol returnSymbol = new Symbol(new MyType("int"));
         return returnSymbol;
     }
 
