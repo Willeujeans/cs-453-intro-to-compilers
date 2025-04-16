@@ -203,8 +203,8 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
     public void updateClasses(String parentClassId, String childClassId){
         for(ClassSymbol each : classes.values()){
-            if(each.type.type_array.contains(childClassId)){
-                each.type.type_array.insertElementAt(parentClassId, 0);
+            if(each.type.typeArray.contains(childClassId)){
+                each.type.typeArray.insertElementAt(parentClassId, 0);
             }
         }
     }
@@ -215,7 +215,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
         for (String classKey : classes.keySet()) {
             for (String declarationKey : originalDeclarationKeys) {
-                List<String> typeArray = classes.get(classKey).type.type_array;
+                List<String> typeArray = classes.get(classKey).type.typeArray;
                 String classKeyWithInheritance = String.join(bufferChar, typeArray);
 
                 String[] splitString = declarationKey.split(bufferChar);
