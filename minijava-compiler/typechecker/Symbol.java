@@ -70,11 +70,9 @@ public class Symbol {
         if(arguments.size() != other.arguments.size()){
             return false;
         }
-        for(Symbol thisSymbol : arguments){
-            for(Symbol otherSymbol : other.getArguments()){
-                if(!thisSymbol.isSameType(otherSymbol)){
-                    return false;
-                }
+        for(int i = 0; i < 0; ++i){
+            if(!arguments.get(i).isSameType(other.arguments.get(i))){
+                return false;
             }
         }
         return true;

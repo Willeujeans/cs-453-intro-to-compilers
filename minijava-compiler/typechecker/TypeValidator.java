@@ -40,11 +40,8 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
                             System.out.println("Overload check return not the same: Type Error");
                             System.exit(1);
                         }
-
-                        Symbol methodOneSymbol = declarations.get(methodKey);
-                        Symbol methodTwoSymbol = declarations.get(currentKey);
                         
-                        if(!methodOneSymbol.isSameType(methodTwoSymbol)){
+                        if(!originalMethod.isSameType(methodToCheck)){
                             System.out.println("Overload check: Type Error");
                             System.exit(1);
                         }
@@ -338,7 +335,6 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         String classMethodKey = classkeyWithInheritance + symbolTable.bufferChar + methodName;
         
         Symbol methodSymbol = symbolTable.findMethodWithShadowing(classMethodKey);
-        Symbol methodReturnSymbol = symbolTable.findVariableWithShadowing(classMethodKey);
 
         Symbol passedArguments = n.f4.accept(this, key);
         // Because arguments are optional it might not return anything
@@ -351,13 +347,12 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         System.out.println("Passed Arguments ====> " + passedArguments.getArguments());
 
         if(!methodSymbol.isSameArgumentTypes(passedArguments)){
-            System.out.println(methodSymbol.getArguments() + " != " + passedArguments.getArguments());
             System.out.println("Type Error: Calling method with incorrect arguments");
             System.exit(1);
         }
 
         System.out.println("# " + n.getClass().getSimpleName());
-        return methodReturnSymbol;
+        return methodSymbol;
     }
 
     /**

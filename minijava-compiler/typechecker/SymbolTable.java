@@ -36,7 +36,16 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public void postTraversalOperations(){
         updateClassInstances();
         updateClassKeysWithInheritance();
-        // pruneMethodsFromDeclarations();
+        updateMethodsReturnType();
+    }
+
+    public void updateMethodsReturnType(){
+        for(String key : methods.keySet()){
+            if(declarations.containsKey(key)){
+                Symbol methodSymbol = methods.get(key);
+                methodSymbol.type = declarations.get(key).type;
+            }
+        }
     }
 
     public void pruneMethodsFromDeclarations(){
@@ -241,7 +250,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
                         methods.remove(declarationKey);
                         Symbol updatedMethodSymbol = new Symbol(methodSymbolToStore);
                         Symbol methodSymbol = declarations.get(newDeclarationKeyJoined);
-                        updatedMethodSymbol.type = symbolToStore.type;
+                        updatedMethodSymbol.type = methodSymbol.type;
                         methods.put(newDeclarationKeyJoined, updatedMethodSymbol);
                     }
                 }
@@ -437,6 +446,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         // Symbol: place it using the current scope
         Symbol methodSymbol = new Symbol(new MyType(), 0);
         insertMethod(currentScope, methodSymbol);
+        // 
         n.f1.accept(this, currentScope);
 
         n.f4.accept(this, currentScope);

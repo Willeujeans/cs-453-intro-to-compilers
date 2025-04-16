@@ -37,8 +37,6 @@ public class MyType {
         if (other == null)
             return false;
 
-        System.out.println(typeArray + " <-=========-> " + other.typeArray);
-
         if (typeArray.size() != other.typeArray.size()) {
             System.out.println(typeArray.size() + " != " + other.typeArray.size());
             System.out.println("checking identical: Different Sizes: ");
@@ -72,14 +70,14 @@ public class MyType {
     }
 
     public String toString(){
-        String output = "[";
+        String output = "'";
         for(int i = 0; i < this.typeArray.size(); ++i){
             output += this.typeArray.get(i);
             if(i < this.typeArray.size() - 1){
                 output += ",";
             }
         }
-        output += "]";
+        output += "'";
         return output;
     }
 }
