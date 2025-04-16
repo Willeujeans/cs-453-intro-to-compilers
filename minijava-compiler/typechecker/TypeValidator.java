@@ -64,7 +64,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f2 -> <EOF>
      */
     @Override
-    public MyType visit(Goal n, String key) {
+    public Symbol visit(Goal n, String key) {
         checkForOverload();
         n.f0.accept(this, key);
         n.f1.accept(this, key);
@@ -93,16 +93,16 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f17 -> "}"
      */
     @Override
-    public MyType visit(MainClass n, String key) {
+    public Symbol visit(MainClass n, String key) {
         String currentScope = key + symbolTable.bufferChar + n.f1.f0.toString() + symbolTable.bufferChar + "main";
         
         // f15 -> ( Statement() )*
         n.f15.accept(this, currentScope);
         
-        MyType returnType = new MyType(n.f1.f0.toString());
+        MyType returnSymbol = new MyType(n.f1.f0.toString());
 
         System.out.println("# " + n.getClass().getSimpleName());
-        return returnType;
+        return returnSymbol;
     }
 
     /**
@@ -110,10 +110,10 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     *       | ClassExtendsDeclaration()
     */
     @Override
-    public MyType visit(TypeDeclaration n, String key){
-        MyType returnType = n.f0.accept(this, key);
+    public Symbol visit(TypeDeclaration n, String key){
+        MyType returnSymbol = n.f0.accept(this, key);
         System.out.println("# " + n.getClass().getSimpleName());
-        return returnType;
+        return returnSymbol;
     }
 
     /**
@@ -124,7 +124,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     * f4 -> ( MethodDeclaration() )*
     * f5 -> "}"
     */
-    public MyType visit(ClassDeclaration n, String key){
+    @Override
+    public Symbol visit(ClassDeclaration n, String key){
         String classKey = n.f1.f0.toString();
         ClassSymbol classSymbol = symbolTable.findClass(classKey);
         String currentScope = classSymbol.getKeyWithInheritance();
@@ -145,7 +146,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     * f6 -> ( MethodDeclaration() )*
     * f7 -> "}"
     */
-    public MyType visit(ClassExtendsDeclaration n, String key){
+    @Override
+    public Symbol visit(ClassExtendsDeclaration n, String key){
         String classKey = n.f1.f0.toString();
         ClassSymbol classSymbol = symbolTable.findClass(classKey);
         String currentScope = classSymbol.getKeyWithInheritance();
@@ -172,30 +174,30 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f12 -> "}"
      */
     @Override
-    public MyType visit(MethodDeclaration n, String key) {
+    public Symbol visit(MethodDeclaration n, String key) {
         String currentScope = key + symbolTable.bufferChar + n.f2.f0.toString();
         n.f8.accept(this, currentScope);
-        MyType expectedReturnType = n.f1.accept(this, key);
-        MyType actualReturnType = n.f10.accept(this, currentScope);
-        String className = expectedReturnType.getType();
+        MyType expectedreturnSymbol = n.f1.accept(this, key);
+        MyType actualreturnSymbol = n.f10.accept(this, currentScope);
+        String className = expectedreturnSymbol.getType();
         
-        String otherClassName = actualReturnType.getType();
+        String otherClassName = actualreturnSymbol.getType();
         boolean firstClass = symbolTable.getClasses().containsKey(className);
         boolean secondClass = symbolTable.getClasses().containsKey(otherClassName);
 
         if(firstClass && secondClass){
-            if(!expectedReturnType.checkSimilar(actualReturnType)){
+            if(!expectedreturnSymbol.checkSimilar(actualreturnSymbol)){
                 System.out.println("Method return type mismatch: Type Error");
                 System.exit(1);
             }
         }else{
-            if(!expectedReturnType.checkIdentical(actualReturnType)){
+            if(!expectedreturnSymbol.checkIdentical(actualreturnSymbol)){
                 System.out.println("Method return type mismatch: Type Error");
                 System.exit(1);
             }
         }
         System.out.println("# " + n.getClass().getSimpleName());
-        return expectedReturnType;
+        return expectedreturnSymbol;
     }
 
     /**
@@ -205,10 +207,10 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f3 -> ")"
      */
     @Override
-    public MyType visit(AllocationExpression n, String key) {
+    public Symbol visit(AllocationExpression n, String key) {
         String classKey = n.f1.f0.toString();
-        MyType returnType = symbolTable.findClass(classKey).type;
-        return returnType;
+        MyType returnSymbol = symbolTable.findClass(classKey).type;
+        return returnSymbol;
     }
 
     /**
@@ -218,7 +220,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f3 -> ";"
      */
     @Override
-    public MyType visit(AssignmentStatement n, String key) {
+    public Symbol visit(AssignmentStatement n, String key) {
         MyType idType = n.f0.accept(this, key);
         MyType expressionType = n.f2.accept(this, key);
 
@@ -249,7 +251,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     * f5 -> Expression()
     * f6 -> ";"
     */
-    public MyType visit(ArrayAssignmentStatement n, String key){
+    @Override
+    public Symbol visit(ArrayAssignmentStatement n, String key){
         MyType arrayType = n.f0.accept(this, key);
         MyType arrayIndexType = n.f2.accept(this, key);
         MyType typeToAssignTo = n.f5.accept(this, key);
@@ -274,7 +277,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f3 -> "]"
      */
     @Override
-    public MyType visit(ArrayLookup n, String key) {
+    public Symbol visit(ArrayLookup n, String key) {
         MyType primaryExpressionZero = n.f0.accept(this, key);
         MyType primaryExpressionTwo = n.f2.accept(this, key);
 
@@ -288,8 +291,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
             System.exit(1);
         }
 
-        MyType returnType = new MyType(primaryExpressionZero.getType());
-        return returnType;
+        MyType returnSymbol = new MyType(primaryExpressionZero.getType());
+        return returnSymbol;
     }
 
     /**
@@ -298,16 +301,16 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f2 -> "length"
      */
     @Override
-    public MyType visit(ArrayLength n, String key) {
-        MyType returnType = n.f0.accept(this, key);
+    public Symbol visit(ArrayLength n, String key) {
+        MyType returnSymbol = n.f0.accept(this, key);
         
-        if(!returnType.checkIdentical(new MyType("int", "[", "]"))){
+        if(!returnSymbol.checkIdentical(new MyType("int", "[", "]"))){
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(1);
         }
 
         System.out.println("# " + n.getClass().getSimpleName());
-        return returnType;
+        return returnSymbol;
     }
 
     /**
@@ -319,7 +322,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f5 -> ")"
      */
     @Override
-    public MyType visit(MessageSend n, String key) {
+    public Symbol visit(MessageSend n, String key) {
         MyType classType = n.f0.accept(this, key);
         String className = classType.getType();
         String methodName = n.f2.f0.toString();
@@ -346,16 +349,16 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
         }
 
         System.out.println(methodSymbol);
-        MyType returnType = new MyType(methodVarDeclaration.type);
+        MyType returnSymbol = new MyType(methodVarDeclaration.type);
         System.out.println("# " + n.getClass().getSimpleName());
-        return returnType;
+        return returnSymbol;
     }
 
     /**
      * f0 -> <IDENTIFIER>
      */
     @Override
-    public MyType visit(Identifier n, String key) {
+    public Symbol visit(Identifier n, String key) {
         String searchKey = key + symbolTable.bufferChar + n.f0.toString();
         Symbol foundSymbol = symbolTable.findVariableWithShadowing(searchKey);
         if (foundSymbol == null) {
@@ -369,17 +372,17 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f0 -> "this"
      */
     @Override
-    public MyType visit(ThisExpression n, String key) {
+    public Symbol visit(ThisExpression n, String key) {
         // return the closest class we are inside of
         Symbol mySymbol = symbolTable.getNearestClass(key);
-        MyType returnType = mySymbol.type;
+        MyType returnSymbol = mySymbol.type;
 
         System.out.println("# " + n.getClass().getSimpleName());
-        return returnType;
+        return returnSymbol;
     }
 
     @Override
-    public MyType visit(ExpressionList n, String key) {
+    public Symbol visit(ExpressionList n, String key) {
         MyType argTypes = new MyType();
         argTypes.addToType(n.f0.accept(this, key));
         
@@ -393,7 +396,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     }
     
     @Override
-    public MyType visit(ExpressionRest n, String key) {
+    public Symbol visit(ExpressionRest n, String key) {
         return n.f1.accept(this, key);
     }
 
@@ -403,9 +406,10 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     *       | IntegerType()
     *       | Identifier()
     */
-    public MyType visit(Type n, String key){
-        MyType returnType = n.f0.accept(this, key);
-        return returnType;
+    @Override
+    public Symbol visit(Type n, String key){
+        MyType returnSymbol = n.f0.accept(this, key);
+        return returnSymbol;
     }
 
        /**
@@ -413,25 +417,28 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     * f1 -> "["
     * f2 -> "]"
     */
-    public MyType visit(ArrayType n, String key){
-        MyType returnType = new MyType("int", "[]");
-        return returnType;
+    @Override
+    public Symbol visit(ArrayType n, String key){
+        MyType returnSymbol = new MyType("int", "[]");
+        return returnSymbol;
     }
 
    /**
     * f0 -> "boolean"
     */
-    public MyType visit(BooleanType n, String key){
-        MyType returnType = new MyType("boolean");
-        return returnType;
+    @Override
+    public Symbol visit(BooleanType n, String key){
+        MyType returnSymbol = new MyType("boolean");
+        return returnSymbol;
     }
 
    /**
     * f0 -> "int"
     */
-    public MyType visit(IntegerType n, String key){
-        MyType returnType = new MyType("int");
-        return returnType;
+    @Override
+    public Symbol visit(IntegerType n, String key){
+        MyType returnSymbol = new MyType("int");
+        return returnSymbol;
     }
     /**
      * f0 -> Block()
@@ -442,10 +449,10 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * | PrintStatement()
      */
     @Override
-    public MyType visit(Statement n, String key) {
-        MyType returnType = n.f0.accept(this, key);
+    public Symbol visit(Statement n, String key) {
+        MyType returnSymbol = n.f0.accept(this, key);
         System.out.println("# " + n.getClass().getSimpleName());
-        return returnType;
+        return returnSymbol;
     }
 
     /**
@@ -454,7 +461,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f2 -> PrimaryExpression()
      */
     @Override
-    public MyType visit(AndExpression n, String key) {
+    public Symbol visit(AndExpression n, String key) {
         // Can only accept booleans
         MyType typeA = n.f0.accept(this, key);
         MyType typeB = n.f2.accept(this, key);
@@ -466,8 +473,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(1);
         }
-        MyType returnType = new MyType("boolean");
-        return returnType;
+        MyType returnSymbol = new MyType("boolean");
+        return returnSymbol;
     }
 
     /**
@@ -476,7 +483,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f2 -> PrimaryExpression()
      */
     @Override
-    public MyType visit(CompareExpression n, String key) {
+    public Symbol visit(CompareExpression n, String key) {
         MyType typeA = n.f0.accept(this, key);
         MyType typeB = n.f2.accept(this, key);
 
@@ -489,8 +496,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
             System.exit(1);
         }
 
-        MyType returnType = new MyType("boolean");
-        return returnType;
+        MyType returnSymbol = new MyType("boolean");
+        return returnSymbol;
     }
 
 
@@ -500,7 +507,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f2 -> PrimaryExpression()
      */
     @Override
-    public MyType visit(PlusExpression n, String key) {
+    public Symbol visit(PlusExpression n, String key) {
         // Can only accept ints
         
         MyType typeA = n.f0.accept(this, key);
@@ -515,8 +522,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
             System.exit(1);
         }
 
-        MyType returnType = new MyType("int");
-        return returnType;
+        MyType returnSymbol = new MyType("int");
+        return returnSymbol;
     }
 
     /** 
@@ -525,7 +532,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f2 -> PrimaryExpression()
      */
     @Override
-    public MyType visit(MinusExpression n, String key) {
+    public Symbol visit(MinusExpression n, String key) {
         // Can only accept ints
         MyType typeA = n.f0.accept(this, key);
         MyType typeB = n.f2.accept(this, key);
@@ -539,8 +546,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
             System.exit(1);
         }
 
-        MyType returnType = new MyType("int");
-        return returnType;
+        MyType returnSymbol = new MyType("int");
+        return returnSymbol;
     }
 
     /**
@@ -549,7 +556,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f2 -> PrimaryExpression()
      */
     @Override
-    public MyType visit(TimesExpression n, String key) {
+    public Symbol visit(TimesExpression n, String key) {
         // Can only accept ints
         MyType typeA = n.f0.accept(this, key);
         MyType typeB = n.f2.accept(this, key);
@@ -563,8 +570,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
             System.exit(1);
         }
 
-        MyType returnType = new MyType("int");
-        return returnType;
+        MyType returnSymbol = new MyType("int");
+        return returnSymbol;
     }
 
     /**
@@ -579,36 +586,36 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * | BracketExpression()
      */
     @Override
-    public MyType visit(PrimaryExpression n, String key) {
-        MyType returnType = n.f0.accept(this, key);
-        return returnType;
+    public Symbol visit(PrimaryExpression n, String key) {
+        MyType returnSymbol = n.f0.accept(this, key);
+        return returnSymbol;
     }
 
     /**
      * f0 -> <INTEGER_LITERAL>
      */
     @Override
-    public MyType visit(IntegerLiteral n, String key) {
-        MyType returnType = new MyType("int");
-        return returnType;
+    public Symbol visit(IntegerLiteral n, String key) {
+        MyType returnSymbol = new MyType("int");
+        return returnSymbol;
     }
 
     /**
      * f0 -> "true"
      */
     @Override
-    public MyType visit(TrueLiteral n, String key) {
-        MyType returnType = new MyType("boolean");
-        return returnType;
+    public Symbol visit(TrueLiteral n, String key) {
+        MyType returnSymbol = new MyType("boolean");
+        return returnSymbol;
     }
 
     /**
      * f0 -> "false"
      */
     @Override
-    public MyType visit(FalseLiteral n, String key) {
-        MyType returnType = new MyType("boolean");
-        return returnType;
+    public Symbol visit(FalseLiteral n, String key) {
+        MyType returnSymbol = new MyType("boolean");
+        return returnSymbol;
     }
 
     /**
@@ -619,14 +626,14 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f4 -> "]"
      */
     @Override
-    public MyType visit(ArrayAllocationExpression n, String key) {
+    public Symbol visit(ArrayAllocationExpression n, String key) {
         MyType expressionType = n.f3.accept(this, key);
         if(!expressionType.checkIdentical(new MyType("int"))){
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(1);
         }
-        MyType returnType = new MyType("int", "[]");
-        return returnType;
+        MyType returnSymbol = new MyType("int", "[]");
+        return returnSymbol;
     }
 
     /**
@@ -634,15 +641,15 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f1 -> Expression()
      */
     @Override
-    public MyType visit(NotExpression n, String key) {
-        MyType returnType = n.f1.accept(this, key);
+    public Symbol visit(NotExpression n, String key) {
+        MyType returnSymbol = n.f1.accept(this, key);
         
-        if(!returnType.checkIdentical(new MyType("boolean"))){
+        if(!returnSymbol.checkIdentical(new MyType("boolean"))){
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(1);
         }
         
-        return returnType;
+        return returnSymbol;
     }
 
     /**
@@ -651,9 +658,9 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
      * f2 -> ")"
      */
     @Override
-    public MyType visit(BracketExpression n, String key) {
-        MyType returnType = n.f1.accept(this, key);
-        return returnType;
+    public Symbol visit(BracketExpression n, String key) {
+        MyType returnSymbol = n.f1.accept(this, key);
+        return returnSymbol;
     }
 
     /**
@@ -668,9 +675,9 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     *       | PrimaryExpression()
     */
     @Override
-    public MyType visit(Expression n, String key) {
-        MyType returnType = n.f0.accept(this, key);
-        return returnType;
+    public Symbol visit(Expression n, String key) {
+        MyType returnSymbol = n.f0.accept(this, key);
+        return returnSymbol;
     }
 
     /**
@@ -680,7 +687,8 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     * f3 -> ")"
     * f4 -> ";"
     */
-    public MyType visit(PrintStatement n, String key){
+    @Override
+    public Symbol visit(PrintStatement n, String key){
         MyType typeToPrint = n.f2.accept(this, key);
         if(!typeToPrint.checkIdentical(new MyType("int"))){
             System.out.println("Type Error: Cannot print types other than int");
@@ -691,7 +699,7 @@ public class TypeValidator extends GJDepthFirst<MyType, String> {
     }
 
     @Override
-    public MyType visit(VarDeclaration n, String key) {
+    public Symbol visit(VarDeclaration n, String key) {
         return null;
     }
 }
