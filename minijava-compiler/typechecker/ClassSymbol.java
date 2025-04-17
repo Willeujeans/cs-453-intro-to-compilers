@@ -5,7 +5,7 @@ import syntaxtree.*;
 import typechecker.MyType;
 import visitor.*;
 
-public class ClassSymbol extends Symbol{
+public class ClassSymbol extends Symbol {
     public String declarationKey;
 
     public ClassSymbol(String newKey, MyType type, int lineDeclared) {
@@ -13,15 +13,15 @@ public class ClassSymbol extends Symbol{
         declarationKey = newKey;
     }
 
-    public MyType updateChildrenClasses(SymbolTable symbolTable, MyType argumentType){
+    public MyType updateChildrenClasses(SymbolTable symbolTable, MyType argumentType) {
         type = updateChildrenClasses(symbolTable, argumentType);
         return type;
     }
 
-    public String getKeyWithInheritance(){
+    public String getKeyWithInheritance() {
         ArrayList<String> output = new ArrayList<String>();
         output.add("global");
-        for(String item : type.typeArray){
+        for (String item : type.typeArray) {
             output.add(item);
         }
         String outputString = String.join(":", output);

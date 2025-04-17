@@ -16,24 +16,24 @@ public class MyType {
     }
 
     public MyType(String... components) {
-        if(components == null)
+        if (components == null)
             throw new IllegalArgumentException("Cannot construct my type from nothing");
         this.typeArray = new Vector<>(Arrays.asList(components));
     }
 
     public MyType(MyType other) {
-        if(other == null)
+        if (other == null)
             throw new IllegalArgumentException("Cannot construct my type from nothing");
         this.typeArray = new Vector<String>(other.typeArray);
     }
 
     public String getBaseType() {
-        if(typeArray.isEmpty())
+        if (typeArray.isEmpty())
             throw new RuntimeException("Trying to get type from nothing");
         return typeArray.firstElement();
     }
-    
-    public boolean checkIdentical(MyType other) {
+
+    public boolean isSameType(MyType other) {
         if (other == null)
             return false;
 
@@ -42,7 +42,7 @@ public class MyType {
             System.out.println("checking identical: Different Sizes: ");
             return false;
         }
-        
+
         for (int i = 0; i < typeArray.size(); i++) {
             String thisType = typeArray.get(i);
             String otherType = other.typeArray.get(i);
@@ -54,13 +54,13 @@ public class MyType {
         return true;
     }
 
-    public Boolean checkSimilar(MyType other) {
-        if(other == null || other.typeArray.isEmpty()){
+    public Boolean isSimilarType(MyType other) {
+        if (other == null || other.typeArray.isEmpty()) {
             return false;
-        }else{
-            for(String each : typeArray){
-                for(String every : other.typeArray){
-                    if(each.equals(every)){
+        } else {
+            for (String each : typeArray) {
+                for (String every : other.typeArray) {
+                    if (each.equals(every)) {
                         return true;
                     }
                 }
@@ -69,11 +69,11 @@ public class MyType {
         return false;
     }
 
-    public String toString(){
+    public String toString() {
         String output = "'";
-        for(int i = 0; i < this.typeArray.size(); ++i){
+        for (int i = 0; i < this.typeArray.size(); ++i) {
             output += this.typeArray.get(i);
-            if(i < this.typeArray.size() - 1){
+            if (i < this.typeArray.size() - 1) {
                 output += ",";
             }
         }
