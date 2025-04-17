@@ -185,7 +185,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         boolean secondClass = symbolTable.getClasses().containsKey(otherClassName);
 
         if (firstClass && secondClass) {
-            if (!expectedreturnSymbol.isRelated(actualreturnSymbol)) {
+            if (!expectedreturnSymbol.type.isRelated(actualreturnSymbol.type)) {
                 System.out.println("Method return type mismatch: Type Error");
                 System.exit(9);
             }
@@ -229,7 +229,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
 
         if (isBothClasses) {
             // Less strict check
-            if (!identifierSymbol.isRelated(expressionSymbol)) {
+            if (!identifierSymbol.type.isRelated(expressionSymbol.type)) {
                 System.out.println(n.getClass().getSimpleName() + ": Type Error");
                 System.exit(9);
             }

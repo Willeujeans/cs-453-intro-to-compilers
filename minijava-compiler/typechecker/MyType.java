@@ -56,6 +56,10 @@ public class MyType {
         return true;
     }
 
+    public boolean isRelated(MyType other) {
+        return getBaseType() == other.getBaseType();
+    }
+
     public Boolean isSimilarType(MyType other) {
         if (other == null || other.typeArray.isEmpty()) {
             return false;

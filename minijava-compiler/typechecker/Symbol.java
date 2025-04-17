@@ -62,13 +62,6 @@ public class Symbol {
         return type.getBaseType().equals(other.type.getBaseType());
     }
 
-    public boolean isRelated(Symbol other) {
-        if (other == null) {
-            return false;
-        }
-        return type.isSimilarType(other.type);
-    }
-
     public void addArgument(Symbol other) {
         if (other == null)
             throw new IllegalArgumentException("Cannot add argument using null");
@@ -82,14 +75,8 @@ public class Symbol {
         for (int i = 0; i < arguments.size(); ++i) {
             Symbol argumentA = arguments.get(i);
             Symbol argumentB = other.arguments.get(i);
-            System.out.println("==========================");
-            System.out.println("==========================");
-            System.out.println(argumentA.isClass);
-            System.out.println(argumentB.isClass);
-            System.out.println("==========================");
-            System.out.println("==========================");
             if (argumentA.isClass && argumentB.isClass) {
-                if (!argumentA.type.isSimilarType(argumentB.type)) {
+                if (!argumentA.type.isRelated(argumentB.type)) {
                     return false;
                 }
             } else {
