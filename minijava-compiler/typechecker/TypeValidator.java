@@ -11,6 +11,9 @@ import java.util.HashSet;
 
 public class TypeValidator extends GJDepthFirst<Symbol, String> {
     SymbolTable symbolTable;
+    private static final MyType INT_TYPE = new MyType("int");
+    private static final MyType BOOLEAN_TYPE = new MyType("boolean");
+    private static final MyType INT_ARRAY_TYPE = new MyType("int", "[]");
 
     public TypeValidator(SymbolTable symbolTable) {
         this.symbolTable = symbolTable;
@@ -185,7 +188,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         boolean secondClass = symbolTable.getClasses().containsKey(otherClassName);
 
         if (firstClass && secondClass) {
-            if (!expectedreturnSymbol.isRelated(actualreturnSymbol)) {
+            if (!expectedreturnSymbol.type.isRelated(actualreturnSymbol.type)) {
                 System.out.println("Method return type mismatch: Type Error");
                 System.exit(9);
             }
@@ -229,7 +232,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
 
         if (isBothClasses) {
             // Less strict check
-            if (!identifierSymbol.isRelated(expressionSymbol)) {
+            if (!identifierSymbol.type.isRelated(expressionSymbol.type)) {
                 System.out.println(n.getClass().getSimpleName() + ": Type Error");
                 System.exit(9);
             }
@@ -261,13 +264,13 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         Symbol arrayIndexSymbol = n.f2.accept(this, key);
         Symbol assignmentSymbol = n.f5.accept(this, key);
 
-        if (!arrayIndexSymbol.type.isSameType(new MyType("int"))) {
+        if (!arrayIndexSymbol.type.isSameType(INT_TYPE)) {
             System.out.println("Type Error");
             System.out.println("!Array index must be an int");
             System.exit(9);
         }
 
-        if (!arraySymbol.isSameBaseType(assignmentSymbol)) {
+        if (!arraySymbol.type.isRelated(assignmentSymbol.type)) {
             System.out.println("Type Error");
             System.out.println("!Incorrect type assignment to array");
             System.exit(9);
@@ -286,12 +289,12 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         Symbol primaryExpressionZero = n.f0.accept(this, key);
         Symbol primaryExpressionTwo = n.f2.accept(this, key);
 
-        if (!primaryExpressionZero.type.isSameType(new MyType("int", "[]"))) {
+        if (!primaryExpressionZero.type.isSameType(INT_ARRAY_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error  primaryExpressionZero" + key);
             System.exit(9);
         }
 
-        if (!primaryExpressionTwo.type.isSameType(new MyType("int"))) {
+        if (!primaryExpressionTwo.type.isSameType(INT_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error  primaryExpressionTwo");
             System.exit(9);
         }
@@ -309,7 +312,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
     public Symbol visit(ArrayLength n, String key) {
         Symbol returnSymbol = n.f0.accept(this, key);
 
-        if (!returnSymbol.type.isSameType(new MyType("int", "[]"))) {
+        if (!returnSymbol.type.isSameType(INT_ARRAY_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(9);
         }
@@ -475,11 +478,11 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         // Can only accept booleans
         Symbol typeA = n.f0.accept(this, key);
         Symbol typeB = n.f2.accept(this, key);
-        if (!typeA.type.isSameType(new MyType("boolean"))) {
+        if (!typeA.type.isSameType(BOOLEAN_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(9);
         }
-        if (!typeB.type.isSameType(new MyType("boolean"))) {
+        if (!typeB.type.isSameType(BOOLEAN_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(9);
         }
@@ -497,11 +500,11 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         Symbol typeA = n.f0.accept(this, key);
         Symbol typeB = n.f2.accept(this, key);
 
-        if (!typeA.type.isSameType(new MyType("int"))) {
+        if (!typeA.type.isSameType(INT_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(9);
         }
-        if (!typeB.type.isSameType(new MyType("int"))) {
+        if (!typeB.type.isSameType(INT_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(9);
         }
@@ -522,11 +525,11 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         Symbol typeA = n.f0.accept(this, key);
         Symbol typeB = n.f2.accept(this, key);
 
-        if (!typeA.type.isSameType(new MyType("int"))) {
+        if (!typeA.type.isSameType(INT_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(9);
         }
-        if (!typeB.type.isSameType(new MyType("int"))) {
+        if (!typeB.type.isSameType(INT_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(9);
         }
@@ -546,11 +549,11 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         Symbol typeA = n.f0.accept(this, key);
         Symbol typeB = n.f2.accept(this, key);
 
-        if (!typeA.type.isSameType(new MyType("int"))) {
+        if (!typeA.type.isSameType(INT_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(9);
         }
-        if (!typeB.type.isSameType(new MyType("int"))) {
+        if (!typeB.type.isSameType(INT_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(9);
         }
@@ -570,11 +573,11 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         Symbol typeA = n.f0.accept(this, key);
         Symbol typeB = n.f2.accept(this, key);
 
-        if (!typeA.type.isSameType(new MyType("int"))) {
+        if (!typeA.type.isSameType(INT_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(9);
         }
-        if (!typeB.type.isSameType(new MyType("int"))) {
+        if (!typeB.type.isSameType(INT_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(9);
         }
@@ -637,7 +640,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
     @Override
     public Symbol visit(ArrayAllocationExpression n, String key) {
         Symbol expressionType = n.f3.accept(this, key);
-        if (!expressionType.type.isSameType(new MyType("int"))) {
+        if (!expressionType.type.isSameType(INT_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(9);
         }
@@ -653,7 +656,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
     public Symbol visit(NotExpression n, String key) {
         Symbol returnSymbol = n.f1.accept(this, key);
 
-        if (!returnSymbol.type.isSameType(new MyType("boolean"))) {
+        if (!returnSymbol.type.isSameType(BOOLEAN_TYPE)) {
             System.out.println(n.getClass().getSimpleName() + ": Type Error");
             System.exit(9);
         }
@@ -699,7 +702,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
     @Override
     public Symbol visit(PrintStatement n, String key) {
         Symbol typeToPrint = n.f2.accept(this, key);
-        if (!typeToPrint.type.isSameType(new MyType("int"))) {
+        if (!typeToPrint.type.isSameType(INT_TYPE)) {
             System.out.println("Type Error: Cannot print types other than int");
             System.exit(9);
         }

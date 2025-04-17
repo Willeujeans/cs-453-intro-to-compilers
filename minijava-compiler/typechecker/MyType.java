@@ -56,19 +56,8 @@ public class MyType {
         return true;
     }
 
-    public Boolean isSimilarType(MyType other) {
-        if (other == null || other.typeArray.isEmpty()) {
-            return false;
-        } else {
-            for (String each : typeArray) {
-                for (String every : other.typeArray) {
-                    if (each.equals(every)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+    public boolean isRelated(MyType other) {
+        return getBaseType() == other.getBaseType();
     }
 
     public String toString() {
