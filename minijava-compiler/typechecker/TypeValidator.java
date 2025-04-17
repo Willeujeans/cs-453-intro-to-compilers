@@ -3,38 +3,34 @@ package typechecker;
 import syntaxtree.*;
 import visitor.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class TypeValidator extends GJDepthFirst<Symbol, String> {
-    SymbolTable symbolTable;
+    SymbolTable<Void, String> symbolTable;
     private static final MyType INT_TYPE = new MyType("int");
     private static final MyType BOOLEAN_TYPE = new MyType("boolean");
     private static final MyType INT_ARRAY_TYPE = new MyType("int", "[]");
 
-    public TypeValidator(SymbolTable symbolTable) {
+    public TypeValidator(SymbolTable<Void, String> symbolTable) {
         this.symbolTable = symbolTable;
     }
 
     public void checkForOverload() {
         HashMap<String, Symbol> methods = symbolTable.getMethods();
-        HashMap<String, Symbol> declarations = symbolTable.declarations;
         if (!methods.isEmpty()) {
             System.out.println("checking...");
             for (String methodKey : methods.keySet()) {
-                String[] keyFragments = methodKey.split(symbolTable.bufferChar);
+                String[] keyFragments = methodKey.split(SymbolTable.BUFFER_CHAR);
                 String[] keyFragmentsTrimmed = Arrays.copyOf(keyFragments, keyFragments.length - 2);
                 String methodName = keyFragments[keyFragments.length - 1];
 
                 int i = keyFragmentsTrimmed.length;
-                String currentKey = keyFragmentsTrimmed + symbolTable.bufferChar + methodName;
+                String currentKey = keyFragmentsTrimmed + SymbolTable.BUFFER_CHAR + methodName;
 
                 while (i > 1) {
-                    currentKey = String.join(symbolTable.bufferChar, Arrays.copyOf(keyFragmentsTrimmed, i))
-                            + symbolTable.bufferChar + methodName;
+                    currentKey = String.join(SymbolTable.BUFFER_CHAR, Arrays.copyOf(keyFragmentsTrimmed, i))
+                            + SymbolTable.BUFFER_CHAR + methodName;
                     if (methods.containsKey(currentKey)) {
                         Symbol originalMethod = methods.get(methodKey);
                         Symbol methodToCheck = methods.get(currentKey);
@@ -100,7 +96,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
      */
     @Override
     public Symbol visit(MainClass n, String key) {
-        String currentScope = key + symbolTable.bufferChar + n.f1.f0.toString() + symbolTable.bufferChar + "main";
+        String currentScope = key + SymbolTable.BUFFER_CHAR + n.f1.f0.toString() + SymbolTable.BUFFER_CHAR + "main";
         n.f15.accept(this, currentScope);
         Symbol returnSymbol = new Symbol(new MyType(n.f1.f0.toString()));
         System.out.println("# " + n.getClass().getSimpleName());
@@ -177,7 +173,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
      */
     @Override
     public Symbol visit(MethodDeclaration n, String key) {
-        String currentScope = key + symbolTable.bufferChar + n.f2.f0.toString();
+        String currentScope = key + SymbolTable.BUFFER_CHAR + n.f2.f0.toString();
         n.f8.accept(this, currentScope);
         Symbol expectedreturnSymbol = n.f1.accept(this, key);
         Symbol actualreturnSymbol = n.f10.accept(this, currentScope);
@@ -336,7 +332,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
 
         String classkeyWithInheritance = symbolTable.findClass(classSymbol.getClassName()).key;
 
-        String classMethodKey = classkeyWithInheritance + symbolTable.bufferChar + methodName;
+        String classMethodKey = classkeyWithInheritance + SymbolTable.BUFFER_CHAR + methodName;
 
         Symbol methodSymbol = symbolTable.findMethodWithShadowing(classMethodKey);
 
@@ -370,7 +366,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
      */
     @Override
     public Symbol visit(Identifier n, String key) {
-        String searchKey = key + symbolTable.bufferChar + n.f0.toString();
+        String searchKey = key + SymbolTable.BUFFER_CHAR + n.f0.toString();
         Symbol foundSymbol = symbolTable.findVariableWithShadowing(searchKey);
         if (foundSymbol == null) {
             System.out.println("Undeclared variable: " + n.f0.toString());
