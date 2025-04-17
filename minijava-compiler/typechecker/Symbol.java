@@ -3,6 +3,7 @@ package typechecker;
 import java.util.ArrayList;
 
 public class Symbol {
+    public boolean isClass = false;
     public String key = new String();
     public MyType type = new MyType();
     public int lineDeclared = 0;
@@ -10,8 +11,11 @@ public class Symbol {
     private ArrayList<Symbol> arguments = new ArrayList<Symbol>();
 
     public Symbol(String newKey, MyType type, int lineDeclared) {
+        if (newKey == null || type == null) {
+            throw new IllegalArgumentException("Key and type cannot be null");
+        }
         this.key = newKey;
-        this.type = type;
+        this.type = new MyType(type); // Defensive copy
         this.lineDeclared = lineDeclared;
     }
 
@@ -55,7 +59,7 @@ public class Symbol {
     public boolean isSameBaseType(Symbol other) {
         if (other == null)
             return false;
-        return type.getBaseType() == other.type.getBaseType();
+        return type.getBaseType().equals(other.type.getBaseType());
     }
 
     public boolean isRelated(Symbol other) {
@@ -75,7 +79,33 @@ public class Symbol {
         if (arguments.size() != other.arguments.size()) {
             return false;
         }
-        for (int i = 0; i < 0; ++i) {
+        for (int i = 0; i < arguments.size(); ++i) {
+            Symbol argumentA = arguments.get(i);
+            Symbol argumentB = other.arguments.get(i);
+            System.out.println("==========================");
+            System.out.println("==========================");
+            System.out.println(argumentA.isClass);
+            System.out.println(argumentB.isClass);
+            System.out.println("==========================");
+            System.out.println("==========================");
+            if (argumentA.isClass && argumentB.isClass) {
+                if (!argumentA.type.isSimilarType(argumentB.type)) {
+                    return false;
+                }
+            } else {
+                if (!argumentA.type.isSameType(argumentB.type)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean isExactSameArgumentTypes(Symbol other) {
+        if (arguments.size() != other.arguments.size()) {
+            return false;
+        }
+        for (int i = 0; i < arguments.size(); ++i) {
             if (!arguments.get(i).type.isSameType(other.arguments.get(i).type)) {
                 return false;
             }
@@ -94,12 +124,11 @@ public class Symbol {
     }
 
     public String toString() {
-        StringBuilder output = new StringBuilder();
-        output.append("{");
-        output.append(type.toString()).append(", ");
-        output.append(arguments.toString());
-        output.append("}");
-
-        return output.toString();
+        return "Symbol{key='" + key + '\'' +
+                ", type=" + type +
+                ", lineDeclared=" + lineDeclared +
+                ", lineUsed=" + lineUsed +
+                ", arguments=" + arguments +
+                '}';
     }
 }

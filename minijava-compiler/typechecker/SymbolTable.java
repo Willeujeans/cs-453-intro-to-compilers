@@ -23,6 +23,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public HashMap<String, Symbol> classes;
     public HashMap<String, Symbol> methods;
     public HashMap<String, Symbol> classInstances;
+
     public String bufferChar = ":";
     public String methodArgumentDelineator = "#";
 
@@ -37,6 +38,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         updateClassInstances();
         updateClassKeysWithInheritance();
         updateMethodsReturnType();
+        updateArgumentTypesWithInheritance();
     }
 
     public void updateMethodsReturnType() {
@@ -48,17 +50,18 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         }
     }
 
-    public void pruneMethodsFromDeclarations() {
-        ArrayList<String> keysToRemove = new ArrayList<String>();
-        for (String key : declarations.keySet()) {
-            if (methods.containsKey(key)) {
-                methods.get(key).type = new MyType(declarations.get(key).type);
-                keysToRemove.add(key);
+    public void updateArgumentTypesWithInheritance() {
+        for (String key : methods.keySet()) {
+            if (declarations.containsKey(key)) {
+                MyType declarationType = declarations.get(key).type;
+                Symbol methodSymbol = methods.get(key);
+                for (Symbol argument : methodSymbol.getArguments()) {
+                    if (classes.containsKey(argument.type.getBaseType())) {
+                        argument.isClass = true;
+                        argument.type = classes.get(argument.type.getBaseType()).type;
+                    }
+                }
             }
-        }
-
-        for (String key : keysToRemove) {
-            declarations.remove(key);
         }
     }
 
@@ -113,7 +116,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             System.out.println("Type Error");
             System.exit(9);
         }
-
+        entry.isClass = true;
         classes.put(key, entry);
         return true;
     }
@@ -147,6 +150,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             System.out.println("Type Error");
             System.exit(9);
         }
+        entry.isClass = true;
         classInstances.put(classInstanceKey, entry);
         return true;
     }
@@ -448,7 +452,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         // Symbol: place it using the current scope
         Symbol methodSymbol = new Symbol(new MyType(), 0);
         insertMethod(currentScope, methodSymbol);
-        //
         n.f1.accept(this, currentScope);
 
         n.f4.accept(this, currentScope);

@@ -16,8 +16,9 @@ public class MyType {
     }
 
     public MyType(String... components) {
-        if (components == null)
-            throw new IllegalArgumentException("Cannot construct my type from nothing");
+        if (components == null || Arrays.stream(components).anyMatch(Objects::isNull)) {
+            throw new IllegalArgumentException("Components cannot be null or contain null");
+        }
         this.typeArray = new Vector<>(Arrays.asList(components));
     }
 
@@ -28,8 +29,9 @@ public class MyType {
     }
 
     public String getBaseType() {
-        if (typeArray.isEmpty())
-            throw new RuntimeException("Trying to get type from nothing");
+        if (typeArray.isEmpty()) {
+            throw new IllegalStateException("MyType has no base type (empty typeArray)");
+        }
         return typeArray.firstElement();
     }
 
@@ -70,14 +72,6 @@ public class MyType {
     }
 
     public String toString() {
-        String output = "'";
-        for (int i = 0; i < this.typeArray.size(); ++i) {
-            output += this.typeArray.get(i);
-            if (i < this.typeArray.size() - 1) {
-                output += ",";
-            }
-        }
-        output += "'";
-        return output;
+        return "MyType{" + String.join(",", typeArray) + "}";
     }
 }
