@@ -56,12 +56,6 @@ public class Symbol {
         }
     }
 
-    public boolean isSameBaseType(Symbol other) {
-        if (other == null)
-            return false;
-        return type.getBaseType().equals(other.type.getBaseType());
-    }
-
     public void addArgument(Symbol other) {
         if (other == null)
             throw new IllegalArgumentException("Cannot add argument using null");

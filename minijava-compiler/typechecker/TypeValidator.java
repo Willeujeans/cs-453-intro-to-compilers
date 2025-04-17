@@ -267,7 +267,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
             System.exit(9);
         }
 
-        if (!arraySymbol.isSameBaseType(assignmentSymbol)) {
+        if (!arraySymbol.type.isRelated(assignmentSymbol.type)) {
             System.out.println("Type Error");
             System.out.println("!Incorrect type assignment to array");
             System.exit(9);
