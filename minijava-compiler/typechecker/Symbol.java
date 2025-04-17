@@ -3,10 +3,17 @@ package typechecker;
 import java.util.ArrayList;
 
 public class Symbol {
+    public String key = new String();
     public MyType type = new MyType();
     public int lineDeclared = 0;
     public ArrayList<Integer> lineUsed = new ArrayList<Integer>();
     private ArrayList<Symbol> arguments = new ArrayList<Symbol>();
+
+    public Symbol(String newKey, MyType type, int lineDeclared) {
+        this.key = newKey;
+        this.type = type;
+        this.lineDeclared = lineDeclared;
+    }
 
     public Symbol(MyType type, int lineDeclared) {
         this.type = type;
@@ -15,6 +22,11 @@ public class Symbol {
 
     public Symbol(MyType type) {
         this.type = type;
+    }
+
+    public MyType updateChildrenClasses(SymbolTable symbolTable, MyType argumentType) {
+        type = updateChildrenClasses(symbolTable, argumentType);
+        return type;
     }
 
     public Symbol(Symbol other) {
@@ -69,6 +81,16 @@ public class Symbol {
             }
         }
         return true;
+    }
+
+    public String getKeyWithInheritance() {
+        ArrayList<String> output = new ArrayList<String>();
+        output.add("global");
+        for (String item : type.typeArray) {
+            output.add(item);
+        }
+        String outputString = String.join(":", output);
+        return outputString;
     }
 
     public String toString() {

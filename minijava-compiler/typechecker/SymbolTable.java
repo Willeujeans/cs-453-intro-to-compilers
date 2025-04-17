@@ -20,7 +20,7 @@ import visitor.*;
 public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public HashMap<String, Symbol> declarations;
 
-    public HashMap<String, ClassSymbol> classes;
+    public HashMap<String, Symbol> classes;
     public HashMap<String, Symbol> methods;
     public HashMap<String, Symbol> classInstances;
     public String bufferChar = ":";
@@ -28,7 +28,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
     public SymbolTable() {
         declarations = new HashMap<String, Symbol>();
-        classes = new HashMap<String, ClassSymbol>();
+        classes = new HashMap<String, Symbol>();
         methods = new HashMap<String, Symbol>();
         classInstances = new HashMap<String, Symbol>();
     }
@@ -104,7 +104,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         return true;
     }
 
-    public boolean insertClass(String key, ClassSymbol entry) {
+    public boolean insertClass(String key, Symbol entry) {
         if (key == null || key.isEmpty() || entry == null) {
             throw new IllegalArgumentException("Attempt to call method with null arguments");
         }
@@ -191,7 +191,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         return null;
     }
 
-    public ClassSymbol findClass(String classId) {
+    public Symbol findClass(String classId) {
         if (classId == null || classId.isEmpty()) {
             throw new IllegalArgumentException("Attempt to find class with illegal arguments");
         }
@@ -212,7 +212,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     }
 
     public void updateClasses(String parentClassId, String childClassId) {
-        for (ClassSymbol each : classes.values()) {
+        for (Symbol each : classes.values()) {
             if (each.type.typeArray.contains(childClassId)) {
                 each.type.typeArray.insertElementAt(parentClassId, 0);
             }
@@ -290,7 +290,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
         System.out.println("= = = = = = = = = Class Table = = = = = = = = =");
         for (String key : classes.keySet()) {
-            System.out.print(key + " -> " + classes.get(key) + " :: " + classes.get(key).declarationKey + "\n");
+            System.out.print(key + " -> " + classes.get(key) + " :: " + classes.get(key).key + "\n");
         }
         System.out.println("= = = = = = = = = = = = = = = = = = = = = = = =");
 
@@ -347,7 +347,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         // MainClass addition
         String classKey = key + bufferChar + n.f1.f0.toString();
         String className = n.f1.f0.toString();
-        ClassSymbol classSymbol = new ClassSymbol(classKey, new MyType(n.f1.f0.toString()), n.f0.beginLine);
+        Symbol classSymbol = new Symbol(classKey, new MyType(n.f1.f0.toString()), n.f0.beginLine);
         insertClass(className, classSymbol);
         insertDeclaration(classKey, new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
 
@@ -385,7 +385,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public Void visit(ClassDeclaration n, String key) {
         String currentScope = key + bufferChar + n.f1.f0.toString();
         String className = n.f1.f0.toString();
-        ClassSymbol classSymbol = new ClassSymbol(currentScope, new MyType(n.f1.f0.toString()), n.f0.beginLine);
+        Symbol classSymbol = new Symbol(currentScope, new MyType(n.f1.f0.toString()), n.f0.beginLine);
         insertClass(className, classSymbol);
         insertDeclaration(currentScope, new Symbol(new MyType(n.f1.f0.toString()), n.f0.beginLine));
 
@@ -413,7 +413,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
         updateClasses(parentClassId, childClassId);
 
-        ClassSymbol classSymbol = new ClassSymbol(childClassId, new MyType(parentClassId, childClassId),
+        Symbol classSymbol = new Symbol(childClassId, new MyType(parentClassId, childClassId),
                 n.f0.beginLine);
         insertClass(childClassId, classSymbol);
 

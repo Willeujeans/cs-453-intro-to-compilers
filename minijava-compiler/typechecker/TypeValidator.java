@@ -126,7 +126,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
     @Override
     public Symbol visit(ClassDeclaration n, String key) {
         String classKey = n.f1.f0.toString();
-        ClassSymbol classSymbol = symbolTable.findClass(classKey);
+        Symbol classSymbol = symbolTable.findClass(classKey);
         String currentScope = classSymbol.getKeyWithInheritance();
 
         n.f4.accept(this, currentScope);
@@ -148,7 +148,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
     @Override
     public Symbol visit(ClassExtendsDeclaration n, String key) {
         String classKey = n.f1.f0.toString();
-        ClassSymbol classSymbol = symbolTable.findClass(classKey);
+        Symbol classSymbol = symbolTable.findClass(classKey);
         String currentScope = classSymbol.getKeyWithInheritance();
 
         n.f6.accept(this, currentScope);
@@ -331,7 +331,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         Symbol classSymbol = n.f0.accept(this, key);
         String methodName = n.f2.f0.toString();
 
-        String classkeyWithInheritance = symbolTable.findClass(classSymbol.getClassName()).declarationKey;
+        String classkeyWithInheritance = symbolTable.findClass(classSymbol.getClassName()).key;
 
         String classMethodKey = classkeyWithInheritance + symbolTable.bufferChar + methodName;
 

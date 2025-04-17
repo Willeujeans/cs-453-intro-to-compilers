@@ -8,7 +8,7 @@ import syntaxtree.*;
 import visitor.*;
 
 public class MyType {
-    // int[][] would be stored as -> ["int", "[", "]"]
+    // int[][] would be stored as -> ["int", "[]"]
     public Vector<String> typeArray = new Vector<String>();
 
     public MyType() {
