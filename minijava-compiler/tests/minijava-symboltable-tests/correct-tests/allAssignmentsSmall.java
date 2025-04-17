@@ -1,16 +1,18 @@
 class allAssignments {
     public static void main(String[] a) {
-        emptySingleClass classVariable ;
-        classGiver newClassGiver ;
+        emptySingleClass classVariable;
+        classGiver newClassGiver;
+        newClassGiver = new classGiver();
         classVariable = newClassGiver.giveClass(1);
         System.out.println(5);
     }
 }
-class classGiver{
-    public emptySingleClass giveClass(int x){
+
+class classGiver {
+    public emptySingleClass giveClass(int x) {
         return new emptySingleClass();
     }
 }
-class emptySingleClass{
-}
 
+class emptySingleClass {
+}

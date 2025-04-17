@@ -1,10 +1,10 @@
 class allAssignments {
     public static void main(String[] a) {
-        int intVariable ;
-        int[] intArrayVariable ;
-        boolean booleanVariable ;
-        emptySingleClass classVariable ;
-        classGiver newClassGiver ;
+        int intVariable;
+        int[] intArrayVariable;
+        boolean booleanVariable;
+        emptySingleClass classVariable;
+        classGiver newClassGiver;
 
         intVariable = 5;
         intVariable = intVariable;
@@ -18,16 +18,21 @@ class allAssignments {
         System.out.println(5);
     }
 }
-class classGiver{
-    public emptySingleClass giveClass(){
+
+class classGiver {
+    public emptySingleClass giveClass() {
         return new emptySingleClass();
     }
 }
-class emptySingleClass{
+
+class emptySingleClass {
 }
-class grandparentClass{
+
+class grandparentClass {
 }
-class parentClass extends grandparentClass{
+
+class parentClass extends grandparentClass {
 }
-class childClass extends parentClass{
+
+class childClass extends parentClass {
 }
