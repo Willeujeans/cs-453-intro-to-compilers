@@ -221,12 +221,10 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         Symbol identifierSymbol = n.f0.accept(this, key);
         Symbol expressionSymbol = n.f2.accept(this, key);
 
-        boolean isClass = symbolTable.classes.containsKey(identifierSymbol.getClassName());
-        boolean isClassB = symbolTable.classes.containsKey(expressionSymbol.getClassName());
+        boolean isClass = identifierSymbol.classification == Symbol.Classification.CLASSINSTANCE;
+        boolean isClassB = expressionSymbol.classification == Symbol.Classification.CLASSINSTANCE;
 
-        boolean isBothClasses = (isClass && isClassB);
-
-        if (isBothClasses) {
+        if (isClass && isClassB) {
             // Less strict check
             if (!identifierSymbol.type.isRelated(expressionSymbol.type)) {
                 System.out.println(n.getClass().getSimpleName() + ": Type Error");
