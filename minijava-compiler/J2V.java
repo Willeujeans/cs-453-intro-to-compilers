@@ -13,29 +13,6 @@ import cs132.vapor.ast.VBuiltIn.Op;
 
 public class J2V {
     public static void main(String[] args) {
-        System.out.print("vapor file text");
-    }
 
-    public static VaporProgram parseVapor(InputStream in, PrintStream err)
-            throws IOException {
-        Op[] ops = {
-                Op.Add, Op.Sub, Op.MulS, Op.Eq, Op.Lt, Op.LtS,
-                Op.PrintIntS, Op.HeapAllocZ, Op.Error,
-        };
-        boolean allowLocals = true;
-        String[] registers = null;
-        boolean allowStack = false;
-
-        VaporProgram program;
-        try {
-            program = VaporParser.run(new InputStreamReader(in), 1, 1,
-                    java.util.Arrays.asList(ops),
-                    allowLocals, registers, allowStack);
-        } catch (ProblemException ex) {
-            err.println(ex.getMessage());
-            return null;
-        }
-
-        return program;
     }
 }
