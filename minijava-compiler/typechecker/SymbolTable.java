@@ -55,7 +55,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public boolean insertClass(String key, Symbol entry) {
         validateParameters(key, entry);
         checkForDuplicate(key, classes);
-        entry.classification = Symbol.Classification.CLASSINSTANCE;
         classes.put(key, entry);
         return true;
     }
@@ -70,7 +69,6 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public boolean insertClassInstance(String classInstanceKey, Symbol entry) {
         validateParameters(classInstanceKey, entry);
         checkForDuplicate(classInstanceKey, classInstances);
-        entry.classification = Symbol.Classification.CLASSINSTANCE;
         classInstances.put(classInstanceKey, entry);
         return true;
     }
@@ -101,8 +99,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             if (declarations.containsKey(key)) {
                 Symbol methodSymbol = methods.get(key);
                 for (Symbol argument : methodSymbol.getArguments()) {
-                    if (classes.containsKey(argument.type.getBaseType())) {
-                        argument.classification = Symbol.Classification.CLASSINSTANCE;
+                    if (argument.classification == Symbol.Classification.CLASSINSTANCE) {
                         argument.type = classes.get(argument.type.getBaseType()).type;
                     }
                 }
@@ -349,9 +346,12 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
         // Argument in mainClass addition
         String currentScope = key + BUFFER_CHAR + n.f1.f0.toString() + BUFFER_CHAR + "main";
-        insertDeclaration(currentScope, new Symbol(Symbol.Classification.METHOD, new MyType(), n.f5.beginLine));
-        insertDeclaration(currentScope + BUFFER_CHAR + n.f11.f0.toString(),
-                new Symbol(Symbol.Classification.VARIABLE, new MyType("String", "[]"), n.f8.beginLine));
+
+        Symbol mainMethodSymbol = new Symbol(Symbol.Classification.METHOD, new MyType(), n.f5.beginLine);
+        insertDeclaration(currentScope, mainMethodSymbol);
+
+        Symbol argumentSymbol = new Symbol(Symbol.Classification.VARIABLE, new MyType("String", "[]"), n.f8.beginLine);
+        insertDeclaration(currentScope + BUFFER_CHAR + n.f11.f0.toString(), argumentSymbol);
 
         n.f14.accept(this, currentScope);
         n.f15.accept(this, currentScope);
