@@ -15,7 +15,6 @@ import visitor.*;
 // Symbol Table Visitor: Traverses AST to create symbol table.
 public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
     public HashMap<String, Symbol> declarations;
-
     public HashMap<String, Symbol> classes;
     public HashMap<String, Symbol> methods;
     public HashMap<String, Symbol> classInstances;
@@ -412,6 +411,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
 
         Symbol classSymbol = new Symbol(Classification.CLASS, new MyType(parentClassId, childClassId),
                 n.f0.beginLine);
+        classSymbol.parentClassId = parentClassId;
         insertClass(childClassId, classSymbol);
 
         String currentScope = key + BUFFER_CHAR + childClassId;
