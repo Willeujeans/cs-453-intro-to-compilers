@@ -75,6 +75,3 @@ if [ ${#comparison_failures[@]} -gt 0 ]; then
         diff -u -w -B "$OUTPUT_DIR/$file" "$CORRECT_DIR/$file" | head -n 10
     done
 fi
-
-echo -e "\nGenerated vapor files are in: ${CYAN}$OUTPUT_DIR${NOCOLOR}"
-echo -e "Correct vapor files are in: ${CYAN}$CORRECT_DIR${NOCOLOR}"
