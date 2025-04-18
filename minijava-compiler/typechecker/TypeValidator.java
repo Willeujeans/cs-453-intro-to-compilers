@@ -328,7 +328,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         Symbol classSymbol = n.f0.accept(this, key);
         String methodName = n.f2.f0.toString();
 
-        String classkeyWithInheritance = symbolTable.findClass(classSymbol.getClassName()).key;
+        String classkeyWithInheritance = symbolTable.findClass(classSymbol.getClassName()).getKeyWithInheritance();
 
         String classMethodKey = classkeyWithInheritance + SymbolTable.BUFFER_CHAR + methodName;
 
