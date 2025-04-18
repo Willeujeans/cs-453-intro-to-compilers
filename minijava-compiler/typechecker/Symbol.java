@@ -3,18 +3,24 @@ package typechecker;
 import java.util.ArrayList;
 
 public class Symbol {
-    public boolean isClass = false;
-    public String key = new String();
+    enum Classification {
+        VARIABLE,
+        CLASS,
+        CLASSINSTANCE,
+        METHOD
+    }
+
+    public Classification classification = Classification.VARIABLE;
     public MyType type = new MyType();
     public int lineDeclared = 0;
     public ArrayList<Integer> lineUsed = new ArrayList<Integer>();
     private ArrayList<Symbol> arguments = new ArrayList<Symbol>();
 
-    public Symbol(String newKey, MyType type, int lineDeclared) {
-        if (newKey == null || type == null) {
+    public Symbol(Classification newClassification, MyType type, int lineDeclared) {
+        if (type == null) {
             throw new IllegalArgumentException("Key and type cannot be null");
         }
-        this.key = newKey;
+        this.classification = newClassification;
         this.type = new MyType(type); // Defensive copy
         this.lineDeclared = lineDeclared;
     }
@@ -34,6 +40,7 @@ public class Symbol {
     }
 
     public Symbol(Symbol other) {
+        this.classification = other.classification;
         this.type = new MyType(other.type);
         this.arguments = new ArrayList<Symbol>(other.arguments);
         this.lineDeclared = other.lineDeclared;
@@ -69,7 +76,8 @@ public class Symbol {
         for (int i = 0; i < arguments.size(); ++i) {
             Symbol argumentA = arguments.get(i);
             Symbol argumentB = other.arguments.get(i);
-            if (argumentA.isClass && argumentB.isClass) {
+            if (argumentA.classification == Classification.CLASSINSTANCE
+                    && argumentB.classification == Classification.CLASSINSTANCE) {
                 if (!argumentA.type.isRelated(argumentB.type)) {
                     return false;
                 }
@@ -105,7 +113,7 @@ public class Symbol {
     }
 
     public String toString() {
-        return "Symbol{key='" + key + '\'' +
+        return "Symbol{key='" + getKeyWithInheritance() + '\'' +
                 ", type=" + type +
                 ", lineDeclared=" + lineDeclared +
                 ", lineUsed=" + lineUsed +

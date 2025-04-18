@@ -221,12 +221,10 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         Symbol identifierSymbol = n.f0.accept(this, key);
         Symbol expressionSymbol = n.f2.accept(this, key);
 
-        boolean isClass = symbolTable.classes.containsKey(identifierSymbol.getClassName());
-        boolean isClassB = symbolTable.classes.containsKey(expressionSymbol.getClassName());
+        boolean isClass = identifierSymbol.classification == Symbol.Classification.CLASSINSTANCE;
+        boolean isClassB = expressionSymbol.classification == Symbol.Classification.CLASSINSTANCE;
 
-        boolean isBothClasses = (isClass && isClassB);
-
-        if (isBothClasses) {
+        if (isClass && isClassB) {
             // Less strict check
             if (!identifierSymbol.type.isRelated(expressionSymbol.type)) {
                 System.out.println(n.getClass().getSimpleName() + ": Type Error");
@@ -330,7 +328,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
         Symbol classSymbol = n.f0.accept(this, key);
         String methodName = n.f2.f0.toString();
 
-        String classkeyWithInheritance = symbolTable.findClass(classSymbol.getClassName()).key;
+        String classkeyWithInheritance = symbolTable.findClass(classSymbol.getClassName()).getKeyWithInheritance();
 
         String classMethodKey = classkeyWithInheritance + SymbolTable.BUFFER_CHAR + methodName;
 
@@ -348,7 +346,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
 
         for (Symbol argument : passedArguments.getArguments()) {
             if (symbolTable.classes.containsKey(argument.type.getBaseType())) {
-                argument.isClass = true;
+                argument.classification = Symbol.Classification.CLASSINSTANCE;
             }
         }
 
