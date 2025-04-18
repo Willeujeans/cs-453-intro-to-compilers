@@ -3,6 +3,8 @@ package typechecker;
 import java.util.ArrayList;
 
 public class Symbol {
+    public String parentClassId = "";
+
     enum Classification {
         VARIABLE,
         CLASS,
