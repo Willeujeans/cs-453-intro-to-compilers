@@ -50,7 +50,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
                 Symbol methodSymbol = methods.get(key);
                 for (Symbol argument : methodSymbol.getArguments()) {
                     if (classes.containsKey(argument.type.getBaseType())) {
-                        argument.isClass = true;
+                        argument.classification = Symbol.Classification.CLASSINSTANCE;
                         argument.type = classes.get(argument.type.getBaseType()).type;
                     }
                 }
@@ -109,7 +109,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             System.out.println("Type Error");
             System.exit(9);
         }
-        entry.isClass = true;
+        entry.classification = Symbol.Classification.CLASSINSTANCE;
         classes.put(key, entry);
         return true;
     }
@@ -143,7 +143,7 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
             System.out.println("Type Error");
             System.exit(9);
         }
-        entry.isClass = true;
+        entry.classification = Symbol.Classification.CLASSINSTANCE;
         classInstances.put(classInstanceKey, entry);
         return true;
     }

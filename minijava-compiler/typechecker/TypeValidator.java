@@ -348,7 +348,7 @@ public class TypeValidator extends GJDepthFirst<Symbol, String> {
 
         for (Symbol argument : passedArguments.getArguments()) {
             if (symbolTable.classes.containsKey(argument.type.getBaseType())) {
-                argument.isClass = true;
+                argument.classification = Symbol.Classification.CLASSINSTANCE;
             }
         }
 

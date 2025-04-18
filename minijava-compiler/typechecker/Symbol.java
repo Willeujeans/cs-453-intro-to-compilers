@@ -3,7 +3,14 @@ package typechecker;
 import java.util.ArrayList;
 
 public class Symbol {
-    public boolean isClass = false;
+    enum Classification {
+        VARIABLE,
+        CLASS,
+        CLASSINSTANCE,
+        METHOD
+    }
+
+    public Classification classification = Classification.VARIABLE;
     public String key = new String();
     public MyType type = new MyType();
     public int lineDeclared = 0;
@@ -69,7 +76,8 @@ public class Symbol {
         for (int i = 0; i < arguments.size(); ++i) {
             Symbol argumentA = arguments.get(i);
             Symbol argumentB = other.arguments.get(i);
-            if (argumentA.isClass && argumentB.isClass) {
+            if (argumentA.classification == Classification.CLASSINSTANCE
+                    && argumentB.classification == Classification.CLASSINSTANCE) {
                 if (!argumentA.type.isRelated(argumentB.type)) {
                     return false;
                 }
