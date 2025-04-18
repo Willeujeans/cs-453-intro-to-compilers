@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import syntaxtree.*;
 import typechecker.Symbol.Classification;
@@ -27,6 +28,56 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         classes = new HashMap<String, Symbol>();
         methods = new HashMap<String, Symbol>();
         classInstances = new HashMap<String, Symbol>();
+    }
+
+    private void validateParameters(String key, Symbol entry) {
+        if (key == null || key.isEmpty()) {
+            throw new IllegalArgumentException("Key must not be null or empty");
+        }
+        if (entry == null) {
+            throw new IllegalArgumentException("Entry must not be null");
+        }
+    }
+
+    private void checkForDuplicate(String key, Map<String, Symbol> map) {
+        if (map.containsKey(key)) {
+            handleTypeError();
+        }
+    }
+
+    public boolean insertDeclaration(String key, Symbol entry) {
+        validateParameters(key, entry);
+        checkForDuplicate(key, declarations);
+        declarations.put(key, entry);
+        return true;
+    }
+
+    public boolean insertClass(String key, Symbol entry) {
+        validateParameters(key, entry);
+        checkForDuplicate(key, classes);
+        entry.classification = Symbol.Classification.CLASSINSTANCE;
+        classes.put(key, entry);
+        return true;
+    }
+
+    public boolean insertMethod(String key, Symbol methodSymbol) {
+        validateParameters(key, methodSymbol);
+        checkForDuplicate(key, methods);
+        methods.put(key, methodSymbol);
+        return true;
+    }
+
+    public boolean insertClassInstance(String classInstanceKey, Symbol entry) {
+        validateParameters(classInstanceKey, entry);
+        checkForDuplicate(classInstanceKey, classInstances);
+        entry.classification = Symbol.Classification.CLASSINSTANCE;
+        classInstances.put(classInstanceKey, entry);
+        return true;
+    }
+
+    private void handleTypeError() {
+        System.err.println("Type Error: Duplicate symbol declaration");
+        System.exit(9);
     }
 
     public void postTraversalOperations() {
@@ -87,66 +138,12 @@ public class SymbolTable<R, A> extends GJDepthFirst<Void, String> {
         }
     }
 
-    public boolean insertDeclaration(String key, Symbol entry) {
-        if (key == null || key.isEmpty() || entry == null) {
-            throw new IllegalArgumentException("Attempt to call method with null arguments");
-        }
-
-        if (declarations.containsKey(key)) {
-            System.out.println("Type Error");
-            System.exit(9);
-        }
-
-        declarations.put(key, entry);
-        return true;
-    }
-
-    public boolean insertClass(String key, Symbol entry) {
-        if (key == null || key.isEmpty() || entry == null) {
-            throw new IllegalArgumentException("Attempt to call method with null arguments");
-        }
-
-        if (classes.containsKey(key)) {
-            System.out.println("Type Error");
-            System.exit(9);
-        }
-        entry.classification = Symbol.Classification.CLASSINSTANCE;
-        classes.put(key, entry);
-        return true;
-    }
-
-    public boolean insertMethod(String key, Symbol methodSymbol) {
-        if (key == null || key.isEmpty()) {
-            throw new IllegalArgumentException("Attempt to call method with null arguments");
-        }
-
-        if (methods.containsKey(key)) {
-            System.out.println("Type Error");
-            System.exit(9);
-        }
-        methods.put(key, methodSymbol);
-        return true;
-    }
-
     public HashMap<String, Symbol> getClasses() {
         return classes;
     }
 
     public HashMap<String, Symbol> getMethods() {
         return methods;
-    }
-
-    public boolean insertClassInstance(String classInstanceKey, Symbol entry) {
-        if (classInstanceKey == null || classInstanceKey.isEmpty() || entry == null) {
-            throw new IllegalArgumentException("Attempt to call method with null arguments");
-        }
-        if (classInstances.containsKey(classInstanceKey)) {
-            System.out.println("Type Error");
-            System.exit(9);
-        }
-        entry.classification = Symbol.Classification.CLASSINSTANCE;
-        classInstances.put(classInstanceKey, entry);
-        return true;
     }
 
     public Symbol findMethodWithShadowing(String key) {
