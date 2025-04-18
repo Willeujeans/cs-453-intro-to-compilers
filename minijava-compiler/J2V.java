@@ -1,3 +1,4 @@
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,7 +13,7 @@ import cs132.vapor.ast.VBuiltIn.Op;
 
 public class J2V {
     public static void main(String[] args) {
-        System.err.println("J2V");
+        System.out.print("vapor file text");
     }
 
     public static VaporProgram parseVapor(InputStream in, PrintStream err)
