@@ -1,0 +1,4 @@
+// Sample Vapor output
+func main() {
+  PrintIntS(42)
+}
